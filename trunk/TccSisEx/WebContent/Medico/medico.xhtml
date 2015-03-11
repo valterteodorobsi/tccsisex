@@ -1,0 +1,174 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>Médico</title>
+</h:head>
+
+<h:body>
+	<div id="cabecalho">
+		<ui:insert name="cabecalho">
+			<ui:include src="/cabecalho.xhtml" />
+		</ui:insert>
+	</div>
+	<div id="conteudo" >	
+	<p:layout id="ini" style="min-width:400px;height:600px;">
+		<p:layoutUnit position="center">
+			<H1 style="text-align: center; color:DarkGoldenrod">Médico</H1>
+			<p:tooltip />
+			<h:form id="form">
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				<p:growl id="nomes" showDetail="true" />
+				<h:panelGrid columns="2" cellpadding="2">
+						<p:outputLabel value="Matricula: " for="matriculaFun" />
+						<p:inputText id="matriculaFun"
+							value="#{medicoBen.medico.ID_MATRICULA}" />
+						<p:outputLabel value="Nome: " for="nomeMed" />
+						<p:inputText id="nomeMed"
+							value="#{medicoBen.medico.NOME}" />
+					</h:panelGrid>
+
+					<p:commandButton value="Cancelar" action="/home" />
+					<p:commandButton value="Pesquisar" actionListener="#{medicoBen.pesquisarMedico}"
+						update="grid"/>
+					<p:commandButton value="Novo" action="mediconovo" />
+
+					<br> </br>
+				<p:layout id="grid" style="min-width:600px;min-height:600px;">
+
+					<p:layoutUnit position="center">
+						<p:dataTable id="table" var="tablemedico"
+							value="#{medicoBen.listaMedicos}" editable="true"
+							style="margin-bottom:20px">
+							
+							<p:ajax event="rowEdit" listener="#{medicoBen.onRowEdit}"
+								update="@this :form:nomes" />
+
+							<p:ajax event="rowEditCancel"
+								listener="#{medicoBen.onRowCancel}" update=":form:nomes" />
+
+							<p:column headerText="Matricula">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablemedico.ID_MATRICULA}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText id="modelInput" value="#{tablemedico.ID_MATRICULA}"
+											style="width:100%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="CRM">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablemedico.CRM}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tablemedico.CRM}" style="width:100%"
+											label="CRM" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="Nome">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablemedico.NOME}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tablemedico.NOME}" style="width:100%"
+											label="Nome" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="Data de Nacimento">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablemedico.DATA_NASC}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText>
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tablemedico.DATA_NASC}" style="width:100%"
+											label="Data de Nacimento">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</p:inputText>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="RG">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablemedico.RG}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tablemedico.RG}" style="width:100%" label="RG" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="Especialidade">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablemedico.ESPECIALIDADE}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tablemedico.ESPECIALIDADE}" style="width:100%"
+											label="Especialidade" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="Carga Horiaria Semanal">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablemedico.CAR_HOR_SEMANA}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tablemedico.CAR_HOR_SEMANA}" style="width:100%"
+											label="Carga Horaria Semanal" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="Dias de Expediente">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablemedico.DIAS_EXPEDIENTE}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tablemedico.DIAS_EXPEDIENTE}" style="width:100%"
+											label="Dias de Expediente" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column style="width:32px">
+								<p:rowEditor title="Alterar" />
+								<p:spacer width="1" />
+								<p:commandLink title="Deletar"  update=":form"
+									action="#{medicoBen.excluirMedico(tablemedico)}">
+
+									<p:graphicImage url="/img/excluir.png"
+										style="background-color: transparent; vertical-align: middle; border: none"
+										width="11px" height="11px" />
+
+								</p:commandLink>
+							</p:column>
+
+
+						</p:dataTable>
+
+					</p:layoutUnit>
+				</p:layout>
+
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+	</div>
+<div id="rodape">
+	
+</div>
+	
+</h:body>
+
+</html>

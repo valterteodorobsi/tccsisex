@@ -1,0 +1,130 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>Exame</title>
+</h:head>
+
+<h:body>
+	<div id="cabecalho">
+		<ui:insert name="cabecalho">
+			<ui:include src="/cabecalho.xhtml" />
+		</ui:insert>
+	</div>
+	<div id="conteudo" >	
+	<p:layout id="ini" style="min-width:400px;height:600px;">
+		<p:layoutUnit position="center">
+			<H1> <!-- style="text-align: center; color:DarkGoldenrod" -->Exame</H1>
+			<p:tooltip />
+			<h:form id="form">
+			 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				<p:growl id="nomes" showDetail="true" />
+				<h:panelGrid columns="2" cellpadding="2">
+						<p:outputLabel value="Código do Exame: " for="codExame" />
+						<p:inputText id="codExame"
+							value="#{exameBen.exame.ID_EXAME}" />
+						<p:outputLabel value="Nome do Exame: " for="nomeExame" />
+						<p:inputText id="nomeExame"
+							value="#{exameBen.exame.NOME_EXAME}" />
+					</h:panelGrid>
+
+					<p:commandButton value="Cancelar" action="/home.jsf" />
+					<p:commandButton value="Pesquisar" actionListener="#{exameBen.pesquisarExame}"
+						update="grid"/>
+					<p:commandButton value="Novo" action="examenovo.xhtml" />
+
+					<br> </br>
+				<p:layout id="grid" style="min-width:600px;min-height:600px;">
+
+					<p:layoutUnit position="center">
+						<p:dataTable id="table" var="tableexame"
+							value="#{exameBen.listaExame}" editable="true"
+							style="margin-bottom:20px">
+							
+							<p:ajax event="rowEdit" listener="#{exameBen.onRowEdit}"
+								update="@this :form:nomes" />
+
+							<p:ajax event="rowEditCancel"
+								listener="#{exameBen.onRowCancel}" update=":form:nomes" />
+
+							<p:column headerText="Código do Exame">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tableexame.ID_EXAME}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText id="modelInput" value="#{tableexame.ID_EXAME}"
+											style="width:100%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							
+							<p:column headerText="Nome do Exame">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tableexame.NOME_EXAME}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tableexame.NOME_EXAME}" style="width:100%"
+											label="Nome" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="DESCRIÇÃO">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tableexame.DESCRICAO}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tableexame.DESCRICAO}" style="width:100%"
+											label="Descrição" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="Validade">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tableexame.VALIDADE}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tableexame.VALIDADE}" style="width:100%"
+											label="Validade" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							
+							<p:column style="width:32px">
+								<p:rowEditor title="Alterar" />
+								<p:spacer width="1" />
+								<p:commandLink title="Deletar"  update=":form"
+									action="#{exameBen.excluirExame(tableexame)}">
+
+									<p:graphicImage url="/img/excluir.png"
+										style="background-color: transparent; vertical-align: middle; border: none"
+										width="11px" height="11px" />
+
+								</p:commandLink>
+							</p:column>
+
+
+						</p:dataTable>
+
+					</p:layoutUnit>
+				</p:layout>
+
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+	</div>
+<div id="rodape">
+	
+</div>
+	
+</h:body>
+
+</html>

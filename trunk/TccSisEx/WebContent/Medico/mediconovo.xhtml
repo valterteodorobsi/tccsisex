@@ -1,0 +1,90 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+
+
+	
+	<title>Médico</title>
+</h:head>
+
+<h:body>
+	<div id="cabecalho">
+		<ui:insert name="cabecalho">
+			<ui:include src="/cabecalho.xhtml" />
+		</ui:insert>
+	</div>
+<div id="conteudo" >
+	<p:layout id="lay" style="min-width:400px;height:600px;">
+		<p:layoutUnit position="center">
+			<H1>Cadastro do Médico</H1>
+			<p:tooltip />
+			<h:form id="form">
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				<p:growl id="nomes" showDetail="true" />
+				<h:panelGrid columns="2" cellpadding="2">
+					<p:outputLabel value="Matricula: " for="matriculaMed" />
+					<p:inputText id="matriculaMed" size="20" maxlength="20" required="true"
+						requiredMessage="Favor preencher o campo Matricula obrigatório"
+						value="#{medicoBen.medico.ID_MATRICULA}">
+						<f:validateLength minimum="1" maximum="20" /> 
+					</p:inputText>
+					<p:outputLabel value="CRM: " for="crmMed" />
+					<p:inputText id="crmMed" size="10"  maxlength="10"  required="true"
+						requiredMessage="Favor preencher o campo  Crm obrigatório"
+						value="#{medicoBen.medico.CRM}" />
+						
+					<p:outputLabel value="Nome: " for="nomeMed" />
+					<p:inputText id="nomeMed" size="50" maxlength="50" required="true"
+						requiredMessage="Favor preencher o campo  Nome obrigatório"
+						value="#{medicoBen.medico.NOME}" >
+						  
+						  </p:inputText>
+						
+					<p:outputLabel value="Data de Nacimento" for="datMed" />
+					<p:inputMask id="datMed" required="true"
+						requiredMessage="Favor preencher o campo  Data de Nascimento obrigatório"
+						value="#{medicoBen.medico.DATA_NASC}" mask="99/99/9999">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:inputMask>
+					<p:outputLabel value="RG: "  for="rgMed" />
+					<p:inputText id="rgMed" size="8" maxlength="8" required="true"
+						requiredMessage="Favor preencher o campo  RG obrigatório"
+						value="#{medicoBen.medico.RG}" />
+					<p:outputLabel value="Especialidade: " for="EspMed" />
+					<p:inputText id="EspMed" size="15" maxlength="15" required="true"
+						requiredMessage="Favor preencher o campo  Especialidade obrigatório"
+						value="#{medicoBen.medico.ESPECIALIDADE}" />
+					<p:outputLabel value="Carga Horaria Semanal: " for="cargMed" />
+					<p:inputText id="cargMed" size="3" maxlength="3" required="true"
+						requiredMessage="Favor preencher o campo  Carga Horaria Semanal obrigatório"
+						value="#{medicoBen.medico.CAR_HOR_SEMANA}" />
+					
+					
+					<p:outputLabel value="Dias de Expediente: " for="diasMed" />
+					<p:inputText id="diasMed" size="30" maxlength="30" required="true"
+						requiredMessage="Favor preencher o campo  Dias de Expediente obrigatório"
+						value="#{medicoBen.medico.DIAS_EXPEDIENTE}" />
+					
+					
+				</h:panelGrid>
+				<p:commandButton value="voltar" action="medico" />
+				<p:commandButton value="Salvar" validateClient="true" 
+					actionListener="#{medicoBen.adicionarMedico}" />
+
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+</div>
+	<!-- VER O PORQUE NÃO ESTA CHAMDO O CORPO INSERINDO O RODAPÉ <div id="rodape">
+		<ui:insert name="rodape">
+			<ui:include src="/rodape.xhtml" />
+		</ui:insert>
+	</div> -->
+
+</h:body>
+</html>

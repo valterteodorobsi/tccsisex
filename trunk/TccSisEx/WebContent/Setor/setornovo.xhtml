@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+
+
+	
+	<title>Setor</title>
+</h:head>
+
+<h:body>
+	<div id="cabecalho">
+		<ui:insert name="cabecalho">
+			<ui:include src="/cabecalho.xhtml" />
+		</ui:insert>
+	</div>
+<div id="conteudo" >
+	<p:layout id="lay" style="min-width:400px;height:600px;">
+		<p:layoutUnit position="center">
+			<H1>Cadastro do Setor</H1>
+			<p:tooltip />
+			<h:form id="form">
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				<p:growl id="nomes" showDetail="true" />
+				<h:panelGrid columns="2" cellpadding="2">
+					<p:outputLabel value="Centro de Custo " for="codSetor" />
+					<p:inputText id="codSetor" size="20" maxlength="20" required="true"
+						requiredMessage="Favor preencher o campo Centro de Custo obrigatório"
+						value="#{setorBen.setor.ID_CENTRO_CUSTO}">
+						<f:validateLength minimum="1" maximum="20" /> 
+					</p:inputText>
+											
+					<p:outputLabel value="Nome: " for="nomeSetor" />
+					<p:inputText id="nomeSetor" size="40" maxlength="40" required="true"
+						requiredMessage="Favor preencher o campo  Nome obrigatório"
+						value="#{setorBen.setor.NOME}" >
+						  
+						  </p:inputText>
+						
+					<p:outputLabel value="Gerente Responsável: "  for="gerSetor" />
+					<p:inputText id="gerSetor" size="25" maxlength="25" required="true"
+						requiredMessage="Favor preencher o campo  Gerente Responsável obrigatório"
+						value="#{setorBen.setor.GERENTE_RESPON}" />
+						
+					<p:outputLabel value="Quantidade Aproximada de Colaboradores: " for="quantSetor" />
+					<p:inputText id="quantSetor" size="5" maxlength="5" required="true"
+						requiredMessage="Favor preencher o campo  Quantidade Aproximada de Colaboradores obrigatório"
+						value="#{setorBen.setor.QUANT_APROX_COLABORADORES}" />
+					
+					
+					<br> </br>
+				</h:panelGrid>
+				<p:commandButton value="voltar" action="setor" />
+				<p:commandButton value="Salvar" validateClient="true" 
+					actionListener="#{setorBen.adicionarSetor}" />
+
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+</div>
+	<!-- VER O PORQUE NÃO ESTA CHAMDO O CORPO INSERINDO O RODAPÉ <div id="rodape">
+		<ui:insert name="rodape">
+			<ui:include src="/rodape.xhtml" />
+		</ui:insert>
+	</div> -->
+
+</h:body>
+</html>

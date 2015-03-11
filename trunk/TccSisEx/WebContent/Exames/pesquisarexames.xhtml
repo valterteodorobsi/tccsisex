@@ -1,0 +1,104 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Pesquisar Exame Anexado</title>
+</h:head>
+
+<h:body>
+<div id="cabecalho">
+		<ui:insert name="cabecalho">
+			<ui:include src="/cabecalho.xhtml" />
+		</ui:insert>
+	</div>
+	<div id="conteudo" >	
+	<p:layout id="ini" style="min-width:400px;height:600px;">
+		<p:layoutUnit position="center">
+			<H1 style="text-align: center; color:DarkGoldenrod">Pesquisar exames</H1>
+			<p:tooltip />
+			<h:form id="form">
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				<p:growl id="nomes" showDetail="true" />
+				<h:panelGrid columns="2" cellpadding="2">
+						<p:outputLabel value="Matricula: " for="matriculaFun" />
+						<p:inputText id="matriculaFun"
+							value="#{arquivoBen.arquivo.MATRICULA}" />
+						
+					</h:panelGrid>
+
+					<p:commandButton value="Cancelar" action="/home" />
+					<p:commandButton value="Pesquisar" 
+								actionListener="#{arquivoBen.pesquisarExamePorMatricula()}"
+								update="grid" />
+						<br> </br>
+						<p:layout id="grid" style="min-width:600px;min-height:600px;">
+
+						<p:layoutUnit position="center">
+							
+							<p:dataTable id="table" var="tableArquivo" value="#{arquivoBen.listaArquivos}" >
+	
+					
+								
+								
+								<p:column headerText="Nome do Colaborador">
+									<h:outputText value="#{tableArquivo.NOME_COLABORADOR}" />
+								</p:column>
+
+								<p:column headerText="Matricula">
+									<h:outputText value="#{tableArquivo.MATRICULA}" />
+								</p:column>
+
+								<p:column headerText="Setor">
+									<h:outputText value="#{tableArquivo.SETOR}" />
+								</p:column>
+								<p:column headerText="Criticidade">
+									<h:outputText value="#{tableArquivo.CRITICIDADE}" />
+								</p:column>
+								<p:column headerText="Exame">
+									<h:outputText value="#{tableArquivo.EXAME}" />
+								</p:column>
+								<p:column headerText="Validade">
+									<h:outputText value="#{tableArquivo.VALIDADE}" />
+								</p:column>
+								<p:column headerText="Descrição">
+									<h:outputText value="#{tableArquivo.DESCRICAO}" />
+								</p:column>
+								<!-- <p:column headerText="Imagem">
+									<h:outputText value="#{tableArquivo.IMAGEM}" />
+								</p:column> -->
+
+
+								<p:column headerText=" ">
+									<p:commandLink title="Deletar"  update=":form"
+									action="#{arquivoBen.excluirArquivo(tableArquivo)}">
+
+									<p:graphicImage url="/img/excluir.png"
+										style="background-color: transparent; vertical-align: middle; border: none"
+										width="11px" height="11px" />
+
+								</p:commandLink>
+
+									
+
+								</p:column>
+
+							</p:dataTable>
+						</p:layoutUnit>
+					</p:layout>
+				</h:form>
+			</p:layoutUnit>
+		</p:layout>
+
+
+
+
+
+	</div>
+	<div id="rodape"></div>
+
+</h:body>
+
+</html>

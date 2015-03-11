@@ -1,0 +1,126 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<title>Sintomas</title>
+</h:head>
+
+<h:body>
+	<div id="cabecalho">
+		<ui:insert name="cabecalho">
+			<ui:include src="/cabecalho.xhtml" />
+		</ui:insert>
+	</div>
+	<div id="conteudo" >
+<p:layout style="min-width:600px;min-height:600px;">
+	<p:layoutUnit position="center">
+        	<H1>Sintomas</H1>
+        	<p:tooltip />
+		<h:form id="form">
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			<p:growl id="nomes" showDetail="true" />
+			<h:panelGrid columns="2" cellpadding="2">
+				<p:outputLabel value="Nome: " for="nomeSint" />
+				<p:inputText id="nomeSint" value="#{sintomasBen.sintomas.NOME_SINTOMAS}"/>
+				
+			</h:panelGrid>
+			<p:commandButton value="Cancelar" action="/home" />
+					<p:commandButton value="Pesquisar" actionListener="#{sintomasBen.pesquisarSintomas}"
+						update="grid"/>
+					<p:commandButton value="Novo" action="sintomasnovo" />
+			<br> </br>
+				<p:layout id="grid" style="min-width:600px;min-height:600px;">
+	<p:layoutUnit position="center">
+						<p:dataTable id="table" var="tablesintomas"
+							value="#{sintomasBen.listaSintomas}" editable="true"
+							style="margin-bottom:20px">
+							
+							<p:ajax event="rowEdit" listener="#{sintomasBen.onRowEdit}"
+								update="@this :form:nomes" />
+
+							<p:ajax event="rowEditCancel"
+								listener="#{sintomasBen.onRowCancel}" update=":form:nomes" />
+
+							<p:column headerText="Código do Sintomas">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablesintomas.ID_SINTOMAS}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText id="modelInput" value="#{tablesintomas.ID_SINTOMAS}"
+											style="width:100%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Nome Sintomas">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablesintomas.NOME_SINTOMAS}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tablesintomas.NOME_SINTOMAS}" style="width:100%"
+											label="Nome Sintomas" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Descrição">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablesintomas.DESCRICAO}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tablesintomas.DESCRICAO}" style="width:100%"
+											label="Descrição" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Remédio Homologado">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablesintomas.REMEDIO}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tablesintomas.REMEDIO}" style="width:100%"
+											label="Remédio Homologado" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column style="width:32px">
+								<p:rowEditor title="Alterar" />
+								<p:spacer width="1" />
+								<p:commandLink title="Deletar"  update=":form"
+									action="#{sintomasBen.excluirSintomas(tablesintomas)}">
+
+									<p:graphicImage url="/img/excluir.png"
+										style="background-color: transparent; vertical-align: middle; border: none"
+										width="11px" height="11px" />
+
+								</p:commandLink>
+							</p:column>
+
+
+						</p:dataTable>
+
+					</p:layoutUnit>
+				</p:layout>
+
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+	</div>
+	<!-- <div id="rodape">
+	<ui:insert name="rodape">
+			<ui:include src="/rodape.xhtml" />
+		</ui:insert>
+	</div> -->
+
+</h:body>
+
+</html>

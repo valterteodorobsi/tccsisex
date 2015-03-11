@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	
+	<script>
+		PrimeFaces.locales['pt'] = {
+			closeText : 'Fechar',
+			prevText : 'Anterior',
+			nextText : 'Próximo',
+			currentText : 'Começo',
+			monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
+					'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+					'Novembro', 'Dezembro' ],
+			monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+					'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+			dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+					'Sexta', 'Sábado' ],
+			dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
+			dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+			weekHeader : 'Semana',
+			firstDay : 0,
+			isRTL : false,
+			showMonthAfterYear : false,
+			yearSuffix : '',
+			timeOnlyTitle : 'Só Horas',
+			timeText : 'Tempo',
+			hourText : 'Hora',
+			minuteText : 'Minuto',
+			secondText : 'Segundo',
+			ampm : false,
+			month : 'Mês',
+			week : 'Semana',
+			day : 'Dia',
+			allDayText : 'Todo o Dia'
+		};
+	</script>
+	
+	<title>Relatório Gerencial</title>
+
+</h:head>
+
+<h:body>
+	<div id="cabecalho">
+		<ui:insert name="cabecalho">
+		<ui:include src="/cabecalho.xhtml" />
+	</ui:insert>
+	</div>
+	<div id="conteudo">
+		<h:form>
+		<p:layout style="min-width:400px;height:600px;">
+			<p:layoutUnit position="center">
+				<H1>Relatório Gerencial</H1>
+				<h:panelGrid columns="9" cellpadding="1">
+					<p:outputLabel value="Medico: " for="medRel" />
+					<p:selectOneMenu id="medRel" required="true" 
+						requiredMessage="Favor preencher o campo  Médico obrigatório"
+							value="#{gerencialBean.gerencial.nomeMedico}" prependId="true" var="m">
+							<f:selectItem itemLabel="Selecione..." itemValue=""  />
+							<f:selectItems value="#{medicoBen.listaMedico()}" var="medico"
+								itemLabel="#{medico.NOME}" itemValue="#{medico.NOME}" />
+								 
+						</p:selectOneMenu>
+					
+				
+					<p:outputLabel for="datInicial" value="Data Inicial:" />
+					<p:calendar id="datInicial" size="15" locale="pt" required="true"
+						requiredMessage="Favor preencher o campo  Data  Inicial obrigatória"
+						value="#{gerencialBean.dataInicial}" >
+					</p:calendar>
+					
+					
+					<p:outputLabel for="datFinal" value="Data Final:" />
+					<p:calendar id="datFinal" size="15" locale="pt" required="true"
+						requiredMessage="Favor preencher o campo  Data Final obrigatória"
+						value="#{gerencialBean.dataFinal}"  />
+						
+						
+						
+						<p:commandButton value="Gerar Relatório"  actionListener="#{gerencialBean.abreGrafico}" ajax="false" update="grafico"   />
+				</h:panelGrid>
+					
+				
+				<p:panel id="grafico" style="width: 550px" >
+
+						<p:pieChart id="linear" title="Gráfico Gerencial Tipo de Entrada"
+							value="#{gerencialBean.piechart}" legendPosition="ne" fill="true" showDataLabels="true" minY="0" maxY="10"
+							style="height:400px" >
+						</p:pieChart>
+				 </p:panel>
+			</p:layoutUnit>
+		</p:layout>
+		</h:form>
+	</div>
+	<div id="rodape"></div>
+
+</h:body>
+
+</html>

@@ -1,0 +1,202 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+<title>Prontuário</title>
+</h:head>
+
+<h:body>
+<div id="cabecalho">
+		<ui:insert name="cabecalho">
+			<ui:include src="/cabecalho.xhtml" />
+		</ui:insert>
+</div>
+<div id="conteudo" >
+	<p:layout id="ini" style="min-width:400px;height:600px;">
+		<p:layoutUnit position="center">
+			<H1>Cadastro de Prontuário</H1>
+			<p:tooltip />
+			<h:form id="form">
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				<p:growl id="nomes" showDetail="true" />
+				<h:panelGrid columns="2" cellpadding="2">
+						<p:outputLabel value="Matricula do Colaborador: " for="codFuncionario" />
+						<p:inputText id="codFuncionario"
+							value="#{prontuarioBen.prontuario.ID_MATRICULA}" />
+					
+					</h:panelGrid>
+
+					<p:commandButton value="Cancelar" action="/home" />
+					<p:commandButton value="Pesquisar" actionListener="#{prontuarioBen.pesquisarProntuarioMatricula()}"
+						update="grid"/>
+					<p:commandButton value="Novo" action="prontuarionovo" />
+
+					<br> </br>
+					<!-- mudar aqui para baixo -->
+					<p:layout id="grid" style="min-width:600px;min-height:600px;">
+
+					<p:layoutUnit position="center">
+						<p:dataTable id="table" var="tableProntuario"
+							value="#{prontuarioBen.listaProntuario}" editable="true"
+							style="margin-bottom:20px">
+							<p:subTable id="tablesub" var="tableFuncionaraio" value="#{prontuarioBen.listaFuncionario}" />
+							<p:ajax event="rowEdit" listener="#{prontuarioBen.onRowEdit}"
+								update=":form:nomes" />
+
+							<p:ajax event="rowEditCancel"
+								listener="#{prontuarioBen.onRowCancel}" update=":form:nomes" />
+
+							
+
+							<p:column headerText="Nome">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tableFuncionaraio.NOME}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tableFuncionaraio.NOME}" style="width:100%"
+											label="Nome" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Função">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tableFuncionaraio.FUNCAO}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tableFuncionaraio.FUNCAO}" style="width:100%"
+											label="Função" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Setor">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tableFuncionaraio.SETOR}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tableFuncionaraio.SETOR}" style="width:100%"
+											label="Setor" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="Data de Nacimento">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tableFuncionaraio.DATA_NASC}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText>
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tableFuncionaraio.DATA_NASC}" style="width:100%"
+											label="Data de Nacimento">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</p:inputText>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="RG">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tableFuncionaraio.RG}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tableFuncionaraio.RG}" style="width:100%" label="RG" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="Email">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tableFuncionaraio.EMAIL}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tableFuncionaraio.EMAIL}" style="width:100%"
+											label="Email" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="Ramal">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tableFuncionaraio.RAMAL}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tableFuncionaraio.RAMAL}" style="width:100%"
+											label="Ramal" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="Endereço">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tableFuncionaraio.ENDERECO}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tableFuncionaraio.ENDERECO}" style="width:100%"
+											label="Endereço" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="Pendencias">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tableProntuario.PENDENCIAS}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tableProntuario.PENDENCIAS}" style="width:100%"
+											label="Pendencias" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>	
+							<p:column headerText="Link Imagens">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tableProntuario.LINK_IMAGENS}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tableProntuario.LINK_IMAGENS}" style="width:100%"
+											label="Link Imagens" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>	
+							
+							
+							<p:column style="width:32px">
+								<p:rowEditor title="Alterar" />
+								<p:spacer width="1" />
+								<p:commandLink title="Deletar"  update=":form"
+									action="#{funcionarioBen.excluirFuncionario(tableProntuario)}">
+
+									<p:graphicImage url="/img/excluir.png"
+										style="background-color: transparent; vertical-align: middle; border: none"
+										width="11px" height="11px" />
+
+								</p:commandLink>
+							</p:column>
+
+
+						</p:dataTable>
+
+					</p:layoutUnit>
+				</p:layout>
+
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+	</div>
+	<!-- <div id="rodape">
+	<ui:insert name="rodape">
+			<ui:include src="/rodape.xhtml" />
+		</ui:insert>
+	</div> -->
+
+</h:body>
+</html>
