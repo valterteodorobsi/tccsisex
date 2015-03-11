@@ -86,8 +86,13 @@
 										<h:outputText value="#{tablesintomas.REMEDIO}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{tablesintomas.REMEDIO}" style="width:100%"
-											label="Remédio Homologado" />
+										<p:selectOneMenu id="remeSintomas" size="20" label="Remedio Homologado"
+							value="#{tablesintomas.REMEDIO}" prependId="true" var="r">
+							<f:selectItem itemLabel="Selecione...   " itemValue=" "  />
+							<f:selectItems value="#{remedioBen.listaRemedio()}" var="remedio"
+								itemLabel="#{remedio.NOME}" itemValue="#{remedio.NOME}" />
+								 
+						</p:selectOneMenu>
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
