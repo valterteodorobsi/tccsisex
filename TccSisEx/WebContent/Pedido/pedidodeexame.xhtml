@@ -1,0 +1,143 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<h:outputStylesheet library="css" name="style.css" />
+	
+	<script>
+		PrimeFaces.locales['pt'] = {
+			closeText : 'Fechar',
+			prevText : 'Anterior',
+			nextText : 'Próximo',
+			currentText : 'Começo',
+			monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
+					'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+					'Novembro', 'Dezembro' ],
+			monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+					'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+			dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+					'Sexta', 'Sábado' ],
+			dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
+			dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+			weekHeader : 'Semana',
+			firstDay : 0,
+			isRTL : false,
+			showMonthAfterYear : false,
+			yearSuffix : '',
+			timeOnlyTitle : 'Só Horas',
+			timeText : 'Tempo',
+			hourText : 'Hora',
+			minuteText : 'Minuto',
+			secondText : 'Segundo',
+			ampm : false,
+			month : 'Mês',
+			week : 'Semana',
+			day : 'Dia',
+			allDayText : 'Todo o Dia'
+		};
+		function imprimirJS(){
+			window.print();
+			 
+		};
+	</script>
+	
+	
+<title>Pedido De Exames</title>
+</h:head>
+
+<h:body>
+	<div id="cabecalho">
+		<ui:insert name="cabecalho">
+			<ui:include src="/cabecalho.xhtml" />
+		</ui:insert>
+	</div>
+	<div id="conteudo" >
+<p:layout style="min-width:600px;min-height:600px;">
+	<p:layoutUnit position="center">
+        	<H1 style="text-align: center;">Pedido de Exame</H1>
+        	<p:tooltip />
+		<h:form id="form">
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			<p:growl id="nomes" showDetail="true" />
+			<h:panelGrid columns="2" cellpadding="2">
+				<p:outputLabel value="Matricula: " for="matriculaPed" />
+					<p:inputText id="matriculaPed" size="20" maxlength="20" required="true"
+						requiredMessage="Favor preencher o campo Matricula obrigatório"
+						value="#{pedidoExameBen.pedidoDeExame.MATRICULA}">
+						<f:validateLength minimum="1" maximum="20" />
+					</p:inputText>
+					<p:outputLabel value="Nome: " for="nomePed" />
+					<p:inputText id="nomePed" size="50" maxlength="50" required="true"
+						requiredMessage="Favor preencher o campo  Nome obrigatório"
+						value="#{pedidoExameBen.pedidoDeExame.NOME_COLABORADOR}" />
+					<p:outputLabel value="Setor: " for="setPed" />
+					<p:selectOneMenu id="setPed" required="true"
+						requiredMessage="Favor preencher o campo  Setor obrigatório"
+							value="#{pedidoExameBen.pedidoDeExame.SETOR}" prependId="true" var="s">
+							<f:selectItem itemLabel="Selecione..." itemValue=""  />
+							<f:selectItems value="#{setorBen.listaSetor()}" var="setor"
+								itemLabel="#{setor.NOME}" itemValue="#{setor.NOME}" />
+						</p:selectOneMenu>
+					
+					<p:outputLabel value="Função: " for="unPed" />
+						<p:selectOneMenu id="unPed" required="true"
+						requiredMessage="Favor preencher o campo  Função obrigatório"
+							value="#{pedidoExameBen.pedidoDeExame.FUNCAO}" prependId="true" var="f">
+							<f:selectItem itemLabel="Selecione..." itemValue=""  />
+							<f:selectItems value="#{funcaoBen.listaFuncao()}" var="funcao"
+								itemLabel="#{funcao.NOME}" itemValue="#{funcao.NOME}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Data de Nacimento" for="datPed" />
+					<p:inputMask id="datPed" required="true"
+						requiredMessage="Favor preencher o campo  Data de Nascimento obrigatório"
+						value="#{pedidoExameBen.pedidoDeExame.DATA_NASC}" mask="99/99/9999">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:inputMask>
+					
+				<p:outputLabel value="Nome do Exame: " size="50" maxlength="50" for="exaPed" />
+				<p:inputText id="exaPed" required="true"
+						requiredMessage="Favor preencher o campo Nome do Exame obrigatório"
+						value="#{pedidoExameBen.pedidoDeExame.NOME_EXAME}"  />
+				<p:outputLabel value="CID: " for="cidPed" />
+				<p:inputText id="cidPed" size="5"  maxlength="5" value="#{pedidoExameBen.pedidoDeExame.CID}" />
+				<p:outputLabel value="Médico: " for="medPed" />
+				<p:inputText id="medPed" size="50" maxlength="50" required="true"
+						requiredMessage="Favor preencher o campo Médico obrigatório"
+						value="#{pedidoExameBen.pedidoDeExame.NOME_MEDICO}" />
+				
+				<p:outputLabel value="Descrição: " for="descPed" />
+				<p:inputTextarea rows="5" cols="30" counter="display" maxlength="150" counterTemplate="{0} Quantidade de caracteres." autoResize="false" 
+					 id="descPed"	value="#{pedidoExameBen.pedidoDeExame.DESCRICAO}" />
+					<p:outputLabel />
+					<h:outputText id="display" />
+					
+					<br> </br>
+
+			</h:panelGrid>
+			<p:commandButton value="voltar" action="/home" />
+				<p:commandButton value="Salvar" validateClient="true" 
+					actionListener="#{pedidoExameBen.adicionarPedidoExame}" />
+					
+					<!-- ver qual fica melhor  -->
+					<!-- <p:commandButton value="Imprimir" actionListener="#{pedidoExameBen.imprimirJS()}" update=":form"/> -->
+					
+					<p:commandButton id="btnImprimir" value="Imprimir" ajax="false"
+                    
+                    styleClass="ui-button ui-state-default ui-corner-all">
+                    <p:printer target="form" />
+                    </p:commandButton>
+		</h:form>
+	</p:layoutUnit>
+</p:layout>
+</div>
+<div id="rodape">
+
+</div>
+	
+</h:body>
+
+</html>

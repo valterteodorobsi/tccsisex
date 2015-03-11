@@ -1,0 +1,148 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	
+	<script>
+		PrimeFaces.locales['pt'] = {
+			closeText : 'Fechar',
+			prevText : 'Anterior',
+			nextText : 'Próximo',
+			currentText : 'Começo',
+			monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
+					'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+					'Novembro', 'Dezembro' ],
+			monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+					'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+			dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+					'Sexta', 'Sábado' ],
+			dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
+			dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+			weekHeader : 'Semana',
+			firstDay : 0,
+			isRTL : false,
+			showMonthAfterYear : false,
+			yearSuffix : '',
+			timeOnlyTitle : 'Só Horas',
+			timeText : 'Tempo',
+			hourText : 'Hora',
+			minuteText : 'Minuto',
+			secondText : 'Segundo',
+			ampm : false,
+			month : 'Mês',
+			week : 'Semana',
+			day : 'Dia',
+			allDayText : 'Todo o Dia'
+		};
+	</script>
+	<title>Colaborador</title>
+</h:head>
+
+<h:body>
+	<div id="cabecalho">
+		<ui:insert name="cabecalho">
+			<ui:include src="/cabecalho.xhtml" />
+		</ui:insert>
+	</div>
+<div id="conteudo" >
+	<p:layout id="lay" style="min-width:400px;height:600px;">
+		<p:layoutUnit position="center">
+			<H1>Cadastro do Colaborador</H1>
+			<p:tooltip />
+			<h:form id="form">
+			 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				<p:growl id="nomes" showDetail="true" />
+				<h:panelGrid columns="2" cellpadding="2">
+					<p:outputLabel value="Matricula: " for="matriculaFun" />
+					<p:inputText id="matriculaFun" size="20" maxlength="20" required="true"
+						requiredMessage="Favor preencher o campo Matricula obrigatório"
+						value="#{funcionarioBen.funcionario.ID_MATRICULA}">
+						<f:validateLength minimum="1" maximum="20" />
+					</p:inputText>
+					<p:outputLabel value="Nome: "  for="nomeFunci" />
+					<p:inputText id="nomeFunci" size="50" maxlength="50" required="true"
+						requiredMessage="Favor preencher o campo  Nome obrigatório"
+						value="#{funcionarioBen.funcionario.NOME}" />
+					<p:outputLabel value="Setor: " for="setFun" />
+					
+					<p:selectOneMenu id="setFun" required="true"
+						requiredMessage="Favor preencher o campo  Setor obrigatório"
+							value="#{funcionarioBen.funcionario.SETOR}" prependId="true" var="s">
+							<f:selectItem itemLabel="Selecione..." itemValue=""  />
+							<f:selectItems value="#{setorBen.listaSetor()}" var="setor"
+								itemLabel="#{setor.NOME}" itemValue="#{setor.NOME}" />
+								 
+						</p:selectOneMenu>
+						
+					
+					
+					<p:outputLabel value="Função: " for="unFun" />
+					
+						<p:selectOneMenu id="unFun" required="true"
+						requiredMessage="Favor preencher o campo  Função obrigatório"
+							value="#{funcionarioBen.funcionario.FUNCAO}" prependId="true" var="f">
+							<f:selectItem itemLabel="Selecione..." itemValue=""  />
+							<f:selectItems value="#{funcaoBen.listaFuncao()}" var="funcao"
+								itemLabel="#{funcao.NOME}" itemValue="#{funcao.NOME}" />
+								 
+						</p:selectOneMenu>
+						
+						
+						<p:outputLabel value="Data de Nacimento" for="datFun" />
+					<p:inputMask id="datFun" required="true"
+						requiredMessage="Favor preencher o campo  Data de Nascimento obrigatório"
+						value="#{funcionarioBen.funcionario.DATA_NASC}" mask="99/99/9999">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:inputMask>
+					<p:outputLabel value="RG: " for="rgFun" />
+					<p:inputText id="rgFun" size="8" maxlength="8" required="true"
+						requiredMessage="Favor preencher o campo  RG obrigatório"
+						value="#{funcionarioBen.funcionario.RG}" />
+					<p:outputLabel value="Endereço: " sfor="endFun" />
+					<p:inputText id="endFun" size="40" maxlength="40" required="true"
+						requiredMessage="Favor preencher o campo  Endereço obrigatório"
+						value="#{funcionarioBen.funcionario.ENDERECO}" />
+					<p:outputLabel value="Email: " for="emaiFun" />
+					<p:inputText id="emaiFun" size="40" maxlength="80" required="true"
+						requiredMessage="Favor preencher o campo  Email obrigatório"
+						value="#{funcionarioBen.funcionario.EMAIL}" />
+					<p:outputLabel value="Sexo: " for="sexFun" />
+						<p:selectOneMenu id="sexFun" required="true" 
+						requiredMessage="Favor preencher o campo  Sexo obrigatório"
+							value="#{funcionarioBen.funcionario.SEXO}" prependId="true" var="s">
+							<f:selectItem itemLabel="Selecione" itemValue=""  />
+							<f:selectItem itemLabel="Masculino  " itemValue="M"/>
+							<f:selectItem itemLabel="Feminino   " itemValue="F"/>
+							</p:selectOneMenu>		
+					
+					<p:outputLabel value="Ramal: " for="ramFun" />
+					<p:inputText id="ramFun" size="4" maxlength="4" required="true"
+						requiredMessage="Favor preencher o campo  Ramal obrigatório"
+						value="#{funcionarioBen.funcionario.RAMAL}" />
+					<p:outputLabel for="datCad" value="Data do Cadastro" />
+					<p:calendar id="datCad" size="10" locale="pt" required="true"
+						requiredMessage="Favor preencher o campo  Data do Cadastro obrigatório"
+						value="#{funcionarioBen.funcionario.DATA_CAD}" showOn="button">
+					</p:calendar>
+				</h:panelGrid>
+				<p:commandButton value="Voltar" actionListener="funcionario"/>
+				<p:commandButton value="Salvar"   
+					
+					actionListener="#{funcionarioBen.adicionarFuncionario}"  />
+
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+</div>
+	<!-- VER O PORQUE NÃO ESTA CHAMDO O CORPO INSERINDO O RODAPÉ <div id="rodape">
+		<ui:insert name="rodape">
+			<ui:include src="/rodape.xhtml" />
+		</ui:insert>
+	</div> -->
+
+</h:body>
+</html>

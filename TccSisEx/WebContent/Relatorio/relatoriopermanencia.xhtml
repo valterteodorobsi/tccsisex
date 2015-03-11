@@ -1,0 +1,94 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+	<div id="cabecalho">
+		<h:graphicImage value="/img/cabeçalho.png" />
+
+	</div>
+	<p:menubar>
+		<p:submenu label="Cadastros" icon="">
+			<p:menuitem value="Funcionário" url="/Funcionario/funcionario.xhtml" />
+			<p:menuitem value="Médico" url="/Medico/medico.xhtml" />
+			<p:menuitem value="Função" url="/Funcao/funcao.xhtml" />
+			<p:menuitem value="Setor" url="/Setor/setor.xhtml" />
+			<p:menuitem value="Exames" url="/Exames/exames.xhtml" />
+			<p:menuitem value="Prontuário" url="/Prontuario/prontuario.xhtml" />
+
+
+		</p:submenu>
+
+		<p:submenu label="Pesquisar" icon="">
+			<p:menuitem value="Funcionário"
+				url="/Funcionario/funcionariopesquisar.xhtml" />
+			<p:menuitem value="Médico" url="/Medico/medicopesquisar.xhtml" />
+			<p:menuitem value="Função" url="/Funcao/funcaopesquisar.xhtml" />
+			<p:menuitem value="Setor" url="/Setor/setorpesquisar.xhtml" />
+			<p:menuitem value="Exames" url="/Exames/examespesquisar.xhtml" />
+			<p:menuitem value="Prontuário"
+				url="/Prontuario/prontuariopesquisar.xhtml" />
+
+
+		</p:submenu>
+		<p:submenu label="Incluir" icon="">
+			<p:menuitem value="Sintomas" url="/Sintomas/sintomas.xhtml" />
+			<p:menuitem value="Atestados" url="/Atestado/atestados.xhtml" />
+			<p:menuitem value="Exames" url="/Exames/exameincluir.xhtml" />
+		</p:submenu>
+		<p:submenu label="Registrar Entrada/Saída" icon="">
+			<p:menuitem value="Registra Entrada"
+				url="/Registro/registraentrada.xhtml" />
+		</p:submenu>
+		<p:submenu label="Pedidos de Exames" icon="">
+			<p:menuitem value="Pedido de Exame" url="/Pedido/pedidodeexame.xhtml" />
+		</p:submenu>
+		<p:submenu label="Relatórios" icon="">
+			<p:menuitem value="Relatório Gerencial"
+				url="/Relatorio/relatoriogerencial.xhtml" />
+			<p:menuitem value="Relatório Tempo de Permanência"
+				url="/Relatorio/relatoriopermanencia.xhtml" />
+			<p:menuitem value="Relatório Ocorrência"
+				url="/Relatorio/relatorioocorrencia.xhtml" />
+			<p:menuitem value="Relatório Sintomas"
+				url="/Relatorio/relatoriosintomas.xhtml" />
+			<p:menuitem value="Relatório Responsabilidades"
+				url="/Relatorio/relatorioresponsabilidades.xhtml" />
+			<p:menuitem value="Relatório Gerencial Atestados"
+				url="/Relatorio/relatorioatestados.xhtml" />
+		</p:submenu>
+	</p:menubar>
+	<p:layout style="min-width:600px;min-height:600px;">
+		<p:layoutUnit position="center">
+			<H1>Relatório Tempo Médio de Permanência</H1>
+			<div>
+			<p:outputLabel value="Modo: " for="medoRel" />
+				<p:autoComplete id="medoRel" dropdown="true" value="Selecione" />
+				<p:outputLabel value="Tipo: " for="tipoRel" />
+				<p:autoComplete id="tipoRel" dropdown="true" value="Selecione" />
+				<p:outputLabel for="event" value="Data Inicial:" />
+        		<p:calendar id="event" value="#{calendarView.date4}">
+            		<p:ajax event="dateSelect" listener="#{calendarView.onDateSelect}" update=" " />
+        		</p:calendar>
+        		 <p:outputLabel for="popup" value="Data Final:" />
+       			<p:calendar id="popup" value="#{calendarView.date2}" />
+        		</div>
+        		<div>        		
+        			<p:button value="Gerar Relatório"></p:button>
+        		</div>
+        		<div>
+					<p:graphicImage style="left:50%; top:50%;" value="/img/grafico.png" />  
+				</div>
+		</p:layoutUnit>
+	</p:layout>
+	<div id="rodape">
+		
+	</div>
+
+</h:body>
+
+</html>

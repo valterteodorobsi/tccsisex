@@ -1,0 +1,151 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>Função</title>
+</h:head>
+
+<h:body>
+	<div id="cabecalho">
+		<ui:insert name="cabecalho">
+			<ui:include src="/cabecalho.xhtml" />
+		</ui:insert>
+	</div>
+	<div id="conteudo" >	
+	<p:layout id="ini" style="min-width:400px;height:600px;">
+		<p:layoutUnit position="center">
+			<H1> <!-- style="text-align: center; color:DarkGoldenrod" -->Função</H1>
+			<p:tooltip />
+			<h:form id="form">
+			 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				<p:growl id="nomes" showDetail="true" />
+				<h:panelGrid columns="2" cellpadding="2">
+						<p:outputLabel value="Código da Função: " for="CodFuncao" />
+						<p:inputText id="CodFuncao"
+							value="#{funcaoBen.funcao.ID_FUNCAO}" />
+						<p:outputLabel value="Nome: " for="nomeFuncao" />
+						<p:inputText id="nomeFuncao"
+							value="#{funcaoBen.funcao.NOME}" />
+					</h:panelGrid>
+
+					<p:commandButton value="Cancelar" action="/home" />
+					<p:commandButton value="Pesquisar" actionListener="#{funcaoBen.pesquisarFuncao}"
+						update="grid" />
+					<p:commandButton value="Novo" action="funcaonovo" />
+
+					<br> </br>
+				<p:layout id="grid" style="min-width:600px;min-height:600px;">
+
+					<p:layoutUnit position="center">
+						<p:dataTable id="table" var="tablefuncao"
+							value="#{funcaoBen.listaFuncao}" editable="true"
+							style="margin-bottom:20px">
+							
+							<p:ajax event="rowEdit" listener="#{funcaoBen.onRowEdit}"
+								update="@this :form:nomes" />
+
+							<p:ajax event="rowEditCancel"
+								listener="#{funcaoBen.onRowCancel}" update=":form:nomes" />
+
+							<p:column headerText="Código da Função">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablefuncao.ID_FUNCAO}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText id="modelInput" value="#{tablefuncao.ID_FUNCAO}"
+											style="width:100%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							
+							<p:column headerText="Nome">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablefuncao.NOME}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tablefuncao.NOME}" style="width:100%"
+											label="Nome" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							
+							<p:column headerText="Criticidade">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablefuncao.CRITICIDADE}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:selectOneMenu id="critiFuncao"
+							value="#{tablefuncao.CRITICIDADE}" prependId="true" var="s" label="Criticidade">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+							<f:selectItem itemLabel="Alta" itemValue="Alta" />
+							<f:selectItem itemLabel="Normal" itemValue="Normal" />
+							<f:selectItem itemLabel="Baixa" itemValue="Baixa" />
+						</p:selectOneMenu>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="DESCRIÇÃO">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablefuncao.DESCRICAO}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{tablefuncao.DESCRICAO}" style="width:100%"
+											label="Descrição" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column headerText="EXAMES">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tablefuncao.EXAMES}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:selectOneMenu id="exaFuncao" 					
+							value="#{tablefuncao.EXAMES}" prependId="true" var="e" label="Exames">
+							<f:selectItem itemLabel="Selecione..." itemValue=""  />
+							<f:selectItems value="#{exameBen.listaExame()}" var="exame"
+								itemLabel="#{exame.NOME_EXAME}" itemValue="#{exame.NOME_EXAME}" />
+								 
+						</p:selectOneMenu>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							
+							<p:column style="width:32px">
+								<p:rowEditor title="Alterar" />
+								<p:spacer width="1" />
+								<p:commandLink update=":form"
+									action="#{funcaoBen.excluirFuncao(tablefuncao)}">
+
+									<p:graphicImage url="/img/excluir.png"
+										style="background-color: transparent; vertical-align: middle; border: none"
+										width="11px" height="11px" />
+
+								</p:commandLink>
+							</p:column>
+
+
+						</p:dataTable>
+
+					</p:layoutUnit>
+				</p:layout>
+
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+	</div>
+<div id="rodape">
+	
+</div>
+	
+</h:body>
+
+</html>

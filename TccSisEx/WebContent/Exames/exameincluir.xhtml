@@ -1,0 +1,116 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Incluir Exames</title>
+</h:head>
+
+<h:body>
+	<div id="cabecalho">
+		<ui:insert name="cabecalho">
+			<ui:include src="/cabecalho.xhtml" />
+		</ui:insert>
+	</div>
+	<div id="conteudo">
+		<p:layout style="min-width:600px;min-height:600px;">
+			<p:layoutUnit position="center">
+				<H1>Incluir Exames</H1>
+				<p:tooltip />
+				<h:form enctype="multipart/form-data" id="form">
+					<p:messages id="messages1" showDetail="true" autoUpdate="true"
+						closable="true" />
+
+					<p:growl id="nomes" showDetail="true" />
+					<h:panelGrid columns="2" cellpadding="2">
+						<p:outputLabel value="Matricula: " for="matriculaAnexo" />
+						<p:inputText id="matriculaAnexo" size="20" maxlength="20"
+							required="true" requiredMessage="Favor preencher o campo Matricula obrigatório"	
+							 value="#{arquivoBen.arquivo.MATRICULA}">
+							<f:validateLength minimum="1" maximum="20" />
+						</p:inputText>
+						<p:outputLabel value="Nome: " for="nomeAnexo" />
+						<p:inputText id="nomeAnexo" size="50" maxlength="50"
+							required="true"
+							requiredMessage="Favor preencher o campo  Nome obrigatório"
+							value="#{arquivoBen.arquivo.NOME_COLABORADOR}" />
+
+
+						<p:outputLabel value="Setor: " for="setAnexo" />
+
+						<p:selectOneMenu id="setAnexo" required="true"
+							requiredMessage="Favor preencher o campo  Setor obrigatório"
+							value="#{arquivoBen.arquivo.SETOR}" prependId="true" var="s">
+							<f:selectItem itemLabel="Selecione..." itemValue="" />
+							<f:selectItems value="#{setorBen.listaSetor()}" var="setor"
+								itemLabel="#{setor.NOME}" itemValue="#{setor.NOME}" />
+
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Criticidade: " for="critiAnexo" />
+							<p:selectOneMenu id="critiAnexo" required="true"
+							requiredMessage="Favor preencher o campo  Criticidade obrigatório"
+							value="#{arquivoBen.arquivo.CRITICIDADE}" prependId="true" var="s">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+							<f:selectItem itemLabel="Alta" itemValue="Alta" />
+							<f:selectItem itemLabel="Normal" itemValue="Normal" />
+							<f:selectItem itemLabel="Baixa" itemValue="Baixa" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Exames: " for="exaAnexo" />
+						<p:selectOneMenu id="exaAnexo" required="true"
+							requiredMessage="Favor preencher o campo  Exame obrigatório"
+							value="#{arquivoBen.arquivo.EXAME}" prependId="true" var="e">
+							<f:selectItem itemLabel="Selecione..." itemValue="" />
+							<f:selectItems value="#{exameBen.listaExame()}" var="exame"
+								itemLabel="#{exame.NOME_EXAME}" itemValue="#{exame.NOME_EXAME}" />
+
+						</p:selectOneMenu>
+						<p:outputLabel value="Validade" for="validadeAnexo" />
+						<p:inputText id="validadeAnexo" size="20" maxlength="20"
+							required="true"
+							requiredMessage="Favor preencher o campo Validade obrigatório"
+							value="#{arquivoBen.arquivo.VALIDADE}">
+							<f:validateLength minimum="1" maximum="20" />
+						</p:inputText>
+
+						<p:outputLabel value="Descrição: " for="desAnexo" />
+						<p:inputTextarea rows="5" cols="30" counter="display"
+							maxlength="150" counterTemplate="{0} Quantidade de caracteres."
+							autoResize="false" id="desAnexo" required="true"
+							requiredMessage="Favor preencher o campo  Descrição obrigatório"
+							value="#{arquivoBen.arquivo.DESCRICAO}" />
+						<p:outputLabel />
+						<h:outputText id="display" />
+
+
+
+
+
+						<p:fileUpload fileUploadListener="#{arquivoBen.recebeArquivos}"
+							mode="simple" value="#{arquivoBen.imagem}" />
+
+
+					</h:panelGrid>
+					<br> </br>
+					<div>
+						<p:commandButton value="Voltar" action="/home"  />
+						<p:commandButton value="Pesquisar" action="pesquisarexames.xhtml"
+							validateClient="false"  />
+						<p:commandButton value="Salvar" validateClient="true"
+							actionListener="#{arquivoBen.adicionarArquivo}" />
+
+
+
+					</div>
+				</h:form>
+			</p:layoutUnit>
+		</p:layout>
+	</div>
+	<div id="rodape"></div>
+
+</h:body>
+
+</html>

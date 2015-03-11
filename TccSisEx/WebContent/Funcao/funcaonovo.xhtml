@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+
+
+	
+	<title>Função</title>
+</h:head>
+
+<h:body>
+	<div id="cabecalho">
+		<ui:insert name="cabecalho">
+			<ui:include src="/cabecalho.xhtml" />
+		</ui:insert>
+	</div>
+<div id="conteudo" >
+	<p:layout id="lay" style="min-width:400px;height:600px;">
+		<p:layoutUnit position="center">
+			<H1>Cadastro do Função</H1>
+			<p:tooltip />
+			<h:form id="form">
+			
+			 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				<p:growl id="nomes" showDetail="true" />
+				<h:panelGrid columns="2" cellpadding="2">
+					<p:outputLabel value="Código da Funcão " for="codFuncao" />
+					<p:inputText id="codFuncao" size="20" maxlength="20" required="true"
+						requiredMessage="Favor preencher o campo Codigo da Função obrigatório"
+						value="#{funcaoBen.funcao.ID_FUNCAO}">
+						<f:validateLength minimum="1" maximum="20" /> 
+					</p:inputText>
+											
+					<p:outputLabel value="Nome: " for="nomeFuncao" />
+					<p:inputText id="nomeFuncao" size="50" maxlength="50" required="true"
+						requiredMessage="Favor preencher o campo  Nome obrigatório"
+						value="#{funcaoBen.funcao.NOME}" >
+						  
+						  </p:inputText>
+
+						<p:outputLabel value="Criticidade: " for="critiFuncao" />
+						<p:selectOneMenu id="critiFuncao" required="true"
+							requiredMessage="Favor preencher o campo  Criticidade obrigatório"
+							value="#{funcaoBen.funcao.CRITICIDADE}" prependId="true" var="s">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+							<f:selectItem itemLabel="Alta" itemValue="Alta" />
+							<f:selectItem itemLabel="Normal" itemValue="Normal" />
+							<f:selectItem itemLabel="Baixa" itemValue="Baixa" />
+						</p:selectOneMenu>
+
+
+						<p:outputLabel value="Exames: " for="exaFuncao" />
+						<p:selectOneMenu id="exaFuncao" required="true"
+						requiredMessage="Favor preencher o campo  Exame obrigatório"
+							value="#{funcaoBen.funcao.EXAMES}" prependId="true" var="e">
+							<f:selectItem itemLabel="Selecione..." itemValue=""  />
+							<f:selectItems value="#{exameBen.listaExame()}" var="exame"
+								itemLabel="#{exame.NOME_EXAME}" itemValue="#{exame.NOME_EXAME}" />
+								 
+						</p:selectOneMenu>
+					<p:outputLabel value="Descrição: " for="desFuncao" />
+					<p:inputTextarea rows="5" cols="30" counter="display" maxlength="150" counterTemplate="{0} Quantidade de caracteres." autoResize="false" 
+					 id="desFuncao"	required="true"
+						requiredMessage="Favor preencher o campo  Descrição obrigatório"	value="#{funcaoBen.funcao.DESCRICAO}" />
+					<p:outputLabel />
+					<h:outputText id="display" />
+					
+					<br> </br>
+				</h:panelGrid>
+				<p:commandButton value="voltar" action="funcao" />
+				<p:commandButton value="Salvar" validateClient="true" 
+					actionListener="#{funcaoBen.adicionarFuncao}" />
+
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+</div>
+	<!-- VER O PORQUE NÃO ESTA CHAMDO O CORPO INSERINDO O RODAPÉ <div id="rodape">
+		<ui:insert name="rodape">
+			<ui:include src="/rodape.xhtml" />
+		</ui:insert>
+	</div> -->
+
+</h:body>
+</html>

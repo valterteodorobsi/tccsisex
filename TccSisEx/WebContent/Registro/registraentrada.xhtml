@@ -1,0 +1,133 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+		<script>
+		PrimeFaces.locales['pt'] = {
+			closeText : 'Fechar',
+			prevText : 'Anterior',
+			nextText : 'Próximo',
+			currentText : 'Começo',
+			monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
+					'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+					'Novembro', 'Dezembro' ],
+			monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+					'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+			dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+					'Sexta', 'Sábado' ],
+			dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
+			dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+			weekHeader : 'Semana',
+			firstDay : 0,
+			isRTL : false,
+			showMonthAfterYear : false,
+			yearSuffix : '',
+			timeOnlyTitle : 'Só Horas',
+			timeText : 'Tempo',
+			hourText : 'Hora',
+			minuteText : 'Minuto',
+			secondText : 'Segundo',
+			ampm : false,
+			month : 'Mês',
+			week : 'Semana',
+			day : 'Dia',
+			allDayText : 'Todo o Dia'
+		};
+	</script>
+<title>Registrar Entrada</title>
+</h:head>
+
+<h:body>
+	<div id="cabecalho">
+		<ui:insert name="cabecalho">
+			<ui:include src="/cabecalho.xhtml" />
+		</ui:insert>
+	</div>
+<div id="conteudo" >
+<p:layout style="min-width:600px;min-height:600px;">
+	<p:layoutUnit position="center">
+        	<H1>Registrar  Entrada</H1>
+        	<p:tooltip />
+		<h:form id="form">
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			<p:growl id="nomes" showDetail="true" />
+			<h:panelGrid columns="2" cellpadding="2">
+				<p:outputLabel value="Matricula: " for="matReg" />
+				<p:inputText id="matReg" size="20" maxlength="20" required="true"
+						requiredMessage="Favor preencher o campo Matricula obrigatório"
+						value="#{registroBen.registro.ID_MATRICULA}" />
+				<p:outputLabel value="Nome: " for="nomeReg" />
+				<p:inputText id="nomeReg" size="40" maxlength="40" required="true"
+						requiredMessage="Favor preencher o campo Nome obrigatório"
+						value="#{registroBen.registro.NOME_COLABORADOR}" />
+				<p:outputLabel value="Remédio Homologado: " for="remReg" />
+				
+				<p:selectOneMenu id="remReg" required="false"
+						requiredMessage="Favor preencher o campo  Remédio obrigatório"
+							value="#{registroBen.registro.REMEDIO}" prependId="true" var="r">
+							<f:selectItem itemLabel="Selecione..." itemValue=""  />
+							<f:selectItems value="#{remedioBen.listaRemedio()}" var="remedio"
+								itemLabel="#{remedio.NOME}" itemValue="#{remedio.NOME}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Data de Entrada: " for="datReg" />
+						<p:calendar id="datReg" size="15" locale="pt" required="true"
+							pattern="dd/MM/yyyy HH:mm"
+							requiredMessage="Favor preencher o campo  Data de Entrada obrigatório"
+							value="#{registroBen.registro.DATA_ENTRADA}" />
+						
+						<h:outputText value="Emergencial: " />
+       						 <p:selectBooleanCheckbox value="#{registroBen.registro.emergencial}" />
+ 						<h:outputText value="Eletivo: " />
+       						 <p:selectBooleanCheckbox value="#{registroBen.registro.emergencial}" />
+       					 
+						
+						<p:outputLabel value="Medico: " for="medReg" />
+					<p:selectOneMenu id="medReg" required="true" 
+						requiredMessage="Favor preencher o campo  Médico obrigatório"
+							value="#{registroBen.registro.medico}" prependId="true" var="m">
+							<f:selectItem itemLabel="Selecione..." itemValue=""  />
+							<f:selectItems value="#{medicoBen.listaMedico()}" var="medico"
+								itemLabel="#{medico.NOME}" itemValue="#{medico.NOME}" />
+								 
+						</p:selectOneMenu>
+						<p:outputLabel value="Sintomas: " for="sinReg" />
+						<p:selectOneMenu id="sinReg" required="true" 
+						requiredMessage="Favor preencher o campo  Sintomas obrigatório"
+							value="#{registroBen.registro.SINTOMAS}" prependId="true" var="m">
+							<f:selectItem itemLabel="Selecione..." itemValue=""  />
+							<f:selectItems value="#{sintomasBen.listaSintomas()}" var="sintomas"
+								itemLabel="#{sintomas.NOME_SINTOMAS}" itemValue="#{sintomas.NOME_SINTOMAS}" />
+								</p:selectOneMenu>
+						<p:outputLabel value="Encaminhar Atentimento: " for="encReg" />
+				<p:inputText id="encReg" size="4" maxlength="4" value="#{registroBen.registro.encExt}" />
+						
+						<p:outputLabel value="Descrição: " for="desReg" />
+					<p:inputTextarea rows="5" cols="30" counter="display" maxlength="150" counterTemplate="{0} Quantidade de caracteres." autoResize="false" 
+					 id="desReg"	required="true"
+						requiredMessage="Favor preencher o campo  Descrição obrigatório" value="#{registroBen.registro.DESCRICAO}" />
+					<p:outputLabel />
+					<h:outputText id="display" />
+					
+						
+			</h:panelGrid>
+			<br> </br>
+				
+				<p:commandButton value="voltar" action="/home" />
+				<p:commandButton value="Salvar" validateClient="true" 
+					actionListener="#{registroBen.adicionarRegistro}" />
+		</h:form>
+	</p:layoutUnit>
+</p:layout>
+</div>
+<div id="rodape">
+	
+</div>
+	
+</h:body>
+
+</html>

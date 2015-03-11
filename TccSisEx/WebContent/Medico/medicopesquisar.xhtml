@@ -1,0 +1,126 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Pesquisar Médico</title>
+</h:head>
+<h:body>
+	<div id="cabecalho">
+		<h:graphicImage value="/img/cabeçalho.png" />
+
+	</div>
+	<p:menubar>
+		<p:submenu label="Cadastros" icon="">
+			<p:menuitem value="Funcionário" url="/Funcionario/funcionario.xhtml" />
+			<p:menuitem value="Médico" url="/Medico/medico.xhtml" />
+			<p:menuitem value="Função" url="/Funcao/funcao.xhtml" />
+			<p:menuitem value="Setor" url="/Setor/setor.xhtml" />
+			<p:menuitem value="Exames" url="/Exames/exames.xhtml" />
+			<p:menuitem value="Prontuário" url="/Prontuario/prontuario.xhtml" />
+
+
+		</p:submenu>
+
+		<p:submenu label="Pesquisar" icon="">
+			<p:menuitem value="Funcionário"
+				url="/Funcionario/funcionariopesquisar.xhtml" />
+			<p:menuitem value="Médico" url="/Medico/medicopesquisar.xhtml" />
+			<p:menuitem value="Função" url="/Funcao/funcaopesquisar.xhtml" />
+			<p:menuitem value="Setor" url="/Setor/setorpesquisar.xhtml" />
+			<p:menuitem value="Exames" url="/Exames/examespesquisar.xhtml" />
+			<p:menuitem value="Prontuário"
+				url="/Prontuario/prontuariopesquisar.xhtml" />
+
+
+		</p:submenu>
+		<p:submenu label="Incluir" icon="">
+			<p:menuitem value="Sintomas" url="/Sintomas/sintomas.xhtml" />
+			<p:menuitem value="Atestados" url="/Atestado/atestados.xhtml" />
+			<p:menuitem value="Exames" url="/Exames/exameincluir.xhtml" />
+		</p:submenu>
+		<p:submenu label="Registrar Entrada/Saída" icon="">
+			<p:menuitem value="Registra Entrada"
+				url="/Registro/registraentrada.xhtml" />
+		</p:submenu>
+		<p:submenu label="Pedidos de Exames" icon="">
+			<p:menuitem value="Pedido de Exame" url="/Pedido/pedidodeexame.xhtml" />
+		</p:submenu>
+		<p:submenu label="Relatórios" icon="">
+			<p:menuitem value="Relatório Gerencial"
+				url="/Relatorio/relatoriogerencial.xhtml" />
+			<p:menuitem value="Relatório Tempo de Permanência"
+				url="/Relatorio/relatoriopermanencia.xhtml" />
+			<p:menuitem value="Relatório Ocorrência"
+				url="/Relatorio/relatorioocorrencia.xhtml" />
+			<p:menuitem value="Relatório Sintomas"
+				url="/Relatorio/relatoriosintomas.xhtml" />
+			<p:menuitem value="Relatório Responsabilidades"
+				url="/Relatorio/relatorioresponsabilidades.xhtml" />
+			<p:menuitem value="Relatório Gerencial Atestados"
+				url="/Relatorio/relatorioatestados.xhtml" />
+		</p:submenu>
+	</p:menubar>
+	<p:layout style="min-width:600px;min-height:600px;">
+		<p:layoutUnit position="center">
+			<p:dataTable var="car" value=" ">
+				<p:column headerText="Matricula">
+					<h:outputText value=" " />
+				</p:column>
+
+				<p:column headerText="Nome">
+					<h:outputText value=" " />
+				</p:column>
+
+				<p:column headerText="Especialidade">
+					<h:outputText value=" " />
+				</p:column>
+
+				<p:column headerText="CRM">
+					<h:outputText value=" " />
+				</p:column>
+				<p:column headerText="Data de Nascimento">
+					<h:outputText value=" " />
+				</p:column>
+				<p:column headerText="RG">
+					<h:outputText value=" " />
+				</p:column>
+				<p:column headerText="Carga Horária Semanal">
+					<h:outputText value=" sss" />
+				</p:column>
+				<p:column headerText="Dias De Atendimento">
+					<h:outputText value="sss " />
+				</p:column>
+				<p:column headerText=" " >
+					<p:commandLink action=" "
+						oncomplete="" update="">
+
+						<p:graphicImage url="/img/editar.png"
+							style="background-color: transparent; vertical-align: middle; border: none"
+							width="20" height="20" />
+
+					</p:commandLink>
+
+					<p:spacer width="10" />
+
+					<p:commandLink action=" "
+						update=" ">
+
+						<p:graphicImage url="/img/excluir.png"
+							style="background-color: transparent; vertical-align: middle; border: none"
+							width="20" height="20" />
+
+					</p:commandLink>
+
+				</p:column>
+
+			</p:dataTable>
+		</p:layoutUnit>
+	</p:layout>
+	<div id="rodape">
+		
+	</div>
+
+</h:body>
+</html>
