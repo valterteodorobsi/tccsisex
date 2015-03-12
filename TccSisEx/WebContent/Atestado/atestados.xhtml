@@ -3,9 +3,9 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
+
 <h:head>
-<title>Incluir Atestado</title>
+	<title>Incluir Atestado</title>
 </h:head>
 
 <h:body>
@@ -15,11 +15,11 @@
 		</ui:insert>
 	</div>
 	<div id="conteudo">
-			<p:layout style="min-width:600px;min-height:600px;">
-				<p:layoutUnit position="center">
-        			<H1>Incluir Atestados</H1>
-        			<p:tooltip />
-		<h:form enctype="multipart/form-data" id="form">
+		<p:layout style="min-width:600px;min-height:600px;">
+			<p:layoutUnit position="center">
+				<H1>Incluir Atestados</H1>
+				<p:tooltip />
+				<h:form enctype="multipart/form-data" id="form">
 					<p:messages id="messages1" showDetail="true" autoUpdate="true"
 						closable="true" />
 
@@ -37,46 +37,47 @@
 							required="true"
 							requiredMessage="Favor preencher o campo  Nome do Colaborador obrigatório"
 							value="#{atestadoBen.atestado.nomeColaborador}" />
-							
-							
-							
-				<p:outputLabel value="Setor: " for="setAtes" />
-				<p:selectOneMenu id="setAtes" required="true"
-						requiredMessage="Favor preencher o campo  Setor obrigatório"
+
+
+
+						<p:outputLabel value="Setor: " for="setAtes" />
+						<p:selectOneMenu id="setAtes" required="true"
+							requiredMessage="Favor preencher o campo  Setor obrigatório"
 							value="#{atestadoBen.atestado.setor}" prependId="true" var="s">
-							<f:selectItem itemLabel="Selecione..." itemValue=""  />
+							<f:selectItem itemLabel="Selecione..." itemValue="" />
 							<f:selectItems value="#{setorBen.listaSetor()}" var="setor"
 								itemLabel="#{setor.NOME}" itemValue="#{setor.NOME}" />
-								 
-				</p:selectOneMenu>
-				
-				<p:outputLabel value="CID: " for="cidAtes" />
-				<p:inputText id="cidAtes" size="5" maxlength="5"
-							required="true"
+
+						</p:selectOneMenu>
+
+						<p:outputLabel value="CID: " for="cidAtes" />
+						<p:inputText id="cidAtes" size="5" maxlength="5" required="true"
 							requiredMessage="Favor preencher o campo  CID obrigatório"
 							value="#{atestadoBen.atestado.cid}" />
-				
-				
-				
-				<p:fileUpload fileUploadListener="#{atestadoBen.recebeAtestados}"
-							mode="simple" value="#{atestadoBen.imagem}" />
-							</h:panelGrid>
-					<br> </br>
-					
-				<div>
-					<p:commandButton value="Voltar" action="/home.jsf"/>
-						<p:commandButton value="Pesquisar" action="pesquisaratestado"/>
-							<p:commandButton value="Salvar" validateClient="true" 
-								
-								actionListener="#{atestadoBen.adicionarAtestado}" />
 
-							
-	
-						</div>
+
+
+						<p:fileUpload fileUploadListener="#{atestadoBen.recebeAtestados}"
+							style="margin-top: 20px;" mode="advanced" sizeLimit="1000000"
+							multiple="false" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/"
+							value="#{atestadoBen.imagem}" />
+
+					</h:panelGrid>
+					<br> </br>
+
+					<div>
+						<p:commandButton value="Voltar" action="/home.jsf" />
+						<p:commandButton value="Pesquisar" action="pesquisaratestado" />
+						<p:commandButton value="Salvar" validateClient="true"
+							actionListener="#{atestadoBen.adicionarAtestado}" />
+
+
+
+					</div>
 				</h:form>
 			</p:layoutUnit>
 		</p:layout>
-					</div>
+	</div>
 	<div id="rodape"></div>
 
 </h:body>

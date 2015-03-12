@@ -1,8 +1,5 @@
 package controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,102 +20,87 @@ import dao.ReceberArquivoDao;
 @ViewScoped
 public class ReceberOArquivoController {
 
-		private Arquivo arquivo;
-		private UploadedFile imagem ;
-		private List<Arquivo> listaArquivos = new ArrayList<Arquivo>();
+	private Arquivo arquivo;
+	private UploadedFile imagem;
+	private List<Arquivo> listaArquivos = new ArrayList<Arquivo>();
 
-		
+	@PostConstruct
+	public void init() {
+		atribuirEstadoInicial();
+	}
 
-		@PostConstruct
-		public void init() {
-			atribuirEstadoInicial();
-		}
+	private void atribuirEstadoInicial() {
 
-		private void atribuirEstadoInicial() {
+		arquivo = new Arquivo();
 
-			arquivo = new Arquivo();
-			
+	}
 
-		}
-		
-		public List<Arquivo> getListaArquivos() {
-			return listaArquivos;
-		}
+	public List<Arquivo> getListaArquivos() {
+		return listaArquivos;
+	}
 
-		public void setListaArquivos(List<Arquivo> listaArquivos) {
-			this.listaArquivos = listaArquivos;
-		}
-		
+	public void setListaArquivos(List<Arquivo> listaArquivos) {
+		this.listaArquivos = listaArquivos;
+	}
+
 	public UploadedFile getImagem() {
-			return imagem;
-		}
+		return imagem;
+	}
 
-		public void setImagem(UploadedFile imagem) {
-			this.imagem = imagem;
-		}
+	public void setImagem(UploadedFile imagem) {
+		this.imagem = imagem;
+	}
 
 	public Arquivo getArquivo() {
-			return arquivo;
-		}
+		return arquivo;
+	}
 
-		public void setArquivo(Arquivo arquivo) {
-			this.arquivo = arquivo;
-		}
+	public void setArquivo(Arquivo arquivo) {
+		this.arquivo = arquivo;
+	}
 
-
-	
 	public String adicionarArquivo() {
-		ReceberArquivoDao  dao = new ReceberArquivoDao();
-		
+		ReceberArquivoDao dao = new ReceberArquivoDao();
+
 		arquivo.setIMAGEM(imagem.getContents());
-		//arquivo.setIMAGEM(file);
+
 		dao.save(arquivo);
 		info();
 		return "/home.jsf";
 	}
-	
+
+	// Recebe o arquivo e coloca na variavel imagem para inserir no banco;
 	public void recebeArquivos(FileUploadEvent event) {
-		
+
+		imagem = event.getFile();
+
 		byte[] arquivoBinario = event.getFile().getContents();
+		arquivo.setIMAGEM(arquivoBinario);
+		FacesMessage msg = new FacesMessage("Sucesso !", event.getFile()
+				.getFileName() + "Incluso.");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 
-		try {
-			imagem.getContents();
-			File file = new File("C:/temp");
-
-			FileOutputStream fos = new FileOutputStream(file);
-			fos.write(arquivoBinario);
-			arquivo.setIMAGEM(arquivoBinario);
-			fos.close();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		/*ReceberArquivoDao  dao = new ReceberArquivoDao();
-		dao.save(arquivo);
-		info();*/
 	}
+
 	public void pesquisarExamePorMatricula() {
 		Integer matricula = arquivo.getMATRICULA();
-		
-		
-		
-		listaArquivos= new ReceberArquivoDao().pesquisar(matricula); 
-		
+
+		listaArquivos = new ReceberArquivoDao().pesquisar(matricula);
+
 		if (matricula == null || matricula == 0 || listaArquivos == null) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Nenhum registro foi encontrado."));
 
 		}
 	}
-	
+
 	public void info() {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso !",
 						"Exame Incluso com Sucesso. "));
 	}
-	
-	
+
 	public void excluirArquivo(Arquivo arquivo) {
 
 		new ReceberArquivoDao().remove(arquivo);
@@ -126,9 +108,8 @@ public class ReceberOArquivoController {
 		pesquisarExamePorMatricula();
 		infoExcluir();
 
-		
 	}
-	
+
 	public void infoExcluir() {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
