@@ -99,15 +99,28 @@
 					</p:inputMask>
 					
 				<p:outputLabel value="Nome do Exame: " size="50" maxlength="50" for="exaPed" />
-				<p:inputText id="exaPed" required="true"
-						requiredMessage="Favor preencher o campo Nome do Exame obrigatório"
-						value="#{pedidoExameBen.pedidoDeExame.NOME_EXAME}"  />
+				
+						<p:selectOneMenu id="exaPed" required="true"
+						requiredMessage="Favor preencher o campo  Exame obrigatório"
+							value="#{pedidoExameBen.pedidoDeExame.NOME_EXAME}" prependId="true" var="e">
+							<f:selectItem itemLabel="Selecione..." itemValue=""  />
+							<f:selectItems value="#{exameBen.listaExame()}" var="exame"
+								itemLabel="#{exame.NOME_EXAME}" itemValue="#{exame.NOME_EXAME}" />
+				</p:selectOneMenu>
+						
 				<p:outputLabel value="CID: " for="cidPed" />
 				<p:inputText id="cidPed" size="5"  maxlength="5" value="#{pedidoExameBen.pedidoDeExame.CID}" />
 				<p:outputLabel value="Médico: " for="medPed" />
-				<p:inputText id="medPed" size="50" maxlength="50" required="true"
-						requiredMessage="Favor preencher o campo Médico obrigatório"
-						value="#{pedidoExameBen.pedidoDeExame.NOME_MEDICO}" />
+				<p:selectOneMenu id="medPed" required="true" 
+						requiredMessage="Favor preencher o campo  Médico obrigatório"
+							value="#{pedidoExameBen.pedidoDeExame.NOME_MEDICO}" prependId="true" var="m">
+							<f:selectItem itemLabel="Selecione..." itemValue=""  />
+							<f:selectItems value="#{medicoBen.listaMedico()}" var="medico"
+								itemLabel="#{medico.NOME}" itemValue="#{medico.NOME}" />
+								 
+						</p:selectOneMenu>
+				
+						
 				
 				<p:outputLabel value="Descrição: " for="descPed" />
 				<p:inputTextarea rows="5" cols="30" counter="display" maxlength="150" counterTemplate="{0} Quantidade de caracteres." autoResize="false" 
@@ -122,14 +135,7 @@
 				<p:commandButton value="Salvar" validateClient="true" 
 					actionListener="#{pedidoExameBen.adicionarPedidoExame}" />
 					
-					<!-- ver qual fica melhor  -->
-					<!-- <p:commandButton value="Imprimir" actionListener="#{pedidoExameBen.imprimirJS()}" update=":form"/> -->
 					
-					<p:commandButton id="btnImprimir" value="Imprimir" ajax="false"
-                    
-                    styleClass="ui-button ui-state-default ui-corner-all">
-                    <p:printer target="form" />
-                    </p:commandButton>
 		</h:form>
 	</p:layoutUnit>
 </p:layout>

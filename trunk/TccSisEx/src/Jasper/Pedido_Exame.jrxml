@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2015-03-11T18:43:50 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pedido_Exame" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1836d1be-cc43-4166-87d3-7a922e39e738">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="NOME_MEDICO" class="java.lang.String">
+		<fieldDescription><![CDATA[NOME_MEDICO]]></fieldDescription>
+	</field>
+	<field name="DATA_NASC" class="java.util.Date">
+		<fieldDescription><![CDATA[DATA_NASC]]></fieldDescription>
+	</field>
+	<field name="DESCRICAO" class="java.lang.String">
+		<fieldDescription><![CDATA[DESCRICAO]]></fieldDescription>
+	</field>
+	<field name="SETOR" class="java.lang.String">
+		<fieldDescription><![CDATA[SETOR]]></fieldDescription>
+	</field>
+	<field name="MATRICULA" class="java.lang.Integer">
+		<fieldDescription><![CDATA[MATRICULA]]></fieldDescription>
+	</field>
+	<field name="NOME_COLABORADOR" class="java.lang.String">
+		<fieldDescription><![CDATA[NOME_COLABORADOR]]></fieldDescription>
+	</field>
+	<field name="NOME_EXAME" class="java.lang.String">
+		<fieldDescription><![CDATA[NOME_EXAME]]></fieldDescription>
+	</field>
+	<field name="FUNCAO" class="java.lang.String">
+		<fieldDescription><![CDATA[FUNCAO]]></fieldDescription>
+	</field>
+	<field name="CID" class="java.lang.String">
+		<fieldDescription><![CDATA[CID]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="6d52f990-211d-4867-8775-fab807bc1495"/>
+				<staticText>
+					<reportElement x="10" y="10" width="234" height="43" forecolor="#FFFFFF" uuid="1e273217-fd0f-41c3-837d-bca79eb5e4a3"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sis Exames]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="d489b8aa-e27e-49ed-99b9-f7917b556567"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Pedido De Exame]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="faf5c17f-b328-4bd7-9395-8fee6f9a04f7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="2c161e5b-683a-438d-988c-1f6cdc9ae79a"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="a727304c-88fd-4998-8f76-db12c860ef7b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="384" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="20" width="100" height="30" uuid="aa44e19e-8015-4070-8fff-046993f8d450"/>
+				<text><![CDATA[Matricula :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="100" height="30" uuid="2041f8fc-9479-40c7-af1d-cbbabd49a81d"/>
+				<text><![CDATA[Nome :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="124" y="100" width="251" height="30" uuid="4c1fe85b-58fb-4368-9f85-bfc9a2cec47b"/>
+				<textFieldExpression><![CDATA[$F{SETOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="124" y="60" width="251" height="30" uuid="60c89271-9838-4c3f-9c25-368d54509b88"/>
+				<textFieldExpression><![CDATA[$F{NOME_COLABORADOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="124" y="20" width="251" height="30" uuid="175746aa-7553-4197-9ac2-cff32d3b46e1"/>
+				<textFieldExpression><![CDATA[$F{MATRICULA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="100" height="30" uuid="7d13b68b-b43b-45bd-889a-161c6f8e23df"/>
+				<text><![CDATA[Setor : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="140" width="100" height="30" uuid="66489cf0-f0ff-4aef-9a7b-6205ce6d1ce8"/>
+				<text><![CDATA[Função : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="124" y="140" width="251" height="30" uuid="82f95aa2-89b5-4afa-84bb-d484314fbfca"/>
+				<textFieldExpression><![CDATA[$F{FUNCAO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="180" width="100" height="30" uuid="09ed461f-e6c0-4bf0-a2c0-30c61a438998"/>
+				<text><![CDATA[Data de Nascimento :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="220" width="100" height="30" uuid="284a8bc2-98cd-4a46-9f7d-64405a6f53fe"/>
+				<text><![CDATA[Nome Do Exame : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="261" width="100" height="30" uuid="324dd14d-1df3-47ef-8957-c22754b80342"/>
+				<text><![CDATA[CID : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="300" width="100" height="30" uuid="e4b40329-bbf9-420f-bd4d-48565cd1afe7"/>
+				<text><![CDATA[Medico : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="124" y="180" width="251" height="30" uuid="df6dd4fd-9235-4224-a267-a04fde0eeb99"/>
+				<textFieldExpression><![CDATA[$F{DATA_NASC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="124" y="220" width="251" height="30" uuid="334f7d6d-92b2-4d8b-8c76-0296e3af5c09"/>
+				<textFieldExpression><![CDATA[$F{NOME_EXAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="124" y="260" width="251" height="30" uuid="154c54cd-7c3e-41d7-97c4-6525deefc61f"/>
+				<textFieldExpression><![CDATA[$F{CID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="124" y="300" width="251" height="30" uuid="1f958c9a-6ba6-4f01-b555-6355a1b04ea5"/>
+				<textFieldExpression><![CDATA[$F{NOME_MEDICO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="340" width="100" height="30" uuid="05d76559-3e9a-4bd8-90fa-3632f0fc3e24"/>
+				<text><![CDATA[Descrição : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="124" y="340" width="251" height="30" uuid="046357af-c64a-4e89-a4e4-7ae980fb6cd2"/>
+				<textFieldExpression><![CDATA[$F{DESCRICAO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="199" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="90" width="280" height="1" uuid="55bda574-d9c0-41e7-ac10-f768a4bef17a"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="90" width="230" height="30" uuid="86df8ba6-867e-410d-868f-fe96859a4b30"/>
+				<textFieldExpression><![CDATA[$F{NOME_MEDICO}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="290" y="140" width="264" height="50" uuid="b44f088d-80c0-4585-aed6-da0315541f29"/>
+				<imageExpression><![CDATA["C:/Users/tais/workspace/TccSisEx/WebContent/img/cabeçalho.png"]]></imageExpression>
+			</image>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,17 +1,22 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.print.DocFlavor;
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
-
-import org.primefaces.context.RequestContext;
 
 import model.PedidoDeExame;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 import dao.PedidoDeExameDao;
 import dao.PedidoDeExameDaoImp;
 
@@ -20,10 +25,18 @@ import dao.PedidoDeExameDaoImp;
 @ViewScoped
 public class PedidoExameController {
 	
-	private static PrintService impressora;  
 	private PedidoDeExame pedidoDeExame;
+	private List<PedidoDeExame> pedidoDeExames = new ArrayList<PedidoDeExame>();
+	private String path; //Caminho base
+	private String pathToReportPackage; // Caminho para o package onde estão armazenados os relatorios Jarper
+	public List<PedidoDeExame> getPedidoDeExames() {
+		return pedidoDeExames;
+	}
 
-	
+	public void setPedidoDeExames(List<PedidoDeExame> pedidoDeExames) {
+		this.pedidoDeExames = pedidoDeExames;
+	}
+
 	@PostConstruct
 	public void init() {
 		atribuirEstadoInicial();
@@ -32,16 +45,9 @@ public class PedidoExameController {
 	private void atribuirEstadoInicial() {
 
 		pedidoDeExame = new PedidoDeExame();
-
+		
 	}
 	
-	public static PrintService getImpressora() {
-		return impressora;
-	}
-
-	public static void setImpressora(PrintService impressora) {
-		PedidoExameController.impressora = impressora;
-	}
 	
 	
 	public PedidoDeExame getPedidoDeExame() {
@@ -52,10 +58,14 @@ public class PedidoExameController {
 		this.pedidoDeExame = pedidoDeExame;
 	}
 	
-	public String adicionarPedidoExame() {
+	public String adicionarPedidoExame() throws Exception {
 		PedidoDeExameDao dao = new PedidoDeExameDaoImp();
 		dao.save(pedidoDeExame);
 		info();
+		pedidoDeExames.add(pedidoDeExame);
+		 
+
+		imprimir(pedidoDeExames);
 		return "/home.jsf";
 	}
 	public void info() {
@@ -65,43 +75,39 @@ public class PedidoExameController {
 						"Pedido Realizado com Sucesso. "));
 	}
 	
-	//JS = JavaScrip, esse metodo é chamado na view para chamar a função java scrip do view
-	//vou verificar se existe parametra pois essa função imprime a tela do sistema e porederia ser um formulario.
-	public void imprimirJS(){
-
-        RequestContext.getCurrentInstance().execute("imprimirJS();");
-    }
+		
 	
-	// Verificar esse metodo pois não funciono  Acredito que terá que excluir pois não estou chamando esse metodo.
-	public void Imprimir(PedidoDeExame pedidoDeExame){
-		 detectaImpressoras(); 
+	
+	//Recupera os caminhos para que a classe possa encontrar os relatórios
+	public PedidoExameController() {
+		this.path = this.getClass().getClassLoader().getResource("").getPath();
+		this.pathToReportPackage = this.path + "jasper/";
+		System.out.println(path);
 	}
-	public void detectaImpressoras() {  
-		  
-        try {  
-  
-            DocFlavor df = DocFlavor.SERVICE_FORMATTED.PRINTABLE;  
-            PrintService[] ps = PrintServiceLookup.lookupPrintServices(df, null);  
-            for (PrintService p: ps) {  
-  
-                System.out.println("Impressora encontrada: " + p.getName());  
-  
-                if (p.getName().contains("Text") || p.getName().contains("Generic"))  {  
-  
-                    System.out.println("Impressora Selecionada: " + p.getName());  
-                    setImpressora(p);  
-                    break;  
-  
-                }  
-  
-            }  
-  
-        } catch (Exception e) {  
-  
-            e.printStackTrace();  
-  
-        }  
+	
+	
+	//Imprime/gera uma lista de Clientes
+	public void imprimir(List<PedidoDeExame> pedidoDeExames) throws Exception	
+	{
+		JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage() + "Pedido_Exame.jrxml");
+		
+		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(pedidoDeExames));
+		//abre visualizador  
+        JasperViewer jv = new JasperViewer(print, false);  
+        jv.setTitle("Pedido De Exame");    
+        jv.setVisible(true); 
+		
+		JasperExportManager.exportReportToPdfFile(print, "c:/relatorio/Pedido_Exame.pdf");		
 	}
+ 
+	public String getPathToReportPackage() {
+		return this.pathToReportPackage;
+	}
+	
+	public String getPath() {
+		return this.path;
+	}
+	
 
 	
 }	

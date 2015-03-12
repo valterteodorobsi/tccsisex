@@ -88,10 +88,13 @@
 
 
 
-
-						<p:fileUpload fileUploadListener="#{arquivoBen.recebeArquivos}"
-							mode="simple" value="#{arquivoBen.imagem}" />
-
+						
+						<p:fileUpload fileUploadListener="#{arquivoBen.recebeArquivos}" style="margin-top: 20px;"
+                              mode="advanced" 
+                              sizeLimit="1000000" 
+                              multiple="false" 
+                              allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/"
+                              value="#{arquivoBen.imagem}"/>
 
 					</h:panelGrid>
 					<br> </br>
