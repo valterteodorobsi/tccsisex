@@ -36,6 +36,7 @@
 <mapping class="model.Arquivo"></mapping>
 <mapping class="model.Atestado"></mapping>
 <mapping class="model.Remedio"></mapping>
+<mapping class="model.RelatorioGerencial"></mapping>
 
 
 

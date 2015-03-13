@@ -63,6 +63,7 @@
 						requiredMessage="Favor preencher o campo  Médico obrigatório"
 							value="#{gerencialBean.gerencial.nomeMedico}" prependId="true" var="m">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
+							<f:selectItem itemLabel="Todos" itemValue="todos"  />
 							<f:selectItems value="#{medicoBen.listaMedico()}" var="medico"
 								itemLabel="#{medico.NOME}" itemValue="#{medico.NOME}" />
 								 
@@ -83,17 +84,18 @@
 						
 						
 						
-						<p:commandButton value="Gerar Relatório"  actionListener="#{gerencialBean.abreGrafico}" ajax="false" update="grafico"   />
+				<p:commandButton value="Gerar Relatório"  actionListener="#{gerencialBean.imprimir}" ajax="false"  />
+				<p:commandButton value="Gerar Grafico"  actionListener="#{gerencialBean.abreGrafico}" ajax="false" update="grafico"   />		
 				</h:panelGrid>
 					
-				
 				<p:panel id="grafico" style="width: 550px" >
 
-						<p:pieChart id="linear" title="Gráfico Gerencial Tipo de Entrada"
-							value="#{gerencialBean.piechart}" legendPosition="ne" fill="true" showDataLabels="true" minY="0" maxY="10"
-							style="height:400px" >
-						</p:pieChart>
-				 </p:panel>
+                                                <p:pieChart id="linear" type="pie" title="Gráfico Gerencial Tipo de Entrada"
+                                                        value="#{gerencialBean.piechart}" legendPosition="ne" fill="true" showDataLabels="true" minY="0" maxY="10"
+                                                        style="height:400px" >
+                                                </p:pieChart>
+                                 </p:panel>
+				
 			</p:layoutUnit>
 		</p:layout>
 		</h:form>
