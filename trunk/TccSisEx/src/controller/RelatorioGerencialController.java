@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import model.RelatorioGerencial;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -70,7 +72,7 @@ public class RelatorioGerencialController implements Serializable {
         
        
 		JasperReport report = JasperCompileManager.compileReport(this
-				.getPathToReportPackage() + "Relatorio_Gerencial.jrxml");
+				.getPathToReportPackage() + "Relatorio_Gerencial1.jrxml");
 
 		JasperPrint print = JasperFillManager.fillReport(report, null,
 				new JRBeanCollectionDataSource(relatorioGerencial));
@@ -84,8 +86,10 @@ public class RelatorioGerencialController implements Serializable {
 	}
 	
 	public void abreGrafico(){
-		
-		if(gerencial != null){
+		if(gerencial.getNomeMedico().equals("todos")){
+			warn();
+		} 
+		else if(gerencial != null){
                 
         piechart = new PieChartModel();
         RelatorioGerencialDao dao = new RelatorioGerencialDao();
@@ -101,6 +105,12 @@ public class RelatorioGerencialController implements Serializable {
         }
         
 }
+	public void warn() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!",
+						"Não é possivel gerar o grafico com o Valor 'TODOS'. "));
+	}
 	
 	public PieChartModel getPiechart() {
 		return piechart;
