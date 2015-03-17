@@ -72,7 +72,7 @@ public class RelatorioGerencialController implements Serializable {
         
        
 		JasperReport report = JasperCompileManager.compileReport(this
-				.getPathToReportPackage() + "Relatorio_Gerencial1.jrxml");
+				.getPathToReportPackage() + "Relatorio_Gerencial.jrxml");
 
 		JasperPrint print = JasperFillManager.fillReport(report, null,
 				new JRBeanCollectionDataSource(relatorioGerencial));
