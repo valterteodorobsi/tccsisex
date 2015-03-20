@@ -17,7 +17,7 @@ public class RelatorioAtestadosDao {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		
-		// mudar query
+		
 		SQLQuery query = session.createSQLQuery("select nome_colaborador as nomeColaborador , setor as nomeSetor ,  count(*) as qtdAtestados from anexo_atestado where nome_colaborador = :nomeColaborador and setor = :nomeSetor group by  nome_colaborador , setor");
 		query.setParameter("nomeColaborador", nomeColaborador);
 		query.setParameter("nomeSetor", nomeSetor);
@@ -34,7 +34,7 @@ public class RelatorioAtestadosDao {
 	
 	
 	}
-		//mudar query
+		
 	public List<RelatorioAtestado> relatorioAtestadoTodos(String nomeColaborador , String nomeSetor) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();

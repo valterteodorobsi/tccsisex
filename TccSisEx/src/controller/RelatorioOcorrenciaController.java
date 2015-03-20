@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import model.RelatorioAtestado;
+import model.RelatorioOcorrencia;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -21,18 +20,16 @@ import net.sf.jasperreports.view.JasperViewer;
 
 import org.primefaces.model.chart.PieChartModel;
 
-import dao.RelatorioAtestadosDao;
+import dao.RelatorioOcorrenciaDao;
 
-@ManagedBean(name = "RelAtestadosBean")
+
+
+@ManagedBean(name = "RelOcorrenciaBean")
 @ViewScoped
-public class RelatorioAtestadoController implements Serializable {
+public class RelatorioOcorrenciaController {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private RelatorioAtestado relAtestados;
-	private List<RelatorioAtestado> listaRelAtestados= new ArrayList<RelatorioAtestado>();
+	private RelatorioOcorrencia relOcorrencias;
+	private List<RelatorioOcorrencia> listaRelOcorrencias= new ArrayList<RelatorioOcorrencia>();
 	private Date dataInicial;
 	private Date dataFinal;
 	private String path; // Caminho base
@@ -40,9 +37,8 @@ public class RelatorioAtestadoController implements Serializable {
 	private PieChartModel piechart;
 	
 	
-	
-	public RelatorioAtestadoController(){
-		relAtestados = new RelatorioAtestado();
+	public RelatorioOcorrenciaController(){
+		relOcorrencias = new RelatorioOcorrencia();
 		piechart = new PieChartModel();
 		this.path = this.getClass().getClassLoader().getResource("").getPath();
 		this.pathToReportPackage = this.path + "jasper/";
@@ -52,120 +48,143 @@ public class RelatorioAtestadoController implements Serializable {
 	
 	
 	public void imprimir() throws Exception {
-		RelatorioAtestadosDao dao = new RelatorioAtestadosDao();
-        String nomeColaborador = relAtestados.getNomeColaborador();
-        String nomeSetor = relAtestados.getNomeSetor();
+		RelatorioOcorrenciaDao dao = new RelatorioOcorrenciaDao();
+        String nomeColaborador = relOcorrencias.getNomeColaborador();
+        String nomeSetor = relOcorrencias.getNomeSetor();
         
         
-        if(relAtestados.getNomeSetor().equals("todos")){
+        if(relOcorrencias.getNomeSetor().equals("todos")){
         	
-        	listaRelAtestados =  dao.relatorioAtestadoTodos(nomeColaborador, nomeSetor);
+        	listaRelOcorrencias =  dao.relatorioOcorrenciaTodos(nomeColaborador, nomeSetor);
 			
-        	List<RelatorioAtestado> relatorioAtestados = new ArrayList<RelatorioAtestado>();
+        	List<RelatorioOcorrencia> relatorioOcorrencias = new ArrayList<RelatorioOcorrencia>();
 
-			for (RelatorioAtestado relAtesRelatorioAtestado : listaRelAtestados) {
+			for (RelatorioOcorrencia relRelatorioOcorrencia : listaRelOcorrencias) {
 
-				relatorioAtestados.add(relAtesRelatorioAtestado);
+				relatorioOcorrencias.add(relRelatorioOcorrencia);
 
 			}
 
-			JasperReport report = JasperCompileManager.compileReport(this
-					.getPathToReportPackage()
-					+ "Relatorio_Atestados.jrxml");
+			JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage()
+					+ "Relatorio_Ocorrencias.jrxml");
 
 			JasperPrint print = JasperFillManager.fillReport(report, null,
-					new JRBeanCollectionDataSource(relatorioAtestados));
+					new JRBeanCollectionDataSource(relatorioOcorrencias));
 			// abre visualizador
 			JasperViewer jv = new JasperViewer(print, false);
-			jv.setTitle("Relatorio Atestados");
+			jv.setTitle("Relatorio Ocorrencias");
 			jv.setVisible(true);
 
 			JasperExportManager.exportReportToPdfFile(print,
-					"c:/relatorio/Relatorio_Atestados.pdf");
+					"c:/relatorio/Relatorio_Ocorrencias.pdf");
 		
         }
         else{
               
-        listaRelAtestados =  dao.RelatorioAtestado(nomeColaborador, nomeSetor);
+        listaRelOcorrencias =  dao.relatorioOcorrencia(nomeColaborador, nomeSetor);
 			
-			List<RelatorioAtestado> relatorioAtestados = new ArrayList<RelatorioAtestado>();
+			List<RelatorioOcorrencia> relatorioOcorrencias = new ArrayList<RelatorioOcorrencia>();
 
-			for (RelatorioAtestado relAtesRelatorioAtestado: listaRelAtestados) {
+			for (RelatorioOcorrencia relAtesRelatorioOcorrencia: listaRelOcorrencias) {
 
-				relatorioAtestados.add(relAtesRelatorioAtestado);
+				relatorioOcorrencias.add(relAtesRelatorioOcorrencia);
 
 			}
 
 			JasperReport report = JasperCompileManager.compileReport(this
 					.getPathToReportPackage()
-					+ "Relatorio_Atestados_unitario.jrxml");
+					+ "Relatorio_Ocorrencias_unitario.jrxml");
 
 			JasperPrint print = JasperFillManager.fillReport(report, null,
-					new JRBeanCollectionDataSource(relatorioAtestados));
+					new JRBeanCollectionDataSource(relatorioOcorrencias));
 			// abre visualizador
 			JasperViewer jv = new JasperViewer(print, false);
-			jv.setTitle("Relatorio Atestados");
+			jv.setTitle("Relatorio Ocorrencias");
 			jv.setVisible(true);
 
 			JasperExportManager.exportReportToPdfFile(print,
-					"c:/relatorio/Relatorio_Atestados.pdf");
+					"c:/relatorio/Relatorio_Ocorrencias.pdf");
 		}
         
 	}
 	
 	
 	
+	
+
 	public void warn() {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!",
 						"Não é possivel gerar o grafico com o Valor 'TODOS'. "));
 	}
-	
-	
-	public RelatorioAtestado getRelAtestados() {
-		return relAtestados;
-	}
-	public void setRelAtestados(RelatorioAtestado relAtestados) {
-		this.relAtestados = relAtestados;
-	}
-	public List<RelatorioAtestado> getListaRelAtestados() {
-		return listaRelAtestados;
-	}
-	public void setListaRelAtestados(List<RelatorioAtestado> listaRelAtestados) {
-		this.listaRelAtestados = listaRelAtestados;
-	}
-	public Date getDataInicial() {
-		return dataInicial;
-	}
-	public void setDataInicial(Date dataInicial) {
-		this.dataInicial = dataInicial;
-	}
+
+
 	public Date getDataFinal() {
 		return dataFinal;
 	}
+
+
 	public void setDataFinal(Date dataFinal) {
 		this.dataFinal = dataFinal;
 	}
+	public RelatorioOcorrencia getRelOcorrencias() {
+		return relOcorrencias;
+	}
+
+
+	public void setRelOcorrencias(RelatorioOcorrencia relOcorrencias) {
+		this.relOcorrencias = relOcorrencias;
+	}
+
+
+	public List<RelatorioOcorrencia> getListaRelOcorrencias() {
+		return listaRelOcorrencias;
+	}
+
+
+	public void setListaRelOcorrencias(List<RelatorioOcorrencia> listaRelOcorrencias) {
+		this.listaRelOcorrencias = listaRelOcorrencias;
+	}
+
+
+	public Date getDataInicial() {
+		return dataInicial;
+	}
+
+
+	public void setDataInicial(Date dataInicial) {
+		this.dataInicial = dataInicial;
+	}
+
+
 	public String getPath() {
 		return path;
 	}
+
+
 	public void setPath(String path) {
 		this.path = path;
 	}
+
+
 	public String getPathToReportPackage() {
 		return pathToReportPackage;
 	}
+
+
 	public void setPathToReportPackage(String pathToReportPackage) {
 		this.pathToReportPackage = pathToReportPackage;
 	}
+
+
 	public PieChartModel getPiechart() {
 		return piechart;
 	}
+
+
 	public void setPiechart(PieChartModel piechart) {
 		this.piechart = piechart;
 	}
-	
-	
 
 }
