@@ -9,11 +9,13 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import model.Funcionario;
+import model.Sintomas;
 
 import org.primefaces.event.RowEditEvent;
 
 import dao.FuncionarioDao;
 import dao.FuncionarioDaoImp;
+import dao.SintomasDaoImp;
 
 @ManagedBean(name="funcionarioBen")
 @ViewScoped
@@ -71,6 +73,14 @@ public class FuncionarioController {
 
 		}
 
+	}
+	
+	public List<Funcionario> listaColaborador(){
+
+		listaFuncionarios = new FuncionarioDaoImp().list();
+		
+		return listaFuncionarios;
+		
 	}
 	
 	public void info() {

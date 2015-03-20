@@ -37,6 +37,7 @@
 <mapping class="model.Atestado"></mapping>
 <mapping class="model.Remedio"></mapping>
 <mapping class="model.RelatorioGerencial"></mapping>
+<mapping class="model.RelatorioSintomas"></mapping>
 
 
 
