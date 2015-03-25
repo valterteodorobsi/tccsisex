@@ -143,16 +143,16 @@ public class Funcionario implements Serializable {
 		return NOMESET;
 	}
 
-	public void setNOMESET(String nOMESET) {
+	/*public void setNOMESET(String nOMESET) {
 		NOMESET = nOMESET;
-	}
+	}*/
 
 	public String getNOMEFUN() {
 		return NOMEFUN;
 	}
 
-	public void setNOMEFUN(String nOMEFUN) {
+	/*public void setNOMEFUN(String nOMEFUN) {
 		NOMEFUN = nOMEFUN;
-	}
+	}*/
 	
 }
