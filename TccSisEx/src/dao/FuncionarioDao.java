@@ -1,7 +1,9 @@
 package dao;
 
-import model.Funcionario;
 import java.util.List;
+
+import model.Funcionario;
+import model.FuncionarioPes;
 
 public interface FuncionarioDao {
 
@@ -13,7 +15,7 @@ public interface FuncionarioDao {
 
 	public void update(Funcionario funcionario);
 	
-	public List<Funcionario> pesquisar(Integer matricula);
+	public List<FuncionarioPes> pesquisar(Integer matricula);
 	
 	public List<Funcionario> pesquisarNome( String nome);
 

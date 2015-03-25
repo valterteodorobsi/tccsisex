@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2015-03-20T10:30:31 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatorio_Gerencial1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e55c3655-45c2-4247-a078-a3fa4df9df69">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="nomeColaborador" class="java.lang.String">
+		<fieldDescription><![CDATA[nomeColaborador]]></fieldDescription>
+	</field>
+	<field name="nomeSetor" class="java.lang.String">
+		<fieldDescription><![CDATA[nomeSetor]]></fieldDescription>
+	</field>
+	<field name="encaminhamento" class="java.lang.String">
+		<fieldDescription><![CDATA[encaminhamento]]></fieldDescription>
+	</field>
+	<field name="qtdEncaminhamento" class="java.lang.Float">
+		<fieldDescription><![CDATA[qtdEncaminhamento]]></fieldDescription>
+	</field>
+	<group name="Group1">
+		<groupHeader>
+			<band height="37">
+				<line>
+					<reportElement x="0" y="32" width="555" height="1" forecolor="#666666" uuid="79b582f4-e6db-427b-a4b1-ba59c38eaec0"/>
+				</line>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="0" width="158" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="ba05b987-2ea1-41e9-bdf2-fe7a783fe5b2"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Nome Colaborador]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="150" y="0" width="130" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="2c435981-3946-499a-9d68-1b32b9c7ce72"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Encaminhamento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="280" y="0" width="103" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="de4d188c-07b8-42fe-9fa9-c7e4120d9c84"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Quantidade Encaminhamento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="383" y="0" width="100" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="d6d7d552-d3ca-4dec-a9a0-48e1a78288df"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Nome Setor]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="483" y="0" width="72" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="8f1aab7f-ece4-46e1-8f78-468abaf14fb6"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="9d83e3a0-9411-408b-b26d-f9ab797f7579"/>
+				<staticText>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="4cb01d72-f7fe-4899-b57e-f9d997de222b"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sis Exames]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="52b506b2-d11d-4d91-a4e2-54fc4c04830a"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Relatorio Ocorrências]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24">
+			<line>
+				<reportElement x="0" y="23" width="555" height="1" forecolor="#666666" uuid="1f40e442-8566-41fc-931d-fc7d0937c1a2"/>
+			</line>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="515" height="13" backcolor="#E6E6E6" uuid="ec3a8f13-3237-4e11-aa5c-0a4cf92abb28"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="0" width="100" height="13" uuid="1ce25b53-4147-43dc-b11d-6cd160ce2134"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="0" width="40" height="13" backcolor="#E6E6E6" uuid="70520b1c-25b6-4e9f-8160-0c098138898e"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="40">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="2" width="555" height="1" uuid="80b060b1-7710-4d30-906b-b10731dd0f13"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="10" width="160" height="30" uuid="4c474b4e-fb83-49ab-867f-cfb55097fc83"/>
+				<textFieldExpression><![CDATA[$F{nomeColaborador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="10" width="100" height="30" uuid="ff9458a6-c036-41e6-9622-954be369c739"/>
+				<textFieldExpression><![CDATA[$F{encaminhamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="283" y="5" width="97" height="30" uuid="21f7fd8f-3e2c-47a1-bfd1-3c719bb7992c"/>
+				<textFieldExpression><![CDATA[$F{qtdEncaminhamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="10" width="165" height="30" uuid="bd01bab6-44a8-44e2-ab2b-823aa4e2c618"/>
+				<textFieldExpression><![CDATA[$F{nomeSetor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="18">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="17" width="555" height="1" uuid="05def6ce-5ff0-4676-aa4e-5ae62db57034"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

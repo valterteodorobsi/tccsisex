@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Funcionario implements Serializable {
+public class FuncionarioPes implements Serializable {
 
 	/**
 	 * 
@@ -31,10 +31,10 @@ public class Funcionario implements Serializable {
 	
 	
 
-	public Funcionario() {
+	public FuncionarioPes() {
 	}
 
-	public Funcionario(Integer ID_MATRICULA, String NOME, Integer iD_CENTRO_CUSTO,
+	public FuncionarioPes(Integer ID_MATRICULA, String NOME, Integer iD_CENTRO_CUSTO,
 			Integer ID_FUNCAO, Date DATA_NASC, String RG, String ENDERECO,
 			String EMAIL, String SEXO, Integer RAMAL, Date DATA_CAD) {
 		

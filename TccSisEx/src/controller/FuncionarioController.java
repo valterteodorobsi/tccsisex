@@ -9,13 +9,12 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import model.Funcionario;
-import model.Sintomas;
+import model.FuncionarioPes;
 
 import org.primefaces.event.RowEditEvent;
 
 import dao.FuncionarioDao;
 import dao.FuncionarioDaoImp;
-import dao.SintomasDaoImp;
 
 @ManagedBean(name="funcionarioBen")
 @ViewScoped
@@ -24,6 +23,17 @@ public class FuncionarioController {
 	private Funcionario funcionario = new Funcionario();
 
 	private List<Funcionario> listaFuncionarios = new ArrayList<Funcionario>();
+	
+	private List<FuncionarioPes> listaFuncionariosPes = new ArrayList<FuncionarioPes>();
+	
+
+	public List<FuncionarioPes> getListaFuncionariosPes() {
+		return listaFuncionariosPes;
+	}
+
+	public void setListaFuncionariosPes(List<FuncionarioPes> listaFuncionariosPes) {
+		this.listaFuncionariosPes = listaFuncionariosPes;
+	}
 
 	public List<Funcionario> getListaFuncionarios() {
 		return listaFuncionarios;
@@ -66,7 +76,7 @@ public class FuncionarioController {
 			listaFuncionarios = new FuncionarioDaoImp().pesquisarNome(nome);
 		}
 		else{
-		listaFuncionarios = new FuncionarioDaoImp().pesquisar(matricula);
+			listaFuncionariosPes = new FuncionarioDaoImp().pesquisar(matricula);
 		}
 		if (nome == null || matricula == null) {
 			warn();
