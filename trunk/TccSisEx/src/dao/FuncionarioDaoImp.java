@@ -3,10 +3,13 @@ package dao;
 import java.util.List;
 
 import model.Funcionario;
+import model.RelatorioOcorrencia;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.transform.Transformers;
 
 import util.HibernateUtil;
 
@@ -46,11 +49,24 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 	public List<Funcionario> pesquisar(Integer matricula) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		Query query = session.createQuery("FROM Funcionario u where u.ID_MATRICULA = :matricula "); 
+		SQLQuery query = session.createSQLQuery("select DATA_NASC, EMAIL , ENDERECO, ID_MATRICULA, funcionario.NOME as NOME, RAMAL, RG, SEXO, f.NOME as NOMEFUN, s.NOME as NOMESET FROM funcionario inner join setor as s on s.ID_CENTRO_CUSTO = funcionario.ID_CENTRO_CUSTO inner join funcao as f on f.ID_FUNCAO = funcionario.ID_FUNCAO where ID_MATRICULA = :matricula group by s.NOME , f.NOME, ID_MATRICULA, funcionario.NOME, DATA_NASC, EMAIL, ENDERECO , RAMAL , RG, SEXO"); 
 		query.setParameter("matricula", matricula);
+		query.addScalar("DATA_NASC");
+		query.addScalar("EMAIL");
+		query.addScalar("ENDERECO");
+		query.addScalar("ID_MATRICULA");
+		query.addScalar("NOME");
+		query.addScalar("RAMAL");
+		query.addScalar("RG");
+		query.addScalar("SEXO");
+		query.addScalar("NOMEFUN");
+		query.addScalar("NOMESET");
+		query.setResultTransformer( Transformers.aliasToBean( Funcionario.class ) );
+
+	    List<Funcionario> users = query.list();
+
 		
-		t.commit();
-		return query.list();
+		return users;
 		
 	}
 	

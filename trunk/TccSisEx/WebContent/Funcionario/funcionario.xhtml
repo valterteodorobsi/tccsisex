@@ -55,7 +55,7 @@
 								listener="#{funcionarioBen.onRowCancel}" update=":form:nomes" />
 
 							<p:column headerText="Matricula">
-								<p:cellEditor>
+							<p:cellEditor>
 									<f:facet name="output">
 										<h:outputText value="#{tablefuncionario.ID_MATRICULA}" />
 									</f:facet>
@@ -82,16 +82,15 @@
 								<p:cellEditor>
 								
 									<f:facet name="output">
-										<h:outputText value="#{tablefuncionario.FUNCAO}" />
+										<h:outputText value="#{tablefuncionario.NOMEFUN}" />
 									</f:facet>
 									<f:facet name="input">
 											<p:selectOneMenu id="unFun"
-												value="#{funcionarioBen.funcionario.FUNCAO}"
-												prependId="true" var="f">
+												value="#{funcionarioBen.funcionario.ID_FUNCAO}">
 												<f:selectItem itemLabel="Selecione..." itemValue="" />
 												<f:selectItems value="#{funcaoBen.listaFuncao()}"
 													var="funcao" itemLabel="#{funcao.NOME}"
-													itemValue="#{funcao.NOME}" />
+													itemValue="#{funcao.ID_FUNCAO}" />
 
 											</p:selectOneMenu>
 										</f:facet>
@@ -101,14 +100,14 @@
 							<p:column headerText="Setor">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{tablefuncionario.SETOR}" />
+										<h:outputText value="#{tablefuncionario.NOMESET}" />
 									</f:facet>
 									<f:facet name="input">
 										
-											<p:selectOneMenu id="setFun" value="#{funcionarioBen.funcionario.SETOR}" prependId="true" var="s">
+											<p:selectOneMenu id="setFun" value="#{funcionarioBen.funcionario.ID_CENTRO_CUSTO}" >
 								<f:selectItem itemLabel="Selecione..." itemValue=""  />
 								<f:selectItems value="#{setorBen.listaSetor()}" var="setor"
-								itemLabel="#{setor.NOME}" itemValue="#{setor.NOME}" />
+								itemLabel="#{setor.NOME}" itemValue="#{setor.ID_CENTRO_CUSTO}" />
 								 
 						</p:selectOneMenu>
 									</f:facet>
