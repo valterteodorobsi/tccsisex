@@ -62,6 +62,7 @@
 						requiredMessage="Favor preencher o campo Matricula obrigatório"
 						value="#{funcionarioBen.funcionario.ID_MATRICULA}">
 						<f:validateLength minimum="1" maximum="20" />
+						
 					</p:inputText>
 					<p:outputLabel value="Nome: "  for="nomeFunci" />
 					<p:inputText id="nomeFunci" size="50" maxlength="50" required="true"
@@ -71,10 +72,10 @@
 					
 					<p:selectOneMenu id="setFun" required="true"
 						requiredMessage="Favor preencher o campo  Setor obrigatório"
-							value="#{funcionarioBen.funcionario.SETOR}" prependId="true" var="s">
+							value="#{funcionarioBen.funcionario.ID_CENTRO_CUSTO}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
 							<f:selectItems value="#{setorBen.listaSetor()}" var="setor"
-								itemLabel="#{setor.NOME}" itemValue="#{setor.NOME}" />
+								itemLabel="#{setor.NOME}" itemValue="#{setor.ID_CENTRO_CUSTO}" />
 								 
 						</p:selectOneMenu>
 						
@@ -84,10 +85,10 @@
 					
 						<p:selectOneMenu id="unFun" required="true"
 						requiredMessage="Favor preencher o campo  Função obrigatório"
-							value="#{funcionarioBen.funcionario.FUNCAO}" prependId="true" var="f">
+							value="#{funcionarioBen.funcionario.ID_FUNCAO}" >
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
 							<f:selectItems value="#{funcaoBen.listaFuncao()}" var="funcao"
-								itemLabel="#{funcao.NOME}" itemValue="#{funcao.NOME}" />
+								itemLabel="#{funcao.NOME}" itemValue="#{funcao.ID_FUNCAO}" />
 								 
 						</p:selectOneMenu>
 						

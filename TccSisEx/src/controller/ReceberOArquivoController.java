@@ -86,7 +86,7 @@ public class ReceberOArquivoController {
 		Integer matricula = arquivo.getMATRICULA();
 
 		listaArquivos = new ReceberArquivoDao().pesquisar(matricula);
-
+		  
 		if (matricula == null || matricula == 0 || listaArquivos == null) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Nenhum registro foi encontrado."));

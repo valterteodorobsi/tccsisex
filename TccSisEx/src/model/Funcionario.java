@@ -17,8 +17,8 @@ public class Funcionario implements Serializable {
 	@Id
 	private Integer ID_MATRICULA;
 	private String NOME;
-	private String SETOR;
-	private String FUNCAO;
+	private Integer ID_CENTRO_CUSTO;
+	private Integer ID_FUNCAO;
 	private Date DATA_NASC;
 	private String RG;
 	private String ENDERECO;
@@ -26,20 +26,23 @@ public class Funcionario implements Serializable {
 	private String SEXO;
 	private Integer RAMAL;
 	private Date DATA_CAD;
+	public String NOMESET;
+	public String NOMEFUN;
 	
 	
 	
+
 	public Funcionario() {
 	}
 
-	public Funcionario(Integer ID_MATRICULA, String NOME, String SETOR,
-			String FUNCAO, Date DATA_NASC, String RG, String ENDERECO,
+	public Funcionario(Integer ID_MATRICULA, String NOME, Integer iD_CENTRO_CUSTO,
+			Integer ID_FUNCAO, Date DATA_NASC, String RG, String ENDERECO,
 			String EMAIL, String SEXO, Integer RAMAL, Date DATA_CAD) {
 		
 		this.ID_MATRICULA = ID_MATRICULA;
 		this.NOME = NOME;
-		this.SETOR = SETOR;
-		this.FUNCAO = FUNCAO;
+		this.ID_CENTRO_CUSTO = iD_CENTRO_CUSTO;
+		this.ID_FUNCAO = ID_FUNCAO;
 		this.DATA_NASC = DATA_NASC;
 		this.RG = RG;
 		this.ENDERECO = ENDERECO;
@@ -64,20 +67,20 @@ public class Funcionario implements Serializable {
 		this.NOME = NOME;
 	}
 
-	public String getSETOR() {
-		return SETOR;
+	public Integer getID_CENTRO_CUSTO() {
+		return ID_CENTRO_CUSTO;
 	}
 
-	public void setSETOR(String sETOR) {
-		SETOR = sETOR;
+	public void setID_CENTRO_CUSTO(Integer iD_CENTRO_CUSTO) {
+		ID_CENTRO_CUSTO = iD_CENTRO_CUSTO;
 	}
 
-	public String getFUNCAO() {
-		return FUNCAO;
+	public Integer getID_FUNCAO() {
+		return ID_FUNCAO;
 	}
 
-	public void setFUNCAO(String fUNCAO) {
-		FUNCAO = fUNCAO;
+	public void setID_FUNCAO(Integer ID_fUNCAO) {
+		ID_FUNCAO = ID_fUNCAO;
 	}
 
 	public Date  getDATA_NASC() {
@@ -135,4 +138,21 @@ public class Funcionario implements Serializable {
 	public void setDATA_CAD(Date dATA_CAD) {
 		DATA_CAD = dATA_CAD;
 	}
+
+	public String getNOMESET() {
+		return NOMESET;
+	}
+
+	public void setNOMESET(String nOMESET) {
+		NOMESET = nOMESET;
+	}
+
+	public String getNOMEFUN() {
+		return NOMEFUN;
+	}
+
+	public void setNOMEFUN(String nOMEFUN) {
+		NOMEFUN = nOMEFUN;
+	}
+	
 }
