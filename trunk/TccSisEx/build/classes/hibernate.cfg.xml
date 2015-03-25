@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+<session-factory>
+<property name="connection.url">jdbc:sqlserver://localhost:1433;instanceName=SQLEXPRESS;databaseName=Sisexames</property> 
+<property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+ 
+<property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
+ 
+<property name="connection.username">sa</property>
+<property name="connection.password">junior21</property>
+<!-- DB schema will be updated if needed -->
+
+<property name="show_sql">true</property>
+<property name="format_sql">true</property>
+<!-- Usando as configurações do C3PO para pool de conexoes -->
+
+<property name="hibernate.current_session_context_class">thread</property>
+<property  name = "hibernate.query.factory_class" > org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory </property>
+
+<!-- Configurações de debug -->
+
+<property name="generate_statistics">true</property>
+<property name="use_sql_comments">true</property>
+
+<mapping class="model.Funcionario"></mapping>
+<mapping class="model.Medico"></mapping>
+<mapping class="model.Funcao"></mapping>
+<mapping class="model.Setor"></mapping> 
+<mapping class="model.Exame"></mapping> 
+<mapping class="model.Prontuario"></mapping> 
+<mapping class="model.RegistroEntrada"></mapping>
+<mapping class="model.Sintomas"></mapping>
+<mapping class="model.PedidoDeExame"></mapping>
+<mapping class="model.Arquivo"></mapping>
+<mapping class="model.Atestado"></mapping>
+<mapping class="model.Remedio"></mapping>
+<mapping class="model.RelatorioGerencial"></mapping>
+<mapping class="model.RelatorioSintomas"></mapping>
+
+
+
+</session-factory>
+
+</hibernate-configuration>
