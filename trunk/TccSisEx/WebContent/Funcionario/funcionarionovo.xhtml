@@ -68,6 +68,38 @@
 		</script>
 
 
+	
+	<script>
+
+		function comparaData(data) {
+				var dataFormatada = data.split("/");
+				var hoje = new Date();
+				var mes = 12;
+				var dia = 32;
+
+				if(dataFormatada[2] > hoje.getFullYear()) {
+
+					alert("Ano Invalido");
+					
+				} else if(dataFormatada[2] != hoje.getFullYear()) {
+				   if((dataFormatada[1]-1) > mes)  {
+					alert("Mês Invalido");
+					
+				  } else if((dataFormatada[1]-1) != hoje.getMonth()) {
+					 if (dataFormatada[0] >= dia) {
+						alert("Dia Invalido ");
+						 if (dataFormatada[0] > dia){
+						 alert("Dia Invalido");
+						 
+					 	}
+					 }
+				  }
+				}
+				
+				return;
+			}
+
+	</script>
 	<title>Colaborador</title>
 </h:head>
 
