@@ -1,13 +1,20 @@
 package dao;
 
+
 import java.util.List;
+
+
+
+import org.hibernate.HibernateException;
+
 
 import model.Funcionario;
 import model.FuncionarioPes;
 
+
 public interface FuncionarioDao {
 
-	public void save(Funcionario funcionario);
+	public void save(Funcionario funcionario) throws HibernateException, Exception;
 
 	public List<Funcionario> list();
 
