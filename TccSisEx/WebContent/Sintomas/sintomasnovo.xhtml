@@ -35,10 +35,10 @@
 					
 					<p:selectOneMenu id="remeSintomas" size="20" required="true"
 						requiredMessage="Favor preencher o campo  Remédio Homologado obrigatório"
-							value="#{sintomasBen.sintomas.REMEDIO}" prependId="true" var="r">
+							value="#{sintomasBen.sintomas.ID_REMEDIO}" >
 							<f:selectItem itemLabel="Selecione...   " itemValue=" "  />
 							<f:selectItems value="#{remedioBen.listaRemedio()}" var="remedio"
-								itemLabel="#{remedio.NOME}" itemValue="#{remedio.NOME}" />
+								itemLabel="#{remedio.NOME}" itemValue="#{remedio.ID_REMEDIO}" />
 								 
 						</p:selectOneMenu>
 						

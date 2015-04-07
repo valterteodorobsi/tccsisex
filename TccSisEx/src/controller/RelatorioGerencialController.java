@@ -65,9 +65,13 @@ public class RelatorioGerencialController implements Serializable {
         List<RelatorioGerencial> relatorioGerencial = new ArrayList<RelatorioGerencial>();
         
         for(RelatorioGerencial gerencial : listaGerencial){
-        	
+        	if(gerencial.getTipoEntrada().equals("0") ){
+        		gerencial.setTipoEntrada("Emergencial");
         	relatorioGerencial.add(gerencial);
-        	        	           
+        	}else{
+        		gerencial.setTipoEntrada("Eletivo");
+        		relatorioGerencial.add(gerencial);
+        	}
     }
         
        
