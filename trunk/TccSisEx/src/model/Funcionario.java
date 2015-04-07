@@ -21,11 +21,9 @@ public class Funcionario implements Serializable {
 	private Integer ID_FUNCAO;
 	private Date DATA_NASC;
 	private String RG;
-	private String ENDERECO;
 	private String EMAIL;
 	private String SEXO;
 	private Integer RAMAL;
-	private Date DATA_CAD;
 	private String NOMESET;
 	private String NOMEFUN;
 	
@@ -35,16 +33,14 @@ public class Funcionario implements Serializable {
 	}
 
 	public Funcionario(Integer ID_MATRICULA, String NOME, Integer iD_CENTRO_CUSTO,
-			Integer ID_FUNCAO, Date DATA_NASC, String RG, String ENDERECO,
-			String EMAIL, String SEXO, Integer RAMAL, Date DATA_CAD) {
+			Integer ID_FUNCAO, Date DATA_NASC, String RG, 
+			String EMAIL, String SEXO, Integer RAMAL) {
 		
 		this.ID_MATRICULA = ID_MATRICULA;
 		this.NOME = NOME;
 		this.ID_CENTRO_CUSTO = iD_CENTRO_CUSTO;
 		this.ID_FUNCAO = ID_FUNCAO;
-		this.DATA_NASC = DATA_NASC;
 		this.RG = RG;
-		this.ENDERECO = ENDERECO;
 		this.EMAIL = EMAIL;
 		this.SEXO = SEXO;
 		this.RAMAL = RAMAL;
@@ -98,14 +94,6 @@ public class Funcionario implements Serializable {
 		RG = rG;
 	}
 
-	public String getENDERECO() {
-		return ENDERECO;
-	}
-
-	public void setENDERECO(String eNDERECO) {
-		ENDERECO = eNDERECO;
-	}
-
 	public String getEMAIL() {
 		return EMAIL;
 	}
@@ -130,13 +118,6 @@ public class Funcionario implements Serializable {
 		RAMAL = rAMAL;
 	}
 
-	public Date getDATA_CAD() {
-		return DATA_CAD;
-	}
-
-	public void setDATA_CAD(Date dATA_CAD) {
-		DATA_CAD = dATA_CAD;
-	}
 
 	public String getNOMESET() {
 		return NOMESET;
