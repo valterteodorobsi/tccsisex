@@ -8,7 +8,35 @@
 
 <h:head>
 	<h:outputStylesheet library="css" name="style.css" />
+	<script  type="text/javascript">
+		
+			function comparaData(data) {
+				var dataFormatada = data.split("/");
+				var hoje = new Date();
+				var mes = 12;
+				var dia = 32;
 
+				if (dataFormatada[2] > hoje.getFullYear()) {
+
+					alert("Ano Invalido");
+				} else if (dataFormatada[2] != hoje.getFullYear()) {
+					if ((dataFormatada[1] - 1) > mes) {
+						alert("Mês Invalido");
+					} else if ((dataFormatada[1] - 1) != hoje.getMonth()) {
+						if (dataFormatada[0] >= dia) {
+							alert("Dia Invalido ");
+							if (dataFormatada[0] > dia) {
+								alert("Dia Invalido");
+
+							}
+						}
+					}
+				}
+				return;
+			}
+		</script>
+
+	
 	<title>Colaborador</title>
 </h:head>
 
@@ -37,7 +65,8 @@
 
 					<p:commandButton value="Cancelar" action="/home" />
 					<p:commandButton value="Pesquisar" actionListener="#{funcionarioBen.pesquisarFun}"
-						update="grid" ajax="false" />
+						update="grid"/>
+						
 					<p:commandButton value="Novo" action="funcionarionovo" />
 
 					<br> </br>
@@ -57,10 +86,10 @@
 							<p:column headerText="Matricula">
 							<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{tablefuncionario.ID_MATRICULA}" />
+										<h:outputText value="#{tablefuncionario.ID_MATRICULA}"  />
 									</f:facet>
-									<f:facet name="input">
-										<p:inputText id="modelInput" value="#{tablefuncionario.ID_MATRICULA}"
+									<f:facet name="input" >
+										<p:inputText id="modelInput" disabled="true" value="#{tablefuncionario.ID_MATRICULA}"
 											style="width:100%" />
 									</f:facet>
 								</p:cellEditor>
@@ -86,7 +115,7 @@
 									</f:facet>
 									<f:facet name="input">
 											<p:selectOneMenu id="unFun"
-												value="#{funcionarioBen.funcionario.ID_FUNCAO}">
+												value="#{tablefuncionario.ID_FUNCAO}">
 												<f:selectItem itemLabel="Selecione..." itemValue="" />
 												<f:selectItems value="#{funcaoBen.listaFuncao()}"
 													var="funcao" itemLabel="#{funcao.NOME}"
@@ -104,7 +133,7 @@
 									</f:facet>
 									<f:facet name="input">
 										
-											<p:selectOneMenu id="setFun" value="#{funcionarioBen.funcionario.ID_CENTRO_CUSTO}" >
+											<p:selectOneMenu id="setFun" value="#{tablefuncionario.ID_CENTRO_CUSTO}" >
 								<f:selectItem itemLabel="Selecione..." itemValue=""  />
 								<f:selectItems value="#{setorBen.listaSetor()}" var="setor"
 								itemLabel="#{setor.NOME}" itemValue="#{setor.ID_CENTRO_CUSTO}" />
@@ -121,10 +150,12 @@
 										</h:outputText>
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{tablefuncionario.DATA_NASC}" style="width:100%"
+										<p:inputMask required="true"
+							requiredMessage="Favor preencher o campo  Data de Nascimento obrigatório" 
+							mask="99/99/9999" onblur="comparaData(this.value);" value="#{tablefuncionario.DATA_NASC}" style="width:100%"
 											label="Data de Nacimento">
 											<f:convertDateTime pattern="dd/MM/yyyy" />
-										</p:inputText>
+										</p:inputMask>
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
@@ -160,17 +191,7 @@
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
-							<p:column headerText="Endereço">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{tablefuncionario.ENDERECO}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{tablefuncionario.ENDERECO}" style="width:100%"
-											label="Endereço" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
+							
 							<p:column headerText="Sexo">
 								<p:cellEditor>
 									<f:facet name="output">
