@@ -85,11 +85,15 @@ public class FuncionarioController {
 
 	}
 	
-	public List<Funcionario> listaColaborador(){
+	public List listaColaborador(){
 
-		listaFuncionarios = new FuncionarioDaoImp().list();
-		
-		return listaFuncionarios;
+		List nomeFuncionario = new FuncionarioDaoImp().listaNome(funcionario.getID_MATRICULA());
+		if(!nomeFuncionario.isEmpty()) {
+			funcionario.setNOME((String) nomeFuncionario.get(0));
+		} else {
+			warn();
+		}
+		return nomeFuncionario;
 		
 	}
 	
