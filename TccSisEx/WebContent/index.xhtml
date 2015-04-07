@@ -13,11 +13,10 @@
 	<title>SisEx - Curitiba 2014</title>
 
 	<!-- Bootstrap core CSS -->
-	<!-- <link href="dist/css/bootstrap.css" rel="stylesheet" />
-	<link href="dist/css/style.css" rel="stylesheet" /> -->
-
+	 <link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet" />
+	<!-- <link href="resources/css/style.css" rel="stylesheet" /> -->
 	<!-- Custom styles for this template -->
-<!-- 	<link href="starter-template.css" rel="stylesheet" /> -->
+	<link href="resources/bootstrap/css/starter-template.css" rel="stylesheet" />
 
 </h:head>
 
@@ -27,14 +26,14 @@
 		<div class="row">
 			<div class="col-sm-6 col-md-4 col-md-offset-4">
 				<h1 class="text-center">SisEx</h1>
-				<h1 class="text-center login-title">Faça o Login para continuar</h1>
+			<!-- 	<h1 class="text-center login-title">Faça o Login para continuar</h1> -->
 				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />  
 				<div class="account-wall">
 					<p:panel >
-					<img class="profile-img"   
+					<!-- <img class="profile-img"   
 						src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-						alt="" />
-						<form class="form-signin">
+						alt="" /> -->
+						<form class="form-signin" >
 						<p:outputLabel value="Login " />
 						<p:inputText value="#{userController.usuario}"
 							styleClass="form-control" placeholder="Login" />
@@ -60,7 +59,7 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="dist/js/bootstrap.min.js"></script>
+	<script src="resources/js/bootstrap.min.js"></script>
 
 </h:body>
 </html>
