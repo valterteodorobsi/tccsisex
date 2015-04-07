@@ -43,10 +43,9 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		System.out.println(funcionario.getNOME());
-		SQLQuery query = session.createSQLQuery("update funcionario set  NOME = funcionario.getNOME() , ramal = :funcionario.getRAMAL() , endereco = :funcionario.getENDERECO() , sexo = :funcionario.getSEXO() , rg = :funcionario.getRG() , email =:funcionario.getEMAIL(), data_nasc = :funcionario.getDATA_NAS() , id_funcao = :funcionario.getID_FUNCAO() , id_centro_custo = :funcionario.getID_CENTRO_CUSTO() where id_matricula = :funcionario.getID_MATRICULA()");
+		SQLQuery query = session.createSQLQuery("update funcionario set  NOME = funcionario.getNOME() , ramal = :funcionario.getRAMAL() , sexo = :funcionario.getSEXO() , rg = :funcionario.getRG() , email =:funcionario.getEMAIL(), data_nasc = :funcionario.getDATA_NAS() , id_funcao = :funcionario.getID_FUNCAO() , id_centro_custo = :funcionario.getID_CENTRO_CUSTO() where id_matricula = :funcionario.getID_MATRICULA()");
 		query.setParameter("NOME",funcionario.getNOME());
 		query.setParameter(	"ramal" , funcionario.getRAMAL());
-		query.setParameter("endereco" ,funcionario.getENDERECO());
 		query.setParameter("sexo" , funcionario.getSEXO());
 		query.setParameter("rg", funcionario.getRAMAL());
 		query.setParameter("email" , funcionario.getEMAIL());
@@ -90,6 +89,19 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 		
 		t.commit();
 		return query.list();
+		
+	}
+	public List<Funcionario> listaNome(Integer matricula) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery("select nome FROM Funcionario where ID_MATRICULA =:matricula"); 
+		query.setParameter("matricula", matricula );
+		query.addScalar("NOME");
+		
+		List<Funcionario> users = query.list();
+
+		
+		return users;
 		
 	}
 }
