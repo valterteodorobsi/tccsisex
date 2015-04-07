@@ -38,17 +38,27 @@
 			day : 'Dia',
 			allDayText : 'Todo o Dia'
 		};
-		function imprimirJS(){
-			window.print();
-			 
-		};
-	</script>
+		</script>
+	
 	
 	
 <title>Pedido De Exames</title>
+	<script>
+		function listaColaborador(valor) {
+			document.getElementById("formEscondido:matriculaEscondida").value = valor;
+			document.getElementById("formEscondido:PesquisarNomePorMatricula").click();
+			
+		}
+		
+		function carregaNome() {
+			document.getElementById("form:nomePed").value = document.getElementById("formEscondido:nomeEscondida").value;
+			document.getElementById("form:matriculaPed").value = document.getElementById("formEscondido:matriculaEscondida").value;
+			
+		}		
+	</script>
 </h:head>
 
-<h:body>
+<h:body onload="carregaNome();">
 	<div id="cabecalho">
 		<ui:insert name="cabecalho">
 			<ui:include src="/cabecalho.xhtml" />
@@ -59,12 +69,20 @@
 	<p:layoutUnit position="center">
         	<H1 style="text-align: center;">Pedido de Exame</H1>
         	<p:tooltip />
+        	<h:form enctype="multipart/form-data" id="formEscondido">
+					<p:inputText id="matriculaEscondida" type="hidden" value="#{funcionarioBen.funcionario.ID_MATRICULA}" />
+					<p:inputText id="nomeEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOME}" />
+					
+						<p:commandButton value="PesquisarNomePorMatricula" actionListener="#{funcionarioBen.listaColaborador}"
+						update="grid" ajax="false" style="display: none;" id="PesquisarNomePorMatricula" />
+				</h:form>
 		<h:form id="form">
 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 			<p:growl id="nomes" showDetail="true" />
 			<h:panelGrid columns="2" cellpadding="2">
 				<p:outputLabel value="Matricula: " for="matriculaPed" />
-					<p:inputText id="matriculaPed" size="20" maxlength="20" required="true"
+					<p:inputText id="matriculaPed" size="20" maxlength="20" 
+					required="true" onblur="listaColaborador(this.value);" update="nomePed" 
 						requiredMessage="Favor preencher o campo Matricula obrigatório"
 						value="#{pedidoExameBen.pedidoDeExame.MATRICULA}">
 						<f:validateLength minimum="1" maximum="20" />
