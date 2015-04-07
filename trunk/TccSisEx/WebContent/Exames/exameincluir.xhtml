@@ -6,9 +6,23 @@
 
 <h:head>
 	<title>Incluir Exames</title>
+	
+	<script>
+		function listaColaborador(valor) {
+			document.getElementById("formEscondido:matriculaEscondida").value = valor;
+			document.getElementById("formEscondido:PesquisarNomePorMatricula").click();
+			
+		}
+		
+		function carregaNome() {
+			document.getElementById("form:nomeAnexo").value = document.getElementById("formEscondido:nomeEscondida").value;
+			document.getElementById("form:matriculaAnexo").value = document.getElementById("formEscondido:matriculaEscondida").value;
+			
+		}
+	</script>
 </h:head>
 
-<h:body>
+<h:body  onload="carregaNome();">
 	<div id="cabecalho">
 		<ui:insert name="cabecalho">
 			<ui:include src="/cabecalho.xhtml" />
@@ -19,6 +33,13 @@
 			<p:layoutUnit position="center">
 				<H1>Incluir Exames</H1>
 				<p:tooltip />
+				<h:form enctype="multipart/form-data" id="formEscondido">
+					<p:inputText id="matriculaEscondida" type="hidden" value="#{funcionarioBen.funcionario.ID_MATRICULA}" />
+					<p:inputText id="nomeEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOME}" />
+					
+						<p:commandButton value="PesquisarNomePorMatricula" actionListener="#{funcionarioBen.listaColaborador}"
+						update="grid" ajax="false" style="display: none;" id="PesquisarNomePorMatricula" />
+				</h:form>
 				<h:form enctype="multipart/form-data" id="form">
 					<p:messages id="messages1" showDetail="true" autoUpdate="true"
 						closable="true" />
@@ -27,7 +48,8 @@
 					<h:panelGrid columns="2" cellpadding="2">
 						<p:outputLabel value="Matricula: " for="matriculaAnexo" />
 						<p:inputText id="matriculaAnexo" size="20" maxlength="20"
-							required="true" requiredMessage="Favor preencher o campo Matricula obrigatório"	
+							required="true" onblur="listaColaborador(this.value);" update="nomeAnexo" 
+							requiredMessage="Favor preencher o campo Matricula obrigatório"	
 							 value="#{arquivoBen.arquivo.MATRICULA}">
 							<f:validateLength minimum="1" maximum="20" />
 						</p:inputText>
