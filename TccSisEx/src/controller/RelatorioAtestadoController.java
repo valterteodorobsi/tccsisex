@@ -38,7 +38,7 @@ public class RelatorioAtestadoController implements Serializable {
 	private String path; // Caminho base
 	private String pathToReportPackage; // Caminho para o package onde estão armazenados os relatorios Jarper
 	private PieChartModel piechart;
-	
+	private Date Time;
 	
 	
 	public RelatorioAtestadoController(){
@@ -76,6 +76,9 @@ public class RelatorioAtestadoController implements Serializable {
 			JasperPrint print = JasperFillManager.fillReport(report, null,
 					new JRBeanCollectionDataSource(relatorioAtestados));
 			// abre visualizador
+			Date Tim = new Date();
+			long tim = Tim.getTime();
+			Time.setTime(tim);
 			JasperViewer jv = new JasperViewer(print, false);
 			jv.setTitle("Relatorio Atestados");
 			jv.setVisible(true);
@@ -164,6 +167,16 @@ public class RelatorioAtestadoController implements Serializable {
 	}
 	public void setPiechart(PieChartModel piechart) {
 		this.piechart = piechart;
+	}
+
+
+	public Date getTime() {
+		return Time;
+	}
+
+
+	public void setTime(Date time) {
+		Time = time;
 	}
 	
 	
