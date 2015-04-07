@@ -40,7 +40,7 @@ public class RelatorioGerencialController implements Serializable {
 	private String path; // Caminho base
 	private String pathToReportPackage; // Caminho para o package onde estão armazenados os relatorios Jarper
 	private PieChartModel piechart;								 
-
+	private Date Time;
 	public RelatorioGerencialController() {
 		gerencial = new RelatorioGerencial();
 		piechart = new PieChartModel();
@@ -81,6 +81,9 @@ public class RelatorioGerencialController implements Serializable {
 		JasperPrint print = JasperFillManager.fillReport(report, null,
 				new JRBeanCollectionDataSource(relatorioGerencial));
 		// abre visualizador
+		Date Tim = new Date();
+		long tim = Tim.getTime();
+		Time.setTime(tim);
 		JasperViewer jv = new JasperViewer(print, false);
 		jv.setTitle("Relatorio Gerencial");
 		jv.setVisible(true);
@@ -172,4 +175,12 @@ public class RelatorioGerencialController implements Serializable {
 		this.dataFinal = dataFinal;
 	}
 
+	public Date getTime() {
+		return Time;
+	}
+
+	public void setTime(Date time) {
+		Time = time;
+	}
+	
 }
