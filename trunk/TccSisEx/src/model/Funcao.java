@@ -19,6 +19,7 @@ public class Funcao implements Serializable {
 	private String CRITICIDADE;
 	private String DESCRICAO;
 	private String EXAMES;
+	private Integer ID_EXAME;
 	
 
 	public Funcao() {
@@ -74,4 +75,14 @@ public class Funcao implements Serializable {
 		DESCRICAO = dESCRICAO;
 	}
 
+	public Integer getID_EXAME() {
+		return ID_EXAME;
+	}
+
+	public void setID_EXAME(Integer iD_EXAME) {
+		ID_EXAME = iD_EXAME;
+	}
+
+	
+	
 }

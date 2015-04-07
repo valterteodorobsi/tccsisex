@@ -19,8 +19,9 @@ public class Sintomas implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	private Integer ID_SINTOMAS;
 	private String DESCRICAO;
-	private String REMEDIO;
+	private Integer ID_REMEDIO;
 	private String NOME_SINTOMAS;
+	public String NOME_REMEDIO;
 	
 	
 
@@ -47,18 +48,39 @@ public class Sintomas implements Serializable{
 	public void setDESCRICAO(String DESCRICAO) {
 		this.DESCRICAO = DESCRICAO;
 	}
-	public String getREMEDIO() {
-		return REMEDIO;
+	
+	public Integer getID_REMEDIO() {
+		return ID_REMEDIO;
 	}
-	public void setREMEDIO(String REMEDIO) {
-		this.REMEDIO = REMEDIO;
+
+
+	public void setID_REMEDIO(Integer iD_REMEDIO) {
+		ID_REMEDIO = iD_REMEDIO;
 	}
+
+
+
+
 	public String getNOME_SINTOMAS() {
 		return NOME_SINTOMAS;
 	}
 
 	public void setNOME_SINTOMAS(String nOME_SINTOMAS) {
 		NOME_SINTOMAS = nOME_SINTOMAS;
+	}
+
+
+
+
+	public String getNOME_REMEDIO() {
+		return NOME_REMEDIO;
+	}
+
+
+
+
+	public void setNOME_REMEDIO(String nOME_REMEDIO) {
+		NOME_REMEDIO = nOME_REMEDIO;
 	}
 	
 	

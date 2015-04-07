@@ -83,14 +83,14 @@
 							<p:column headerText="Remédio Homologado">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{tablesintomas.REMEDIO}" />
+										<h:outputText value="#{tablesintomas.NOME_REMEDIO}" />
 									</f:facet>
 									<f:facet name="input">
 										<p:selectOneMenu id="remeSintomas" size="20" label="Remedio Homologado"
-							value="#{tablesintomas.REMEDIO}" prependId="true" var="r">
+							value="#{tablesintomas.ID_REMEDIO}" prependId="true" var="r">
 							<f:selectItem itemLabel="Selecione...   " itemValue=" "  />
 							<f:selectItems value="#{remedioBen.listaRemedio()}" var="remedio"
-								itemLabel="#{remedio.NOME}" itemValue="#{remedio.NOME}" />
+								itemLabel="#{remedio.NOME}" itemValue="#{remedio.ID_REMEDIO}" />
 								 
 						</p:selectOneMenu>
 									</f:facet>
