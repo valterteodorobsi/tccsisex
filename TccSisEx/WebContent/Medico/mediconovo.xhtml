@@ -6,7 +6,37 @@
 
 <h:head>
 	<h:outputStylesheet library="css" name="style.css" />
+	<script>
 
+		function comparaData(data) {
+				var dataFormatada = data.split("/");
+				var hoje = new Date();
+				var mes = 12;
+				var dia = 32;
+
+				if(dataFormatada[2] > hoje.getFullYear()) {
+
+					alert("Ano Invalido");
+					
+				} else if(dataFormatada[2] != hoje.getFullYear()) {
+				   if((dataFormatada[1]-1) > mes)  {
+					alert("Mês Invalido");
+					
+				  } else if((dataFormatada[1]-1) != hoje.getMonth()) {
+					 if (dataFormatada[0] >= dia) {
+						alert("Dia Invalido ");
+						 if (dataFormatada[0] > dia){
+						 alert("Dia Invalido");
+						 
+					 	}
+					 }
+				  }
+				}
+				
+				return;
+			}
+
+	</script>
 
 	
 	<title>Médico</title>
@@ -48,6 +78,7 @@
 					<p:outputLabel value="Data de Nacimento" for="datMed" />
 					<p:inputMask id="datMed" required="true"
 						requiredMessage="Favor preencher o campo  Data de Nascimento obrigatório"
+						onblur="comparaData(this.value);" 
 						value="#{medicoBen.medico.DATA_NASC}" mask="99/99/9999">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>

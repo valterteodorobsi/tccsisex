@@ -9,14 +9,22 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import util.HibernateUtil;
+import controller.SetorController;
 
 public class SetorDaoImp implements SetorDao {
-	public void save(Setor setor) {
+	public void save(Setor setor) throws  Exception  {
 
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
+		try{
 		session.save(setor);
 		t.commit();
+		}catch (Exception ex) {
+			SetorController.matriculaErro();
+			session.getTransaction().rollback();
+			session.close();
+			 throw ex;
+		}
 	}
 
 

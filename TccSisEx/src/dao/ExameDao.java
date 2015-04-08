@@ -6,7 +6,7 @@ import model.Exame;
 
 public interface ExameDao {
 
-	public void save(Exame exame);
+	public void save(Exame exame) throws Exception;
 
 
 	public List<Exame> list();

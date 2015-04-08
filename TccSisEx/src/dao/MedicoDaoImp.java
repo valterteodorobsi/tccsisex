@@ -2,7 +2,6 @@ package dao;
 
 import java.util.List;
 
-import model.Funcionario;
 import model.Medico;
 
 import org.hibernate.Query;
@@ -10,15 +9,24 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import util.HibernateUtil;
+import controller.MedicoController;
 
-public class MedicoDaoImp implements MedicoDao {
+public class MedicoDaoImp implements MedicoDao  {
 
-	public void save(Medico Medico) {
+	public void save(Medico Medico) throws  Exception {
 
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
+		try{
 		session.save(Medico);
 		t.commit();
+		}catch (Exception ex) {
+			MedicoController.matriculaErro();
+			session.getTransaction().rollback();
+			session.close();
+			 throw ex;
+		}
+		
 	}
 
 

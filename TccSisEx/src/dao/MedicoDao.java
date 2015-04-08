@@ -1,11 +1,12 @@
 package dao;
 
 import model.Medico;
+
 import java.util.List;
 
 public interface MedicoDao {
 
-	public void save(Medico medico);
+	public void save(Medico medico) throws Exception;
 
 	public List<Medico> list();
 

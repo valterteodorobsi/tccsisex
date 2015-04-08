@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.transform.Transformers;
 
+import controller.FuncaoController;
 import util.HibernateUtil;
 
 public class FuncaoDaoImp implements FuncaoDao {
@@ -18,6 +19,7 @@ public class FuncaoDaoImp implements FuncaoDao {
 
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
+		try{
 	SQLQuery query = session.createSQLQuery("insert into Funcao (ID_FUNCAO, NOME, CRITICIDADE, ID_EXAME, DESCRICAO)" +
 				" values(:ID_FUNCAO, :NOME, :CRITICIDADE, :ID_EXAME, :DESCRICAO)");
 				query.setParameter("ID_FUNCAO", funcao.getID_FUNCAO());
@@ -28,6 +30,11 @@ public class FuncaoDaoImp implements FuncaoDao {
 				 
 				  
 			query.executeUpdate();
+		}catch(Exception ex){
+		       	session.close();
+		       	FuncaoController.matriculaErro();
+		       	throw ex;
+		}
 				t.commit();
 	}
 

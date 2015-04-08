@@ -61,7 +61,7 @@ public class ExameController {
 		
 	}
 
-	public String adicionarExame() {
+	public String adicionarExame() throws Exception {
 		ExameDao dao = new ExameDaoImp();
 		dao.save(exame);
 		info();
@@ -139,5 +139,12 @@ public class ExameController {
 	public void onRowCancel(RowEditEvent event) {
 		FacesMessage msg = new FacesMessage("Edição Cancelada");
 		FacesContext.getCurrentInstance().addMessage("Edição Cancelada", msg);
+	}
+	
+	public static void matriculaErro() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!",
+						"Código do Exame já existente. "));
 	}
 }

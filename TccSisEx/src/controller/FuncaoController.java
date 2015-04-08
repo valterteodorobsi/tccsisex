@@ -61,7 +61,7 @@ public class FuncaoController {
 		
 	}
 
-	public String adicionarFuncao() {
+	public String adicionarFuncao() throws Exception {
 		FuncaoDao dao = new FuncaoDaoImp();
 		dao.save(funcao);
 		info();
@@ -139,4 +139,12 @@ public class FuncaoController {
 		FacesContext.getCurrentInstance().addMessage("Edição Cancelada", msg);
 	}
 
+	
+	public static void matriculaErro() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!",
+						"Código da Função já existente. "));
+	}
+	
 }

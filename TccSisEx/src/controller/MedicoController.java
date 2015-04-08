@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 
 import model.Medico;
 
+import org.hibernate.HibernateException;
 import org.primefaces.event.RowEditEvent;
 
 import dao.MedicoDao;
@@ -62,7 +63,7 @@ public class MedicoController {
 		
 	}
 
-	public String adicionarMedico() {
+	public String adicionarMedico()  throws HibernateException, Exception {
 		MedicoDao dao = new MedicoDaoImp();
 		dao.save(medico);
 		info();
@@ -76,16 +77,20 @@ public class MedicoController {
 		if(matricula == 0){
 			
 			listaMedicos = new MedicoDaoImp().pesquisarNome(nome);
+			if(listaMedicos.isEmpty()){
+				warn();
+			}
 		}
 		else{
 		listaMedicos = new MedicoDaoImp().pesquisar(matricula);
-		}
-		if (nome == null || matricula == null) {
+			if(listaMedicos.isEmpty()){
 			warn();
-
+			}
+		}
+		
 		}
 
-	}
+	
 	
 	public List<Medico> listaMedico() {
 
@@ -135,5 +140,12 @@ public class MedicoController {
 		FacesMessage msg = new FacesMessage("Edição Cancelada");
 		FacesContext.getCurrentInstance().addMessage("Edição Cancelada", msg);
 	}
-
+	
+	
+	public static void matriculaErro() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!",
+						"Matricula já existente. "));
+	}
 }

@@ -28,10 +28,6 @@ public class FuncionarioController {
 
 	private List<Funcionario> listaFuncionarios = new ArrayList<Funcionario>();
 
-	static Date dataMaxima = new Date();
-	
-
-	
 	private List<FuncionarioPes> listaFuncionariosPes = new ArrayList<FuncionarioPes>();
 	
 
@@ -82,14 +78,17 @@ public class FuncionarioController {
 		if(matricula == 0){
 		
 			listaFuncionarios = new FuncionarioDaoImp().pesquisarNome(nome);
-			
+				if (listaFuncionarios.isEmpty()) {
+				warn();
+				}
 			}else{
 			listaFuncionariosPes = new FuncionarioDaoImp().pesquisar(matricula);
-		}
-		if (nome == null || matricula == null) {
-			warn();
+			if (listaFuncionariosPes.isEmpty()) {
+				warn();
 
+			}
 		}
+		
 
 	}
 	

@@ -6,7 +6,7 @@ import model.Setor;
 
 public interface SetorDao {
 
-	public void save(Setor setor);
+	public void save(Setor setor)  throws Exception;
 
 	public List<Setor> list();
 
