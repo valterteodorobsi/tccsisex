@@ -33,6 +33,9 @@ xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
     <param-value>client</param-value>
   </context-param>  -->
+	<session-config>
+		<session-timeout>3</session-timeout>
+	</session-config>
   <context-param>
     <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
     <param-value>resources.application</param-value>

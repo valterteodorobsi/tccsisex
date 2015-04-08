@@ -1,11 +1,12 @@
 package dao;
 
 import model.Funcao;
+
 import java.util.List;
 
 public interface FuncaoDao {
 
-	public void save(Funcao funcao);
+	public void save(Funcao funcao) throws Exception;
 
 	public List<Funcao> list();
 

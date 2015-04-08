@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -12,7 +13,7 @@
 <h:body>
 
 
-	<h:graphicImage value="/img/cabeçalho.png" />
+	<h:graphicImage value="/img/cabeçalho.png"   />
 
 	<p:menubar>
 		<p:submenu label="Cadastros" icon="">
@@ -53,20 +54,23 @@
 		<p:submenu label="Pedidos de Exames" icon="">
 			<p:menuitem value="Pedido de Exame" url="/Pedido/pedidodeexame.jsf" />
 		</p:submenu>
-		<p:submenu label="Relatórios" icon="">
-			<p:menuitem value="Relatório Gerencial"
-				url="/Relatorio/relatoriogerencial.jsf" />
-			<p:menuitem value="Relatório Tempo de Permanência"
-				url="/Relatorio/relatoriopermanencia.jsf" />
-			<p:menuitem value="Relatório Ocorrência"
-				url="/Relatorio/relatorioocorrencia.jsf" />
-			<p:menuitem value="Relatório Sintomas"
-				url="/Relatorio/relatoriosintomas.jsf" />
-			<p:menuitem value="Relatório Responsabilidades"
-				url="/Relatorio/relatorioresponsabilidades.jsf" />
-			<p:menuitem value="Relatório Gerencial Atestados"
-				url="/Relatorio/relatorioatestados.jsf" />
-		</p:submenu>
+		
+		<c:if test="#{usuario.tipoAcesso == '1'}">
+			<p:submenu label="Relatórios" icon="">
+				<p:menuitem value="Relatório Gerencial"
+					url="/Relatorio/relatoriogerencial.jsf" />
+				<p:menuitem value="Relatório Tempo de Permanência"
+					url="/Relatorio/relatoriopermanencia.jsf" />
+				<p:menuitem value="Relatório Ocorrência"
+					url="/Relatorio/relatorioocorrencia.jsf" />
+				<p:menuitem value="Relatório Sintomas"
+					url="/Relatorio/relatoriosintomas.jsf" />
+				<p:menuitem value="Relatório Responsabilidades"
+					url="/Relatorio/relatorioresponsabilidades.jsf" />
+				<p:menuitem value="Relatório Gerencial Atestados"
+					url="/Relatorio/relatorioatestados.jsf" />
+			</p:submenu>
+		</c:if>
 		
 	</p:menubar>
 </h:body>

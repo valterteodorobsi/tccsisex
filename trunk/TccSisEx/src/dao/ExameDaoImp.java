@@ -3,22 +3,29 @@ package dao;
 import java.util.List;
 
 import model.Exame;
-import model.Funcao;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import util.HibernateUtil;
+import controller.ExameController;
 
 public class ExameDaoImp implements ExameDao {
 
 	
-	public void save(Exame exame) {
+	public void save(Exame exame)  throws  Exception{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
+		try{
 		session.save(exame);
 		t.commit();
+		}catch (Exception ex) {
+			ExameController.matriculaErro();
+			session.getTransaction().rollback();
+			session.close();
+			 throw ex;
+		}
 	}
 
 

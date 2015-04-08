@@ -61,7 +61,7 @@ public class SetorController {
 		infoExcluir();
 	}
 
-	public String adicionarSetor() {
+	public String adicionarSetor() throws Exception {
 		SetorDao dao = new SetorDaoImp();
 		dao.save(setor);
 		info();
@@ -135,5 +135,12 @@ public class SetorController {
 		FacesMessage msg = new FacesMessage("Edição Cancelada");
 		FacesContext.getCurrentInstance().addMessage("Edição Cancelada", msg);
 	}
+	public static void matriculaErro() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!",
+						"Centro de Custo já existente. "));
+	}
+	
 
 }

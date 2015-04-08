@@ -6,6 +6,37 @@
 
 <h:head>
 	<h:outputStylesheet library="css" name="style.css" />
+	<script>
+
+		function comparaData(data) {
+				var dataFormatada = data.split("/");
+				var hoje = new Date();
+				var mes = 12;
+				var dia = 32;
+
+				if(dataFormatada[2] > hoje.getFullYear()) {
+
+					alert("Ano Invalido");
+					
+				} else if(dataFormatada[2] != hoje.getFullYear()) {
+				   if((dataFormatada[1]-1) > mes)  {
+					alert("Mês Invalido");
+					
+				  } else if((dataFormatada[1]-1) != hoje.getMonth()) {
+					 if (dataFormatada[0] >= dia) {
+						alert("Dia Invalido ");
+						 if (dataFormatada[0] > dia){
+						 alert("Dia Invalido");
+						 
+					 	}
+					 }
+				  }
+				}
+				
+				return;
+			}
+
+	</script>
 	<title>Médico</title>
 </h:head>
 
@@ -57,7 +88,7 @@
 										<h:outputText value="#{tablemedico.ID_MATRICULA}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText id="modelInput" value="#{tablemedico.ID_MATRICULA}"
+										<p:inputText id="modelInput" disabled="true" value="#{tablemedico.ID_MATRICULA}"
 											style="width:100%" />
 									</f:facet>
 								</p:cellEditor>
@@ -92,11 +123,13 @@
 										</h:outputText>
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{tablemedico.DATA_NASC}" style="width:100%"
-											label="Data de Nacimento">
-											<f:convertDateTime pattern="dd/MM/yyyy" />
-										</p:inputText>
-									</f:facet>
+											<p:inputMask required="true"
+												requiredMessage="Favor preencher o campo  Data de Nascimento obrigatório"
+												value="#{tablemedico.DATA_NASC}" style="width:100%" mask="99/99/9999"
+												onblur="comparaData(this.value);" label="Data de Nacimento">
+												<f:convertDateTime pattern="dd/MM/yyyy" />
+											</p:inputMask>
+										</f:facet>
 								</p:cellEditor>
 							</p:column>
 							<p:column headerText="RG">
