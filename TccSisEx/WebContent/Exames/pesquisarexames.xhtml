@@ -5,6 +5,19 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
+	<script>
+		function confirm_entry(){
+			input_box=confirm("Tem certesa que deseja excluir o Registro?");
+			if (input_box==true){
+			// Output when OK is clicked
+			return true;
+			}
+			else{
+			// Output when Cancel is clicked
+			return false;
+			}
+		}
+	</script>
 	<title>Pesquisar Exame Anexado</title>
 </h:head>
 
@@ -25,7 +38,7 @@
 				<h:panelGrid columns="2" cellpadding="2">
 						<p:outputLabel value="Matricula: " for="matriculaFun" />
 						<p:inputText id="matriculaFun"
-							value="#{arquivoBen.arquivo.MATRICULA}" />
+							value="#{arquivoBen.arquivo.ID_MATRICULA}" />
 						
 					</h:panelGrid>
 
@@ -48,7 +61,7 @@
 								</p:column>
 
 								<p:column headerText="Matricula">
-									<h:outputText value="#{tableArquivo.MATRICULA}" />
+									<h:outputText value="#{tableArquivo.ID_MATRICULA}" />
 								</p:column>
 
 								<p:column headerText="Setor">
@@ -72,7 +85,7 @@
 
 
 								<p:column headerText=" ">
-									<p:commandLink title="Deletar"  update=":form"
+									<p:commandLink title="Deletar"  update=":form" onclick="confirm_entry();"
 									action="#{arquivoBen.excluirArquivo(tableArquivo)}">
 
 									<p:graphicImage url="/img/excluir.png"

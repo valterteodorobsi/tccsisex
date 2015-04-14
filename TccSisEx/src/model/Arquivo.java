@@ -28,7 +28,9 @@ public class Arquivo implements Serializable{
 	@Column(name = "IMAGEM")  
 	private byte [] IMAGEM;
 	private String NOME_COLABORADOR;
-	private Integer MATRICULA;
+	private Integer ID_MATRICULA;
+	private Integer ID_SETOR;
+	private Integer ID_EXAMEFK;
 	private String SETOR;
 	private String CRITICIDADE;
 	private String EXAME;
@@ -68,12 +70,7 @@ public class Arquivo implements Serializable{
 	public void setNOME_COLABORADOR(String NOME_COLABORADOR) {
 		this.NOME_COLABORADOR = NOME_COLABORADOR;
 	}
-	public Integer getMATRICULA() {
-		return MATRICULA;
-	}
-	public void setMATRICULA(Integer mATRICULA) {
-		MATRICULA = mATRICULA;
-	}
+	
 	public String getSETOR() {
 		return SETOR;
 	}
@@ -97,6 +94,36 @@ public class Arquivo implements Serializable{
 	}
 	public void setDESCRICAO(String dESCRICAO) {
 		DESCRICAO = dESCRICAO;
+	}
+
+
+	public Integer getID_SETOR() {
+		return ID_SETOR;
+	}
+
+
+	public void setID_SETOR(Integer iD_SETOR) {
+		ID_SETOR = iD_SETOR;
+	}
+
+
+	public Integer getID_MATRICULA() {
+		return ID_MATRICULA;
+	}
+
+
+	public void setID_MATRICULA(Integer iD_MATRICULA) {
+		ID_MATRICULA = iD_MATRICULA;
+	}
+
+
+	public Integer getID_EXAMEFK() {
+		return ID_EXAMEFK;
+	}
+
+
+	public void setID_EXAMEFK(Integer iD_EXAMEFK) {
+		ID_EXAMEFK = iD_EXAMEFK;
 	}
 	
 	

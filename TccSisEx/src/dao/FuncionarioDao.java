@@ -24,6 +24,6 @@ public interface FuncionarioDao {
 	
 	public List<FuncionarioPes> pesquisar(Integer matricula);
 	
-	public List<Funcionario> pesquisarNome( String nome);
+	public List<FuncionarioPes> pesquisarNome( String nome);
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import model.Medico;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -18,6 +19,7 @@ public class MedicoDaoImp implements MedicoDao  {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		try{
+			
 		session.save(Medico);
 		t.commit();
 		}catch (Exception ex) {
@@ -41,7 +43,9 @@ public class MedicoDaoImp implements MedicoDao  {
 	public void remove(Medico Medico) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		session.delete(Medico);
+		SQLQuery query = session.createSQLQuery("update Medico set ATIVO = 0  WHERE ID_MATRICULA = :ID_MATRICULA");
+		query.setInteger("ID_MATRICULA", Medico.getID_MATRICULA());
+		query.executeUpdate(); 
 		t.commit();
 	}
 
@@ -55,7 +59,7 @@ public class MedicoDaoImp implements MedicoDao  {
 	public List<Medico> pesquisar(int matricula) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		Query query = session.createQuery("FROM Medico u where u.ID_MATRICULA = :matricula "); 
+		Query query = session.createQuery("FROM Medico u where u.ID_MATRICULA = :matricula and ATIVO = 1"); 
 		query.setParameter("matricula", matricula);
 		t.commit();
 		return query.list();
@@ -64,7 +68,7 @@ public class MedicoDaoImp implements MedicoDao  {
 	public List<Medico> pesquisarNome( String nome) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		Query query = session.createQuery("FROM Medico u where  u.NOME LIKE :nome"); 
+		Query query = session.createQuery("FROM Medico u where  u.NOME LIKE :nome and ATIVO = 1"); 
 		query.setParameter("nome", "%"+ nome + "%");
 		t.commit();
 		return query.list();

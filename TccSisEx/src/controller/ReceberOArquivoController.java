@@ -83,7 +83,7 @@ public class ReceberOArquivoController {
 	}
 
 	public void pesquisarExamePorMatricula() {
-		Integer matricula = arquivo.getMATRICULA();
+		Integer matricula = arquivo.getID_MATRICULA();
 
 		listaArquivos = new ReceberArquivoDao().pesquisar(matricula);
 		  

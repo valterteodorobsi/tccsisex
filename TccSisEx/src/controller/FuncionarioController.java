@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -10,9 +9,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import model.Funcionario;
-
 import model.FuncionarioPes;
-
 
 import org.hibernate.HibernateException;
 import org.primefaces.event.RowEditEvent;
@@ -26,7 +23,7 @@ public class FuncionarioController {
 
 	private Funcionario funcionario = new Funcionario();
 
-	private List<Funcionario> listaFuncionarios = new ArrayList<Funcionario>();
+	private List<FuncionarioPes> listaFuncionarios = new ArrayList<FuncionarioPes>();
 
 	private List<FuncionarioPes> listaFuncionariosPes = new ArrayList<FuncionarioPes>();
 	
@@ -40,11 +37,11 @@ public class FuncionarioController {
 	}
 
 
-	public List<Funcionario> getListaFuncionarios() {
+	public List<FuncionarioPes> getListaFuncionarios() {
 		return listaFuncionarios;
 	}
 
-	public void setListaFuncionarios(List<Funcionario> listaFuncionarios) {
+	public void setListaFuncionarios(List<FuncionarioPes> listaFuncionarios) {
 		this.listaFuncionarios = listaFuncionarios;
 	}
 
@@ -59,9 +56,9 @@ public class FuncionarioController {
 	public void excluirFuncionario(Funcionario funcionario) {
 
 		new FuncionarioDaoImp().remove(funcionario);
-
-		pesquisarFun();
 		infoExcluir();
+		pesquisarFun();
+		
 		
 	}
 
@@ -77,8 +74,8 @@ public class FuncionarioController {
 		String nome = funcionario.getNOME();
 		if(matricula == 0){
 		
-			listaFuncionarios = new FuncionarioDaoImp().pesquisarNome(nome);
-				if (listaFuncionarios.isEmpty()) {
+			listaFuncionariosPes = new FuncionarioDaoImp().pesquisarNome(nome);
+				if (listaFuncionariosPes.isEmpty()) {
 				warn();
 				}
 			}else{

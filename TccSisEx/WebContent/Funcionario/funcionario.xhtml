@@ -8,10 +8,10 @@
 
 <h:head>
 	<!-- Bootstrap core CSS -->
-	 <link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet" />
+	 <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" />
 	<!-- <link href="WebContent/resources/css/style.css" rel="stylesheet" /> -->
 	<!-- Custom styles for this template -->
-	<link href="resources/bootstrap/css/starter-template.css" rel="stylesheet" />
+	<link href="../resources/bootstrap/css/starter-template.css" rel="stylesheet" />
 	
 	<script  type="text/javascript">
 		
@@ -40,8 +40,19 @@
 				return;
 			}
 		</script>
-
-	
+		<script>
+		function confirm_entry(){
+			input_box=confirm("Tem certesa que deseja excluir o Registro?");
+			if (input_box==true){
+			// Output when OK is clicked
+			return true;
+			}
+			else{
+			// Output when Cancel is clicked
+			return false;
+			}
+		}
+	</script>
 	<title>Colaborador</title>
 </h:head>
 
@@ -219,7 +230,7 @@
 							<p:column style="width:32px">
 								<p:rowEditor title="Alterar" />
 								<p:spacer width="1" />
-								<p:commandLink title="Remover" update=":form"  action="#{funcionarioBen.excluirFuncionario(tablefuncionario)}">
+								<p:commandLink title="Remover" update=":form" onclick="confirm_entry();" action="#{funcionarioBen.excluirFuncionario(tablefuncionario)}">
 									<p:graphicImage url="/img/excluir.png"
 										style="background-color: transparent; vertical-align: middle; border: none"
 										width="11px" height="11px" />

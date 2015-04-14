@@ -21,8 +21,9 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		try{
-		SQLQuery query = session.createSQLQuery("insert into Funcionario (ID_MATRICULA, NOME, ID_CENTRO_CUSTO, ID_FUNCAO,  DATA_NASC, RG,  EMAIL, SEXO, RAMAL)" +
-		" values(:ID_MATRICULA, :NOME, :ID_CENTRO_CUSTO, :ID_FUNCAO, :DATA_NASC, :RG,  :EMAIL, :SEXO, :RAMAL )");
+		funcionario.setATIVO(true);
+		SQLQuery query = session.createSQLQuery("insert into Funcionario (ID_MATRICULA, NOME, ID_CENTRO_CUSTO, ID_FUNCAO,  DATA_NASC, RG,  EMAIL, SEXO, RAMAL, ATIVO)" +
+		" values(:ID_MATRICULA, :NOME, :ID_CENTRO_CUSTO, :ID_FUNCAO, :DATA_NASC, :RG,  :EMAIL, :SEXO, :RAMAL ,:ATIVO)");
 		query.setParameter("ID_MATRICULA", funcionario.getID_MATRICULA());
 		query.setParameter("NOME", funcionario.getNOME());
 		query.setParameter("ID_CENTRO_CUSTO", funcionario.getID_CENTRO_CUSTO());
@@ -32,6 +33,7 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 		query.setParameter("EMAIL", funcionario.getEMAIL());
 		query.setParameter("SEXO", funcionario.getSEXO());
 		query.setParameter("RAMAL", funcionario.getRAMAL());
+		query.setParameter("ATIVO", funcionario.getATIVO());
 		 
 		  
 	query.executeUpdate();
@@ -60,7 +62,7 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 	public void remove(Funcionario funcionario) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		SQLQuery query = session.createSQLQuery("DELETE FROM Funcionario WHERE ID_MATRICULA = :ID_MATRICULA");
+		SQLQuery query = session.createSQLQuery("update Funcionario set ATIVO = 0  WHERE ID_MATRICULA = :ID_MATRICULA");
 		query.setInteger("ID_MATRICULA", funcionario.getID_MATRICULA());
 		query.executeUpdate(); 
 		t.commit();
@@ -70,7 +72,6 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 
-		System.out.println(funcionario);
 		SQLQuery query = session.createSQLQuery("update Funcionario set NOME=:NOME, ID_CENTRO_CUSTO =:ID_CENTRO_CUSTO, ID_FUNCAO = :ID_FUNCAO, DATA_NASC = :DATA_NASC, RG = :RG, EMAIL = :EMAIL, SEXO = :SEXO, RAMAL= :RAMAL"
 		+" where ID_MATRICULA = :ID_MATRICULA");
 				query.setInteger("ID_MATRICULA", funcionario.getID_MATRICULA());
@@ -104,7 +105,7 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 	public List<FuncionarioPes> pesquisar(Integer matricula) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		SQLQuery query = session.createSQLQuery("select DATA_NASC, EMAIL , ID_MATRICULA, funcionario.NOME as NOME, RAMAL, RG, SEXO, f.NOME as NOMEFUN, s.NOME as NOMESET FROM funcionario inner join setor as s on s.ID_CENTRO_CUSTO = funcionario.ID_CENTRO_CUSTO inner join funcao as f on f.ID_FUNCAO = funcionario.ID_FUNCAO where ID_MATRICULA = :matricula group by s.NOME , f.NOME, ID_MATRICULA, funcionario.NOME, DATA_NASC, EMAIL, RAMAL , RG, SEXO"); 
+		SQLQuery query = session.createSQLQuery("select DATA_NASC, EMAIL , ID_MATRICULA, funcionario.NOME as NOME, RAMAL, RG, SEXO, f.NOME as NOMEFUN, s.NOME as NOMESET FROM funcionario inner join setor as s on s.ID_CENTRO_CUSTO = funcionario.ID_CENTRO_CUSTO inner join funcao as f on f.ID_FUNCAO = funcionario.ID_FUNCAO where ID_MATRICULA = :matricula and ATIVO = 1 group by s.NOME , f.NOME, ID_MATRICULA, funcionario.NOME, DATA_NASC, EMAIL, RAMAL , RG, SEXO"); 
 		query.setParameter("matricula", matricula);
 		query.addScalar("DATA_NASC");
 		query.addScalar("EMAIL");
@@ -122,13 +123,13 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 		
 	}
 	
-	public List<Funcionario> pesquisarNome(String nome) {
+	public List<FuncionarioPes> pesquisarNome(String nome) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		//Query query = session.createQuery("FROM Funcionario u where u.NOME LIKE :nome"); 
 		
 		
-		SQLQuery query = session.createSQLQuery("select DATA_NASC, EMAIL , ID_MATRICULA, fu.NOME as NOME, RAMAL, RG, SEXO, f.NOME as NOMEFUN, s.NOME as NOMESET FROM funcionario as fu inner join setor as s on s.ID_CENTRO_CUSTO = fu.ID_CENTRO_CUSTO inner join funcao as f on f.ID_FUNCAO = fu.ID_FUNCAO where fu.NOME LIKE :nome group by s.NOME , f.NOME, ID_MATRICULA, fu.NOME, DATA_NASC, EMAIL, RAMAL , RG, SEXO"); 
+		SQLQuery query = session.createSQLQuery("select DATA_NASC, EMAIL , ID_MATRICULA, fu.NOME as NOME, RAMAL, RG, SEXO, f.NOME as NOMEFUN, s.NOME as NOMESET FROM funcionario as fu inner join setor as s on s.ID_CENTRO_CUSTO = fu.ID_CENTRO_CUSTO inner join funcao as f on f.ID_FUNCAO = fu.ID_FUNCAO where fu.NOME LIKE :nome and ATIVO = 1 group by s.NOME , f.NOME, ID_MATRICULA, fu.NOME, DATA_NASC, EMAIL, RAMAL , RG, SEXO"); 
 		query.setParameter("nome", "%"+ nome + "%");
 		query.addScalar("DATA_NASC");
 		query.addScalar("EMAIL");
@@ -141,7 +142,7 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 		query.addScalar("NOMESET");
 		query.setResultTransformer( Transformers.aliasToBean( Funcionario.class ) );
 
-	    List<Funcionario> users = query.list();
+	    List<FuncionarioPes> users = query.list();
 
 		
 		return users;
@@ -151,7 +152,7 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 	public List<Funcionario> listaNome(Integer matricula) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		SQLQuery query = session.createSQLQuery("select nome FROM Funcionario where ID_MATRICULA =:matricula"); 
+		SQLQuery query = session.createSQLQuery("select nome FROM Funcionario where ID_MATRICULA =:matricula and ATIVO = 1"); 
 		query.setParameter("matricula", matricula );
 		query.addScalar("NOME");
 		List<Funcionario> users = query.list();

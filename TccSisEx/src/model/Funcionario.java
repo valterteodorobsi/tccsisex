@@ -26,6 +26,7 @@ public class Funcionario implements Serializable {
 	private Integer RAMAL;
 	private String NOMESET;
 	private String NOMEFUN;
+	private Boolean ATIVO;
 	
 	
 
@@ -134,5 +135,15 @@ public class Funcionario implements Serializable {
 	public void setNOMEFUN(String nOMEFUN) {
 		NOMEFUN = nOMEFUN;
 	}
+
+	public Boolean getATIVO() {
+		return ATIVO;
+	}
+
+	public void setATIVO(Boolean aTIVO) {
+		ATIVO = aTIVO;
+	}
+	
+	
 	
 }

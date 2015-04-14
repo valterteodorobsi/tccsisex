@@ -29,14 +29,16 @@ public class Atestado implements Serializable {
 	@Lob  
 	@Column(name = "IMAGEM")  
 	private byte [] imagem;
-	@Column(name = "NOME_COLABORADOR")  
+	//@Column(name = "NOME_COLABORADOR")  
 	private String nomeColaborador;
-	@Column(name = "MATRICULA")  
-	private Integer matricula;
-	@Column(name = "SETOR")  
+	@Column(name = "ID_MATRICULA")  
+	private Integer ID_MATRICULA;
+	//@Column(name = "SETOR")  
 	private String setor;
 	@Column(name = "CID")  
-	private String cid;
+	private String CID;
+	@Column(name = "ID_SETOR")
+	private int ID_SETOR;
 	
 	
     public Atestado() {
@@ -64,10 +66,10 @@ public class Atestado implements Serializable {
 		this.nomeColaborador = nomeColaborador;
 	}
 	public Integer getMatricula() {
-		return matricula;
+		return ID_MATRICULA;
 	}
 	public void setMatricula(Integer matricula) {
-		this.matricula = matricula;
+		this.ID_MATRICULA = matricula;
 	}
 	public String getSetor() {
 		return setor;
@@ -76,12 +78,24 @@ public class Atestado implements Serializable {
 		this.setor = setor;
 	}
 	public String getCid() {
-		return cid;
+		return CID;
 	}
 	public void setCid(String cid) {
-		this.cid = cid;
+		this.CID = cid;
+	}
+
+
+
+	public int getID_SETOR() {
+		return ID_SETOR;
+	}
+
+
+
+	public void setID_SETOR(int iD_SETOR) {
+		ID_SETOR = iD_SETOR;
 	}
 	
-
+	
 	
 }

@@ -91,10 +91,10 @@
 				
 				<p:selectOneMenu id="remReg" required="false"
 						requiredMessage="Favor preencher o campo  Remédio obrigatório"
-							value="#{registroBen.registro.REMEDIO}" prependId="true" var="r">
+							value="#{registroBen.registro.ID_REMEDIO}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
 							<f:selectItems value="#{remedioBen.listaRemedio()}" var="remedio"
-								itemLabel="#{remedio.NOME}" itemValue="#{remedio.NOME}" />
+								itemLabel="#{remedio.NOME}" itemValue="#{remedio.ID_REMEDIO}" />
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Data de Entrada: " for="datReg" />
@@ -112,19 +112,19 @@
 						<p:outputLabel value="Medico: " for="medReg" />
 					<p:selectOneMenu id="medReg" required="true" 
 						requiredMessage="Favor preencher o campo  Médico obrigatório"
-							value="#{registroBen.registro.medico}" prependId="true" var="m">
+							value="#{registroBen.registro.ID_MEDICO}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
 							<f:selectItems value="#{medicoBen.listaMedico()}" var="medico"
-								itemLabel="#{medico.NOME}" itemValue="#{medico.NOME}" />
+								itemLabel="#{medico.NOME}" itemValue="#{medico.ID_MATRICULA}" />
 								 
 						</p:selectOneMenu>
 						<p:outputLabel value="Sintomas: " for="sinReg" />
 						<p:selectOneMenu id="sinReg" required="true" 
 						requiredMessage="Favor preencher o campo  Sintomas obrigatório"
-							value="#{registroBen.registro.SINTOMAS}" prependId="true" var="m">
+							value="#{registroBen.registro.ID_SINTOMAS}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
 							<f:selectItems value="#{sintomasBen.listaSintomas()}" var="sintomas"
-								itemLabel="#{sintomas.NOME_SINTOMAS}" itemValue="#{sintomas.NOME_SINTOMAS}" />
+								itemLabel="#{sintomas.NOME_SINTOMAS}" itemValue="#{sintomas.ID_SINTOMAS}" />
 								</p:selectOneMenu>
 						<p:outputLabel value="Encaminhar Atentimento: " for="encReg" />
 				<p:inputText id="encReg" size="4" maxlength="4" value="#{registroBen.registro.encExt}" />

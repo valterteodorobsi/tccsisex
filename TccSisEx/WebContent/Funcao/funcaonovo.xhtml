@@ -56,7 +56,7 @@
 						<p:outputLabel value="Exames: " for="exaFuncao" />
 						<p:selectOneMenu id="exaFuncao" required="true"
 						requiredMessage="Favor preencher o campo  Exame obrigatório"
-							value="#{funcaoBen.funcao.ID_EXAME}" prependId="true" var="e">
+							value="#{funcaoBen.funcao.ID_EXAME}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
 							<f:selectItems value="#{exameBen.listaExame()}" var="exame"
 								itemLabel="#{exame.NOME_EXAME}" itemValue="#{exame.ID_EXAME}" />

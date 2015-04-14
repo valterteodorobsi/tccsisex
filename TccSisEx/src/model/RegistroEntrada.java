@@ -22,21 +22,21 @@ public class RegistroEntrada implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	private Integer ID_REGISTRO;
-	private String DESCRICAO;
-	private String REMEDIO;
 	private Integer ID_MATRICULA;
+	private Integer ID_MEDICO;
+	private Integer ID_REMEDIO;
+	private Integer ID_SINTOMAS;
 	private Date DATA_ENTRADA;
 	private Date DATA_SAIDA;
-	private String NOME_COLABORADOR;
+	private String DESCRICAO;
 	@Column(name = "TIPO_ENTRADA") 
 	private boolean emergencial;
 	@Column(name = "ENC_EX")  
 	private String encExt;
-	@Column(name = "MEDICO")
-	private String medico;
-	@Column(name = "SINTOMAS")
+	private String NOME_COLABORADOR;
+	private String MEDICO;
 	private String SINTOMAS;
-	
+	private String REMEDIO;
 
 	
 
@@ -128,13 +128,6 @@ public class RegistroEntrada implements Serializable {
 	public void setEmergencial(boolean emergencial) {
 		this.emergencial = emergencial;
 	}
-	public String getMedico() {
-		return medico;
-	}
-
-	public void setMedico(String medico) {
-		this.medico = medico;
-	}
 
 	public String getSINTOMAS() {
 		return SINTOMAS;
@@ -144,4 +137,37 @@ public class RegistroEntrada implements Serializable {
 		SINTOMAS = sINTOMAS;
 	}
 
+	public Integer getID_MEDICO() {
+		return ID_MEDICO;
+	}
+
+	public void setID_MEDICO(Integer iD_MEDICO) {
+		ID_MEDICO = iD_MEDICO;
+	}
+
+	public Integer getID_REMEDIO() {
+		return ID_REMEDIO;
+	}
+
+	public void setID_REMEDIO(Integer iD_REMEDIO) {
+		ID_REMEDIO = iD_REMEDIO;
+	}
+
+	public Integer getID_SINTOMAS() {
+		return ID_SINTOMAS;
+	}
+
+	public void setID_SINTOMAS(Integer iD_SINTOMAS) {
+		ID_SINTOMAS = iD_SINTOMAS;
+	}
+
+	public String getMEDICO() {
+		return MEDICO;
+	}
+
+	public void setMEDICO(String mEDICO) {
+		MEDICO = mEDICO;
+	}
+	
+	
 }

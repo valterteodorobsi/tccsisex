@@ -5,6 +5,19 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
+<script>
+		function confirm_entry(){
+			input_box=confirm("Tem certesa que deseja excluir o Registro?");
+			if (input_box==true){
+			// Output when OK is clicked
+			return true;
+			}
+			else{
+			// Output when Cancel is clicked
+			return false;
+			}
+		}
+	</script>
 	<title>Pesquisar Atestado Anexado</title>
 </h:head>
 
@@ -69,7 +82,7 @@
 									<p:commandLink title="Deletar"  update=":form"
 									action="#{atestadoBen.excluirAtestado(tableatestado)}">
 
-									<p:graphicImage url="/img/excluir.png"
+									<p:graphicImage url="/img/excluir.png" onclick="confirm_entry();"
 										style="background-color: transparent; vertical-align: middle; border: none"
 										width="11px" height="11px" />
 

@@ -35,15 +35,15 @@
 						alt="" /> -->
 						<form class="form-signin" >
 						<p:outputLabel value="Login " />
-						<p:inputText value="#{userController.usuario}"
+						<p:inputText value="#{userController.usuario.username}"
 							styleClass="form-control" placeholder="Login" />
 							<BR />
 							<p:outputLabel value="Senha" />
-						<p:password value="#{userController.senha}"
+						<p:password value="#{userController.usuario.password}"
 							styleClass="form-control" placeholder="Senha" />
 							<BR />
 						<p:commandButton value="Entrar"
-							actionListener="#{userController.logar}"
+							actionListener="#{userController.doEfetuarLogin}"
 							styleClass="btn btn-lg btn-primary btn-block" update="messages"/>
 					</form>
 						</p:panel>

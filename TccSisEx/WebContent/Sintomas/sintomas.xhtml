@@ -5,6 +5,19 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
+	<script>
+		function confirm_entry(){
+			input_box=confirm("Tem certesa que deseja excluir o Registro?");
+			if (input_box==true){
+			// Output when OK is clicked
+			return true;
+			}
+			else{
+			// Output when Cancel is clicked
+			return false;
+			}
+		}
+	</script>
 <title>Sintomas</title>
 </h:head>
 
@@ -100,7 +113,7 @@
 							<p:column style="width:32px">
 								<p:rowEditor title="Alterar" />
 								<p:spacer width="1" />
-								<p:commandLink title="Deletar"  update=":form"
+								<p:commandLink title="Deletar"  update=":form" onclick="confirm_entry();"
 									action="#{sintomasBen.excluirSintomas(tablesintomas)}">
 
 									<p:graphicImage url="/img/excluir.png"

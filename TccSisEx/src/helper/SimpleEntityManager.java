@@ -19,7 +19,7 @@ import javax.persistence.PersistenceContext;
  */
 public class SimpleEntityManager {
 
-	@PersistenceContext(name="SisExamess")
+	@PersistenceContext(name="SisExPU")
 	private EntityManager entityManager;
     private EntityManagerFactory factory;
      
@@ -29,7 +29,7 @@ public class SimpleEntityManager {
     }
      
     public SimpleEntityManager(){
-        factory = Persistence.createEntityManagerFactory("SisExamess");
+        factory = Persistence.createEntityManagerFactory("SisExPU");
         this.entityManager = factory.createEntityManager();
     }
  
@@ -55,4 +55,3 @@ public class SimpleEntityManager {
     }
 	
 }
-
