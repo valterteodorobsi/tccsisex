@@ -50,7 +50,7 @@
 						<p:inputText id="matriculaAnexo" size="20" maxlength="20"
 							required="true" onblur="listaColaborador(this.value);" update="nomeAnexo" 
 							requiredMessage="Favor preencher o campo Matricula obrigatório"	
-							 value="#{arquivoBen.arquivo.MATRICULA}">
+							 value="#{arquivoBen.arquivo.ID_MATRICULA}">
 							<f:validateLength minimum="1" maximum="20" />
 						</p:inputText>
 						<p:outputLabel value="Nome: " for="nomeAnexo" />
@@ -64,10 +64,10 @@
 
 						<p:selectOneMenu id="setAnexo" required="true"
 							requiredMessage="Favor preencher o campo  Setor obrigatório"
-							value="#{arquivoBen.arquivo.SETOR}" prependId="true" var="s">
+							value="#{arquivoBen.arquivo.ID_SETOR}">
 							<f:selectItem itemLabel="Selecione..." itemValue="" />
 							<f:selectItems value="#{setorBen.listaSetor()}" var="setor"
-								itemLabel="#{setor.NOME}" itemValue="#{setor.NOME}" />
+								itemLabel="#{setor.NOME}" itemValue="#{setor.ID_CENTRO_CUSTO}" />
 
 						</p:selectOneMenu>
 
@@ -84,10 +84,10 @@
 						<p:outputLabel value="Exames: " for="exaAnexo" />
 						<p:selectOneMenu id="exaAnexo" required="true"
 							requiredMessage="Favor preencher o campo  Exame obrigatório"
-							value="#{arquivoBen.arquivo.EXAME}" prependId="true" var="e">
+							value="#{arquivoBen.arquivo.ID_EXAMEFK}">
 							<f:selectItem itemLabel="Selecione..." itemValue="" />
 							<f:selectItems value="#{exameBen.listaExame()}" var="exame"
-								itemLabel="#{exame.NOME_EXAME}" itemValue="#{exame.NOME_EXAME}" />
+								itemLabel="#{exame.NOME_EXAME}" itemValue="#{exame.ID_EXAME}" />
 
 						</p:selectOneMenu>
 						<p:outputLabel value="Validade" for="validadeAnexo" />

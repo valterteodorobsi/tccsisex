@@ -18,6 +18,7 @@ public class Exame implements Serializable {
 	private String NOME_EXAME;
 	private String DESCRICAO;
 	private String VALIDADE;
+	private Boolean ATIVO;
 	
 
 	public Exame() {
@@ -61,6 +62,14 @@ public class Exame implements Serializable {
 
 	public void setVALIDADE(String vALIDADE) {
 		VALIDADE = vALIDADE;
+	}
+
+	public Boolean getATIVO() {
+		return ATIVO;
+	}
+
+	public void setATIVO(Boolean aTIVO) {
+		ATIVO = aTIVO;
 	}
 
 

@@ -62,6 +62,7 @@ public class ExameController {
 	}
 
 	public String adicionarExame() throws Exception {
+		exame.setATIVO(true);
 		ExameDao dao = new ExameDaoImp();
 		dao.save(exame);
 		info();
@@ -107,14 +108,17 @@ public class ExameController {
 		if(ID_EXAME == 0){
 			
 			listaExame = new ExameDaoImp().pesquisarNome(nome_exame);
+			if(listaExame.isEmpty()){
+				warn();
+			}
 		}
 		else{
 		listaExame = new ExameDaoImp().pesquisar(ID_EXAME);
-		}
-		if (nome_exame == null || ID_EXAME == null) {
+			if(listaExame.isEmpty()){
 			warn();
-
+			}
 		}
+		
 
 	}
 

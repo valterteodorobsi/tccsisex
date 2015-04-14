@@ -6,6 +6,19 @@
 
 <h:head>
 	<h:outputStylesheet library="css" name="style.css" />
+	<script>
+		function confirm_entry(){
+			input_box=confirm("Tem certesa que deseja excluir o Registro?");
+			if (input_box==true){
+			// Output when OK is clicked
+			return true;
+			}
+			else{
+			// Output when Cancel is clicked
+			return false;
+			}
+		}
+	</script>
 	<title>Função</title>
 </h:head>
 
@@ -122,7 +135,7 @@
 							<p:column style="width:32px">
 								<p:rowEditor title="Alterar" />
 								<p:spacer width="1" />
-								<p:commandLink update=":form"
+								<p:commandLink update=":form"  onclick="confirm_entry();"
 									action="#{funcaoBen.excluirFuncao(tablefuncao)}">
 
 									<p:graphicImage url="/img/excluir.png"

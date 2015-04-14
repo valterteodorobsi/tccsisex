@@ -24,6 +24,7 @@
 <property name="generate_statistics">true</property>
 <property name="use_sql_comments">true</property>
 
+
 <mapping class="model.Funcionario"></mapping>
 <mapping class="model.Medico"></mapping>
 <mapping class="model.Funcao"></mapping>
@@ -42,5 +43,6 @@
 
 
 </session-factory>
+
 
 </hibernate-configuration>

@@ -39,7 +39,37 @@
 			allDayText : 'Todo o Dia'
 		};
 		</script>
-	
+	<script>
+
+		function comparaData(data) {
+				var dataFormatada = data.split("/");
+				var hoje = new Date();
+				var mes = 12;
+				var dia = 32;
+
+				if(dataFormatada[2] > hoje.getFullYear()) {
+
+					alert("Ano Invalido");
+					
+				} else if(dataFormatada[2] != hoje.getFullYear()) {
+				   if((dataFormatada[1]-1) > mes)  {
+					alert("Mês Invalido");
+					
+				  } else if((dataFormatada[1]-1) != hoje.getMonth()) {
+					 if (dataFormatada[0] >= dia) {
+						alert("Dia Invalido ");
+						 if (dataFormatada[0] > dia){
+						 alert("Dia Invalido");
+						 
+					 	}
+					 }
+				  }
+				}
+				
+				return;
+			}
+
+	</script>
 	
 	
 <title>Pedido De Exames</title>
@@ -90,28 +120,29 @@
 					<p:outputLabel value="Nome: " for="nomePed" />
 					<p:inputText id="nomePed" size="50" maxlength="50" required="true"
 						requiredMessage="Favor preencher o campo  Nome obrigatório"
-						value="#{pedidoExameBen.pedidoDeExame.NOME_COLABORADOR}" />
+						 />
 					<p:outputLabel value="Setor: " for="setPed" />
 					<p:selectOneMenu id="setPed" required="true"
 						requiredMessage="Favor preencher o campo  Setor obrigatório"
-							value="#{pedidoExameBen.pedidoDeExame.SETOR}" prependId="true" var="s">
+							value="#{pedidoExameBen.pedidoDeExame.ID_SETOR}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
 							<f:selectItems value="#{setorBen.listaSetor()}" var="setor"
-								itemLabel="#{setor.NOME}" itemValue="#{setor.NOME}" />
+								itemLabel="#{setor.NOME}" itemValue="#{setor.ID_CENTRO_CUSTO}" />
 						</p:selectOneMenu>
 					
 					<p:outputLabel value="Função: " for="unPed" />
 						<p:selectOneMenu id="unPed" required="true"
 						requiredMessage="Favor preencher o campo  Função obrigatório"
-							value="#{pedidoExameBen.pedidoDeExame.FUNCAO}" prependId="true" var="f">
+							value="#{pedidoExameBen.pedidoDeExame.ID_FUNCAO}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
 							<f:selectItems value="#{funcaoBen.listaFuncao()}" var="funcao"
-								itemLabel="#{funcao.NOME}" itemValue="#{funcao.NOME}" />
+								itemLabel="#{funcao.NOME}" itemValue="#{funcao.ID_FUNCAO}" />
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Data de Nacimento" for="datPed" />
 					<p:inputMask id="datPed" required="true"
 						requiredMessage="Favor preencher o campo  Data de Nascimento obrigatório"
+						onblur="comparaData(this.value);"
 						value="#{pedidoExameBen.pedidoDeExame.DATA_NASC}" mask="99/99/9999">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>
@@ -120,10 +151,10 @@
 				
 						<p:selectOneMenu id="exaPed" required="true"
 						requiredMessage="Favor preencher o campo  Exame obrigatório"
-							value="#{pedidoExameBen.pedidoDeExame.NOME_EXAME}" prependId="true" var="e">
+							value="#{pedidoExameBen.pedidoDeExame.ID_EXAME}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
 							<f:selectItems value="#{exameBen.listaExame()}" var="exame"
-								itemLabel="#{exame.NOME_EXAME}" itemValue="#{exame.NOME_EXAME}" />
+								itemLabel="#{exame.NOME_EXAME}" itemValue="#{exame.ID_EXAME}" />
 				</p:selectOneMenu>
 						
 				<p:outputLabel value="CID: " for="cidPed" />
@@ -131,10 +162,10 @@
 				<p:outputLabel value="Médico: " for="medPed" />
 				<p:selectOneMenu id="medPed" required="true" 
 						requiredMessage="Favor preencher o campo  Médico obrigatório"
-							value="#{pedidoExameBen.pedidoDeExame.NOME_MEDICO}" prependId="true" var="m">
+							value="#{pedidoExameBen.pedidoDeExame.ID_MEDICO}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
 							<f:selectItems value="#{medicoBen.listaMedico()}" var="medico"
-								itemLabel="#{medico.NOME}" itemValue="#{medico.NOME}" />
+								itemLabel="#{medico.NOME}" itemValue="#{medico.ID_MATRICULA}" />
 								 
 						</p:selectOneMenu>
 				

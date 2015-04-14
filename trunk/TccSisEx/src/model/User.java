@@ -29,15 +29,16 @@ public class User {
 	private Long id;
 
 	@Column(name = "LOGIN", nullable=false)
-	private String login;
+	private String username;
 
 	@Column(name = "SENHA", nullable=false)
-	private String passwd;
+	private String password;
 
 	
 	@Column(name = "NIVEL_USUARIO", nullable=false)
 	private int nivelAcesso;
 
+	
 	/**
 	 * @return id
 	 */
@@ -57,31 +58,31 @@ public class User {
 	/**
 	 * @return login
 	 */
-	public String getLogin() {
-		return login;
+	public String getUsername() {
+		return username;
 	}
 
 	/**
 	 * @param login
 	 *            the login to set
 	 */
-	public void setLogin(String login) {
-		this.login = login;
+	public void setUsername(String login) {
+		this.username = login;
 	}
 
 	/**
 	 * @return passwd
 	 */
-	public String getPasswd() {
-		return passwd;
+	public String getPassword() {
+		return password;
 	}
 
 	/**
 	 * @param passwd
 	 *            the passwd to set
 	 */
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setPassword(String passwd) {
+		this.password = passwd;
 	}
 
 	/**
@@ -98,4 +99,7 @@ public class User {
 	public void setNivelAcesso(int nivelAcesso) {
 		this.nivelAcesso = nivelAcesso;
 	}
+
+
+	
 }

@@ -23,7 +23,7 @@ public class Medico implements Serializable {
 	private String ESPECIALIDADE;
 	private Integer CAR_HOR_SEMANA;
 	private String DIAS_EXPEDIENTE;
-	
+	private Boolean ATIVO;
 	
 	
 	public Medico() {
@@ -108,6 +108,14 @@ public class Medico implements Serializable {
 
 	public void setCAR_HOR_SEMANA(Integer CAR_HOR_SEMANA) {
 		this.CAR_HOR_SEMANA = CAR_HOR_SEMANA;
+	}
+
+	public Boolean getATIVO() {
+		return ATIVO;
+	}
+
+	public void setATIVO(Boolean aTIVO) {
+		ATIVO = aTIVO;
 	}
 
 	

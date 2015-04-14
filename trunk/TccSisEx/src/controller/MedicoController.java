@@ -64,6 +64,7 @@ public class MedicoController {
 	}
 
 	public String adicionarMedico()  throws HibernateException, Exception {
+		medico.setATIVO(true);
 		MedicoDao dao = new MedicoDaoImp();
 		dao.save(medico);
 		info();
