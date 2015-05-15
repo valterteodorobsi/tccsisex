@@ -28,7 +28,7 @@
 						closable="true" />
 					<p:growl id="nomes" showDetail="true" />
 					<h:panelGrid columns="2" cellpadding="2">
-						<p:outputLabel value="Matricula : " for="matReg" />
+						<p:outputLabel value="Matrícula : " for="matReg" />
 						<p:inputText id="matReg"
 							value="#{registroBen.registro.ID_MATRICULA}" />
 					</h:panelGrid>
@@ -40,14 +40,14 @@
 					<p:layout id="grid" style="min-width:600px;min-height:600px;">
 
 						<p:layoutUnit position="center">
-							<p:dataTable id="table" var="tableRegistro"
+							<p:dataTable id="table" var="tableRegistro" paginator="true" rows="5"
 								value="#{registroBen.listaRegistro}" editable="true"
 								style="margin-bottom:20px">
 
 								<p:column headerText="Nome do colaborador">
 									<h:outputText value="#{tableRegistro.NOME_COLABORADOR}" />
 								</p:column>
-								<p:column headerText="Matricula">
+								<p:column headerText="Matrícula">
 									<h:outputText value="#{tableRegistro.ID_MATRICULA}" />
 								</p:column>
 								<p:column headerText="Remédio">

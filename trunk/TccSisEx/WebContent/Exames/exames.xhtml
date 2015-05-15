@@ -54,7 +54,7 @@
 				<p:layout id="grid" style="min-width:600px;min-height:600px;">
 
 					<p:layoutUnit position="center">
-						<p:dataTable id="table" var="tableexame"
+						<p:dataTable id="table" var="tableexame" paginator="true" rows="5"
 							value="#{exameBen.listaExame}" editable="true"
 							style="margin-bottom:20px">
 							
@@ -88,7 +88,7 @@
 								</p:cellEditor>
 							</p:column>
 
-							<p:column headerText="DESCRIÇÃO">
+							<p:column headerText="Descrição">
 								<p:cellEditor>
 									<f:facet name="output">
 										<h:outputText value="#{tableexame.DESCRICAO}" />

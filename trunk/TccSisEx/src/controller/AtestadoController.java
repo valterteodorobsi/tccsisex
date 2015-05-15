@@ -1,5 +1,11 @@
 package controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
 
 import model.Atestado;
 
@@ -63,6 +70,8 @@ public class AtestadoController {
 		Integer matricula = atestado.getMatricula();
 
 		listaAtestado = new AtestadoDao().pesquisar(matricula);
+		listaAtestado.get(0).getImagem();
+		
 
 		if (matricula == null || matricula == 0 || listaAtestado == null) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -117,4 +126,51 @@ public class AtestadoController {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 
 	}
+	
+		
+		/**
+		 * <p>
+	     * 	Gera uma imagem apartir de um array de <code>bytes</code>.
+	     * </p>
+		 * @param byteArray <code>byte[]</code>
+		 * @throws IOException
+		 * @return bImageFromConvert {@link BufferedImage}
+		 */
+		public static BufferedImage converterByteArrayParaImg(final byte[] byteArray) throws IOException, IllegalArgumentException {
+			if(byteArray == null) {
+				throw new IllegalArgumentException();
+			}
+			InputStream in = new ByteArrayInputStream(byteArray);
+			BufferedImage bImageFromConvert = ImageIO.read(in);
+			return bImageFromConvert;
+		}
+		/**
+		 * <p>
+	     * 	A partir da imagem recuperada através do caminho passado, é gerado um array de <code>bytes</code>.
+	     * </p>
+		 * @param caminho {@link String}.
+		 * @param extensaoImg {@link String}.
+		 * @return <code>byte[]</code>.
+		 * @throws IOException
+		 */
+		public static byte[] converterImgParaByteArray(final String caminho, final String extensaoImg) throws IOException, IllegalArgumentException{
+			
+			if(caminho == null) {
+				throw new IllegalArgumentException();
+			}
+			
+			byte[] imageInByte;
+			BufferedImage originalImage = ImageIO.read(new File(caminho));
+		
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write(originalImage, extensaoImg, baos);
+			baos.flush();
+			imageInByte = baos.toByteArray();
+			baos.close();
+			return imageInByte;
+		}
+
+
 }
+
+

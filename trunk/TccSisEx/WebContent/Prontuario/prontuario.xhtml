@@ -40,7 +40,7 @@
 					<p:layout id="grid" style="min-width:600px;min-height:600px;">
 
 					<p:layoutUnit position="center">
-						<p:dataTable id="table" var="tableProntuario"
+						<p:dataTable id="table" var="tableProntuario" paginator="true" rows="5"
 							value="#{prontuarioBen.listaProntuario}" editable="true"
 							style="margin-bottom:20px">
 							<p:subTable id="tablesub" var="tableFuncionaraio" value="#{prontuarioBen.listaFuncionario}" />

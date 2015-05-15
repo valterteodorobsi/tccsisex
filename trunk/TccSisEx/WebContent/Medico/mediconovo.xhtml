@@ -57,9 +57,9 @@
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:growl id="nomes" showDetail="true" />
 				<h:panelGrid columns="2" cellpadding="2">
-					<p:outputLabel value="Matricula: " for="matriculaMed" />
+					<p:outputLabel value="Matrícula: " for="matriculaMed" />
 					<p:inputText id="matriculaMed" size="20" maxlength="20" required="true"
-						requiredMessage="Favor preencher o campo Matricula obrigatório"
+						requiredMessage="Favor preencher o campo Matrícula obrigatório"
 						value="#{medicoBen.medico.ID_MATRICULA}">
 						<f:validateLength minimum="1" maximum="20" /> 
 					</p:inputText>
@@ -75,7 +75,7 @@
 						  
 						  </p:inputText>
 						
-					<p:outputLabel value="Data de Nacimento" for="datMed" />
+					<p:outputLabel value="Data de Nascimento" for="datMed" />
 					<p:inputMask id="datMed" required="true"
 						requiredMessage="Favor preencher o campo  Data de Nascimento obrigatório"
 						onblur="comparaData(this.value);" 
@@ -90,7 +90,7 @@
 					<p:inputText id="EspMed" size="15" maxlength="15" required="true"
 						requiredMessage="Favor preencher o campo  Especialidade obrigatório"
 						value="#{medicoBen.medico.ESPECIALIDADE}" />
-					<p:outputLabel value="Carga Horaria Semanal: " for="cargMed" />
+					<p:outputLabel value="Carga Horária Semanal: " for="cargMed" />
 					<p:inputText id="cargMed" size="3" maxlength="3" required="true"
 						requiredMessage="Favor preencher o campo  Carga Horaria Semanal obrigatório"
 						value="#{medicoBen.medico.CAR_HOR_SEMANA}" />

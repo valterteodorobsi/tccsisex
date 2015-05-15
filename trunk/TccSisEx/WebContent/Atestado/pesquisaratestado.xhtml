@@ -36,7 +36,7 @@
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:growl id="nomes" showDetail="true" />
 				<h:panelGrid columns="2" cellpadding="2">
-						<p:outputLabel value="Matricula: " for="matriculaFun" />
+						<p:outputLabel value="Matrícula: " for="matriculaFun" />
 						<p:inputText id="matriculaFun"
 							value="#{atestadoBen.atestado.matricula}" />
 						
@@ -51,50 +51,72 @@
 
 						<p:layoutUnit position="center">
 							
-							<p:dataTable id="table" var="tableatestado" value="#{atestadoBen.listaAtestado}" >
+							<p:dataTable id="table" var="tableatestado" paginator="true" rows="5" value="#{atestadoBen.listaAtestado}" >
 	
-					
-								
-								<p:column headerText="Matricula">
-									<h:outputText value="#{tableatestado.matricula}" />
-								</p:column>
-								
-								<p:column headerText="Nome do Colaborador">
-								
-									<h:outputText value="#{tableatestado.nomeColaborador}" />
-								
-								</p:column>
-
-								<p:column headerText="Setor">
-									<h:outputText value="#{tableatestado.setor}" />
-								</p:column>
-								<p:column headerText="CID">
-									<h:outputText value="#{tableatestado.cid}" />
-								</p:column>
-								
-								<p:column headerText="Imagem">
-								<p:commandLink value="ABRIR IMAGEM" />
-									<!-- <h:outputText value="#{tableatestado.imagem}" /> -->
-								</p:column> 
-
-
-								<p:column headerText=" ">
-									<p:commandLink title="Deletar"  update=":form"
-									action="#{atestadoBen.excluirAtestado(tableatestado)}">
-
-									<p:graphicImage url="/img/excluir.png" onclick="confirm_entry();"
-										style="background-color: transparent; vertical-align: middle; border: none"
-										width="11px" height="11px" />
-
-								</p:commandLink>
-
-									
-
-								</p:column>
-
-							</p:dataTable>
+											<f:facet name="header">
+				                    			<p:graphicImage rendered="#{tableatestado.imagemProntaHtml != null}" url="#{tableatestado.imagemProntaHtml}" id="testeImagee"/> 
+				                			</f:facet>
+	
+											<p:column>
+												<p:graphicImage  value="#{tableatestado.imagemProntaHtml}" id="testeImage"/> 
+											</p:column>
+	
+											<p:column headerText="Matrícula">
+												<h:outputText value="#{tableatestado.matricula}" />
+											</p:column>
+											
+											<p:column headerText="Nome do Colaborador">
+											
+												<h:outputText value="#{tableatestado.nomeColaborador}" />
+											
+											</p:column>
+			
+											<p:column headerText="Setor">
+												<h:outputText value="#{tableatestado.setor}" />
+											</p:column>
+											<p:column headerText="CID">
+												<h:outputText value="#{tableatestado.cid}" />
+											</p:column>
+											
+											<p:column headerText="Imagem">
+											<!-- <p:commandLink value="ABRIR IMAGEM" /> -->
+												<!-- <h:outputText value="#{tableatestado.imagem}" /> -->
+												<p:commandButton update=":form:carDetail" oncomplete="carDialog.show()" icon="ui-icon-search" title="View">
+			               			  			<f:setPropertyActionListener value="#{car}" target="#{atestadoBen.listaAtestado}" /> 
+			           			 				</p:commandButton>
+											</p:column> 
+			
+			
+											<p:column headerText=" ">
+												<p:commandLink title="Deletar"  update=":form"
+												action="#{atestadoBen.excluirAtestado(tableatestado)}">
+			
+												<p:graphicImage url="/img/excluir.png" onclick="confirm_entry();"
+													style="background-color: transparent; vertical-align: middle; border: none"
+													width="11px" height="11px" />
+			
+											</p:commandLink>
+			
+			
+											</p:column>
+			
+							               
+										</p:dataTable>
+							
+							 <p:dialog header="Imagem" widgetVar="carDialog" modal="false" showEffect="fade" hideEffect="fade" resizable="false"  >
+		       					 <p:outputPanel id="carDetail" style="text-align:center;">
+		           					 <p:panelGrid  columns="2"  target="#{atestadoBen.listaAtestado}"  columnClasses="label,value">
+				                		 
+						                <!-- <h:outputText value="Imagem" /> -->
+		
+										
+		 
+		            				</p:panelGrid>
+						        </p:outputPanel>
+						    </p:dialog>
 						</p:layoutUnit>
 					</p:layout>
+					
 				</h:form>
 			</p:layoutUnit>
 		</p:layout>

@@ -53,6 +53,8 @@
 			
 		};		
 		
+		
+		
 	</script>
 </h:head>
 
@@ -78,10 +80,10 @@
 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 			<p:growl id="nomes" showDetail="true" />
 			<h:panelGrid columns="2" cellpadding="2">
-				<p:outputLabel value="Matricula: " for="matReg" />
-				<p:inputText id="matReg" size="20" maxlength="20"
+				<p:outputLabel value="Matrícula: " for="matReg" />
+				<p:inputText id="matReg" size="10" maxlength="10"
 				 required="true" onblur="listaColaborador(this.value);" update="nomeReg" 
-						requiredMessage="Favor preencher o campo Matricula obrigatório"
+						requiredMessage="Favor preencher o campo Matrícula obrigatório"
 						value="#{registroBen.registro.ID_MATRICULA}" />
 				<p:outputLabel value="Nome: " for="nomeReg" />
 				<p:inputText id="nomeReg" size="40" maxlength="40" required="true"
@@ -119,13 +121,14 @@
 								 
 						</p:selectOneMenu>
 						<p:outputLabel value="Sintomas: " for="sinReg" />
-						<p:selectOneMenu id="sinReg" required="true" 
-						requiredMessage="Favor preencher o campo  Sintomas obrigatório"
-							value="#{registroBen.registro.ID_SINTOMAS}">
+						<p:selectOneMenu id="sinReg" value="#{registroBen.registro.ID_SINTOMAS}" onchange="liberar()" >
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
-							<f:selectItems value="#{sintomasBen.listaSintomas()}" var="sintomas"
+							<f:selectItems value="#{sintomasBen.listaSintomas()}" var="sintomas" 
 								itemLabel="#{sintomas.NOME_SINTOMAS}" itemValue="#{sintomas.ID_SINTOMAS}" />
 								</p:selectOneMenu>
+								
+								
+								
 						<p:outputLabel value="Encaminhar Atentimento: " for="encReg" />
 				<p:inputText id="encReg" size="4" maxlength="4" value="#{registroBen.registro.encExt}" />
 						

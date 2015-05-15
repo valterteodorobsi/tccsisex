@@ -1,7 +1,10 @@
 package model;
 
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 
+import javax.faces.context.FacesContext;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 
 
@@ -55,6 +61,13 @@ public class Atestado implements Serializable {
 	}
 	public byte[] getImagem() {
 		return imagem;
+	}
+	
+	public StreamedContent  getImagemProntaHtml() throws UnsupportedEncodingException {
+        FacesContext context = FacesContext.getCurrentInstance();
+        
+		return new DefaultStreamedContent(new ByteArrayInputStream(this.getImagem()), "image/png");
+//		return "data:image/png;base64," + new String(getImagem(), "iso-8859-1");
 	}
 	public void setImagem(byte[] imagem) {
 		this.imagem = imagem;

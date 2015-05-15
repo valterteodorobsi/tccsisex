@@ -68,7 +68,7 @@
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:growl id="nomes" showDetail="true" />
 				<h:panelGrid columns="2" cellpadding="2">
-						<p:outputLabel value="Matricula: " for="matriculaFun" />
+						<p:outputLabel value="Matrícula: " for="matriculaFun" />
 						<p:inputText id="matriculaFun"
 							value="#{medicoBen.medico.ID_MATRICULA}" />
 						<p:outputLabel value="Nome: " for="nomeMed" />
@@ -85,7 +85,7 @@
 				<p:layout id="grid" style="min-width:600px;min-height:600px;">
 
 					<p:layoutUnit position="center">
-						<p:dataTable id="table" var="tablemedico"
+						<p:dataTable id="table" var="tablemedico" paginator="true" rows="5"
 							value="#{medicoBen.listaMedicos}" editable="true"
 							style="margin-bottom:20px">
 							
@@ -95,7 +95,7 @@
 							<p:ajax event="rowEditCancel"
 								listener="#{medicoBen.onRowCancel}" update=":form:nomes" />
 
-							<p:column headerText="Matricula">
+							<p:column headerText="Matrícula">
 								<p:cellEditor>
 									<f:facet name="output">
 										<h:outputText value="#{tablemedico.ID_MATRICULA}" />
@@ -128,7 +128,7 @@
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
-							<p:column headerText="Data de Nacimento">
+							<p:column headerText="Data de Nascimento">
 								<p:cellEditor>
 									<f:facet name="output">
 										<h:outputText value="#{tablemedico.DATA_NASC}">
@@ -139,7 +139,7 @@
 											<p:inputMask required="true"
 												requiredMessage="Favor preencher o campo  Data de Nascimento obrigatório"
 												value="#{tablemedico.DATA_NASC}" style="width:100%" mask="99/99/9999"
-												onblur="comparaData(this.value);" label="Data de Nacimento">
+												onblur="comparaData(this.value);" label="Data de Nascimento">
 												<f:convertDateTime pattern="dd/MM/yyyy" />
 											</p:inputMask>
 										</f:facet>
@@ -166,7 +166,7 @@
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
-							<p:column headerText="Carga Horiaria Semanal">
+							<p:column headerText="Carga Horária Semanal">
 								<p:cellEditor>
 									<f:facet name="output">
 										<h:outputText value="#{tablemedico.CAR_HOR_SEMANA}" />

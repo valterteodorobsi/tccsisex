@@ -35,15 +35,16 @@ public class AtestadoDao {
 	public List<Atestado> pesquisar(int matricula) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		SQLQuery query = session.createSQLQuery("select an.ID_ATESTADO as idAtestado ,an.ID_MATRICULA, f.NOME as nomeColaborador, s.NOME as setor, CID from ANEXO_ATESTADO as an  inner join FUNCIONARIO as f on an.ID_MATRICULA = f.ID_MATRICULA inner join SETOR as s on an.ID_SETOR = s.ID_CENTRO_CUSTO where an.ID_MATRICULA = :matricula"); 
+		SQLQuery query = session.createSQLQuery("select an.ID_ATESTADO as idAtestado ,an.ID_MATRICULA, f.NOME as nomeColaborador, s.NOME as setor, CID ,an.imagem 	from ANEXO_ATESTADO as an  inner join FUNCIONARIO as f on an.ID_MATRICULA = f.ID_MATRICULA inner join SETOR as s on an.ID_SETOR = s.ID_CENTRO_CUSTO where an.ID_MATRICULA = :matricula"); 
 		query.setParameter("matricula", matricula);
 		query.addScalar("ID_MATRICULA");
 		query.addScalar("CID");
+		query.addScalar("imagem");
 		query.addScalar("nomeColaborador");
 		query.addScalar("setor");
 		query.addScalar("idAtestado");
 		query.setResultTransformer( Transformers.aliasToBean( Atestado.class ) );
-
+		
 	    List<Atestado> users = query.list();
 		return users;
 		
