@@ -36,7 +36,7 @@
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:growl id="nomes" showDetail="true" />
 				<h:panelGrid columns="2" cellpadding="2">
-						<p:outputLabel value="Matricula: " for="matriculaFun" />
+						<p:outputLabel value="Matrícula: " for="matriculaFun" />
 						<p:inputText id="matriculaFun"
 							value="#{arquivoBen.arquivo.ID_MATRICULA}" />
 						
@@ -51,7 +51,7 @@
 
 						<p:layoutUnit position="center">
 							
-							<p:dataTable id="table" var="tableArquivo" value="#{arquivoBen.listaArquivos}" >
+							<p:dataTable id="table" var="tableArquivo" paginator="true" rows="5" value="#{arquivoBen.listaArquivos}" >
 	
 					
 								
@@ -60,7 +60,7 @@
 									<h:outputText value="#{tableArquivo.NOME_COLABORADOR}" />
 								</p:column>
 
-								<p:column headerText="Matricula">
+								<p:column headerText="Matrícula">
 									<h:outputText value="#{tableArquivo.ID_MATRICULA}" />
 								</p:column>
 

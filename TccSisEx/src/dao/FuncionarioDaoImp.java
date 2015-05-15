@@ -149,13 +149,14 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 		
 	}
 	
-	public List<Funcionario> listaNome(Integer matricula) {
+	public List<FuncionarioPes> listaNome(Integer matricula) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		SQLQuery query = session.createSQLQuery("select nome FROM Funcionario where ID_MATRICULA =:matricula and ATIVO = 1"); 
+		SQLQuery query = session.createSQLQuery("select f.NOME, s.NOME as NOMESET FROM Funcionario as f inner join setor as s on s.ID_CENTRO_CUSTO = f.ID_CENTRO_CUSTO where f.ID_MATRICULA =:matricula and ATIVO = 1  group by s.NOME , f.NOME "); 
 		query.setParameter("matricula", matricula );
 		query.addScalar("NOME");
-		List<Funcionario> users = query.list();
+		query.addScalar("NOMESET");
+		List<FuncionarioPes> users = query.list();
 
 		return users;
 		}

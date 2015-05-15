@@ -15,6 +15,7 @@
 		
 		function carregaNome() {
 			document.getElementById("form:nomeAtestado").value = document.getElementById("formEscondido:nomeEscondida").value;
+			document.getElementById("form:setAtes").value = document.getElementById("formEscondido:setorEscondida").value;
 			document.getElementById("form:matriculaAtestado").value = document.getElementById("formEscondido:matriculaEscondida").value;
 			
 		}
@@ -34,6 +35,7 @@
 				<p:tooltip />
 				<h:form enctype="multipart/form-data" id="formEscondido">
 					<p:inputText id="matriculaEscondida" type="hidden" value="#{funcionarioBen.funcionario.ID_MATRICULA}" />
+					<p:inputText id="setorEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOMESET}" />
 					<p:inputText id="nomeEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOME}" />
 					
 						<p:commandButton value="PesquisarNomePorMatricula" actionListener="#{funcionarioBen.listaColaborador}"
@@ -46,7 +48,7 @@
 
 					<p:growl id="nomes" showDetail="true" />
 					<h:panelGrid columns="2" cellpadding="2">
-						<p:outputLabel value="Matricula: " for="matriculaAtestado" />
+						<p:outputLabel value="Matrícula: " for="matriculaAtestado" />
 						<p:inputText id="matriculaAtestado" size="20" maxlength="20"
 							required="true" onblur="listaColaborador(this.value);" update="nomeAtestado" 
 							requiredMessage="Favor preencher o campo Matricula obrigatório"
@@ -65,15 +67,10 @@
 
 
 						<p:outputLabel value="Setor: " for="setAtes" />
-						<p:selectOneMenu id="setAtes" required="true"
-							requiredMessage="Favor preencher o campo  Setor obrigatório"
-							value="#{atestadoBen.atestado.ID_SETOR}">
-							<f:selectItem itemLabel="Selecione..." itemValue="" />
-							<f:selectItems value="#{setorBen.listaSetor()}" var="setor"
-								itemLabel="#{setor.NOME}" itemValue="#{setor.ID_CENTRO_CUSTO}" />
-
-						</p:selectOneMenu>
-
+						<p:inputText id="setAtes" size="" maxlength="5" required="true"
+							requiredMessage="Favor preencher o campo  CID obrigatório"
+							 />
+						
 						<p:outputLabel value="CID: " for="cidAtes" />
 						<p:inputText id="cidAtes" size="5" maxlength="5" required="true"
 							requiredMessage="Favor preencher o campo  CID obrigatório"

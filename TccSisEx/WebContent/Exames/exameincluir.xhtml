@@ -46,10 +46,10 @@
 
 					<p:growl id="nomes" showDetail="true" />
 					<h:panelGrid columns="2" cellpadding="2">
-						<p:outputLabel value="Matricula: " for="matriculaAnexo" />
+						<p:outputLabel value="Matrícula: " for="matriculaAnexo" />
 						<p:inputText id="matriculaAnexo" size="20" maxlength="20"
 							required="true" onblur="listaColaborador(this.value);" update="nomeAnexo" 
-							requiredMessage="Favor preencher o campo Matricula obrigatório"	
+							requiredMessage="Favor preencher o campo Matrícula obrigatório"	
 							 value="#{arquivoBen.arquivo.ID_MATRICULA}">
 							<f:validateLength minimum="1" maximum="20" />
 						</p:inputText>

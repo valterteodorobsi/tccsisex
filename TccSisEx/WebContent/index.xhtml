@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<title>SisEx - Curitiba 2014</title>
+	<title>SisEx - Curitiba 2015</title>
 
 	<!-- Bootstrap core CSS -->
 	 <link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet" />
@@ -33,18 +33,20 @@
 					<!-- <img class="profile-img"   
 						src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
 						alt="" /> -->
-						<form class="form-signin" >
+						<form class="form-signin"  method="get" >
 						<p:outputLabel value="Login " />
-						<p:inputText value="#{userController.usuario.username}"
-							styleClass="form-control" placeholder="Login" />
+						<p:inputText value="#{userController.user.login}"
+							styleClass="form-control" placeholder="Login" >
+							<f:validateLength minimum="6" />
+							</p:inputText>
 							<BR />
 							<p:outputLabel value="Senha" />
-						<p:password value="#{userController.usuario.password}"
-							styleClass="form-control" placeholder="Senha" />
+						<p:password value="#{userController.user.passwd}"
+							styleClass="form-control" placeholder="Senha" >
+							<f:validateLength minimum="6" maximum="10" />
+							</p:password>
 							<BR />
-						<p:commandButton value="Entrar"
-							actionListener="#{userController.doEfetuarLogin}"
-							styleClass="btn btn-lg btn-primary btn-block" update="messages"/>
+						<p:commandButton type="submit" value="Entrar"  />
 					</form>
 						</p:panel>
 					

@@ -89,7 +89,7 @@
 				<p:layout id="grid" style="min-width:600px;min-height:600px;">
 
 					<p:layoutUnit position="center">
-						<p:dataTable id="table" var="tablefuncionario"
+						<p:dataTable id="table" var="tablefuncionario" paginator="true" rows="5"
 							value="#{funcionarioBen.listaFuncionariosPes}" editable="true"
 							style="margin-bottom:20px">
 							
@@ -158,7 +158,7 @@
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
-							<p:column headerText="Data de Nacimento">
+							<p:column headerText="Data de Nascimento">
 								<p:cellEditor>
 									<f:facet name="output">
 										<h:outputText value="#{tablefuncionario.DATA_NASC}">
@@ -169,7 +169,7 @@
 										<p:inputMask required="true"
 							requiredMessage="Favor preencher o campo  Data de Nascimento obrigatório" 
 							mask="99/99/9999" onblur="comparaData(this.value);" value="#{tablefuncionario.DATA_NASC}" style="width:100%"
-											label="Data de Nacimento">
+											label="Data de Nascimento">
 											<f:convertDateTime pattern="dd/MM/yyyy" />
 										</p:inputMask>
 									</f:facet>

@@ -110,10 +110,10 @@
 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 			<p:growl id="nomes" showDetail="true" />
 			<h:panelGrid columns="2" cellpadding="2">
-				<p:outputLabel value="Matricula: " for="matriculaPed" />
+				<p:outputLabel value="Matrícula: " for="matriculaPed" />
 					<p:inputText id="matriculaPed" size="20" maxlength="20" 
 					required="true" onblur="listaColaborador(this.value);" update="nomePed" 
-						requiredMessage="Favor preencher o campo Matricula obrigatório"
+						requiredMessage="Favor preencher o campo Matrícula obrigatório"
 						value="#{pedidoExameBen.pedidoDeExame.MATRICULA}">
 						<f:validateLength minimum="1" maximum="20" />
 					</p:inputText>
@@ -139,7 +139,7 @@
 								itemLabel="#{funcao.NOME}" itemValue="#{funcao.ID_FUNCAO}" />
 						</p:selectOneMenu>
 
-						<p:outputLabel value="Data de Nacimento" for="datPed" />
+						<p:outputLabel value="Data de Nascimento" for="datPed" />
 					<p:inputMask id="datPed" required="true"
 						requiredMessage="Favor preencher o campo  Data de Nascimento obrigatório"
 						onblur="comparaData(this.value);"

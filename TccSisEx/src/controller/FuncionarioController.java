@@ -92,8 +92,12 @@ public class FuncionarioController {
 	public List listaColaborador(){
 
 		List nomeFuncionario = new FuncionarioDaoImp().listaNome(funcionario.getID_MATRICULA());
+		
 		if(!nomeFuncionario.isEmpty()) {
-		funcionario.setNOME((String) nomeFuncionario.get(0));
+			for(int i=0; i<nomeFuncionario.size();i++) {
+				funcionario.setNOME((String)nomeFuncionario.get(0));
+				funcionario.setNOMESET((String) nomeFuncionario.get(0));
+			}
 		} else {
 		warn();
 		}

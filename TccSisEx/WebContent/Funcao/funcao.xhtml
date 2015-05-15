@@ -54,7 +54,7 @@
 				<p:layout id="grid" style="min-width:600px;min-height:600px;">
 
 					<p:layoutUnit position="center">
-						<p:dataTable id="table" var="tablefuncao"
+						<p:dataTable id="table" var="tablefuncao" paginator="true" rows="5"
 							value="#{funcaoBen.listaFuncao}" editable="true"
 							style="margin-bottom:20px">
 							
@@ -104,7 +104,7 @@
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
-							<p:column headerText="DESCRIÇÃO">
+							<p:column headerText="Descrição">
 								<p:cellEditor>
 									<f:facet name="output">
 										<h:outputText value="#{tablefuncao.DESCRICAO}" />
@@ -115,7 +115,7 @@
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
-							<p:column headerText="EXAMES">
+							<p:column headerText="Exames">
 								<p:cellEditor>
 									<f:facet name="output">
 										<h:outputText value="#{tablefuncao.EXAMES}" />

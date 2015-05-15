@@ -12,9 +12,11 @@
 
 <h:body>
 
-
-	<h:graphicImage value="/img/cabeçalho.png"   />
-
+	
+		<h:graphicImage value="/img/cabeçalho.png"   />
+		<h:form>
+		#{userMB.user.name} |<p:commandLink value="Sair" action="#{userMB.logOut()}" ajax="false" style="font-size: 16px;" />
+     	</h:form>
 	<p:menubar>
 		<p:submenu label="Cadastros" icon="">
 			<p:menuitem value="Colaborador" url="/Funcionario/funcionario.jsf" />
