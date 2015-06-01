@@ -16,7 +16,7 @@ public interface FuncionarioDao {
 
 	public void save(Funcionario funcionario) throws HibernateException, Exception;
 
-	public List<Funcionario> list();
+	public List<FuncionarioPes> list();
 
 	public void remove(Funcionario funcionario);
 

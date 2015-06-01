@@ -15,7 +15,7 @@
 	
 		<h:graphicImage value="/img/cabeçalho.png"   />
 		<h:form>
-		#{userMB.user.name} |<p:commandLink value="Sair" action="#{userMB.logOut()}" ajax="false" style="font-size: 16px;" />
+		#{loginBean.usuario.nome} |<p:commandLink value="Sair" action="#{loginBean.deslogar()}" ajax="false" style="font-size: 16px;" />
      	</h:form>
 	<p:menubar>
 		<p:submenu label="Cadastros" icon="">
@@ -57,7 +57,7 @@
 			<p:menuitem value="Pedido de Exame" url="/Pedido/pedidodeexame.jsf" />
 		</p:submenu>
 		
-		<c:if test="#{usuario.tipoAcesso == '1'}"> 
+		<c:if test="#{loginBean.usuario.nivel_Usuario == 'true'}"> 
 			<p:submenu label="Relatórios" icon="">
 				<p:menuitem value="Relatório Gerencial"
 					url="/Relatorio/relatoriogerencial.jsf" />

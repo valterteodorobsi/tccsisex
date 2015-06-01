@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import model.Funcionario;
 import model.FuncionarioPes;
 
+import org.codehaus.groovy.tools.shell.util.NoExitSecurityManager;
 import org.hibernate.HibernateException;
 import org.primefaces.event.RowEditEvent;
 
@@ -96,14 +97,22 @@ public class FuncionarioController {
 		if(!nomeFuncionario.isEmpty()) {
 			for(int i=0; i<nomeFuncionario.size();i++) {
 				funcionario.setNOME((String)nomeFuncionario.get(0));
-				funcionario.setNOMESET((String) nomeFuncionario.get(0));
+				//funcionario.setNOMESET((String) nomeFuncionario.get(0));
 			}
 		} else {
 		warn();
 		}
 		return nomeFuncionario;
 		}
-
+	
+	
+	public List listaColaboradorComboBox(){
+		
+		List nomeFuncionario = new FuncionarioDaoImp().list();
+		
+		return nomeFuncionario ;
+		
+	}
 	
 	public void info() {
 		FacesContext.getCurrentInstance().addMessage(
@@ -146,6 +155,7 @@ public class FuncionarioController {
 
 		new FuncionarioDaoImp().update(funcionario);
 		infoAlterar();
+		pesquisarFun();
 		
 	}
 

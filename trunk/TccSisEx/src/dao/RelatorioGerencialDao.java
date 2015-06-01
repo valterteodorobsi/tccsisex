@@ -16,14 +16,14 @@ public class RelatorioGerencialDao {
 	
 	
 	
-	public List<RelatorioGerencial> relatorioGerencial(String nomeMedico) {
+	public List<RelatorioGerencial> relatorioGerencial(int nomeMedico) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		
-	
-		SQLQuery query = session.createSQLQuery("select medico as nomeMedico, tipo_entrada as tipoEntrada , count(*) as qtdeEntrada from registro_entrada where medico = :nomeMedico group by tipo_entrada , medico");
+
+		SQLQuery query = session.createSQLQuery("select me.NOME as nomeMedicos, tipo_entrada as tipoEntrada , count(*) as qtdeEntrada from registro_entrada as registro inner join medico as me on registro.ID_MEDICO = me.ID_MATRICULA where registro.ID_MEDICO = :nomeMedico group by tipo_entrada , me.NOME");
 		query.setParameter("nomeMedico", nomeMedico);
-	    query.addScalar("nomeMedico");
+	    query.addScalar("nomeMedicos");
 	    query.addScalar("tipoEntrada");
 	    query.addScalar("qtdeEntrada");
 
@@ -37,14 +37,14 @@ public class RelatorioGerencialDao {
 	
 	}
 	
-	public List<RelatorioGerencial> relatorioGerencialTodos(String nomeMedico) {
+	public List<RelatorioGerencial> relatorioGerencialTodos(int nomeMedico) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		
 	
-		SQLQuery query = session.createSQLQuery("select medico as nomeMedico, tipo_entrada as tipoEntrada , count(*) as qtdeEntrada from registro_entrada group by tipo_entrada , medico");
+		SQLQuery query = session.createSQLQuery("select me.NOME as nomeMedicos, tipo_entrada as tipoEntrada , count(*) as qtdeEntrada from registro_entrada as registro inner join medico as me on registro.ID_MEDICO = me.ID_MATRICULA group by tipo_entrada , me.NOME");
 		
-	    query.addScalar("nomeMedico");
+	    query.addScalar("nomeMedicos");
 	    query.addScalar("tipoEntrada");
 	    query.addScalar("qtdeEntrada");
 
