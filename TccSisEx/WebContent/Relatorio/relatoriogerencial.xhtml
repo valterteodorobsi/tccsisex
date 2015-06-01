@@ -63,11 +63,11 @@
 					<p:outputLabel value="Medico: " for="medRel" />
 					<p:selectOneMenu id="medRel" required="true" 
 						requiredMessage="Favor preencher o campo  Médico obrigatório"
-							value="#{gerencialBean.gerencial.nomeMedico}" prependId="true" var="m">
+							value="#{gerencialBean.gerencial.nomeMedico}" prependId="true" >
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
-							<f:selectItem itemLabel="Todos" itemValue="todos"  />
-							<f:selectItems value="#{medicoBen.listaMedico()}" var="medico"
-								itemLabel="#{medico.NOME}" itemValue="#{medico.NOME}" />
+							<f:selectItem itemLabel="Todos" itemValue="0"  />
+							<f:selectItems  value="#{medicoBen.listaMedico()}" var="medico"
+								itemLabel="#{medico.NOME}" itemValue="#{medico.ID_MATRICULA}" />
 								 
 						</p:selectOneMenu>
 					

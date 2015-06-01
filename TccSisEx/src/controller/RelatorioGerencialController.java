@@ -41,6 +41,7 @@ public class RelatorioGerencialController implements Serializable {
 	private String pathToReportPackage; // Caminho para o package onde estão armazenados os relatorios Jarper
 	private PieChartModel piechart;								 
 	private Date Time;
+	
 	public RelatorioGerencialController() {
 		gerencial = new RelatorioGerencial();
 		piechart = new PieChartModel();
@@ -51,9 +52,9 @@ public class RelatorioGerencialController implements Serializable {
 
 	public void imprimir() throws Exception {
 		RelatorioGerencialDao dao = new RelatorioGerencialDao();
-        String nomeMedico = gerencial.getNomeMedico();
+        int nomeMedico = gerencial.getNomeMedico();
         
-        if(gerencial.getNomeMedico().equals("todos")){
+        if(gerencial.getNomeMedico()== 0){
         	
         	listaGerencial =  dao.relatorioGerencialTodos(nomeMedico);
         }
@@ -81,9 +82,9 @@ public class RelatorioGerencialController implements Serializable {
 		JasperPrint print = JasperFillManager.fillReport(report, null,
 				new JRBeanCollectionDataSource(relatorioGerencial));
 		// abre visualizador
-		Date Tim = new Date();
-		long tim = Tim.getTime();
-		Time.setTime(tim);
+		//Date Tim = new Date();
+		//long tim = Tim.getTime();
+		//Time.setTime(tim);
 		JasperViewer jv = new JasperViewer(print, false);
 		jv.setTitle("Relatorio Gerencial");
 		jv.setVisible(true);
@@ -93,14 +94,14 @@ public class RelatorioGerencialController implements Serializable {
 	}
 	
 	public void abreGrafico(){
-		if(gerencial.getNomeMedico().equals("todos")){
+		if(gerencial.getNomeMedico()== 0){
 			warn();
 		} 
 		else if(gerencial != null){
                 
         piechart = new PieChartModel();
         RelatorioGerencialDao dao = new RelatorioGerencialDao();
-        String nomeMedico = gerencial.getNomeMedico();
+        int nomeMedico = gerencial.getNomeMedico();
        
         listaGerencial =  dao.relatorioGerencial(nomeMedico);
                 

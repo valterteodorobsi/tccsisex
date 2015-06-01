@@ -9,9 +9,10 @@ public class RelatorioGerencial implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String nomeMedico;
+	private int nomeMedico;
 	private String tipoEntrada;
 	private float qtdeEntrada;
+	private String nomeMedicos;
 	
 	
 	
@@ -19,15 +20,15 @@ public class RelatorioGerencial implements Serializable{
 		
 	}
 	
-	public RelatorioGerencial(String nomeMedico, String tipoEntrada,float qtdeEntrada) {
+	public RelatorioGerencial(int nomeMedico, String tipoEntrada,float qtdeEntrada) {
 		this.nomeMedico = nomeMedico;
 		this.tipoEntrada = tipoEntrada;
 		this.qtdeEntrada = qtdeEntrada;
 	}
-	public String getNomeMedico() {
+	public int getNomeMedico() {
 		return nomeMedico;
 	}
-	public void setNomeMedico(String nomeMedico) {
+	public void setNomeMedico(int nomeMedico) {
 		this.nomeMedico = nomeMedico;
 	}
 	public String getTipoEntrada() {
@@ -42,6 +43,15 @@ public class RelatorioGerencial implements Serializable{
 	public void setQtdeEntrada(float qtdeEntrada) {
 		this.qtdeEntrada = qtdeEntrada;
 	}
+
+	public String getNomeMedicos() {
+		return nomeMedicos;
+	}
+
+	public void setNomeMedicos(String nomeMedicos) {
+		this.nomeMedicos = nomeMedicos;
+	}
+	
 	
 
 	

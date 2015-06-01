@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
-<!-- 2015-05-31T13:02:19 -->
+<!-- 2015-05-31T19:17:15 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatorio_Gerencial1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e55c3655-45c2-4247-a078-a3fa4df9df69">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString language="SQL">
 		<![CDATA[]]>
 	</queryString>
-	<field name="tipoEntrada" class="java.lang.String">
-		<fieldDescription><![CDATA[tipoEntrada]]></fieldDescription>
+	<field name="nomeFuncionario" class="java.lang.String">
+		<fieldDescription><![CDATA[nomeFuncionario]]></fieldDescription>
 	</field>
-	<field name="qtdeEntrada" class="java.lang.Float">
-		<fieldDescription><![CDATA[qtdeEntrada]]></fieldDescription>
+	<field name="qtdEntrada" class="java.lang.Integer">
+		<fieldDescription><![CDATA[qtdEntrada]]></fieldDescription>
 	</field>
-	<field name="nomeMedico" class="java.lang.String">
-		<fieldDescription><![CDATA[nomeMedico]]></fieldDescription>
+	<field name="tempoMedidoPermanenciaMinutos" class="java.lang.Float">
+		<fieldDescription><![CDATA[tempoMedidoPermanenciaMinutos]]></fieldDescription>
 	</field>
-	<field name="nomeMedicos" class="java.lang.String">
-		<fieldDescription><![CDATA[nomeMedicos]]></fieldDescription>
-	</field>
-	<field name="gerencial" class="model.RelatorioGerencial">
-		<fieldDescription><![CDATA[gerencial]]></fieldDescription>
+	<field name="tempoMedioPermanenciaHoras" class="java.lang.Float">
+		<fieldDescription><![CDATA[tempoMedioPermanenciaHoras]]></fieldDescription>
 	</field>
 	<group name="Group1">
 		<groupHeader>
@@ -46,28 +43,28 @@
 					<textElement>
 						<font size="12"/>
 					</textElement>
-					<text><![CDATA[Quantidade Atendimento]]></text>
+					<text><![CDATA[Quantidade de Entradas]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="283" y="0" width="100" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="7328a981-3b40-48b0-af1c-c24e2eefe48e"/>
+					<reportElement mode="Opaque" x="283" y="0" width="77" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="7328a981-3b40-48b0-af1c-c24e2eefe48e"/>
 					<textElement>
 						<font size="12"/>
 					</textElement>
 					<text><![CDATA[]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="383" y="0" width="100" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="abc1f28b-c66b-4d57-905c-62de5d480163"/>
+					<reportElement mode="Opaque" x="360" y="0" width="100" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="abc1f28b-c66b-4d57-905c-62de5d480163"/>
 					<textElement>
 						<font size="12"/>
 					</textElement>
-					<text><![CDATA[Tipo Atendimento]]></text>
+					<text><![CDATA[Tempo Médio em Horas]]></text>
 				</staticText>
 				<staticText>
-					<reportElement mode="Opaque" x="483" y="0" width="72" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="e9e9bfd3-f860-4e08-8c8e-1a40df7ce8ae"/>
+					<reportElement mode="Opaque" x="460" y="0" width="95" height="32" forecolor="#666666" backcolor="#E6E6E6" uuid="e9e9bfd3-f860-4e08-8c8e-1a40df7ce8ae"/>
 					<textElement>
 						<font size="12"/>
 					</textElement>
-					<text><![CDATA[]]></text>
+					<text><![CDATA[Tempo Médio em Minutos]]></text>
 				</staticText>
 			</band>
 		</groupHeader>
@@ -94,7 +91,7 @@
 					<textElement textAlignment="Right">
 						<font size="14" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Relatorio Gerencial]]></text>
+					<text><![CDATA[Relatório Tempo Médio Permanencia]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -123,21 +120,25 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="40">
+		<band height="45">
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="2" width="555" height="1" uuid="80b060b1-7710-4d30-906b-b10731dd0f13"/>
 			</line>
 			<textField>
 				<reportElement x="0" y="10" width="180" height="30" uuid="736c92bc-8633-4ffa-bfe8-f33eff4f7fc7"/>
-				<textFieldExpression><![CDATA[$F{nomeMedicos}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nomeFuncionario}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="183" y="10" width="189" height="30" uuid="796375a3-b30a-4967-9e85-d05ee394e075"/>
-				<textFieldExpression><![CDATA[$F{qtdeEntrada}]]></textFieldExpression>
+				<reportElement x="183" y="10" width="177" height="30" uuid="796375a3-b30a-4967-9e85-d05ee394e075"/>
+				<textFieldExpression><![CDATA[$F{qtdEntrada}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="390" y="10" width="165" height="30" uuid="5a021e7f-af69-480b-931d-38118390e286"/>
-				<textFieldExpression><![CDATA[$F{tipoEntrada}]]></textFieldExpression>
+				<reportElement x="360" y="10" width="100" height="30" uuid="5a021e7f-af69-480b-931d-38118390e286"/>
+				<textFieldExpression><![CDATA[$F{tempoMedioPermanenciaHoras}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="7" width="95" height="30" uuid="befc5dc8-afb9-459a-bf20-b9801f69443b"/>
+				<textFieldExpression><![CDATA[$F{tempoMedidoPermanenciaMinutos}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

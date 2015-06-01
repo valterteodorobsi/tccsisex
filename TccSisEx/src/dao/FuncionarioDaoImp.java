@@ -51,12 +51,18 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 
 
 
-	public List<Funcionario> list() {
+	public List<FuncionarioPes> list() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		List lista = session.createQuery("from Funcionario").list();
-		t.commit();
-		return lista;
+		SQLQuery query = session.createSQLQuery("select f.NOME as NOME, ID_MATRICULA FROM Funcionario as f  where ATIVO = 1  group by  f.NOME ,ID_MATRICULA "); 
+		query.addScalar("NOME");
+		query.addScalar("ID_MATRICULA");
+		query.setResultTransformer( Transformers.aliasToBean( Funcionario.class ) );
+		List<FuncionarioPes> users = query.list();
+
+		return users;
+		
+		
 	}
 
 	public void remove(Funcionario funcionario) {
@@ -152,10 +158,9 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 	public List<FuncionarioPes> listaNome(Integer matricula) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		SQLQuery query = session.createSQLQuery("select f.NOME, s.NOME as NOMESET FROM Funcionario as f inner join setor as s on s.ID_CENTRO_CUSTO = f.ID_CENTRO_CUSTO where f.ID_MATRICULA =:matricula and ATIVO = 1  group by s.NOME , f.NOME "); 
+		SQLQuery query = session.createSQLQuery("select f.NOME FROM Funcionario as f  where f.ID_MATRICULA =:matricula and ATIVO = 1  group by  f.NOME "); 
 		query.setParameter("matricula", matricula );
 		query.addScalar("NOME");
-		query.addScalar("NOMESET");
 		List<FuncionarioPes> users = query.list();
 
 		return users;
