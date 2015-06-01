@@ -9,9 +9,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-import model.Funcionario;
 import model.Prontuario;
 
+import org.hibernate.HibernateException;
 import org.primefaces.event.RowEditEvent;
 
 import dao.ProntuarioDao;
@@ -23,19 +23,10 @@ import dao.ProntuarioDaoImp;
 public class ProntuarioController {
 
 	
-	private Funcionario funcionario;
 	private Prontuario prontuario;
 	
 	private List<Prontuario> listaProntuario = new ArrayList<Prontuario>();
-	private List<Funcionario> listaFuncionario = new ArrayList<Funcionario>();
 	
-	public List<Funcionario> getListaFuncionario() {
-		return listaFuncionario;
-	}
-
-	public void setListaFuncionario(List<Funcionario> listaFuncionario) {
-		this.listaFuncionario = listaFuncionario;
-	}
 
 	@PostConstruct
 	public void init() {
@@ -43,7 +34,6 @@ public class ProntuarioController {
 	}
 
 	private void atribuirEstadoInicial() {
-		setFuncionario(new Funcionario());
 		prontuario = new Prontuario();
 
 	}
@@ -75,7 +65,7 @@ public class ProntuarioController {
 	}
 	
 	
-	public String adicionarProntuario() {
+	public String adicionarProntuario() throws HibernateException, Exception {
 		ProntuarioDao dao = new ProntuarioDaoImp();
 		dao.save(prontuario);
 		FacesMessage msg = new FacesMessage(
@@ -84,17 +74,6 @@ public class ProntuarioController {
 		return "/home.jsf";
 	}
 	
-/*	public void pesquisarProntuario() {
-		Integer ID_MATRICULA = prontuario.getID_MATRICULA();
-		String nome = funcionario.getNOME();
-		System.out.println("chegou");
-		listaProntuario = new ProntuarioDaoImp().pesquisarPorMatriculaOuNome(ID_MATRICULA, nome);
-		if (nome == null || ID_MATRICULA == 0) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("Nenhum registro foi encontrado."));
-
-		}
-	}*/
 
 	public void pesquisarProntuarioMatricula() {
 		Integer ID_MATRICULA = prontuario.getID_MATRICULA();
@@ -102,11 +81,6 @@ public class ProntuarioController {
 		
 		
 		listaProntuario = new ProntuarioDaoImp().pesquisarPorMatricula(ID_MATRICULA); 
-		listaFuncionario = new ProntuarioDaoImp().pesquisarPorMatriculaFuncionario(ID_MATRICULA);
-		// ver como fazer
-		//funcionario.equals(listaProntuario.contains(funcionario));
-		//System.out.println(listaProntuario);
-		
 		if (ID_MATRICULA == null || ID_MATRICULA == 0 || listaProntuario == null) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Nenhum registro foi encontrado."));
@@ -139,13 +113,7 @@ public class ProntuarioController {
 		FacesContext.getCurrentInstance().addMessage("Edição Cancelada", msg);
 	}
 
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
-	}
 
 	
 	

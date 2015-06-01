@@ -4,10 +4,10 @@ import java.util.List;
 
 import model.Prontuario;
 
-public interface ProntuarioDao {
-	public void save(Prontuario prontuario);
+import org.hibernate.HibernateException;
 
-	public Prontuario getExame(int id);
+public interface ProntuarioDao {
+	public void save(Prontuario prontuario)throws HibernateException, Exception;
 
 	public List<Prontuario> list();
 
@@ -17,4 +17,6 @@ public interface ProntuarioDao {
 	
 	/*public List<Prontuario> pesquisarPorMatriculaOuNome(Integer id_matricula, String nome);*/
 	public List<Prontuario> pesquisarPorMatricula(Integer id_matricula);
+	
+	public List<Prontuario> pesquisarNome(String nome);
 }
