@@ -3,7 +3,6 @@ package dao;
 import java.util.List;
 
 import model.Funcionario;
-
 import model.FuncionarioPes;
 
 import org.hibernate.SQLQuery;
@@ -54,9 +53,32 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 	public List<FuncionarioPes> list() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		SQLQuery query = session.createSQLQuery("select f.NOME as NOME, ID_MATRICULA FROM Funcionario as f  where ATIVO = 1  group by  f.NOME ,ID_MATRICULA "); 
+			SQLQuery query = session.createSQLQuery("select f.NOME as NOME, ID_MATRICULA FROM "
+					+ "Funcionario as f  where ATIVO = 1  group by  f.NOME ,ID_MATRICULA "); 
 		query.addScalar("NOME");
 		query.addScalar("ID_MATRICULA");
+		query.setResultTransformer( Transformers.aliasToBean( Funcionario.class ) );
+		List<FuncionarioPes> users = query.list();
+
+		return users;
+		
+		
+	}
+	
+	public List<FuncionarioPes> listaColaboradorProntuario(Integer matricula){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		SQLQuery query = session
+				.createSQLQuery("select f.NOME as NOME, s.NOME as NOMESET,funcao.NOME as NOMEFUN, ID_MATRICULA"
+						+ "FROM Funcionario as f"
+						+ "inner join setor as s on f.ID_CENTRO_CUSTO = s.ID_CENTRO_CUSTO"
+						+ "inner join FUNCAO as funcao on f.ID_FUNCAO = funcao.ID_FUNCAO"
+						+ "where f.ID_MATRICULA = :matricula and ATIVO = 1"
+						+ "group by  f.NOME , s.NOME, funcao.NOME ");
+		query.setParameter("matricula", matricula );
+		query.addScalar("NOME");
+		query.addScalar("NOMESET");
+		query.addScalar("NOMEFUN");
 		query.setResultTransformer( Transformers.aliasToBean( Funcionario.class ) );
 		List<FuncionarioPes> users = query.list();
 
@@ -158,7 +180,8 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 	public List<FuncionarioPes> listaNome(Integer matricula) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		SQLQuery query = session.createSQLQuery("select f.NOME FROM Funcionario as f  where f.ID_MATRICULA =:matricula and ATIVO = 1  group by  f.NOME "); 
+		SQLQuery query = session.createSQLQuery("select f.NOME FROM Funcionario as f  where f.ID_MATRICU"
+				+ "LA =:matricula and ATIVO = 1  group by  f.NOME "); 
 		query.setParameter("matricula", matricula );
 		query.addScalar("NOME");
 		List<FuncionarioPes> users = query.list();

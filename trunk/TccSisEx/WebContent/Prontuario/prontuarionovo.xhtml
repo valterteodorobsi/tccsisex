@@ -10,6 +10,24 @@
 
 	
 	<title>Prontuário</title>
+	<script>
+		function listaColaboradorProntuario(valor) {
+			document.getElementById("formEscondido:matriculaEscondida").value = valor;
+			document.getElementById("formEscondido:PesquisarNomePorMatricula").click();
+			
+		}
+		
+		function carregaNome() {
+			document.getElementById("form:nomeReg").value = document.getElementById("formEscondido:nomeEscondida").value;
+			document.getElementById("form:nomeFuncao").value = document.getElementById("formEscondido:nomefunEscondida").value;
+			document.getElementById("form:nomeSetor").value = document.getElementById("formEscondido:nomesetEscondida").value;
+			document.getElementById("form:matReg").value = document.getElementById("formEscondido:matriculaEscondida").value;
+			
+		};		
+		
+		
+		
+	</script>
 </h:head>
 
 <h:body>
@@ -23,50 +41,45 @@
 		<p:layoutUnit position="center">
 			<H1>Cadastro de Prontuário</H1>
 			<p:tooltip />
+        	<h:form enctype="multipart/form-data" id="formEscondido">
+					<p:inputText id="matriculaEscondida" type="hidden" value="#{funcionarioBen.funcionario.ID_MATRICULA}" />
+					<p:inputText id="nomeEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOME}" />
+					<p:inputText id="nomefunEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOMEFUN}" />
+					<p:inputText id="nomesetEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOMESET}" />
+					
+						<p:commandButton value="PesquisarNomePorMatricula" actionListener="#{funcionarioBen.listaColaboradorProntuarios}"
+						update="grid" ajax="false" style="display: none;" id="PesquisarNomePorMatricula" />
+				</h:form>
 			<h:form id="form">
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:growl id="nomes" showDetail="true" />
 				<h:panelGrid columns="2" cellpadding="2">
-					<p:outputLabel value="Código da Prontuário: " for="codProntuario" />
-					<p:inputText id="codProntuario" size="20" maxlength="20" required="true"
-						requiredMessage="Favor preencher o campo Código do Prontuário obrigatório"
-						value="#{prontuarioBen.prontuario.ID_PRONTUARIO}">
-						<f:validateLength minimum="1" maximum="20" /> 
-					</p:inputText>
-											
-					<p:outputLabel value="Nome: " for="nomeFuncao" />
-					<p:inputText id="nomeFuncao" size="50" maxlength="50" required="true"
-						requiredMessage="Favor preencher o campo  Nome obrigatório"
-						value="#{funcaoBen.funcao.NOME}" >
-						  
-						  </p:inputText>
+					
+					<p:outputLabel value="Matrícula: " for="matReg" />
+				<p:inputText id="matReg" size="10" maxlength="10"
+				 required="true" onblur="listaColaboradorProntuario(this.value);" update="nomeReg,nomeFuncao,nomeSetor" 
+						requiredMessage="Favor preencher o campo Matrícula obrigatório"
+						value="#{prontuarioBen.prontuario.ID_MATRICULA}" />
+				<p:outputLabel value="Nome: " for="nomeReg" />
+				<p:inputText id="nomeReg"  />
 						
-					<p:outputLabel value="Criticidade: "  for="critiFuncao" />
-					<p:inputText id="critiFuncao" size="50" maxlength="50" required="true"
-						requiredMessage="Favor preencher o campo  Criticidade obrigatório"
-						value="#{funcaoBen.funcao.CRITICIDADE}" />
+					<p:outputLabel value="Função: " for="nomeFuncao" />
+					<p:inputText id="nomeFuncao"></p:inputText>
+					<p:outputLabel value="Setor: " for="nomeSetor" />
+					<p:inputText id="nomeSetor"></p:inputText>
 					
-					<p:outputLabel value="Exames: " for="exaFuncao" />
-						<p:selectOneMenu id="exaFuncao" required="true"
-						requiredMessage="Favor preencher o campo  Exame obrigatório"
-							value="#{funcaoBen.funcao.EXAMES}" prependId="true" var="e">
-							<f:selectItem itemLabel="Selecione..." itemValue=""  />
-							<f:selectItems value="#{exameBen.listaExame()}" var="exame"
-								itemLabel="#{exame.NOME_EXAME}" itemValue="#{exame.NOME_EXAME}" />
-								 
-						</p:selectOneMenu>
-					<p:outputLabel value="Descrição: " for="desFuncao" />
-					<p:inputTextarea rows="5" cols="30" counter="display" maxlength="150" counterTemplate="{0} Quantidade de caracteres." autoResize="false" 
-					 id="desFuncao"	required="true"
-						requiredMessage="Favor preencher o campo  Descrição obrigatório"	value="#{funcaoBen.funcao.DESCRICAO}" />
-					<p:outputLabel />
-					<h:outputText id="display" />
-					
+						<p:outputLabel value="Pendencias: " for="Pendencias" />
+					<p:inputText id="Pendencias" size="50" maxlength="50" required="true"
+						requiredMessage="Favor preencher o campo Pendencias obrigatório"
+						value="#{prontuarioBen.prontuario.PENDENCIAS}">
+						<f:validateLength minimum="1" maximum="50" /> 
+						</p:inputText>
+										
 					<br> </br>
 				</h:panelGrid>
 				<p:commandButton value="Voltar" action="/home" />
 				<p:commandButton value="Salvar" validateClient="true" 
-					actionListener="#{funcaoBen.adicionarFuncao}" />
+					actionListener="#{prontuarioBen.adicionarProntuario}" />
 
 			</h:form>
 		</p:layoutUnit>
