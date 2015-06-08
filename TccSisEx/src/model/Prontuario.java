@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,11 +20,16 @@ public class Prontuario implements Serializable{
 	@Column(name = "ID_PRONTUARIO") 
 	private Integer ID_PRONTUARIO;
 	private String PENDENCIAS;
-	private String LINK_IMAGENS;
-	private Integer ID_MATRICULA;
-	private Integer ID_EXAME;
-	private Integer ID_REGISTRO;
+	@Column(name = "ID_MATRICULA") 
+	private Integer id_matricula;
 	
+	private String nomeFuncionario;
+	private String nomeFuncao;
+	private String nomeSetor;
+	private Date data_nasc;
+	private String email;
+	private String rg;
+	private Integer ramal;
 	
 	
 
@@ -32,31 +38,11 @@ public class Prontuario implements Serializable{
 	}
 	
 	
-	public Prontuario(Integer iD_PRONTUARIO, String pENDENCIAS,
-			String lINK_IMAGENS, Integer iD_MATRICULA, Integer iD_EXAME,
-			Integer iD_REGISTRO) {
-		this.ID_PRONTUARIO = iD_PRONTUARIO;
-		this.PENDENCIAS = pENDENCIAS;
-		this.LINK_IMAGENS = lINK_IMAGENS;
-		this.ID_MATRICULA = iD_MATRICULA;
-		this.ID_EXAME = iD_EXAME;
-		this.ID_REGISTRO = iD_REGISTRO;
-	}
-	
-
-	
-	
 	public Integer getID_PRONTUARIO() {
 		return ID_PRONTUARIO;
 	}
 	public void setID_PRONTUARIO(Integer iD_PRONTUARIO) {
 		ID_PRONTUARIO = iD_PRONTUARIO;
-	}
-	public String getLINK_IMAGENS() {
-		return LINK_IMAGENS;
-	}
-	public void setLINK_IMAGENS(String lINK_IMAGENS) {
-		LINK_IMAGENS = lINK_IMAGENS;
 	}
 	public String getPENDENCIAS() {
 		return PENDENCIAS;
@@ -64,23 +50,81 @@ public class Prontuario implements Serializable{
 	public void setPENDENCIAS(String pENDENCIAS) {
 		PENDENCIAS = pENDENCIAS;
 	}
-	public Integer getID_EXAME() {
-		return ID_EXAME;
+	public Integer getid_matricula() {
+		return id_matricula;
 	}
-	public void setID_EXAME(Integer iD_EXAME) {
-		ID_EXAME = iD_EXAME;
+	public void setid_matricula(Integer id_matricula) {
+		this.id_matricula = id_matricula;
 	}
-	public Integer getID_MATRICULA() {
-		return ID_MATRICULA;
+
+
+	public String getNomeFuncionario() {
+		return nomeFuncionario;
 	}
-	public void setID_MATRICULA(Integer iD_MATRICULA) {
-		ID_MATRICULA = iD_MATRICULA;
+
+
+	public void setNomeFuncionario(String nomeFuncionario) {
+		this.nomeFuncionario = nomeFuncionario;
 	}
-	public Integer getID_REGISTRO() {
-		return ID_REGISTRO;
+
+
+	public String getNomeFuncao() {
+		return nomeFuncao;
 	}
-	public void setID_REGISTRO(Integer iD_REGISTRO) {
-		ID_REGISTRO = iD_REGISTRO;
+
+
+	public void setNomeFuncao(String nomeFuncao) {
+		this.nomeFuncao = nomeFuncao;
+	}
+
+
+	public String getNomeSetor() {
+		return nomeSetor;
+	}
+
+
+	public void setNomeSetor(String nomeSetor) {
+		this.nomeSetor = nomeSetor;
+	}
+
+
+	public Date getData_nasc() {
+		return data_nasc;
+	}
+
+
+	public void setData_nasc(Date data_nasc) {
+		this.data_nasc = data_nasc;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getRg() {
+		return rg;
+	}
+
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+
+	public Integer getRamal() {
+		return ramal;
+	}
+
+
+	public void setRamal(Integer ramal) {
+		this.ramal = ramal;
 	}
 	
 	

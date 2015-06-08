@@ -2,17 +2,16 @@ package dao;
 
 import java.util.List;
 
+import model.Funcionario;
+import model.Prontuario;
+
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.transform.Transformers;
 
-import controller.FuncionarioController;
 import util.HibernateUtil;
-import model.Exame;
-import model.Funcao;
-import model.Funcionario;
-import model.Prontuario;
 
 public class ProntuarioDaoImp implements ProntuarioDao {
 
@@ -20,13 +19,9 @@ public class ProntuarioDaoImp implements ProntuarioDao {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		try{
-			SQLQuery query = session.createSQLQuery("insert into Prontuario (ID_MATRICULA, ID_EXAME, ID_PRONTUARIO, ID_REGISTRO,  LINK_IMAGENS, PENDENCIAS)" +
-			" values(:ID_MATRICULA, :ID_EXAME, :ID_PRONTUARIO, :ID_REGISTRO, :LINK_IMAGENS, :PENDENCIAS)");
-			query.setParameter("ID_MATRICULA", prontuario.getID_MATRICULA());
-			query.setParameter("ID_EXAME", prontuario.getID_EXAME());
-			query.setParameter("ID_PRONTUARIO", prontuario.getID_PRONTUARIO());
-			query.setParameter("ID_REGISTRO", prontuario.getID_REGISTRO());
-			query.setParameter("LINK_IMAGENS", prontuario.getLINK_IMAGENS());
+			SQLQuery query = session.createSQLQuery("insert into Prontuario (id_matricula, PENDENCIAS)" +
+			" values( :id_matricula, :PENDENCIAS)");
+			query.setParameter("id_matricula", prontuario.getid_matricula());
 			query.setParameter("PENDENCIAS", prontuario.getPENDENCIAS());
 			  
 		query.executeUpdate();
@@ -60,12 +55,9 @@ public class ProntuarioDaoImp implements ProntuarioDao {
 	public void update(Prontuario prontuario) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		SQLQuery query = session.createSQLQuery("update Prontuario set ID_MATRICULA =:ID_MATRICULA, ID_EXAME = :ID_EXAME,ID_REGISTRO = :ID_REGISTRO,LINK_IMAGENS = :LINK_IMAGENS, PENDENCIAS= :PENDENCIAS where ID_PRONTUARIO = :ID_PRONTUARIO");
-				query.setInteger("ID_MATRICULA", prontuario.getID_MATRICULA());
-				query.setParameter("ID_EXAME", prontuario.getID_EXAME());
+		SQLQuery query = session.createSQLQuery("update Prontuario set id_matricula =:id_matricula, PENDENCIAS= :PENDENCIAS where ID_PRONTUARIO = :ID_PRONTUARIO");
+				query.setInteger("id_matricula", prontuario.getid_matricula());
 				query.setParameter("ID_PRONTUARIO", prontuario.getID_PRONTUARIO());
-				query.setParameter("ID_REGISTRO", prontuario.getID_REGISTRO());
-				query.setParameter("LINK_IMAGENS", prontuario.getLINK_IMAGENS());
 				query.setParameter("PENDENCIAS", prontuario.getPENDENCIAS());
 				  
 			query.executeUpdate();
@@ -74,15 +66,24 @@ public class ProntuarioDaoImp implements ProntuarioDao {
 
 	}
 
-	public List<Prontuario> pesquisarPorMatricula(Integer id_matricula) {
+	public List<Prontuario> pesquisarPorMatricula(Integer matricula) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		Query query = session
-				.createQuery("from Prontuario p where p.ID_MATRICULA = :id_matricula"); 
-		query.setParameter("id_matricula", id_matricula);
-		
+		SQLQuery query = session.createSQLQuery("select funcionario.nome as nomeFuncionario, funcao.nome as nomeFuncao, setor.nome as nomeSetor, funcionario.data_nasc, funcionario.rg, funcionario.email, funcionario.ramal, prontuarios.id_matricula, prontuarios.pendencias from prontuario as prontuarios inner join FUNCIONARIO as funcionario on funcionario.ID_MATRICULA = prontuarios.id_matricula inner join SETOR as setor on funcionario.ID_CENTRO_CUSTO = setor.ID_CENTRO_CUSTO inner join FUNCAO as funcao on funcionario.ID_FUNCAO = funcao.ID_FUNCAO where prontuarios.id_matricula = :matricula group by funcionario.nome, funcao.nome, setor.nome, funcionario.data_nasc, funcionario.rg, funcionario.email, funcionario.ramal, prontuarios.id_matricula, prontuarios.pendencias ");
+		query.setParameter("matricula", matricula);
+		query.addScalar("nomeFuncionario");
+		query.addScalar("nomeFuncao");
+		query.addScalar("nomeSetor");
+		query.addScalar("data_nasc");
+		query.addScalar("email");
+		query.addScalar("rg");
+		query.addScalar("ramal");
+		query.addScalar("id_matricula");
+		query.addScalar("PENDENCIAS");
+		query.setResultTransformer( Transformers.aliasToBean( Prontuario.class ) );
+		List<Prontuario> users = query.list();
 		t.commit();
-		return query.list();
+		return users;
 	}
 	public List<Funcionario> pesquisarPorMatriculaFuncionario(Integer id_matricula) {
 		Session session = HibernateUtil.getSessionFactory().openSession();

@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import model.Usuario;
@@ -16,7 +17,7 @@ import dao.UsuarioImpl;
 @ManagedBean(name = "loginBean")
 @SessionScoped
 public class LoginController extends BaseBean {
-	private final String DESTINO_SUCESSO = "home.jsf";
+	private final String DESTINO_SUCESSO = "page2";
 	private final String DESTINO_ERRO = null;
 	private final String DESTINO_LOGOUT = "index.jsf";
 	private final String DESTINO_CADASTRO = "cadastro.jsf?faces-redirect=true";
@@ -55,7 +56,8 @@ public class LoginController extends BaseBean {
 //				request.getRequestDispatcher(request.getContextPath() + "home.jsf");
 				//FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 				
-				info();
+				//info();
+				
 				return this.DESTINO_SUCESSO;
 				//return "/page2?faces-redirect=true";
 			} else {

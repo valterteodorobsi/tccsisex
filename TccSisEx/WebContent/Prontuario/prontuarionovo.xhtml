@@ -30,7 +30,7 @@
 	</script>
 </h:head>
 
-<h:body>
+<h:body onload="carregaNome();">
 	<div id="cabecalho">
 		<ui:insert name="cabecalho">
 			<ui:include src="/cabecalho.xhtml" />
@@ -59,7 +59,7 @@
 				<p:inputText id="matReg" size="10" maxlength="10"
 				 required="true" onblur="listaColaboradorProntuario(this.value);" update="nomeReg,nomeFuncao,nomeSetor" 
 						requiredMessage="Favor preencher o campo Matrícula obrigatório"
-						value="#{prontuarioBen.prontuario.ID_MATRICULA}" />
+						value="#{prontuarioBen.prontuario.id_matricula}" />
 				<p:outputLabel value="Nome: " for="nomeReg" />
 				<p:inputText id="nomeReg"  />
 						
@@ -69,11 +69,14 @@
 					<p:inputText id="nomeSetor"></p:inputText>
 					
 						<p:outputLabel value="Pendencias: " for="Pendencias" />
-					<p:inputText id="Pendencias" size="50" maxlength="50" required="true"
-						requiredMessage="Favor preencher o campo Pendencias obrigatório"
-						value="#{prontuarioBen.prontuario.PENDENCIAS}">
-						<f:validateLength minimum="1" maximum="50" /> 
-						</p:inputText>
+					
+					<p:selectOneMenu id="Pendencias" required="true"
+							requiredMessage="Favor preencher o campo Pendencias obrigatório"
+							value="#{prontuarioBen.prontuario.PENDENCIAS}">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+							<f:selectItem itemLabel="Sim" itemValue="sim" />
+							<f:selectItem itemLabel="Não" itemValue="não" />
+						</p:selectOneMenu>
 										
 					<br> </br>
 				</h:panelGrid>

@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Arrays;
 import java.util.List;
 
 import model.Funcionario;
@@ -57,7 +58,7 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 					+ "Funcionario as f  where ATIVO = 1  group by  f.NOME ,ID_MATRICULA "); 
 		query.addScalar("NOME");
 		query.addScalar("ID_MATRICULA");
-		query.setResultTransformer( Transformers.aliasToBean( Funcionario.class ) );
+		query.setResultTransformer( Transformers.aliasToBean( FuncionarioPes.class ) );
 		List<FuncionarioPes> users = query.list();
 
 		return users;
@@ -69,19 +70,13 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		SQLQuery query = session
-				.createSQLQuery("select f.NOME as NOME, s.NOME as NOMESET,funcao.NOME as NOMEFUN, ID_MATRICULA"
-						+ "FROM Funcionario as f"
-						+ "inner join setor as s on f.ID_CENTRO_CUSTO = s.ID_CENTRO_CUSTO"
-						+ "inner join FUNCAO as funcao on f.ID_FUNCAO = funcao.ID_FUNCAO"
-						+ "where f.ID_MATRICULA = :matricula and ATIVO = 1"
-						+ "group by  f.NOME , s.NOME, funcao.NOME ");
+				.createSQLQuery("select f.NOME, s.NOME as NOMESET, funcao.NOME as NOMEFUN, f.ID_MATRICULA FROM Funcionario as f inner join setor as s on f.ID_CENTRO_CUSTO = s.ID_CENTRO_CUSTO inner join FUNCAO as funcao on f.ID_FUNCAO = funcao.ID_FUNCAO where f.ID_MATRICULA = :matricula and f.ATIVO = 1 group by  f.NOME , f.ID_MATRICULA, s.NOME, funcao.NOME ");
 		query.setParameter("matricula", matricula );
 		query.addScalar("NOME");
 		query.addScalar("NOMESET");
 		query.addScalar("NOMEFUN");
-		query.setResultTransformer( Transformers.aliasToBean( Funcionario.class ) );
+		query.setResultTransformer( Transformers.aliasToBean( FuncionarioPes.class ) );
 		List<FuncionarioPes> users = query.list();
-
 		return users;
 		
 		
