@@ -72,7 +72,7 @@
 						</p:selectOneMenu>
 						
 						<p:outputLabel value="Tipo: " for="tipRel" />
-					<p:selectOneMenu id="tipRel" required="true" 
+					<p:selectOneMenu id="tipRel" required="true" filter="true" 
 						requiredMessage="Favor preencher o campo Tipo obrigatório"
 							value="#{RelSintomasBean.relSintomas.nomeSetor}" prependId="true" var="m">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />

@@ -61,7 +61,7 @@
 				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<h:panelGrid columns="9" cellpadding="1">
 					<p:outputLabel value="Medico: " for="medRel" />
-					<p:selectOneMenu id="medRel" required="true" 
+					<p:selectOneMenu id="medRel" required="true" filter="true" 
 						requiredMessage="Favor preencher o campo  Médico obrigatório"
 							value="#{gerencialBean.gerencial.nomeMedico}" prependId="true" >
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />

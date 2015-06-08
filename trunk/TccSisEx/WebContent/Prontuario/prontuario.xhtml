@@ -6,6 +6,19 @@
 
 <h:head>
 	<h:outputStylesheet library="css" name="style.css" />
+		<script>
+		function confirm_entry(){
+			input_box=confirm("Tem certesa que deseja excluir o Registro?");
+			if (input_box==true){
+			// Output when OK is clicked
+			return true;
+			}
+			else{
+			// Output when Cancel is clicked
+			return false;
+			}
+		}
+	</script>
 <title>Prontuário</title>
 </h:head>
 
@@ -26,7 +39,7 @@
 				<h:panelGrid columns="2" cellpadding="2">
 						<p:outputLabel value="Matricula do Colaborador: " for="codFuncionario" />
 						<p:inputText id="codFuncionario"
-							value="#{prontuarioBen.prontuario.ID_MATRICULA}" />
+							value="#{prontuarioBen.prontuario.id_matricula}" />
 					
 					</h:panelGrid>
 
@@ -43,22 +56,22 @@
 						<p:dataTable id="table" var="tableProntuario" paginator="true" rows="5"
 							value="#{prontuarioBen.listaProntuario}" editable="true"
 							style="margin-bottom:20px">
-							<p:subTable id="tablesub" var="tableFuncionaraio" value="#{prontuarioBen.listaFuncionario}" />
+							
 							<p:ajax event="rowEdit" listener="#{prontuarioBen.onRowEdit}"
-								update=":form:nomes" />
+								update="@this :form:nomes" />
 
 							<p:ajax event="rowEditCancel"
-								listener="#{prontuarioBen.onRowCancel}" update=":form:nomes" />
+								listener="#{funcionarioBen.onRowCancel}" update="@this :form:nomes" />
 
 							
 
-							<p:column headerText="Nome">
+							<p:column headerText="Nome" >
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{tableFuncionaraio.NOME}" />
+										<h:outputText value="#{tableProntuario.nomeFuncionario}" />
 									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{tableFuncionaraio.NOME}" style="width:100%"
+									<f:facet name="input"  >
+										<p:inputText disabled="true" value="#{tableProntuario.nomeFuncionario}" style="width:100%"
 											label="Nome" />
 									</f:facet>
 								</p:cellEditor>
@@ -67,10 +80,10 @@
 							<p:column headerText="Função">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{tableFuncionaraio.FUNCAO}" />
+										<h:outputText value="#{tableProntuario.nomeFuncao}" />
 									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{tableFuncionaraio.FUNCAO}" style="width:100%"
+									<f:facet name="input"  >
+										<p:inputText disabled="true" value="#{tableProntuario.nomeFuncao}" style="width:100%"
 											label="Função" />
 									</f:facet>
 								</p:cellEditor>
@@ -79,23 +92,23 @@
 							<p:column headerText="Setor">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{tableFuncionaraio.SETOR}" />
+										<h:outputText value="#{tableProntuario.nomeSetor}" />
 									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{tableFuncionaraio.SETOR}" style="width:100%"
+									<f:facet name="input"  >
+										<p:inputText disabled="true" value="#{tableProntuario.nomeSetor}" style="width:100%"
 											label="Setor" />
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
 							<p:column headerText="Data de Nacimento">
 								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{tableFuncionaraio.DATA_NASC}">
+									<f:facet name="output" >
+										<h:outputText value="#{tableProntuario.data_nasc}">
 											<f:convertDateTime pattern="dd/MM/yyyy" />
 										</h:outputText>
 									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{tableFuncionaraio.DATA_NASC}" style="width:100%"
+									<f:facet name="input"  >
+										<p:inputText disabled="true" value="#{tableProntuario.data_nasc}" style="width:100%"
 											label="Data de Nacimento">
 											<f:convertDateTime pattern="dd/MM/yyyy" />
 										</p:inputText>
@@ -105,20 +118,20 @@
 							<p:column headerText="RG">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{tableFuncionaraio.RG}" />
+										<h:outputText value="#{tableProntuario.rg}" />
 									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{tableFuncionaraio.RG}" style="width:100%" label="RG" />
+									<f:facet name="input"  >
+										<p:inputText disabled="true" value="#{tableProntuario.rg}" style="width:100%" label="RG" />
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
 							<p:column headerText="Email">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{tableFuncionaraio.EMAIL}" />
+										<h:outputText value="#{tableProntuario.email}" />
 									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{tableFuncionaraio.EMAIL}" style="width:100%"
+									<f:facet name="input"  >
+										<p:inputText disabled="true" value="#{tableProntuario.email}" style="width:100%"
 											label="Email" />
 									</f:facet>
 								</p:cellEditor>
@@ -126,22 +139,11 @@
 							<p:column headerText="Ramal">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{tableFuncionaraio.RAMAL}" />
+										<h:outputText value="#{tableProntuario.ramal}" />
 									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{tableFuncionaraio.RAMAL}" style="width:100%"
+									<f:facet name="input"  >
+										<p:inputText disabled="true" value="#{tableProntuario.ramal}" style="width:100%"
 											label="Ramal" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-							<p:column headerText="Endereço">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{tableFuncionaraio.ENDERECO}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{tableFuncionaraio.ENDERECO}" style="width:100%"
-											label="Endereço" />
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
@@ -151,20 +153,14 @@
 										<h:outputText value="#{tableProntuario.PENDENCIAS}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{tableProntuario.PENDENCIAS}" style="width:100%"
-											label="Pendencias" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>	
-							<p:column headerText="Link Imagens">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{tableProntuario.LINK_IMAGENS}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{tableProntuario.LINK_IMAGENS}" style="width:100%"
-											label="Link Imagens" />
-									</f:facet>
+											<p:selectOneMenu id="Pendencias" required="true"
+												requiredMessage="Favor preencher o campo Pendencias obrigatório"
+												value="#{tableProntuario.PENDENCIAS}">
+												<f:selectItem itemLabel="Selecione" itemValue="" />
+												<f:selectItem itemLabel="Sim" itemValue="sim" />
+												<f:selectItem itemLabel="Não" itemValue="não" />
+											</p:selectOneMenu>
+										</f:facet>
 								</p:cellEditor>
 							</p:column>	
 							
@@ -172,14 +168,12 @@
 							<p:column style="width:32px">
 								<p:rowEditor title="Alterar" />
 								<p:spacer width="1" />
-								<p:commandLink title="Deletar"  update=":form"
-									action="#{funcionarioBen.excluirFuncionario(tableProntuario)}">
-
+								
+									<p:commandLink title="Remover" update=":form" onclick="confirm_entry();" action="#{funcionarioBen.excluirFuncionario(tableProntuario)}">
 									<p:graphicImage url="/img/excluir.png"
 										style="background-color: transparent; vertical-align: middle; border: none"
 										width="11px" height="11px" />
-
-								</p:commandLink>
+									</p:commandLink>
 							</p:column>
 
 

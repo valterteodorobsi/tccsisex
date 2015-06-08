@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -11,6 +12,7 @@ import javax.faces.context.FacesContext;
 import model.Funcionario;
 import model.FuncionarioPes;
 
+import org.codehaus.groovy.tools.shell.util.NoExitSecurityManager;
 import org.hibernate.HibernateException;
 import org.primefaces.event.RowEditEvent;
 
@@ -115,12 +117,16 @@ public class FuncionarioController {
 
 	public List listaColaboradorProntuarios() {
 
-		List nomeFuncionario = new FuncionarioDaoImp()
+		List<FuncionarioPes> nomeFuncionario =  new FuncionarioDaoImp()
 				.listaColaboradorProntuario(funcionario.getID_MATRICULA());
 
 		if (!nomeFuncionario.isEmpty()) {
+			
 			for (int i = 0; i < nomeFuncionario.size(); i++) {
-				funcionario.setNOME((String) nomeFuncionario.get(0));
+				funcionario.setNOME(nomeFuncionario.get(0).getNOME().toString());
+				funcionario.setNOMEFUN(nomeFuncionario.get(0).getNOMEFUN().toString());
+				funcionario.setNOMESET(nomeFuncionario.get(0).getNOMESET().toString());
+				
 			}
 		} else {
 			warn();

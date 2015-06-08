@@ -76,18 +76,19 @@ public class ProntuarioController {
 	
 
 	public void pesquisarProntuarioMatricula() {
-		Integer ID_MATRICULA = prontuario.getID_MATRICULA();
+		Integer id_matricula = prontuario.getid_matricula();
 		
 		
 		
-		listaProntuario = new ProntuarioDaoImp().pesquisarPorMatricula(ID_MATRICULA); 
-		if (ID_MATRICULA == null || ID_MATRICULA == 0 || listaProntuario == null) {
+		listaProntuario = new ProntuarioDaoImp().pesquisarPorMatricula(id_matricula); 
+		
+		if (listaProntuario.isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Nenhum registro foi encontrado."));
 
 		}
 	}
-	
+		
 	
 	
 	public List<Prontuario> listaProntuario(){
