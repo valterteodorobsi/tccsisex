@@ -78,5 +78,14 @@ public class ExameDaoImp implements ExameDao {
 		return query.list();
 
 	}
+	public List<Exame>pesquisarVazio(){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+			Transaction t = session.beginTransaction();
+			Query query = session
+				.createQuery("FROM Exame u where u.ATIVO = 1 "); 
+																									// depois
+		t.commit();
+		return query.list();
+	}
 
 }
