@@ -37,6 +37,7 @@ public class ExameController {
 	}
 
 	public List<Exame> getListaExame() {
+		listaExame= new ExameDaoImp().pesquisarVazio();
 		return listaExame;
 	}
 
@@ -66,7 +67,12 @@ public class ExameController {
 		ExameDao dao = new ExameDaoImp();
 		dao.save(exame);
 		info();
-		return "/home.jsf";
+		listaExame=null;
+		FacesContext.getCurrentInstance().getExternalContext().redirect("../home.jsf");
+		
+		
+		return "";
+		
 	}
 	
 	
@@ -109,7 +115,7 @@ public class ExameController {
 			
 			listaExame = new ExameDaoImp().pesquisarNome(nome_exame);
 			if(listaExame.isEmpty()){
-				warn();
+				//warn();
 			}
 		}
 		else{
@@ -119,13 +125,14 @@ public class ExameController {
 			}
 		}
 		
+		
 
 	}
+	
 
 		
 	public List<Exame> listaExame(){
-		listaExame= new ExameDaoImp().list();
-		
+		listaExame= new ExameDaoImp().pesquisarVazio();
 		return listaExame;
 		
 	}
