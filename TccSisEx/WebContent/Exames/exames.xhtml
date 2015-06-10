@@ -36,24 +36,8 @@
 			<h:form id="form">
 			 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:growl id="nomes" showDetail="true" />
-				<h:panelGrid columns="2" cellpadding="2">
-						<p:outputLabel value="Código do Exame: " for="codExame" />
-						<p:inputText id="codExame"
-							value="#{exameBen.exame.ID_EXAME}" />
-						<p:outputLabel value="Nome do Exame: " for="nomeExame" />
-						<p:inputText id="nomeExame"
-							value="#{exameBen.exame.NOME_EXAME}" />
-					</h:panelGrid>
+								<p:layout id="grid" style="min-width:400px;min-height:200px;">
 
-					<p:commandButton value="Cancelar" action="/home.jsf" />
-					<p:commandButton value="Pesquisar" actionListener="#{exameBen.pesquisarExame}"
-						update="grid"/>
-					<p:commandButton value="Novo" action="examenovo.xhtml" />
-
-					<br> </br>
-				<p:layout id="grid" style="min-width:600px;min-height:600px;">
-
-					<p:layoutUnit position="center">
 						<p:dataTable id="table" var="tableexame" paginator="true" rows="5"
 							value="#{exameBen.listaExame}" editable="true"
 							style="margin-bottom:20px">
@@ -114,7 +98,7 @@
 							<p:column style="width:32px">
 								<p:rowEditor title="Alterar" />
 								<p:spacer width="1" />
-								<p:commandLink title="Deletar"  update=":form" onclick="confirm_entry();"
+								<p:commandLink title="Deletar"  update="table" onclick="confirm_entry();"
 									action="#{exameBen.excluirExame(tableexame)}">
 
 									<p:graphicImage url="/img/excluir.png"
@@ -127,8 +111,22 @@
 
 						</p:dataTable>
 
-					</p:layoutUnit>
-				</p:layout>
+				</p:layout> 
+				<h:panelGrid columns="2" cellpadding="2">
+						<p:outputLabel value="Código do Exame: " for="codExame" />
+						<p:inputText id="codExame"
+							value="#{exameBen.exame.ID_EXAME}" />
+						<p:outputLabel value="Nome do Exame: " for="nomeExame" />
+						<p:inputText id="nomeExame"
+							value="#{exameBen.exame.NOME_EXAME}" />
+					</h:panelGrid>
+
+					<p:commandButton value="Cancelar" action="/home.jsf" />
+					<p:commandButton value="Pesquisar" actionListener="#{exameBen.pesquisarExame}"
+						update="table"/>
+					<p:commandButton value="Novo" action="examenovo.xhtml" />
+
+					<br> </br>
 
 			</h:form>
 		</p:layoutUnit>
