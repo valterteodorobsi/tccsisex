@@ -57,8 +57,9 @@ public class LoginController extends BaseBean {
 				//FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 				
 				//info();
-				
-				return this.DESTINO_SUCESSO;
+				FacesContext.getCurrentInstance().getExternalContext().redirect("home.jsf");
+				return "";
+				//return this.DESTINO_SUCESSO;
 				//return "/page2?faces-redirect=true";
 			} else {
 				this.mensagem = super.DADOS_INCORRETOS;
