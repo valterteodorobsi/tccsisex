@@ -36,30 +36,14 @@
 			<h:form id="form">
 			 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:growl id="nomes" showDetail="true" />
-				<h:panelGrid columns="2" cellpadding="2">
-						<p:outputLabel value="Código da Função: " for="CodFuncao" />
-						<p:inputText id="CodFuncao"
-							value="#{funcaoBen.funcao.ID_FUNCAO}" />
-						<p:outputLabel value="Nome: " for="nomeFuncao" />
-						<p:inputText id="nomeFuncao"
-							value="#{funcaoBen.funcao.NOME}" />
-					</h:panelGrid>
+				
 
-					<p:commandButton value="Cancelar" action="/home" />
-					<p:commandButton value="Pesquisar" actionListener="#{funcaoBen.pesquisarFuncao}"
-						update="grid" />
-					<p:commandButton value="Novo" action="funcaonovo" />
-
-					<br> </br>
-				<p:layout id="grid" style="min-width:600px;min-height:600px;">
-
-					<p:layoutUnit position="center">
 						<p:dataTable id="table" var="tablefuncao" paginator="true" rows="5"
 							value="#{funcaoBen.listaFuncao}" editable="true"
 							style="margin-bottom:20px">
 							
 							<p:ajax event="rowEdit" listener="#{funcaoBen.onRowEdit}"
-								update="@this :form:nomes" />
+								update="@this :form:table" />
 
 							<p:ajax event="rowEditCancel"
 								listener="#{funcaoBen.onRowCancel}" update=":form:nomes" />
@@ -148,9 +132,21 @@
 
 						</p:dataTable>
 
-					</p:layoutUnit>
-				</p:layout>
+<h:panelGrid columns="2" cellpadding="2">
+						<p:outputLabel value="Código da Função: " for="CodFuncao" />
+						<p:inputText id="CodFuncao"
+							value="#{funcaoBen.funcao.ID_FUNCAO}" />
+						<p:outputLabel value="Nome: " for="nomeFuncao" />
+						<p:inputText id="nomeFuncao"
+							value="#{funcaoBen.funcao.NOME}" />
+					</h:panelGrid>
 
+					<p:commandButton value="Cancelar" action="/home" />
+					<p:commandButton value="Pesquisar" actionListener="#{funcaoBen.pesquisarFuncao}"
+						update="form" />
+					<p:commandButton value="Novo" action="funcaonovo" />
+
+					<br> </br>
 			</h:form>
 		</p:layoutUnit>
 	</p:layout>

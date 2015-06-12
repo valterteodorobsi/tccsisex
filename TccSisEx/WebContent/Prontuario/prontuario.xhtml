@@ -36,34 +36,28 @@
 			<h:form id="form">
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:growl id="nomes" showDetail="true" />
-				<h:panelGrid columns="2" cellpadding="2">
-						<p:outputLabel value="Matricula do Colaborador: " for="codFuncionario" />
-						<p:inputText id="codFuncionario"
-							value="#{prontuarioBen.prontuario.id_matricula}" />
-					
-					</h:panelGrid>
-
-					<p:commandButton value="Cancelar" action="/home" />
-					<p:commandButton value="Pesquisar" actionListener="#{prontuarioBen.pesquisarProntuarioMatricula()}"
-						update="grid"/>
-					<p:commandButton value="Novo" action="prontuarionovo" />
-
-					<br> </br>
-					<!-- mudar aqui para baixo -->
-					<p:layout id="grid" style="min-width:600px;min-height:600px;">
-
-					<p:layoutUnit position="center">
+				
 						<p:dataTable id="table" var="tableProntuario" paginator="true" rows="5"
 							value="#{prontuarioBen.listaProntuario}" editable="true"
 							style="margin-bottom:20px">
 							
 							<p:ajax event="rowEdit" listener="#{prontuarioBen.onRowEdit}"
-								update="@this :form:nomes" />
+								update="@this :form:table" />
 
 							<p:ajax event="rowEditCancel"
 								listener="#{funcionarioBen.onRowCancel}" update="@this :form:nomes" />
 
-							
+							<p:column headerText="Matrícula" >
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{tableProntuario.id_matricula}" />
+									</f:facet>
+									<f:facet name="input"  >
+										<p:inputText disabled="true" value="#{tableProntuario.id_matricula}" style="width:100%"
+											label="Matrícula" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
 
 							<p:column headerText="Nome" >
 								<p:cellEditor>
@@ -169,7 +163,7 @@
 								<p:rowEditor title="Alterar" />
 								<p:spacer width="1" />
 								
-									<p:commandLink title="Remover" update=":form" onclick="confirm_entry();" action="#{funcionarioBen.excluirFuncionario(tableProntuario)}">
+									<p:commandLink title="Remover" update=":form" onclick="confirm_entry();" action="#{prontuarioBen.excluirProntuario(tableProntuario)}">
 									<p:graphicImage url="/img/excluir.png"
 										style="background-color: transparent; vertical-align: middle; border: none"
 										width="11px" height="11px" />
@@ -179,9 +173,19 @@
 
 						</p:dataTable>
 
-					</p:layoutUnit>
-				</p:layout>
+<h:panelGrid columns="2" cellpadding="2">
+						<p:outputLabel value="Matricula do Colaborador: " for="codFuncionario" />
+						<p:inputText id="codFuncionario"
+							value="#{prontuarioBen.prontuario.id_matricula}" />
+					
+					</h:panelGrid>
 
+					<p:commandButton value="Cancelar" action="/home" />
+					<p:commandButton value="Pesquisar" actionListener="#{prontuarioBen.pesquisarProntuarioMatricula()}"
+						update="form"/>
+					<p:commandButton value="Novo" action="prontuarionovo" />
+
+					<br> </br>
 			</h:form>
 		</p:layoutUnit>
 	</p:layout>

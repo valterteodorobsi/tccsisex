@@ -175,9 +175,9 @@
 
 						<p:outputLabel value="Email: " for="emaiFun" />
 						<p:inputText id="emaiFun" size="40" maxlength="80" required="true"
-							requiredMessage="Favor preencher o campo  Email obrigatório"
+							converterMessage="Favor preencher o campo  Email obrigatório"
 							value="#{funcionarioBen.funcionario.EMAIL}">
-							<f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+" />
+							<f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+"  />
 						</p:inputText>
 						<p:outputLabel value="Sexo: " for="sexFun" />
 						<p:selectOneMenu id="sexFun" required="true"
@@ -192,12 +192,13 @@
 						<p:outputLabel value="Ramal: " for="ramFun" />
 						<p:inputText id="ramFun" size="4" maxlength="4" required="true"
 							requiredMessage="Favor preencher o campo  Ramal obrigatório"
+							converterMessage="O campo Ramal é Numérico"
 							value="#{funcionarioBen.funcionario.RAMAL}" />
 
 					</h:panelGrid>
-					<p:commandButton value="Voltar" actionListener="funcionario" />
+					<p:commandButton value="Voltar" action="/home"   /> 
 					<p:commandButton value="Salvar" 
-						actionListener="#{funcionarioBen.adicionarFuncionario}"  />
+						actionListener="#{funcionarioBen.adicionarFuncionario}"  update="form" />
 
 				</h:form>
 			</p:layoutUnit>

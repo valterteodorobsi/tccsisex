@@ -28,116 +28,115 @@
 			<ui:include src="/cabecalho.xhtml" />
 		</ui:insert>
 	</div>
-	<div id="conteudo" >	
-	<p:layout id="ini" style="min-width:400px;height:600px;">
-		<p:layoutUnit position="center">
-			<H1> <!-- style="text-align: center; color:DarkGoldenrod" -->Setor</H1>
-			<p:tooltip />
-			<h:form id="form">
-			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-				<p:growl id="nomes" showDetail="true" />
-				<h:panelGrid columns="2" cellpadding="2">
+	<div id="conteudo">
+		<p:layout id="ini" style="min-width:400px;height:600px;">
+			<p:layoutUnit position="center">
+				<H1>
+					<!-- style="text-align: center; color:DarkGoldenrod" -->
+					Setor
+				</H1>
+				<p:tooltip />
+				<h:form id="form">
+					<p:messages id="messages" showDetail="true" autoUpdate="true"
+						closable="true" />
+					<p:growl id="nomes" showDetail="true" />
+
+
+					<p:dataTable id="table" var="tablesetor" paginator="true" rows="5"
+						value="#{setorBen.listaSetor}" editable="true"
+						style="margin-bottom:20px">
+
+						<p:ajax event="rowEdit" listener="#{setorBen.onRowEdit}"
+							update="@this :form:table" />
+
+						<p:ajax event="rowEditCancel" listener="#{setorBen.onRowCancel}"
+							update=":form:nomes" />
+
+						<p:column headerText="Centro de Custo">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{tablesetor.ID_CENTRO_CUSTO}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="modelInput" disabled="true"
+										value="#{tablesetor.ID_CENTRO_CUSTO}" style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Nome">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{tablesetor.NOME}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{tablesetor.NOME}" style="width:100%"
+										label="Nome" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Gerente Responsável">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{tablesetor.GERENTE_RESPON}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{tablesetor.GERENTE_RESPON}"
+										style="width:100%" label="Gerente Responsável" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column headerText="Quantidade Aproximada de Colaboradores">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{tablesetor.QUANT_APROX_COLABORADORES}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{tablesetor.QUANT_APROX_COLABORADORES}"
+										style="width:100%"
+										label="Quntidade Apoximada de Colaboradores" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column style="width:32px">
+							<p:rowEditor title="Alterar" />
+							<p:spacer width="1" />
+							<p:commandLink title="Deletar" update=":form"
+								onclick="confirm_entry();"
+								action="#{setorBen.excluirSetor(tablesetor)}">
+
+								<p:graphicImage url="/img/excluir.png"
+									style="background-color: transparent; vertical-align: middle; border: none"
+									width="11px" height="11px" />
+
+							</p:commandLink>
+						</p:column>
+
+
+					</p:dataTable>
+
+					<h:panelGrid columns="2" cellpadding="2">
 						<p:outputLabel value="Centro de Custo: " for="centSetor" />
 						<p:inputText id="centSetor"
 							value="#{setorBen.setor.ID_CENTRO_CUSTO}" />
 						<p:outputLabel value="Nome: " for="nomesetor" />
-						<p:inputText id="nomesetor"
-							value="#{setorBen.setor.NOME}" />
+						<p:inputText id="nomesetor" value="#{setorBen.setor.NOME}" />
 					</h:panelGrid>
 
 					<p:commandButton value="Cancelar" action="/home" />
-					<p:commandButton value="Pesquisar" actionListener="#{setorBen.pesquisarSetor}"
-						update="grid"/>
+					<p:commandButton value="Pesquisar"
+						actionListener="#{setorBen.pesquisarSetor}" update="form" />
 					<p:commandButton value="Novo" action="setornovo" />
 
 					<br> </br>
-				<p:layout id="grid" style="min-width:600px;min-height:600px;">
-
-					<p:layoutUnit position="center">
-						<p:dataTable id="table" var="tablesetor" paginator="true" rows="5"
-							value="#{setorBen.listaSetor}" editable="true"
-							style="margin-bottom:20px">
-							
-							<p:ajax event="rowEdit" listener="#{setorBen.onRowEdit}"
-								update="@this :form:nomes" />
-
-							<p:ajax event="rowEditCancel"
-								listener="#{setorBen.onRowCancel}" update=":form:nomes" />
-
-							<p:column headerText="Centro de Custo">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{tablesetor.ID_CENTRO_CUSTO}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText id="modelInput" disabled="true" value="#{tablesetor.ID_CENTRO_CUSTO}"
-											style="width:100%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-							
-							<p:column headerText="Nome">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{tablesetor.NOME}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{tablesetor.NOME}" style="width:100%"
-											label="Nome" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-							
-							<p:column headerText="Gerente Responsável">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{tablesetor.GERENTE_RESPON}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{tablesetor.GERENTE_RESPON}" style="width:100%" 
-										label="Gerente Responsável" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-							<p:column headerText="Quantidade Aproximada de Colaboradores">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{tablesetor.QUANT_APROX_COLABORADORES}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{tablesetor.QUANT_APROX_COLABORADORES}" style="width:100%"
-											label="Quntidade Apoximada de Colaboradores" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-							
-							<p:column style="width:32px">
-								<p:rowEditor title="Alterar" />
-								<p:spacer width="1" />
-								<p:commandLink title="Deletar"  update=":form" onclick="confirm_entry();"
-									action="#{setorBen.excluirSetor(tablesetor)}">
-
-									<p:graphicImage url="/img/excluir.png"
-										style="background-color: transparent; vertical-align: middle; border: none"
-										width="11px" height="11px" />
-
-								</p:commandLink>
-							</p:column>
-
-
-						</p:dataTable>
-
-					</p:layoutUnit>
-				</p:layout>
-
-			</h:form>
-		</p:layoutUnit>
-	</p:layout>
+				</h:form>
+			</p:layoutUnit>
+		</p:layout>
 	</div>
-<div id="rodape">
-	
-</div>
-	
+	<div id="rodape"></div>
+
 </h:body>
 
 </html>

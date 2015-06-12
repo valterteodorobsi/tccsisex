@@ -1,6 +1,6 @@
 package controller;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -20,10 +20,9 @@ import dao.SintomasDaoImp;
 @ViewScoped
 public class SintomasController {
 	private Sintomas sintomas;
-	
-	private List<Sintomas> listaSintomas = new ArrayList<Sintomas>();
 
-	
+	private List<Sintomas> listaSintomas = null;
+
 	@PostConstruct
 	public void init() {
 		atribuirEstadoInicial();
@@ -32,7 +31,7 @@ public class SintomasController {
 	private void atribuirEstadoInicial() {
 
 		sintomas = new Sintomas();
-		
+
 	}
 
 	public Sintomas getSintomas() {
@@ -40,18 +39,21 @@ public class SintomasController {
 	}
 
 	public void setSintomas(Sintomas sintomas) {
+		
 		this.sintomas = sintomas;
 	}
 
 	public List<Sintomas> getListaSintomas() {
+		if(listaSintomas == null){
+			listaSintomas = new SintomasDaoImp().list();
+		}
 		return listaSintomas;
 	}
 
 	public void setListaSintomas(List<Sintomas> listaSintomas) {
 		this.listaSintomas = listaSintomas;
 	}
-	
-	
+
 	public void excluirSintomas(Sintomas sintomas) {
 
 		new SintomasDaoImp().remove(sintomas);
@@ -61,33 +63,37 @@ public class SintomasController {
 		infoExcluir();
 	}
 
-	public String adicionarSintomas() {
+	public String adicionarSintomas() throws IOException {
 		SintomasDao dao = new SintomasDaoImp();
 		dao.save(sintomas);
 		info();
-		
-		return "/home.jsf";
+		listaSintomas = null;
+		FacesContext.getCurrentInstance().getExternalContext()
+				.redirect("sintomas.jsf");
+
+		return "";
+
 	}
-	
+
 	public void pesquisarSintomas() {
 		String nome = sintomas.getNOME_SINTOMAS();
 
 		listaSintomas = new SintomasDaoImp().pesquisar(nome);
-		if (nome == null || nome == " " || listaSintomas.contains(nome)) {
+		if (listaSintomas.isEmpty()) {
 			warn();
 
 		}
 
-	}	
-	
-	public List<Sintomas> listaSintomas(){
+	}
+
+	public List<Sintomas> listaSintomas() {
 
 		listaSintomas = new SintomasDaoImp().list();
-		
+
 		return listaSintomas;
-		
+
 	}
-	
+
 	public void info() {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
@@ -115,11 +121,10 @@ public class SintomasController {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso !",
 						"Sintomas Alterado com Sucesso. "));
 	}
-	
-	
+
 	public void onRowEdit(RowEditEvent event) {
 
-		Sintomas sintomas= (Sintomas) event.getObject();
+		Sintomas sintomas = (Sintomas) event.getObject();
 
 		new SintomasDaoImp().update(sintomas);
 
