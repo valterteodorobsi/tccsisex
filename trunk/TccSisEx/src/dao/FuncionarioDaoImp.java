@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.Arrays;
 import java.util.List;
 
 import model.Funcionario;
@@ -184,4 +183,23 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 		return users;
 		}
 
+	// faz a busca da lista de inicio na tela 
+	public List<FuncionarioPes> pesquisarVazio(){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery("select DATA_NASC, EMAIL , ID_MATRICULA, funcionario.NOME as NOME, RAMAL, RG, SEXO, f.NOME as NOMEFUN, s.NOME as NOMESET FROM funcionario inner join setor as s on s.ID_CENTRO_CUSTO = funcionario.ID_CENTRO_CUSTO inner join funcao as f on f.ID_FUNCAO = funcionario.ID_FUNCAO where ATIVO = 1 group by s.NOME , f.NOME, ID_MATRICULA, funcionario.NOME, DATA_NASC, EMAIL, RAMAL , RG, SEXO"); 
+		query.addScalar("DATA_NASC");
+		query.addScalar("EMAIL");
+		query.addScalar("ID_MATRICULA");
+		query.addScalar("NOME");
+		query.addScalar("RAMAL");
+		query.addScalar("RG");
+		query.addScalar("SEXO");
+		query.addScalar("NOMEFUN");
+		query.addScalar("NOMESET");
+		query.setResultTransformer( Transformers.aliasToBean( Funcionario.class ) );
+
+	    List<FuncionarioPes> users = query.list();
+		return users;
+	}
 }

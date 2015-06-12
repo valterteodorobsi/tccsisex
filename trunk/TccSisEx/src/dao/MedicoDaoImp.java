@@ -35,7 +35,7 @@ public class MedicoDaoImp implements MedicoDao  {
 	public List<Medico> list() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		List lista = session.createQuery("from Medico").list();
+		List lista = session.createQuery("from Medico u where u.ATIVO = 1").list();
 		t.commit();
 		return lista;
 	}

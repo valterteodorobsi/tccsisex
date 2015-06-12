@@ -25,7 +25,7 @@ public class ProntuarioController {
 	
 	private Prontuario prontuario;
 	
-	private List<Prontuario> listaProntuario = new ArrayList<Prontuario>();
+	private List<Prontuario> listaProntuario = null;
 	
 
 	@PostConstruct
@@ -47,6 +47,11 @@ public class ProntuarioController {
 	}
 
 	public List<Prontuario> getListaProntuario() {
+		
+		if(listaProntuario == null){
+			listaProntuario = new ProntuarioDaoImp().pesquisarNome();
+			
+		}
 		return listaProntuario;
 	}
 
@@ -58,7 +63,6 @@ public class ProntuarioController {
 
 		new ProntuarioDaoImp().remove(prontuario);
 
-		pesquisarProntuarioMatricula();
 
 		FacesMessage msg = new FacesMessage("Prontuário foi excluído com sucesso");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -71,7 +75,8 @@ public class ProntuarioController {
 		FacesMessage msg = new FacesMessage(
 				"Prontuário Cadastrado com Sucesso");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-		return "/home.jsf";
+		FacesContext.getCurrentInstance().getExternalContext().redirect("prontuario.jsf");
+		return "";
 	}
 	
 

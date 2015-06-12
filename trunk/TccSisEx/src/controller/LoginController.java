@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -71,10 +72,12 @@ public class LoginController extends BaseBean {
 		return this.DESTINO_ERRO;
 	}
 
-	public String deslogar() {
+	public String deslogar() throws IOException {
 		this.usuario = new Usuario();
 		super.usuarioLogado = this.usuario;
-		return this.DESTINO_LOGOUT;
+		FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+		return "";
+		//return this.DESTINO_LOGOUT;
 	}
 
 	public Boolean mostrarMensagem() {

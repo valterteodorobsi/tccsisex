@@ -14,6 +14,7 @@ import model.Medico;
 import org.hibernate.HibernateException;
 import org.primefaces.event.RowEditEvent;
 
+import dao.FuncionarioDaoImp;
 import dao.MedicoDao;
 import dao.MedicoDaoImp;
 
@@ -23,7 +24,7 @@ public class MedicoController {
 
 	private Medico medico;
 
-	private List<Medico> listaMedicos = new ArrayList<Medico>();
+	private List<Medico> listaMedicos =  null ;
 
 	@PostConstruct
 	public void init() {
@@ -38,6 +39,10 @@ public class MedicoController {
 	}
 
 	public List<Medico> getListaMedicos() {
+		
+		if(listaMedicos == null){
+			listaMedicos = new MedicoDaoImp().list();
+		}
 		return listaMedicos;
 	}
 
@@ -68,7 +73,9 @@ public class MedicoController {
 		MedicoDao dao = new MedicoDaoImp();
 		dao.save(medico);
 		info();
-		return "/home.jsf";
+		listaMedicos = null;
+		FacesContext.getCurrentInstance().getExternalContext().redirect("medico.jsf");
+		return "";
 	}
 
 	public void pesquisarMedico() {

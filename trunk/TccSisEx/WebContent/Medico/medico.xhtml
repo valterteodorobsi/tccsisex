@@ -67,30 +67,14 @@
 			<h:form id="form">
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:growl id="nomes" showDetail="true" />
-				<h:panelGrid columns="2" cellpadding="2">
-						<p:outputLabel value="Matrícula: " for="matriculaFun" />
-						<p:inputText id="matriculaFun"
-							value="#{medicoBen.medico.ID_MATRICULA}" />
-						<p:outputLabel value="Nome: " for="nomeMed" />
-						<p:inputText id="nomeMed"
-							value="#{medicoBen.medico.NOME}" />
-					</h:panelGrid>
+				
 
-					<p:commandButton value="Cancelar" action="/home" />
-					<p:commandButton value="Pesquisar" actionListener="#{medicoBen.pesquisarMedico}"
-						update="grid"/>
-					<p:commandButton value="Novo" action="mediconovo" />
-
-					<br> </br>
-				<p:layout id="grid" style="min-width:600px;min-height:600px;">
-
-					<p:layoutUnit position="center">
 						<p:dataTable id="table" var="tablemedico" paginator="true" rows="5"
 							value="#{medicoBen.listaMedicos}" editable="true"
 							style="margin-bottom:20px">
 							
 							<p:ajax event="rowEdit" listener="#{medicoBen.onRowEdit}"
-								update="@this :form:nomes" />
+								update="@this :form:table" />
 
 							<p:ajax event="rowEditCancel"
 								listener="#{medicoBen.onRowCancel}" update=":form:nomes" />
@@ -204,8 +188,21 @@
 
 						</p:dataTable>
 
-					</p:layoutUnit>
-				</p:layout>
+				<h:panelGrid columns="2" cellpadding="2">
+						<p:outputLabel value="Matrícula: " for="matriculaFun" />
+						<p:inputText id="matriculaFun"
+							value="#{medicoBen.medico.ID_MATRICULA}" />
+						<p:outputLabel value="Nome: " for="nomeMed" />
+						<p:inputText id="nomeMed"
+							value="#{medicoBen.medico.NOME}" />
+					</h:panelGrid>
+
+					<p:commandButton value="Cancelar" action="/home" />
+					<p:commandButton value="Pesquisar" actionListener="#{medicoBen.pesquisarMedico}"
+						update="form"/>
+					<p:commandButton value="Novo" action="mediconovo" />
+
+					<br> </br>
 
 			</h:form>
 		</p:layoutUnit>

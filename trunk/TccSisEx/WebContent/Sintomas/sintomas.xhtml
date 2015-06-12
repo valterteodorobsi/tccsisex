@@ -35,24 +35,13 @@
 		<h:form id="form">
 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 			<p:growl id="nomes" showDetail="true" />
-			<h:panelGrid columns="2" cellpadding="2">
-				<p:outputLabel value="Nome: " for="nomeSint" />
-				<p:inputText id="nomeSint" value="#{sintomasBen.sintomas.NOME_SINTOMAS}"/>
-				
-			</h:panelGrid>
-			<p:commandButton value="Cancelar" action="/home" />
-					<p:commandButton value="Pesquisar" actionListener="#{sintomasBen.pesquisarSintomas}"
-						update="grid"/>
-					<p:commandButton value="Novo" action="sintomasnovo" />
-			<br> </br>
-				<p:layout id="grid" style="min-width:600px;min-height:600px;">
-	<p:layoutUnit position="center">
+			
 						<p:dataTable id="table" var="tablesintomas" paginator="true" rows="5"
 							value="#{sintomasBen.listaSintomas}" editable="true"
 							style="margin-bottom:20px">
 							
 							<p:ajax event="rowEdit" listener="#{sintomasBen.onRowEdit}"
-								update="@this :form:nomes" />
+								update="@this :form:table" />
 
 							<p:ajax event="rowEditCancel"
 								listener="#{sintomasBen.onRowCancel}" update=":form:nomes" />
@@ -126,9 +115,16 @@
 
 						</p:dataTable>
 
-					</p:layoutUnit>
-				</p:layout>
-
+<h:panelGrid columns="2" cellpadding="2">
+				<p:outputLabel value="Nome: " for="nomeSint" />
+				<p:inputText id="nomeSint" value="#{sintomasBen.sintomas.NOME_SINTOMAS}"/>
+				
+			</h:panelGrid>
+			<p:commandButton value="Cancelar" action="/home" />
+					<p:commandButton value="Pesquisar" actionListener="#{sintomasBen.pesquisarSintomas}"
+						update="form"/>
+					<p:commandButton value="Novo" action="sintomasnovo" />
+			<br> </br>
 			</h:form>
 		</p:layoutUnit>
 	</p:layout>

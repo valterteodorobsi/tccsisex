@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -12,7 +10,6 @@ import javax.faces.context.FacesContext;
 import model.Funcionario;
 import model.FuncionarioPes;
 
-import org.codehaus.groovy.tools.shell.util.NoExitSecurityManager;
 import org.hibernate.HibernateException;
 import org.primefaces.event.RowEditEvent;
 
@@ -25,12 +22,15 @@ public class FuncionarioController {
 
 	private Funcionario funcionario = new Funcionario();
 
-	private List<FuncionarioPes> listaFuncionarios = new ArrayList<FuncionarioPes>();
 
-	private List<FuncionarioPes> listaFuncionariosPes = new ArrayList<FuncionarioPes>();
+	private List<FuncionarioPes> listaFuncionariosPes = null;
 	
 
 	public List<FuncionarioPes> getListaFuncionariosPes() {
+		if(listaFuncionariosPes == null){
+			listaFuncionariosPes = new FuncionarioDaoImp().pesquisarVazio();
+		}
+		
 		return listaFuncionariosPes;
 	}
 
@@ -39,13 +39,6 @@ public class FuncionarioController {
 	}
 
 
-	public List<FuncionarioPes> getListaFuncionarios() {
-		return listaFuncionarios;
-	}
-
-	public void setListaFuncionarios(List<FuncionarioPes> listaFuncionarios) {
-		this.listaFuncionarios = listaFuncionarios;
-	}
 
 	public Funcionario getFuncionario() {
 		return funcionario;
@@ -68,7 +61,10 @@ public class FuncionarioController {
 		FuncionarioDao dao = new FuncionarioDaoImp();
 		dao.save(funcionario);
 		info();
-		return "/home.jsf";
+		listaFuncionariosPes = null;
+		FacesContext.getCurrentInstance().getExternalContext().redirect("funcionario.jsf");
+		
+		return "";
 	}
 
 	public void pesquisarFun() {
@@ -190,6 +186,18 @@ public class FuncionarioController {
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!",
 						"Matricula já existente. "));
+	}
+	
+	public List<FuncionarioPes> listaFuncionarios(){
+		
+			String nome = null;
+			listaFuncionariosPes = new FuncionarioDaoImp().pesquisarNome(nome);
+				
+			
+		//listaFuncionariosPes= new FuncionarioDaoImp().pesquisarVazio();
+		//return listaFuncionariosPes;
+		
+		return listaFuncionariosPes;
 	}
 	
 } 

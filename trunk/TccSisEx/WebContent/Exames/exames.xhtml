@@ -36,7 +36,6 @@
 			<h:form id="form">
 			 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:growl id="nomes" showDetail="true" />
-								<p:layout id="grid" style="min-width:400px;min-height:200px;">
 
 						<p:dataTable id="table" var="tableexame" paginator="true" rows="5"
 							value="#{exameBen.listaExame}" editable="true"
@@ -111,7 +110,6 @@
 
 						</p:dataTable>
 
-				</p:layout> 
 				<h:panelGrid columns="2" cellpadding="2">
 						<p:outputLabel value="Código do Exame: " for="codExame" />
 						<p:inputText id="codExame"
@@ -123,7 +121,7 @@
 
 					<p:commandButton value="Cancelar" action="/home.jsf" />
 					<p:commandButton value="Pesquisar" actionListener="#{exameBen.pesquisarExame}"
-						update="table"/>
+						update="@this :form:table"/>
 					<p:commandButton value="Novo" action="examenovo.xhtml" />
 
 					<br> </br>

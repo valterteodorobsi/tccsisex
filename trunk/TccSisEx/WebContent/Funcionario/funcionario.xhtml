@@ -63,38 +63,21 @@
 		</ui:insert>
 	</div>
 	<div id="conteudo" >	
-	<p:layout id="ini" style="min-width:600px;height:800px;">
+	<p:layout id="ini" style="min-width:600px;height:550px;">
 		<p:layoutUnit position="center">
 			<H1>Colaborador</H1>
 			<p:tooltip />
 			<h:form id="form">
 			 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:growl id="nomes" showDetail="true" />
-				<h:panelGrid columns="2" cellpadding="2">
-						<p:outputLabel value="Matricula: " for="matriculaFun" />
-						<p:inputText id="matriculaFun"
-							value="#{funcionarioBen.funcionario.ID_MATRICULA}" />
-						<p:outputLabel value="Nome: " for="nomeFunci" />
-						<p:inputText id="nomeFunci"
-							value="#{funcionarioBen.funcionario.NOME}" />
-					</h:panelGrid>
+				
 
-					<p:commandButton value="Cancelar" action="/home" />
-					<p:commandButton value="Pesquisar" actionListener="#{funcionarioBen.pesquisarFun}"
-						update="grid"/>
-						
-					<p:commandButton value="Novo" action="funcionarionovo" />
-
-					<br> </br>
-				<p:layout id="grid" style="min-width:600px;min-height:600px;">
-
-					<p:layoutUnit position="center">
 						<p:dataTable id="table" var="tablefuncionario" paginator="true" rows="5"
 							value="#{funcionarioBen.listaFuncionariosPes}" editable="true"
 							style="margin-bottom:20px">
 							
 							<p:ajax event="rowEdit" listener="#{funcionarioBen.onRowEdit}"
-								update="@this :form:nomes" />
+								update="@this :form:table" />
 
 							<p:ajax event="rowEditCancel"
 								listener="#{funcionarioBen.onRowCancel}" update=":form:nomes" />
@@ -116,8 +99,8 @@
 									<f:facet name="output">
 										<h:outputText value="#{tablefuncionario.NOME}" />
 									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{tablefuncionario.NOME}" style="width:100%"
+									<f:facet name="input" >
+										<p:inputText maxlength="50" value="#{tablefuncionario.NOME}" style="width:100%"
 											label="Nome" />
 									</f:facet>
 								</p:cellEditor>
@@ -181,7 +164,7 @@
 										<h:outputText value="#{tablefuncionario.RG}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{tablefuncionario.RG}" style="width:100%" label="RG" />
+										<p:inputText  maxlength="8" value="#{tablefuncionario.RG}" style="width:100%" label="RG" />
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
@@ -191,7 +174,7 @@
 										<h:outputText value="#{tablefuncionario.EMAIL}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{tablefuncionario.EMAIL}" style="width:100%"
+										<p:inputText maxlength="8"  value="#{tablefuncionario.EMAIL}" style="width:100%"
 											label="Email" />
 									</f:facet>
 								</p:cellEditor>
@@ -202,7 +185,7 @@
 										<h:outputText value="#{tablefuncionario.RAMAL}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{tablefuncionario.RAMAL}" style="width:100%"
+										<p:inputText size="4" maxlength="4" value="#{tablefuncionario.RAMAL}" style="width:100%"
 											label="Ramal" />
 									</f:facet>
 								</p:cellEditor>
@@ -231,7 +214,7 @@
 								<p:rowEditor title="Alterar" />
 								<p:spacer width="1" />
 								<p:commandLink title="Remover" update=":form" onclick="confirm_entry();" action="#{funcionarioBen.excluirFuncionario(tablefuncionario)}">
-									<p:graphicImage url="/img/excluir.png"
+									<p:graphicImage id="Excluir" url="/img/excluir.png"
 										style="background-color: transparent; vertical-align: middle; border: none"
 										width="11px" height="11px" />
 									</p:commandLink>
@@ -240,9 +223,22 @@
 
 						</p:dataTable>
 
-					</p:layoutUnit>
-				</p:layout>
+				<h:panelGrid columns="2" cellpadding="2">
+						<p:outputLabel value="Matricula: " for="matriculaFun" />
+						<p:inputText id="matriculaFun"
+							value="#{funcionarioBen.funcionario.ID_MATRICULA}" />
+						<p:outputLabel value="Nome: " for="nomeFunci" />
+						<p:inputText id="nomeFunci"
+							value="#{funcionarioBen.funcionario.NOME}" />
+					</h:panelGrid>
 
+					<p:commandButton value="Cancelar" action="/home" />
+					<p:commandButton value="Pesquisar" actionListener="#{funcionarioBen.pesquisarFun}"
+						update="form"/>
+						
+					<p:commandButton value="Novo" action="funcionarionovo" />
+
+					<br> </br>
 			</h:form>
 		</p:layoutUnit>
 	</p:layout>

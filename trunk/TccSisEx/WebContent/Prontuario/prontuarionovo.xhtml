@@ -26,6 +26,12 @@
 		};		
 		
 		
+		function voltar(){
+			
+			 
+		}
+		
+		
 		
 	</script>
 </h:head>
@@ -80,7 +86,8 @@
 										
 					<br> </br>
 				</h:panelGrid>
-				<p:commandButton value="Voltar" action="/home" />
+				<p:commandButton value="Voltar" action="/home" validateClient="false" />
+					
 				<p:commandButton value="Salvar" validateClient="true" 
 					actionListener="#{prontuarioBen.adicionarProntuario}" />
 

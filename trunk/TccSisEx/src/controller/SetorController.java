@@ -22,7 +22,7 @@ public class SetorController {
 
 	private Setor setor;
 
-	private List<Setor> listaSetor = new ArrayList<Setor>();
+	private List<Setor> listaSetor = null;
 
 	@PostConstruct
 	public void init() {
@@ -32,11 +32,14 @@ public class SetorController {
 	private void atribuirEstadoInicial() {
 
 		setor = new Setor();
-		
 
 	}
 
 	public List<Setor> getListaSetor() {
+		if (listaSetor == null) {
+			listaSetor = new SetorDaoImp().list();
+		}
+
 		return listaSetor;
 	}
 
@@ -65,35 +68,40 @@ public class SetorController {
 		SetorDao dao = new SetorDaoImp();
 		dao.save(setor);
 		info();
-		return "/home.jsf";
+		listaSetor = null;
+		FacesContext.getCurrentInstance().getExternalContext()
+				.redirect("funcionario.jsf");
+
+		return "";
 	}
 
 	public void pesquisarSetor() {
 		Integer ID_CENTRO_CUSTO = setor.getID_CENTRO_CUSTO();
 		String nome = setor.getNOME();
 
-		if(ID_CENTRO_CUSTO == 0){
-			
+		if (ID_CENTRO_CUSTO == 0) {
 			listaSetor = new SetorDaoImp().pesquisarNome(nome);
-		}
-		else{
-		listaSetor = new SetorDaoImp().pesquisar(ID_CENTRO_CUSTO);
-		}
-		if (nome== null || ID_CENTRO_CUSTO == null) {
-			warn();
+			if (listaSetor.isEmpty()) {
 
+				warn();
+			}
+		} else {
+
+			listaSetor = new SetorDaoImp().pesquisar(ID_CENTRO_CUSTO);
+			if (listaSetor.isEmpty()) {
+				warn();
+			}
 		}
 
 	}
 
-		
-	public List<Setor> listaSetor(){
+	public List<Setor> listaSetor() {
 		listaSetor = new SetorDaoImp().list();
-		
+
 		return listaSetor;
-		
+
 	}
-	
+
 	public void info() {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
@@ -135,12 +143,12 @@ public class SetorController {
 		FacesMessage msg = new FacesMessage("Edição Cancelada");
 		FacesContext.getCurrentInstance().addMessage("Edição Cancelada", msg);
 	}
+
 	public static void matriculaErro() {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!",
 						"Centro de Custo já existente. "));
 	}
-	
 
 }

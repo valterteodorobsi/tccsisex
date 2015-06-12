@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -22,7 +21,7 @@ public class ExameController {
 	//clase que acesa a view e joga para o dao 
 	private Exame exame;
 
-	private List<Exame> listaExame= new ArrayList<Exame>();
+	private List<Exame> listaExame= null ;
 	
 	//metodo que inicia o objeto 
 	@PostConstruct
@@ -37,7 +36,9 @@ public class ExameController {
 	}
 
 	public List<Exame> getListaExame() {
-		listaExame= new ExameDaoImp().pesquisarVazio();
+		if(listaExame == null){
+			listaExame = new ExameDaoImp().pesquisarVazio();
+		}
 		return listaExame;
 	}
 
@@ -68,7 +69,7 @@ public class ExameController {
 		dao.save(exame);
 		info();
 		listaExame=null;
-		FacesContext.getCurrentInstance().getExternalContext().redirect("../home.jsf");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("exames.jsf");
 		
 		
 		return "";

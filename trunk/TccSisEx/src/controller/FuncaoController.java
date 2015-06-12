@@ -22,7 +22,7 @@ public class FuncaoController {
 
 	private Funcao funcao;
 
-	private List<Funcao> listaFuncao = new ArrayList<Funcao>();
+	private List<Funcao> listaFuncao = null;
 
 	@PostConstruct
 	public void init() {
@@ -36,6 +36,10 @@ public class FuncaoController {
 	}
 
 	public List<Funcao> getListaFuncao() {
+		if(listaFuncao == null){
+			 listaFuncao = new FuncaoDaoImp().list();
+			
+		}
 		return listaFuncao;
 	}
 
@@ -65,28 +69,29 @@ public class FuncaoController {
 		FuncaoDao dao = new FuncaoDaoImp();
 		dao.save(funcao);
 		info();
+		listaFuncao = null;
+FacesContext.getCurrentInstance().getExternalContext().redirect("funcao.jsf");
 		
-		return "/home.jsf";
+		return "";
 	}
 
 	public void pesquisarFuncao() {
 		Integer ID_FUNCAO = funcao.getID_FUNCAO();
 		String nome = funcao.getNOME();
-
-		
 	
 		if(ID_FUNCAO == 0){
-			
 			listaFuncao = new FuncaoDaoImp().pesquisarNome(nome);
-		}
-		else{
+			if(listaFuncao.isEmpty()){
+			warn();
+			}
+		}else{
 		listaFuncao = new FuncaoDaoImp().pesquisar(ID_FUNCAO);
-		}
-		if (nome == null || ID_FUNCAO == null) {
+		
+		if(listaFuncao.isEmpty()){
 			warn();
 
+			}
 		}
-
 	}
 
 	public List<Funcao> listaFuncao() {

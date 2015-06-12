@@ -18,5 +18,5 @@ public interface ProntuarioDao {
 	/*public List<Prontuario> pesquisarPorMatriculaOuNome(Integer id_matricula, String nome);*/
 	public List<Prontuario> pesquisarPorMatricula(Integer id_matricula);
 	
-	public List<Prontuario> pesquisarNome(String nome);
+	public List<Prontuario> pesquisarNome();
 }
