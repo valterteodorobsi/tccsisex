@@ -29,7 +29,7 @@ public class AtestadoController {
 
 	private Atestado atestado;
 	private UploadedFile imagem;
-	private List<Atestado> listaAtestado = new ArrayList<Atestado>();
+	private List<Atestado> listaAtestado = null;
 
 	@PostConstruct
 	public void init() {
@@ -51,6 +51,10 @@ public class AtestadoController {
 	}
 
 	public List<Atestado> getListaAtestado() {
+		if(listaAtestado == null){
+			listaAtestado = new AtestadoDao().pesquisarTodos();
+			
+		}
 		return listaAtestado;
 	}
 
@@ -68,15 +72,17 @@ public class AtestadoController {
 
 	public void pesquisarAtestadoPorMatricula() {
 		Integer matricula = atestado.getMatricula();
-
-		listaAtestado = new AtestadoDao().pesquisar(matricula);
-		listaAtestado.get(0).getImagem();
 		
-
-		if (matricula == null || matricula == 0 || listaAtestado == null) {
+		if(matricula != 0 ){
+		listaAtestado = new AtestadoDao().pesquisar(matricula);
+		//listaAtestado.get(0).getImagem();
+		
+		
+			if (listaAtestado.isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Nenhum registro foi encontrado."));
 
+			}
 		}
 	}
 
@@ -103,13 +109,14 @@ public class AtestadoController {
 						"Atestado  foi excluído com sucesso. "));
 	}
 
-	public String adicionarAtestado() {
+	public String adicionarAtestado() throws IOException {
 		AtestadoDao dao = new AtestadoDao();
 
 		atestado.setImagem(imagem.getContents());
 		dao.save(atestado);
 		info();
-		return "/home.jsf";
+		FacesContext.getCurrentInstance().getExternalContext().redirect("atestados.jsf");
+		return "";
 	}
 
 	// Recebe o arquivo e coloca na variavel imagem para inserir no banco

@@ -1,6 +1,6 @@
 package controller;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -22,7 +22,7 @@ public class ReceberOArquivoController {
 
 	private Arquivo arquivo;
 	private UploadedFile imagem;
-	private List<Arquivo> listaArquivos = new ArrayList<Arquivo>();
+	private List<Arquivo> listaArquivos = null;
 
 	@PostConstruct
 	public void init() {
@@ -36,6 +36,12 @@ public class ReceberOArquivoController {
 	}
 
 	public List<Arquivo> getListaArquivos() {
+		
+		if(listaArquivos == null){
+			listaArquivos = new ReceberArquivoDao().pesquisarTodos();
+			
+		}
+		
 		return listaArquivos;
 	}
 
@@ -59,14 +65,15 @@ public class ReceberOArquivoController {
 		this.arquivo = arquivo;
 	}
 
-	public String adicionarArquivo() {
+	public String adicionarArquivo() throws IOException {
 		ReceberArquivoDao dao = new ReceberArquivoDao();
 
 		arquivo.setIMAGEM(imagem.getContents());
 
 		dao.save(arquivo);
 		info();
-		return "/home.jsf";
+		FacesContext.getCurrentInstance().getExternalContext().redirect("exameincluir.jsf");
+		return "";
 	}
 
 	// Recebe o arquivo e coloca na variavel imagem para inserir no banco;
@@ -87,7 +94,7 @@ public class ReceberOArquivoController {
 
 		listaArquivos = new ReceberArquivoDao().pesquisar(matricula);
 		  
-		if (matricula == null || matricula == 0 || listaArquivos == null) {
+		if (listaArquivos.isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Nenhum registro foi encontrado."));
 

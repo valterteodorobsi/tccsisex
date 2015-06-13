@@ -69,6 +69,7 @@
 						<p:outputLabel value="Setor: " for="setAtes" />
 						<p:inputText id="setAtes" size="" maxlength="5" required="true"
 							requiredMessage="Favor preencher o campo  CID obrigatório"
+							value="#{atestadoBen.atestado.ID_SETOR}" 
 							 />
 						
 						<p:outputLabel value="CID: " for="cidAtes" />
@@ -76,7 +77,11 @@
 							requiredMessage="Favor preencher o campo  CID obrigatório"
 							value="#{atestadoBen.atestado.cid}" />
 
-
+						<p:outputLabel value="Quantidade de Dias: " for="DiasAtes" />
+						<p:inputText id="DiasAtes" size="10" maxlength="10" required="true"
+							requiredMessage="Favor preencher o campo  DIAS obrigatório"
+							value="#{atestadoBen.atestado.DIAS}" />
+						
 
 						<p:fileUpload fileUploadListener="#{atestadoBen.recebeAtestados}"
 							style="margin-top: 20px;" mode="advanced" sizeLimit="1000000"

@@ -52,7 +52,24 @@ public class ReceberArquivoDao {
 
 	}
 	
-	
+	public List<Arquivo> pesquisarTodos() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery("select an.CRITICIDADE, an.DESCRICAO , an.VALIDADE ,an.ID_EXAME, an.ID_MATRICULA ,s.nome as SETOR, f.nome as NOME_COLABORADOR , ex.NOME_EXAME as EXAME from ANEXO_EXAME as an inner join FUNCIONARIO as f on an.ID_MATRICULA = f.ID_MATRICULA inner join SETOR as s on an.ID_SETOR = s.ID_CENTRO_CUSTO inner join EXAME as ex on an.ID_EXAMEFK = ex.ID_EXAME "); 
+		query.addScalar("ID_MATRICULA");
+		query.addScalar("CRITICIDADE");
+		query.addScalar("DESCRICAO");
+		query.addScalar("VALIDADE");
+		query.addScalar("ID_EXAME");
+		query.addScalar("NOME_COLABORADOR");
+		query.addScalar("SETOR");
+		query.addScalar("EXAME");
+		query.setResultTransformer( Transformers.aliasToBean( Arquivo.class ) );
+
+	    List<Arquivo> users = query.list();
+		return users;
+
+	}
 	public void remove(Arquivo arquivo) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();

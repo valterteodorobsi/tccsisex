@@ -122,7 +122,7 @@
 						requiredMessage="Favor preencher o campo  Nome obrigatório"
 						 />
 					<p:outputLabel value="Setor: " for="setPed" />
-					<p:selectOneMenu id="setPed" required="true"
+					<p:selectOneMenu id="setPed" required="true" filter="true"
 						requiredMessage="Favor preencher o campo  Setor obrigatório"
 							value="#{pedidoExameBen.pedidoDeExame.ID_SETOR}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
@@ -131,7 +131,7 @@
 						</p:selectOneMenu>
 					
 					<p:outputLabel value="Função: " for="unPed" />
-						<p:selectOneMenu id="unPed" required="true"
+						<p:selectOneMenu id="unPed" required="true" filter="true"
 						requiredMessage="Favor preencher o campo  Função obrigatório"
 							value="#{pedidoExameBen.pedidoDeExame.ID_FUNCAO}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
@@ -149,7 +149,7 @@
 					
 				<p:outputLabel value="Nome do Exame: " size="50" maxlength="50" for="exaPed" />
 				
-						<p:selectOneMenu id="exaPed" required="true"
+						<p:selectOneMenu id="exaPed" required="true" filter="true"
 						requiredMessage="Favor preencher o campo  Exame obrigatório"
 							value="#{pedidoExameBen.pedidoDeExame.ID_EXAME}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
@@ -160,7 +160,7 @@
 				<p:outputLabel value="CID: " for="cidPed" />
 				<p:inputText id="cidPed" size="5"  maxlength="5" value="#{pedidoExameBen.pedidoDeExame.CID}" />
 				<p:outputLabel value="Médico: " for="medPed" />
-				<p:selectOneMenu id="medPed" required="true" 
+				<p:selectOneMenu id="medPed" required="true" filter="true"
 						requiredMessage="Favor preencher o campo  Médico obrigatório"
 							value="#{pedidoExameBen.pedidoDeExame.ID_MEDICO}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />

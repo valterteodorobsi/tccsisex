@@ -91,7 +91,7 @@
 						value="#{registroBen.registro.NOME_COLABORADOR}" />
 				<p:outputLabel value="Remédio Homologado: " for="remReg" />
 				
-				<p:selectOneMenu id="remReg" required="false"
+				<p:selectOneMenu id="remReg" required="true" filter="true"
 						requiredMessage="Favor preencher o campo  Remédio obrigatório"
 							value="#{registroBen.registro.ID_REMEDIO}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
@@ -112,7 +112,7 @@
        					 
 						
 						<p:outputLabel value="Medico: " for="medReg" />
-					<p:selectOneMenu id="medReg" required="true" 
+					<p:selectOneMenu id="medReg" required="true" filter="true"
 						requiredMessage="Favor preencher o campo  Médico obrigatório"
 							value="#{registroBen.registro.ID_MEDICO}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
@@ -121,7 +121,7 @@
 								 
 						</p:selectOneMenu>
 						<p:outputLabel value="Sintomas: " for="sinReg" />
-						<p:selectOneMenu id="sinReg" value="#{registroBen.registro.ID_SINTOMAS}" onchange="liberar()" >
+						<p:selectOneMenu id="sinReg" value="#{registroBen.registro.ID_SINTOMAS}" filter="true" >
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
 							<f:selectItems value="#{sintomasBen.listaSintomas()}" var="sintomas" 
 								itemLabel="#{sintomas.NOME_SINTOMAS}" itemValue="#{sintomas.ID_SINTOMAS}" />
@@ -130,7 +130,13 @@
 								
 								
 						<p:outputLabel value="Encaminhar Atentimento: " for="encReg" />
-				<p:inputText id="encReg" size="4" maxlength="4" value="#{registroBen.registro.encExt}" />
+						<p:selectOneMenu id="encReg" required="true"
+												requiredMessage="Favor preencher o campo Encaminhar Atendimento obrigatório"
+												value="#{registroBen.registro.encExt}">
+												<f:selectItem itemLabel="Selecione" itemValue="" />
+												<f:selectItem itemLabel="Sim" itemValue="sim" />
+												<f:selectItem itemLabel="Não" itemValue="não" />
+											</p:selectOneMenu>
 						
 						<p:outputLabel value="Descrição: " for="desReg" />
 					<p:inputTextarea rows="5" cols="30" counter="display" maxlength="150" counterTemplate="{0} Quantidade de caracteres." autoResize="false" 
