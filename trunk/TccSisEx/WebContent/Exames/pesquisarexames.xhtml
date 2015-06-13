@@ -35,21 +35,8 @@
 			<h:form id="form">
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:growl id="nomes" showDetail="true" />
-				<h:panelGrid columns="2" cellpadding="2">
-						<p:outputLabel value="Matrícula: " for="matriculaFun" />
-						<p:inputText id="matriculaFun"
-							value="#{arquivoBen.arquivo.ID_MATRICULA}" />
-						
-					</h:panelGrid>
+				
 
-					<p:commandButton value="Cancelar" action="/home" />
-					<p:commandButton value="Pesquisar" 
-								actionListener="#{arquivoBen.pesquisarExamePorMatricula()}"
-								update="grid" />
-						<br> </br>
-						<p:layout id="grid" style="min-width:600px;min-height:600px;">
-
-						<p:layoutUnit position="center">
 							
 							<p:dataTable id="table" var="tableArquivo" paginator="true" rows="5" value="#{arquivoBen.listaArquivos}" >
 	
@@ -99,8 +86,19 @@
 								</p:column>
 
 							</p:dataTable>
-						</p:layoutUnit>
-					</p:layout>
+							
+							<h:panelGrid columns="2" cellpadding="2">
+						<p:outputLabel value="Matrícula: " for="matriculaFun" />
+						<p:inputText id="matriculaFun"
+							value="#{arquivoBen.arquivo.ID_MATRICULA}" />
+						
+					</h:panelGrid>
+
+					<p:commandButton value="Cancelar" action="/home" />
+					<p:commandButton value="Pesquisar" 
+								actionListener="#{arquivoBen.pesquisarExamePorMatricula()}"
+								update="form" />
+						<br> </br>
 				</h:form>
 			</p:layoutUnit>
 		</p:layout>

@@ -44,7 +44,9 @@ public class Atestado implements Serializable {
 	@Column(name = "CID")  
 	private String CID;
 	@Column(name = "ID_SETOR")
-	private int ID_SETOR;
+	private Integer ID_SETOR;
+	@Column(name = "DIAS")
+	private String DIAS;
 	
 	
     public Atestado() {
@@ -99,16 +101,50 @@ public class Atestado implements Serializable {
 
 
 
-	public int getID_SETOR() {
+	public Integer getID_SETOR() {
 		return ID_SETOR;
 	}
 
 
 
-	public void setID_SETOR(int iD_SETOR) {
+	public void setID_SETOR(Integer iD_SETOR) {
 		ID_SETOR = iD_SETOR;
 	}
-	
-	
-	
+
+
+
+	public Integer getID_MATRICULA() {
+		return ID_MATRICULA;
+	}
+
+
+
+	public void setID_MATRICULA(Integer iD_MATRICULA) {
+		ID_MATRICULA = iD_MATRICULA;
+	}
+
+
+
+	public String getCID() {
+		return CID;
+	}
+
+
+
+	public void setCID(String cID) {
+		CID = cID;
+	}
+
+
+
+	public String getDIAS() {
+		return DIAS;
+	}
+
+
+
+	public void setDIAS(String dIAS) {
+		DIAS = dIAS;
+	}
+
 }

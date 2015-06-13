@@ -27,28 +27,18 @@
 					<p:messages id="messages" showDetail="true" autoUpdate="true"
 						closable="true" />
 					<p:growl id="nomes" showDetail="true" />
-					<h:panelGrid columns="2" cellpadding="2">
-						<p:outputLabel value="Matrícula : " for="matReg" />
-						<p:inputText id="matReg"
-							value="#{registroBen.registro.ID_MATRICULA}" />
-					</h:panelGrid>
+					
 
-					<p:commandButton value="Cancelar" action="/home" />
-					<p:commandButton value="Pesquisar"
-						actionListener="#{registroBen.pesquisar}" update="grid" />
-					<br> </br>
-					<p:layout id="grid" style="min-width:600px;min-height:600px;">
-
-						<p:layoutUnit position="center">
 							<p:dataTable id="table" var="tableRegistro" paginator="true" rows="5"
 								value="#{registroBen.listaRegistro}" editable="true"
 								style="margin-bottom:20px">
 
-								<p:column headerText="Nome do colaborador">
-									<h:outputText value="#{tableRegistro.NOME_COLABORADOR}" />
-								</p:column>
+								
 								<p:column headerText="Matrícula">
 									<h:outputText value="#{tableRegistro.ID_MATRICULA}" />
+								</p:column>
+								<p:column headerText="Nome do colaborador">
+									<h:outputText value="#{tableRegistro.NOME_COLABORADOR}" />
 								</p:column>
 								<p:column headerText="Remédio">
 									<h:outputText value="#{tableRegistro.REMEDIO}" />
@@ -73,8 +63,16 @@
 								</p:column>
 
 							</p:dataTable>
-						</p:layoutUnit>
-					</p:layout>
+							<h:panelGrid columns="2" cellpadding="2">
+						<p:outputLabel value="Matrícula : " for="matReg" />
+						<p:inputText id="matReg"
+							value="#{registroBen.registro.ID_MATRICULA}" />
+					</h:panelGrid>
+
+					<p:commandButton value="Cancelar" action="/home" />
+					<p:commandButton value="Pesquisar"
+						actionListener="#{registroBen.pesquisar}" update="form" />
+					<br> </br>
 				</h:form>
 			</p:layoutUnit>
 		</p:layout>

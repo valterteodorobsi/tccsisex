@@ -63,6 +63,24 @@ public class RegistroEntradaDaoImp implements RegistroEntradaDao {
 
 	}
 	
+	public List<RegistroEntrada> pesquisarTodos() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery("Select f.nome as NOME_COLABORADOR, rs.ID_MATRICULA, r.nome as REMEDIO, rs.DESCRICAO, rs.DATA_ENTRADA from REGISTRO_ENTRADA as rs inner join FUNCIONARIO as f on rs.ID_MATRICULA = f.ID_MATRICULA inner join REMEDIO as r on rs.ID_REMEDIO = r.ID_REMEDIO where  rs.DATA_SAIDA  IS NULL"); 
+		query.addScalar("NOME_COLABORADOR");
+		query.addScalar("ID_MATRICULA");
+		query.addScalar("REMEDIO");
+		query.addScalar("DESCRICAO");
+		query.addScalar("DATA_ENTRADA");
+		query.setResultTransformer( Transformers.aliasToBean( RegistroEntrada.class ) );
+
+	    List<RegistroEntrada> users = query.list();
+		return users;
+																			
+																										
+
+	}
+	
 	
 	public void update(Integer id_matricula) {
 		Session session = HibernateUtil.getSessionFactory().openSession();

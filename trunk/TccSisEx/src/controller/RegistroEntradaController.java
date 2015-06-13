@@ -1,7 +1,6 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,14 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.event.RowEditEvent;
-
-import com.sun.org.apache.bcel.internal.generic.Select;
-
-import antlr.debug.Event;
-import model.Funcao;
 import model.RegistroEntrada;
-import dao.FuncaoDaoImp;
 import dao.RegistroEntradaDao;
 import dao.RegistroEntradaDaoImp;
 
@@ -29,7 +21,7 @@ public class RegistroEntradaController {
 		
 	private RegistroEntrada registro;
 	
-	private List<RegistroEntrada> listaRegistro= new ArrayList<RegistroEntrada>();
+	private List<RegistroEntrada> listaRegistro= null;
 	
 	
 
@@ -58,6 +50,10 @@ public class RegistroEntradaController {
 	}
 
 	public List<RegistroEntrada> getListaRegistro() {
+		if(listaRegistro == null){
+			listaRegistro = new RegistroEntradaDaoImp().pesquisarTodos();
+			
+		}
 		return listaRegistro;
 	}
 
@@ -67,11 +63,12 @@ public class RegistroEntradaController {
 	
 	
 	
-	public String adicionarRegistro() {
+	public String adicionarRegistro() throws IOException {
 		RegistroEntradaDao dao = new RegistroEntradaDaoImp();
 		dao.save(registro);
 		info();
-		return "/home.jsf";
+		FacesContext.getCurrentInstance().getExternalContext().redirect("registraentrada.jsf");
+		return "";
 	}
 	
 	public void info() {
@@ -91,7 +88,7 @@ public class RegistroEntradaController {
 		Integer matricula = registro.getID_MATRICULA();
 
 		listaRegistro = new RegistroEntradaDaoImp().pesquisar(matricula);
-		if (matricula == 0 || matricula == null) {
+		if (listaRegistro.isEmpty()) {
 			warn();
 
 		}

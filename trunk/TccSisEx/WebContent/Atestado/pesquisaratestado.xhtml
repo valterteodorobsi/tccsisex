@@ -35,31 +35,13 @@
 			<h:form id="form">
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:growl id="nomes" showDetail="true" />
-				<h:panelGrid columns="2" cellpadding="2">
-						<p:outputLabel value="Matrícula: " for="matriculaFun" />
-						<p:inputText id="matriculaFun"
-							value="#{atestadoBen.atestado.matricula}" />
-						
-					</h:panelGrid>
+				
 
-					<p:commandButton value="Cancelar" action="/home" />
-					<p:commandButton value="Pesquisar" 
-								actionListener="#{atestadoBen.pesquisarAtestadoPorMatricula()}"
-								update="grid" />
-						<br> </br>
-						<p:layout id="grid" style="min-width:600px;min-height:600px;">
-
-						<p:layoutUnit position="center">
 							
 							<p:dataTable id="table" var="tableatestado" paginator="true" rows="5" value="#{atestadoBen.listaAtestado}" >
 	
-											<f:facet name="header">
-				                    			<p:graphicImage rendered="#{tableatestado.imagemProntaHtml != null}" url="#{tableatestado.imagemProntaHtml}" id="testeImagee"/> 
-				                			</f:facet>
+											
 	
-											<p:column>
-												<p:graphicImage  value="#{tableatestado.imagemProntaHtml}" id="testeImage"/> 
-											</p:column>
 	
 											<p:column headerText="Matrícula">
 												<h:outputText value="#{tableatestado.matricula}" />
@@ -76,6 +58,9 @@
 											</p:column>
 											<p:column headerText="CID">
 												<h:outputText value="#{tableatestado.cid}" />
+											</p:column>
+											<p:column headerText="Dias">
+												<h:outputText value="#{tableatestado.DIAS}" />
 											</p:column>
 											
 											<p:column headerText="Imagem">
@@ -114,9 +99,18 @@
 		            				</p:panelGrid>
 						        </p:outputPanel>
 						    </p:dialog>
-						</p:layoutUnit>
-					</p:layout>
-					
+			<h:panelGrid columns="2" cellpadding="2">
+						<p:outputLabel value="Matrícula: " for="matriculaFun" />
+						<p:inputText id="matriculaFun"
+							value="#{atestadoBen.atestado.matricula}" />
+						
+					</h:panelGrid>
+
+					<p:commandButton value="Cancelar" action="/home" />
+					<p:commandButton value="Pesquisar" 
+								actionListener="#{atestadoBen.pesquisarAtestadoPorMatricula()}"
+								update="form" />
+						<br> </br>					
 				</h:form>
 			</p:layoutUnit>
 		</p:layout>

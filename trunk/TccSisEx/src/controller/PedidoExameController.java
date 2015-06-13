@@ -66,7 +66,8 @@ public class PedidoExameController {
 		 
 
 		imprimir(pedidoDeExames);
-		return "/home.jsf";
+		FacesContext.getCurrentInstance().getExternalContext().redirect("pedidoexame.jsf");
+		return "";
 	}
 	public void info() {
 		FacesContext.getCurrentInstance().addMessage(
