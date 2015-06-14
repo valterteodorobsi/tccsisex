@@ -96,7 +96,7 @@
 										<h:outputText value="#{tablemedico.CRM}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{tablemedico.CRM}" style="width:100%"
+										<p:inputText value="#{tablemedico.CRM}" maxlength="10" style="width:100%"
 											label="CRM" />
 									</f:facet>
 								</p:cellEditor>
@@ -107,12 +107,12 @@
 										<h:outputText value="#{tablemedico.NOME}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{tablemedico.NOME}" style="width:100%"
+										<p:inputText value="#{tablemedico.NOME}" maxlength="40" style="width:100%"
 											label="Nome" />
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
-							<p:column headerText="Data de Nascimento">
+							<p:column headerText="Data de Nasc">
 								<p:cellEditor>
 									<f:facet name="output">
 										<h:outputText value="#{tablemedico.DATA_NASC}">
@@ -135,7 +135,7 @@
 										<h:outputText value="#{tablemedico.RG}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{tablemedico.RG}" style="width:100%" label="RG" />
+										<p:inputText value="#{tablemedico.RG}" maxlength="8" style="width:100%" label="RG" />
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
@@ -145,7 +145,7 @@
 										<h:outputText value="#{tablemedico.ESPECIALIDADE}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{tablemedico.ESPECIALIDADE}" style="width:100%"
+										<p:inputText value="#{tablemedico.ESPECIALIDADE}" maxlength="30" style="width:100%"
 											label="Especialidade" />
 									</f:facet>
 								</p:cellEditor>
@@ -156,7 +156,7 @@
 										<h:outputText value="#{tablemedico.CAR_HOR_SEMANA}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{tablemedico.CAR_HOR_SEMANA}" style="width:100%"
+										<p:inputText value="#{tablemedico.CAR_HOR_SEMANA}" maxlength="3"  
 											label="Carga Horaria Semanal" />
 									</f:facet>
 								</p:cellEditor>
@@ -167,7 +167,7 @@
 										<h:outputText value="#{tablemedico.DIAS_EXPEDIENTE}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{tablemedico.DIAS_EXPEDIENTE}" style="width:100%"
+										<p:inputText value="#{tablemedico.DIAS_EXPEDIENTE}" maxlength="30" style="width:100%"
 											label="Dias de Expediente" />
 									</f:facet>
 								</p:cellEditor>

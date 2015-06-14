@@ -64,11 +64,11 @@
 											</p:column>
 											
 											<p:column headerText="Imagem">
-											<!-- <p:commandLink value="ABRIR IMAGEM" /> -->
-												<!-- <h:outputText value="#{tableatestado.imagem}" /> -->
-												<p:commandButton update=":form:carDetail" oncomplete="carDialog.show()" icon="ui-icon-search" title="View">
-			               			  			<f:setPropertyActionListener value="#{car}" target="#{atestadoBen.listaAtestado}" /> 
-			           			 				</p:commandButton>
+											
+												<p:commandButton 
+													action="#{atestadoBen.criarImagem(tableatestado)}"  onclick="carDialog.show();" />
+ 			               			  			 
+			           			 			
 											</p:column> 
 			
 			
@@ -88,16 +88,11 @@
 							               
 										</p:dataTable>
 							
-							 <p:dialog header="Imagem" widgetVar="carDialog" modal="false" showEffect="fade" hideEffect="fade" resizable="false"  >
-		       					 <p:outputPanel id="carDetail" style="text-align:center;">
-		           					 <p:panelGrid  columns="2"  target="#{atestadoBen.listaAtestado}"  columnClasses="label,value">
-				                		 
-						                <!-- <h:outputText value="Imagem" /> -->
-		
+							 <p:dialog header="Imagem" widgetVar="carDialog" >
+		       		  		
+						               	<p:graphicImage id="boximage" url="../resources/imgUp/atestado.png" cache="false" />
 										
 		 
-		            				</p:panelGrid>
-						        </p:outputPanel>
 						    </p:dialog>
 			<h:panelGrid columns="2" cellpadding="2">
 						<p:outputLabel value="Matrícula: " for="matriculaFun" />

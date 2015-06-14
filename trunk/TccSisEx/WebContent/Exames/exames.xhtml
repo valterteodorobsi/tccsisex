@@ -11,10 +11,10 @@
 			input_box=confirm("Tem certesa que deseja excluir o Registro?");
 			if (input_box==true){
 			// Output when OK is clicked
+			
+			
 			return true;
-			}
-			else{
-			// Output when Cancel is clicked
+			}else{
 			return false;
 			}
 		}
@@ -97,7 +97,7 @@
 							<p:column style="width:32px">
 								<p:rowEditor title="Alterar" />
 								<p:spacer width="1" />
-								<p:commandLink title="Deletar"  update="table" onclick="confirm_entry();"
+								<p:commandLink title="Deletar"  ajaxSingle="true" update="table" onclick="if(!confirm('Deseja Excluir?'))return false;"
 									action="#{exameBen.excluirExame(tableexame)}">
 
 									<p:graphicImage url="/img/excluir.png"
@@ -110,10 +110,11 @@
 
 						</p:dataTable>
 
-				<h:panelGrid columns="2" cellpadding="2">
+				<h:panelGrid columns="1" cellpadding="1" >
 						<p:outputLabel value="Código do Exame: " for="codExame" />
 						<p:inputText id="codExame"
 							value="#{exameBen.exame.ID_EXAME}" />
+							<p:outputLabel value="OU" />
 						<p:outputLabel value="Nome do Exame: " for="nomeExame" />
 						<p:inputText id="nomeExame"
 							value="#{exameBen.exame.NOME_EXAME}" />

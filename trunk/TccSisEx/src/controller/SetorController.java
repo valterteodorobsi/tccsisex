@@ -70,7 +70,7 @@ public class SetorController {
 		info();
 		listaSetor = null;
 		FacesContext.getCurrentInstance().getExternalContext()
-				.redirect("funcionario.jsf");
+				.redirect("setor.jsf");
 
 		return "";
 	}

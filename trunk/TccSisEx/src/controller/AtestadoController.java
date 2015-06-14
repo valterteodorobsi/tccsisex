@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class AtestadoController {
 	private Atestado atestado;
 	private UploadedFile imagem;
 	private List<Atestado> listaAtestado = null;
+	private String imagem2 = new String();
 
 	@PostConstruct
 	public void init() {
@@ -69,6 +72,17 @@ public class AtestadoController {
 	public void setImagem(UploadedFile imagem) {
 		this.imagem = imagem;
 	}
+	
+	
+
+	public String getImagem2() throws IOException {
+		
+		return imagem2;
+	}
+
+	public void setImagem2(String imagem2) {
+		this.imagem2 = imagem2;
+	}
 
 	public void pesquisarAtestadoPorMatricula() {
 		Integer matricula = atestado.getMatricula();
@@ -85,6 +99,17 @@ public class AtestadoController {
 			}
 		}
 	}
+	
+	 public void criarImagem(Atestado atestado) throws IOException {
+		 	//String caminho = "C:\\Users\\Hunter\\workspace\\TccSisExames\\WebContent\\resources\\imgUp\\atestado.png";
+		String caminho =FacesContext.getCurrentInstance().getExternalContext().getRealPath("")+"/resources/imgUp/atestado.png";
+		System.out.println(caminho);
+		 FileOutputStream fos = new FileOutputStream(caminho);
+			fos.write(atestado.getImagem());
+			System.out.println("Exibir nome: "+atestado.getNomeColaborador());
+			fos.close();
+		 
+	 }
 
 	public void info() {
 		FacesContext.getCurrentInstance().addMessage(
@@ -113,6 +138,7 @@ public class AtestadoController {
 		AtestadoDao dao = new AtestadoDao();
 
 		atestado.setImagem(imagem.getContents());
+
 		dao.save(atestado);
 		info();
 		FacesContext.getCurrentInstance().getExternalContext().redirect("atestados.jsf");
@@ -120,12 +146,16 @@ public class AtestadoController {
 	}
 
 	// Recebe o arquivo e coloca na variavel imagem para inserir no banco
-	public void recebeAtestados(FileUploadEvent event) {
+	public void recebeAtestados(FileUploadEvent event) throws IOException {
 
 		imagem = event.getFile();
 
 		byte[] arquivoBinario = event.getFile().getContents();
 
+		String caminho = "C:\\imgUP\\atestado.png";
+		FileOutputStream fos = new FileOutputStream(caminho);
+		fos.write(arquivoBinario);
+		fos.close();
 		atestado.setImagem(arquivoBinario);
 
 		FacesMessage msg = new FacesMessage("Sucesso !", event.getFile()
@@ -176,7 +206,7 @@ public class AtestadoController {
 			baos.close();
 			return imageInByte;
 		}
-
+		
 
 }
 

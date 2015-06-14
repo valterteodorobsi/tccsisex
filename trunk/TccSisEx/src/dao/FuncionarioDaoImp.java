@@ -39,7 +39,7 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 	
 		}catch(Exception ex){
 			  
-			//session.refresh(funcionario);
+			session.refresh(funcionario);
 		       	session.close();
 		       	FuncionarioController.matriculaErro();
 		        throw ex;

@@ -28,7 +28,7 @@
 			 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<p:growl id="nomes" showDetail="true" />
 				<h:panelGrid columns="2" cellpadding="2">
-					<p:outputLabel value="Código da Funcão " for="codFuncao" />
+					<p:outputLabel value="Código da Função " for="codFuncao" />
 					<p:inputText id="codFuncao" size="20" maxlength="20" required="true"
 						requiredMessage="Favor preencher o campo Codigo da Função obrigatório"
 						value="#{funcaoBen.funcao.ID_FUNCAO}">
@@ -54,7 +54,7 @@
 
 
 						<p:outputLabel value="Exames: " for="exaFuncao" />
-						<p:selectOneMenu id="exaFuncao" required="true"
+						<p:selectOneMenu id="exaFuncao" required="true" filter="true"
 						requiredMessage="Favor preencher o campo  Exame obrigatório"
 							value="#{funcaoBen.funcao.ID_EXAME}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
