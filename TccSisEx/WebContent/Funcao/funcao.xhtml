@@ -78,8 +78,8 @@
 										<h:outputText value="#{tablefuncao.CRITICIDADE}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:selectOneMenu id="critiFuncao"
-							value="#{tablefuncao.CRITICIDADE}" prependId="true" var="s" label="Criticidade">
+										<p:selectOneMenu id="critiFuncao" style="width:100%"
+							value="#{tablefuncao.CRITICIDADE}" var="s" label="Criticidade" filter="true">
 							<f:selectItem itemLabel="Selecione" itemValue="" />
 							<f:selectItem itemLabel="Alta" itemValue="Alta" />
 							<f:selectItem itemLabel="Normal" itemValue="Normal" />
@@ -106,7 +106,7 @@
 									</f:facet>
 									<f:facet name="input">
 										<p:selectOneMenu id="exaFuncao" 					
-							value="#{tablefuncao.ID_EXAME}" >
+							value="#{tablefuncao.ID_EXAME}" filter="true" style="width:100%" >
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
 							<f:selectItems value="#{exameBen.listaExame()}" var="exame"
 								itemLabel="#{exame.NOME_EXAME}" itemValue="#{exame.ID_EXAME}" />

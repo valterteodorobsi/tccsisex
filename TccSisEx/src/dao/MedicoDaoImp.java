@@ -25,10 +25,10 @@ public class MedicoDaoImp implements MedicoDao  {
 		}catch (Exception ex) {
 			MedicoController.matriculaErro();
 			session.getTransaction().rollback();
-			session.close();
+			
 			 throw ex;
 		}
-		
+		session.close();
 	}
 
 
