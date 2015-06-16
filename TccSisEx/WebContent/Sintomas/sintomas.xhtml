@@ -87,9 +87,9 @@
 									<f:facet name="output">
 										<h:outputText value="#{tablesintomas.NOME_REMEDIO}" />
 									</f:facet>
-									<f:facet name="input">
-										<p:selectOneMenu id="remeSintomas" size="20" label="Remedio Homologado"
-							value="#{tablesintomas.ID_REMEDIO}" prependId="true" var="r">
+									<f:facet name="input" style="width:100%">
+										<p:selectOneMenu id="remeSintomas" 
+							value="#{sintomasBen.sintomas.ID_REMEDIO}" style="width:100%" >
 							<f:selectItem itemLabel="Selecione...   " itemValue=" "  />
 							<f:selectItems value="#{remedioBen.listaRemedio()}" var="remedio"
 								itemLabel="#{remedio.NOME}" itemValue="#{remedio.ID_REMEDIO}" />
@@ -102,7 +102,7 @@
 							<p:column style="width:32px">
 								<p:rowEditor title="Alterar" />
 								<p:spacer width="1" />
-								<p:commandLink title="Deletar"  update=":form" onclick="confirm_entry();"
+								<p:commandLink title="Deletar"  update=":form" onclick="if(!confirm('Deseja Excluir o registro ?'))return false;"
 									action="#{sintomasBen.excluirSintomas(tablesintomas)}">
 
 									<p:graphicImage url="/img/excluir.png"

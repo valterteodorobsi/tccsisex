@@ -63,22 +63,22 @@
 					<p:outputLabel value="Modo: " for="modRel" />
 					<p:selectOneMenu id="modRel" required="true"  filter="true"
 						requiredMessage="Favor preencher o campo  Modo obrigatório"
-							value="#{RelAtestadosBean.relAtestados.nomeColaborador}" prependId="true" var="m">
+							value="#{RelAtestadosBean.relAtestados.idColaborador}" prependId="true" >
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
-							<f:selectItem itemLabel="Todos" itemValue="todos"  />
+							<f:selectItem itemLabel="Todos" itemValue="0"  />
 							<f:selectItems value="#{funcionarioBen.listaColaboradorComboBox()}" var="colaborador"
-								itemLabel="#{colaborador.NOME}" itemValue="#{colaborador.NOME}" />
+								itemLabel="#{colaborador.NOME}" itemValue="#{colaborador.ID_MATRICULA}" />
 								 
 						</p:selectOneMenu>
 						
 						<p:outputLabel value="Tipo: " for="tipRel" />
 					<p:selectOneMenu id="tipRel" required="true" filter="true"
 						requiredMessage="Favor preencher o campo Tipo obrigatório"
-							value="#{RelAtestadosBean.relAtestados.nomeSetor}" prependId="true" var="m">
+							value="#{RelAtestadosBean.relAtestados.idSetor}" prependId="true" >
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
-							<f:selectItem itemLabel="Todos" itemValue="todos"  />
+							<f:selectItem itemLabel="Todos" itemValue="0"  />
 							<f:selectItems value="#{setorBen.listaSetor()}" var="setor"
-								itemLabel="#{setor.NOME}" itemValue="#{setor.NOME}" />
+								itemLabel="#{setor.NOME}" itemValue="#{setor.ID_CENTRO_CUSTO}" />
 								 
 						</p:selectOneMenu>
 					
@@ -98,16 +98,8 @@
 						
 						
 				<p:commandButton value="Gerar Relatório"  actionListener="#{RelAtestadosBean.imprimir}" ajax="false"  />
-				<p:commandButton value="Gerar Grafico"  actionListener="#{RelAtestadosBean.abreGrafico}" ajax="false" update="grafico"   />		
 				</h:panelGrid>
 					
-				<p:panel id="grafico" style="width: 550px" >
-
-                                                <p:pieChart id="linear" type="pie" title="Gráfico Sintomas"
-                                                        value="#{RelAtestadosBean.piechart}" legendPosition="ne" fill="true" showDataLabels="true" minY="0" maxY="10"
-                                                        style="height:400px" >
-                                                </p:pieChart>
-                                 </p:panel>
 				
 			</p:layoutUnit>
 		</p:layout>

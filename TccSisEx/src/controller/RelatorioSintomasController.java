@@ -50,11 +50,11 @@ public class RelatorioSintomasController  implements Serializable{
 
 	public void imprimir() throws Exception {
 		RelatorioSintomasDao dao = new RelatorioSintomasDao();
-        String nomeSintomas = relSintomas.getNomeSintomas();
-        String nomeSetor = relSintomas.getNomeSetor();
+        Integer nomeSintomas = relSintomas.getIdSintomas();
+        Integer nomeSetor = relSintomas.getIdSetor();
         
         
-        if(relSintomas.getNomeSetor().equals("todos")){
+        if(relSintomas.getIdSetor().equals(0)){
         	
         	listaRelSintomas =  dao.relatorioSintomasTodos(nomeSintomas , nomeSetor);
 			
@@ -65,7 +65,9 @@ public class RelatorioSintomasController  implements Serializable{
 				relatorioSintomas.add(relSintomas);
 
 			}
-
+			if(relatorioSintomas.isEmpty()){
+				warn();
+			}else{
 			JasperReport report = JasperCompileManager.compileReport(this
 					.getPathToReportPackage()
 					+ "Relatorio_Sintomas.jrxml");
@@ -79,7 +81,7 @@ public class RelatorioSintomasController  implements Serializable{
 
 			JasperExportManager.exportReportToPdfFile(print,
 					"c:/relatorio/Relatorio_Sintomas.pdf");
-		
+			}
         }
         else{
               
@@ -92,7 +94,9 @@ public class RelatorioSintomasController  implements Serializable{
 				relatorioSintomas.add(relSintomas);
 
 			}
-
+			if(relatorioSintomas.isEmpty()){
+				warn();
+			}else{	
 			JasperReport report = JasperCompileManager.compileReport(this
 					.getPathToReportPackage()
 					+ "Relatorio_Sintomas_unitario.jrxml");
@@ -106,31 +110,11 @@ public class RelatorioSintomasController  implements Serializable{
 
 			JasperExportManager.exportReportToPdfFile(print,
 					"c:/relatorio/Relatorio_Sintomas.pdf");
+			}
 		}
+			
         
 	}
-	
-	public void abreGrafico(){
-		if(relSintomas.getNomeSetor().equals("todos") || relSintomas.getNomeSintomas().equals("todos")){
-			warn();
-		} 
-		else if(relSintomas != null){
-                
-        piechart = new PieChartModel();
-        RelatorioSintomasDao dao = new RelatorioSintomasDao();
-        String nomeSintomas = relSintomas.getNomeSintomas();
-        String nomeSetor = relSintomas.getNomeSetor();
-       
-        listaRelSintomas =  dao.relatorioSintomas(nomeSintomas, nomeSetor);
-                
-                piechart = new PieChartModel();
-                
-                for(RelatorioSintomas sintomas : listaRelSintomas){
-                       // piechart.set(( Integer.valueOf(sintomas.getQtd_sintomas,sintomas.getNomeSintomas(), sintomas.getNomeSetor())));
-                }
-        }
-        
-}
 	
 	
 	
@@ -141,7 +125,7 @@ public class RelatorioSintomasController  implements Serializable{
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!",
-						"Não é possivel gerar o grafico com o Valor 'TODOS'. "));
+						"Nenhum registro foi encontrado. "));
 	}
 	
 	

@@ -4,7 +4,7 @@ import model.PedidoDeExame;
 
 public interface PedidoDeExameDao {
 
-	public void save(PedidoDeExame pedidoDeExame);
+	public void save(PedidoDeExame pedidoDeExame) throws Exception;
 
 	
 }

@@ -163,7 +163,8 @@
 								<p:rowEditor title="Alterar" />
 								<p:spacer width="1" />
 								
-									<p:commandLink title="Remover" update=":form" onclick="confirm_entry();" action="#{prontuarioBen.excluirProntuario(tableProntuario)}">
+									<p:commandLink title="Remover" onclick="if(!confirm('Deseja Excluir o registro ?'))return false;" 
+									action="#{prontuarioBen.excluirProntuario(tableProntuario)}" update=":form" >
 									<p:graphicImage url="/img/excluir.png"
 										style="background-color: transparent; vertical-align: middle; border: none"
 										width="11px" height="11px" />

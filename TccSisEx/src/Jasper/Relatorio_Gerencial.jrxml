@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
-<!-- 2015-05-31T13:02:19 -->
+<!-- 2015-06-12T22:12:06 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatorio_Gerencial1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e55c3655-45c2-4247-a078-a3fa4df9df69">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString language="SQL">
@@ -12,14 +12,11 @@
 	<field name="qtdeEntrada" class="java.lang.Float">
 		<fieldDescription><![CDATA[qtdeEntrada]]></fieldDescription>
 	</field>
-	<field name="nomeMedico" class="java.lang.String">
+	<field name="nomeMedico" class="java.lang.Integer">
 		<fieldDescription><![CDATA[nomeMedico]]></fieldDescription>
 	</field>
 	<field name="nomeMedicos" class="java.lang.String">
 		<fieldDescription><![CDATA[nomeMedicos]]></fieldDescription>
-	</field>
-	<field name="gerencial" class="model.RelatorioGerencial">
-		<fieldDescription><![CDATA[gerencial]]></fieldDescription>
 	</field>
 	<group name="Group1">
 		<groupHeader>

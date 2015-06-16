@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import model.RelatorioGerencial;
 import model.RelatorioPermanencia;
@@ -39,12 +41,9 @@ public class RelatorioPermanenciaController implements Serializable {
 	private String path; // Caminho base
 	private String pathToReportPackage; // Caminho para o package onde estão
 										// armazenados os relatorios Jarper
-	private PieChartModel piechart;
-	private Date Time;
 
 	public RelatorioPermanenciaController() {
 		permanencia = new RelatorioPermanencia();
-		piechart = new PieChartModel();
 		this.path = this.getClass().getClassLoader().getResource("").getPath();
 		this.pathToReportPackage = this.path + "jasper/";
 		System.out.println(path);
@@ -68,19 +67,23 @@ public class RelatorioPermanenciaController implements Serializable {
 			relatorioPermanencia.add(permanencia);
 
 		}
+		if (listaPermanencia.isEmpty()) {
+			semRegistro();
+		} else {
+			JasperReport report = JasperCompileManager.compileReport(this
+					.getPathToReportPackage() + "Relatorio_Permanencia.jrxml");
 
-		JasperReport report = JasperCompileManager.compileReport(this
-				.getPathToReportPackage() + "Relatorio_Permanencia.jrxml");
+			JasperPrint print = JasperFillManager.fillReport(report, null,
+					new JRBeanCollectionDataSource(relatorioPermanencia));
+			// abre visualizador
+			JasperViewer jv = new JasperViewer(print, false);
+			jv.setTitle("Relatorio Tempo Médio de Permanencia");
+			jv.setVisible(true);
 
-		JasperPrint print = JasperFillManager.fillReport(report, null,
-				new JRBeanCollectionDataSource(relatorioPermanencia));
-		// abre visualizador
-		JasperViewer jv = new JasperViewer(print, false);
-		jv.setTitle("Relatorio Tempo Médio de Permanencia");
-		jv.setVisible(true);
+			JasperExportManager.exportReportToPdfFile(print,
+					"c:/relatorio/Relatorio_Permanencia.pdf");
 
-		JasperExportManager.exportReportToPdfFile(print,
-				"c:/relatorio/Relatorio_Permanencia.pdf");
+		}
 	}
 
 	public RelatorioPermanencia getPermanencia() {
@@ -93,6 +96,7 @@ public class RelatorioPermanenciaController implements Serializable {
 
 	public List<RelatorioPermanencia> getListaPermanencia() {
 		return listaPermanencia;
+
 	}
 
 	public void setListaPermanencia(List<RelatorioPermanencia> listaPermanencia) {
@@ -131,20 +135,11 @@ public class RelatorioPermanenciaController implements Serializable {
 		this.pathToReportPackage = pathToReportPackage;
 	}
 
-	public PieChartModel getPiechart() {
-		return piechart;
-	}
-
-	public void setPiechart(PieChartModel piechart) {
-		this.piechart = piechart;
-	}
-
-	public Date getTime() {
-		return Time;
-	}
-
-	public void setTime(Date time) {
-		Time = time;
+	public void semRegistro() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!",
+						"Não existe registros"));
 	}
 
 }

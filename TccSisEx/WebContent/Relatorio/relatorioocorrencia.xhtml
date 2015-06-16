@@ -97,18 +97,9 @@
 						
 						
 						
-				<p:commandButton value="Gerar Relatório"  actionListener="#{RelOcorrenciaBean.imprimir}" ajax="false"  />
-				<p:commandButton value="Gerar Grafico"  actionListener="#{RelOcorrenciaBean.abreGrafico}" ajax="false" update="grafico"   />		
+				<p:commandButton value="Gerar Relatório"  actionListener="#{RelOcorrenciaBean.imprimir}" ajax="false"  update="messages"/>
 				</h:panelGrid>
 					
-				<p:panel id="grafico" style="width: 550px" >
-
-                                                <p:pieChart id="linear" type="pie" title="Gráfico Sintomas"
-                                                        value="#{RelOcorrenciaBean.piechart}" legendPosition="ne" fill="true" showDataLabels="true" minY="0" maxY="10"
-                                                        style="height:400px" >
-                                                </p:pieChart>
-                                 </p:panel>
-				
 			</p:layoutUnit>
 		</p:layout>
 		</h:form>

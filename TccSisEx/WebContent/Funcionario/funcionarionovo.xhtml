@@ -175,9 +175,7 @@
 
 						<p:outputLabel value="Email: " for="emaiFun" />
 						<p:inputText id="emaiFun" size="40" maxlength="80" required="true"
-							converterMessage="Favor preencher o campo  Email obrigatório"
 							value="#{funcionarioBen.funcionario.EMAIL}">
-							<f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+"  />
 						</p:inputText>
 						<p:outputLabel value="Sexo: " for="sexFun" />
 						<p:selectOneMenu id="sexFun" required="true"
@@ -204,11 +202,6 @@
 			</p:layoutUnit>
 		</p:layout>
 	</div>
-	<!-- VER O PORQUE NÃO ESTA CHAMDO O CORPO INSERINDO O RODAPÉ <div id="rodape">
-		<ui:insert name="rodape">
-			<ui:include src="/rodape.xhtml" />
-		</ui:insert>
-	</div> -->
 
 </h:body>
 </html>

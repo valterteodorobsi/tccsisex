@@ -104,7 +104,7 @@
 							<p:rowEditor title="Alterar" />
 							<p:spacer width="1" />
 							<p:commandLink title="Deletar" update=":form"
-								onclick="confirm_entry();"
+								onclick="if(!confirm('Deseja Excluir o registro ?'))return false;"
 								action="#{setorBen.excluirSetor(tablesetor)}">
 
 								<p:graphicImage url="/img/excluir.png"
@@ -117,10 +117,11 @@
 
 					</p:dataTable>
 
-					<h:panelGrid columns="2" cellpadding="2">
+					<h:panelGrid columns="1" cellpadding="1">
 						<p:outputLabel value="Centro de Custo: " for="centSetor" />
 						<p:inputText id="centSetor"
 							value="#{setorBen.setor.ID_CENTRO_CUSTO}" />
+							<p:outputLabel value="ou" />
 						<p:outputLabel value="Nome: " for="nomesetor" />
 						<p:inputText id="nomesetor" value="#{setorBen.setor.NOME}" />
 					</h:panelGrid>

@@ -175,7 +175,7 @@
 							<p:column style="width:32px">
 								<p:rowEditor title="Alterar" />
 								<p:spacer width="1" />
-								<p:commandLink title="Deletar"  update=":form"  onclick="confirm_entry();"
+								<p:commandLink title="Deletar"  update=":form"  onclick="if(!confirm('Deseja Excluir o registro ?'))return false;"
 									action="#{medicoBen.excluirMedico(tablemedico)}">
 
 									<p:graphicImage url="/img/excluir.png"
@@ -188,10 +188,11 @@
 
 						</p:dataTable>
 
-				<h:panelGrid columns="2" cellpadding="2">
+				<h:panelGrid columns="1" cellpadding="1">
 						<p:outputLabel value="Matrícula: " for="matriculaFun" />
 						<p:inputText id="matriculaFun"
 							value="#{medicoBen.medico.ID_MATRICULA}" />
+							<p:outputLabel value="ou" />
 						<p:outputLabel value="Nome: " for="nomeMed" />
 						<p:inputText id="nomeMed"
 							value="#{medicoBen.medico.NOME}" />

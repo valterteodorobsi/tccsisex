@@ -119,7 +119,7 @@
 							<p:column style="width:32px">
 								<p:rowEditor title="Alterar" />
 								<p:spacer width="1" />
-								<p:commandLink update=":form"  onclick="confirm_entry();"
+								<p:commandLink update=":form"  onclick="if(!confirm('Deseja Excluir o registro ?'))return false;"
 									action="#{funcaoBen.excluirFuncao(tablefuncao)}">
 
 									<p:graphicImage url="/img/excluir.png"
@@ -132,10 +132,11 @@
 
 						</p:dataTable>
 
-<h:panelGrid columns="2" cellpadding="2">
+<h:panelGrid columns="1" cellpadding="1">
 						<p:outputLabel value="Código da Função: " for="CodFuncao" />
 						<p:inputText id="CodFuncao"
 							value="#{funcaoBen.funcao.ID_FUNCAO}" />
+							<p:outputLabel value="ou" />
 						<p:outputLabel value="Nome: " for="nomeFuncao" />
 						<p:inputText id="nomeFuncao"
 							value="#{funcaoBen.funcao.NOME}" />

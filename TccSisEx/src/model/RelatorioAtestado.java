@@ -11,17 +11,11 @@ public class RelatorioAtestado implements Serializable {
 	private String nomeColaborador;
 	private String nomeSetor;
 	private float qtdAtestados;
+	private Integer idColaborador;
+	private Integer idSetor;
 	
 	public RelatorioAtestado(){
 		
-	}
-	
-	public RelatorioAtestado(String nomeColaborador, String nomeSetor,
-			float qtdAtestados) {
-		super();
-		this.nomeColaborador = nomeColaborador;
-		this.nomeSetor = nomeSetor;
-		this.qtdAtestados = qtdAtestados;
 	}
 
 
@@ -58,6 +52,30 @@ public class RelatorioAtestado implements Serializable {
 
 	public void setQtdAtestados(float qtdAtestados) {
 		this.qtdAtestados = qtdAtestados;
+	}
+
+
+
+	public Integer getIdColaborador() {
+		return idColaborador;
+	}
+
+
+
+	public void setIdColaborador(Integer idColaborador) {
+		this.idColaborador = idColaborador;
+	}
+
+
+
+	public Integer getIdSetor() {
+		return idSetor;
+	}
+
+
+
+	public void setIdSetor(Integer idSetor) {
+		this.idSetor = idSetor;
 	}
 	
 	

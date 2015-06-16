@@ -8,6 +8,9 @@ public class RelatorioSintomas implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private Integer idSintomas;
+	private Integer idSetor;
 	private String nomeSintomas;
 	private String nomeSetor;
 	private float qtdSintomas;
@@ -16,15 +19,6 @@ public class RelatorioSintomas implements Serializable {
 	
 	public RelatorioSintomas(){
 		
-	}
-	
-	
-	public RelatorioSintomas(String nomeSintomas, String nomeSetor,
-			float qtdSintomas) {
-		
-		this.nomeSintomas = nomeSintomas;
-		this.nomeSetor = nomeSetor;
-		this.qtdSintomas = qtdSintomas;
 	}
 	
 	
@@ -44,6 +38,36 @@ public class RelatorioSintomas implements Serializable {
 		return qtdSintomas;
 	}
 	public void setQtd_sintomas(float qtdSintomas) {
+		this.qtdSintomas = qtdSintomas;
+	}
+
+
+	public Integer getIdSintomas() {
+		return idSintomas;
+	}
+
+
+	public void setIdSintomas(Integer idSintomas) {
+		this.idSintomas = idSintomas;
+	}
+
+
+	public Integer getIdSetor() {
+		return idSetor;
+	}
+
+
+	public void setIdSetor(Integer idSetor) {
+		this.idSetor = idSetor;
+	}
+
+
+	public float getQtdSintomas() {
+		return qtdSintomas;
+	}
+
+
+	public void setQtdSintomas(float qtdSintomas) {
 		this.qtdSintomas = qtdSintomas;
 	}
 	

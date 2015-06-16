@@ -10,7 +10,9 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.transform.Transformers;
+import org.jgroups.util.Promise;
 
+import controller.ProntuarioController;
 import util.HibernateUtil;
 
 public class ProntuarioDaoImp implements ProntuarioDao {
@@ -32,7 +34,7 @@ public class ProntuarioDaoImp implements ProntuarioDao {
 
 			// session.refresh(funcionario);
 			session.close();
-			// FuncionarioController.matriculaErro();
+			ProntuarioController.matriculaErro();
 			throw ex;
 
 		}
@@ -72,7 +74,7 @@ public class ProntuarioDaoImp implements ProntuarioDao {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		SQLQuery query = session
-				.createSQLQuery("select funcionario.nome as nomeFuncionario, funcao.nome as nomeFuncao, setor.nome as nomeSetor, funcionario.data_nasc, funcionario.rg, funcionario.email, funcionario.ramal, prontuarios.id_matricula, prontuarios.pendencias from prontuario as prontuarios inner join FUNCIONARIO as funcionario on funcionario.ID_MATRICULA = prontuarios.id_matricula inner join SETOR as setor on funcionario.ID_CENTRO_CUSTO = setor.ID_CENTRO_CUSTO inner join FUNCAO as funcao on funcionario.ID_FUNCAO = funcao.ID_FUNCAO where prontuarios.id_matricula = :matricula group by funcionario.nome, funcao.nome, setor.nome, funcionario.data_nasc, funcionario.rg, funcionario.email, funcionario.ramal, prontuarios.id_matricula, prontuarios.pendencias ");
+				.createSQLQuery("select funcionario.nome as nomeFuncionario, funcao.nome as nomeFuncao, setor.nome as nomeSetor, funcionario.data_nasc, funcionario.rg, funcionario.email, funcionario.ramal, prontuarios.id_matricula, prontuarios.pendencias , prontuarios.ID_PRONTUARIO  from prontuario as prontuarios inner join FUNCIONARIO as funcionario on funcionario.ID_MATRICULA = prontuarios.id_matricula inner join SETOR as setor on funcionario.ID_CENTRO_CUSTO = setor.ID_CENTRO_CUSTO inner join FUNCAO as funcao on funcionario.ID_FUNCAO = funcao.ID_FUNCAO where prontuarios.id_matricula = :matricula group by funcionario.nome, funcao.nome, setor.nome, funcionario.data_nasc, funcionario.rg, funcionario.email, funcionario.ramal, prontuarios.id_matricula, prontuarios.pendencias, prontuarios.ID_PRONTUARIO  ");
 		query.setParameter("matricula", matricula);
 		query.addScalar("nomeFuncionario");
 		query.addScalar("nomeFuncao");
@@ -83,6 +85,7 @@ public class ProntuarioDaoImp implements ProntuarioDao {
 		query.addScalar("ramal");
 		query.addScalar("id_matricula");
 		query.addScalar("PENDENCIAS");
+		query.addScalar("ID_PRONTUARIO");
 		query.setResultTransformer(Transformers.aliasToBean(Prontuario.class));
 		List<Prontuario> users = query.list();
 		t.commit();
@@ -104,7 +107,7 @@ public class ProntuarioDaoImp implements ProntuarioDao {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		SQLQuery query = session
-				.createSQLQuery("select funcionario.nome as nomeFuncionario, funcao.nome as nomeFuncao, setor.nome as nomeSetor, funcionario.data_nasc, funcionario.rg, funcionario.email, funcionario.ramal, prontuarios.id_matricula, prontuarios.pendencias from prontuario as prontuarios inner join FUNCIONARIO as funcionario on funcionario.ID_MATRICULA = prontuarios.id_matricula inner join SETOR as setor on funcionario.ID_CENTRO_CUSTO = setor.ID_CENTRO_CUSTO inner join FUNCAO as funcao on funcionario.ID_FUNCAO = funcao.ID_FUNCAO  group by funcionario.nome, funcao.nome, setor.nome, funcionario.data_nasc, funcionario.rg, funcionario.email, funcionario.ramal, prontuarios.id_matricula, prontuarios.pendencias ");
+				.createSQLQuery("select funcionario.nome as nomeFuncionario, funcionario.id_matricula, funcao.nome as nomeFuncao, setor.nome as nomeSetor, funcionario.data_nasc, funcionario.rg, funcionario.email, funcionario.ramal,  prontuarios.pendencias, prontuarios.ID_PRONTUARIO from prontuario as prontuarios inner join FUNCIONARIO as funcionario on funcionario.ID_MATRICULA = prontuarios.id_matricula inner join SETOR as setor on funcionario.ID_CENTRO_CUSTO = setor.ID_CENTRO_CUSTO inner join FUNCAO as funcao on funcionario.ID_FUNCAO = funcao.ID_FUNCAO  group by funcionario.nome, funcao.nome, setor.nome, funcionario.data_nasc, funcionario.rg, funcionario.email, funcionario.ramal,funcionario.id_matricula,  prontuarios.pendencias, prontuarios.ID_PRONTUARIO ");
 		query.addScalar("nomeFuncionario");
 		query.addScalar("nomeFuncao");
 		query.addScalar("nomeSetor");
@@ -114,6 +117,7 @@ public class ProntuarioDaoImp implements ProntuarioDao {
 		query.addScalar("ramal");
 		query.addScalar("id_matricula");
 		query.addScalar("PENDENCIAS");
+		query.addScalar("ID_PRONTUARIO");
 		query.setResultTransformer(Transformers.aliasToBean(Prontuario.class));
 		List<Prontuario> users = query.list();
 		t.commit();

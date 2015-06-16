@@ -13,14 +13,14 @@ import util.HibernateUtil;
 
 public class RelatorioSintomasDao {
 	
-	public List<RelatorioSintomas> relatorioSintomas(String nomeSintomas, String nomeSetor) {
+	public List<RelatorioSintomas> relatorioSintomas(Integer idSintomas, Integer idSetor) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		
 		// mudar query
-		SQLQuery query = session.createSQLQuery("select sintomas as nomeSintomas, s.nome as nomeSetor, count(*) as qtdSintomas from registro_entrada as r inner join funcionario as f on f.setor = f.setor inner join setor as s on s.nome = s.nome  where r.sintomas = :nomeSintomas and s.nome = :nomeSetor group by  sintomas, s.nome");
-		query.setParameter("nomeSintomas", nomeSintomas);
-		query.setParameter("nomeSetor", nomeSetor);
+		SQLQuery query = session.createSQLQuery("select sinto.NOME_SINTOMAS as nomeSintomas, s.NOME as nomeSetor, COUNT(*) as qtdSintomas from REGISTRO_ENTRADA as r inner join FUNCIONARIO as funci on funci.ID_MATRICULA = r.ID_MATRICULA inner join SETOR as s on s.ID_CENTRO_CUSTO = funci.ID_CENTRO_CUSTO inner join SINTOMAS as sinto on r.ID_SINTOMAS = sinto.ID_SINTOMAS where s.ID_CENTRO_CUSTO = :idSetor and sinto.ID_SINTOMAS = :idSintomas group by sinto.NOME_SINTOMAS , s.NOME");
+		query.setParameter("idSintomas", idSintomas);
+		query.setParameter("idSetor", idSetor);
 	    query.addScalar("nomeSintomas");
 	    query.addScalar("nomeSetor");
 	    query.addScalar("qtdSintomas");
@@ -35,14 +35,13 @@ public class RelatorioSintomasDao {
 	
 	}
 		//mudar query
-	public List<RelatorioSintomas> relatorioSintomasTodos(String nomeSintomas , String nomeSetor) {
+	public List<RelatorioSintomas> relatorioSintomasTodos(Integer nomeSintomas , Integer nomeSetor) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		
 	
-		SQLQuery query = session.createSQLQuery("select sintomas as nomeSintomas, s.nome as nomeSetor, count(*) as qtdSintomas from registro_entrada as r inner join funcionario as f on f.setor = f.setor inner join setor as s on s.nome = s.nome  group by  sintomas, s.nome");
-		
-	    query.addScalar("nomeSintomas");
+		SQLQuery query = session.createSQLQuery("select sinto.NOME_SINTOMAS as nomeSintomas, s.NOME as nomeSetor, COUNT(*) as qtdSintomas from REGISTRO_ENTRADA as r inner join FUNCIONARIO as funci on funci.ID_MATRICULA = r.ID_MATRICULA inner join SETOR as s on s.ID_CENTRO_CUSTO = funci.ID_CENTRO_CUSTO inner join SINTOMAS as sinto on r.ID_SINTOMAS = sinto.ID_SINTOMAS group by sinto.NOME_SINTOMAS , s.NOME");
+		query.addScalar("nomeSintomas");
 	    query.addScalar("nomeSetor");
 	    query.addScalar("qtdSintomas");
 	    query.setResultTransformer( Transformers.aliasToBean( RelatorioSintomas.class ) );

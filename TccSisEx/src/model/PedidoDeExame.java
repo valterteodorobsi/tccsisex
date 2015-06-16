@@ -29,6 +29,11 @@ public class PedidoDeExame implements Serializable{
 	private String CID;
 	private String DESCRICAO;
 	private Date DATA_NASC;
+	private String NOME_MEDICO;
+	private String NOME_COLABORADOR;
+	private String NOME_EXAME;
+	private String SETOR;
+	private String FUNCAO;
 	
 	public PedidoDeExame(){
 		
@@ -106,6 +111,46 @@ public class PedidoDeExame implements Serializable{
 
 	public void setID_EXAME(Integer iD_EXAME) {
 		ID_EXAME = iD_EXAME;
+	}
+
+	public String getNOME_MEDICO() {
+		return NOME_MEDICO;
+	}
+
+	public void setNOME_MEDICO(String nOME_MEDICO) {
+		NOME_MEDICO = nOME_MEDICO;
+	}
+
+	public String getNOME_COLABORADOR() {
+		return NOME_COLABORADOR;
+	}
+
+	public void setNOME_COLABORADOR(String nOME_COLABORADOR) {
+		NOME_COLABORADOR = nOME_COLABORADOR;
+	}
+
+	public String getNOME_EXAME() {
+		return NOME_EXAME ;
+	}
+
+	public void setNOME_EXAME(String nOME_EXAME) {
+		NOME_EXAME = nOME_EXAME;
+	}
+
+	public String getSETOR() {
+		return SETOR;
+	}
+
+	public void setSETOR(String sETOR) {
+		SETOR = sETOR;
+	}
+
+	public String getFUNCAO() {
+		return FUNCAO;
+	}
+
+	public void setFUNCAO(String fUNCAO) {
+		FUNCAO = fUNCAO;
 	}
 
 	

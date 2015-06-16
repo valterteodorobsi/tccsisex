@@ -7,11 +7,7 @@
 
 
 <h:head>
-	<!-- Bootstrap core CSS -->
-	 <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" />
-	<!-- <link href="WebContent/resources/css/style.css" rel="stylesheet" /> -->
-	<!-- Custom styles for this template -->
-	<link href="../resources/bootstrap/css/starter-template.css" rel="stylesheet" />
+	
 	
 	<script  type="text/javascript">
 		
@@ -213,7 +209,7 @@
 							<p:column style="width:32px">
 								<p:rowEditor title="Alterar" />
 								<p:spacer width="1" />
-								<p:commandLink title="Remover" update=":form" onclick="confirm_entry();" action="#{funcionarioBen.excluirFuncionario(tablefuncionario)}">
+								<p:commandLink title="Remover" update=":form" onclick="if(!confirm('Deseja Excluir o registro ?'))return false;" action="#{funcionarioBen.excluirFuncionario(tablefuncionario)}">
 									<p:graphicImage id="Excluir" url="/img/excluir.png"
 										style="background-color: transparent; vertical-align: middle; border: none"
 										width="11px" height="11px" />
@@ -223,10 +219,11 @@
 
 						</p:dataTable>
 
-				<h:panelGrid columns="2" cellpadding="2">
+				<h:panelGrid columns="1" cellpadding="1">
 						<p:outputLabel value="Matricula: " for="matriculaFun" />
 						<p:inputText id="matriculaFun"
 							value="#{funcionarioBen.funcionario.ID_MATRICULA}" />
+							<p:outputLabel value="ou" />
 						<p:outputLabel value="Nome: " for="nomeFunci" />
 						<p:inputText id="nomeFunci"
 							value="#{funcionarioBen.funcionario.NOME}" />
@@ -243,11 +240,6 @@
 		</p:layoutUnit>
 	</p:layout>
 	</div>
-	<!-- <div id="rodape">
-	<ui:insert name="rodape">
-			<ui:include src="/rodape.xhtml" />
-		</ui:insert>
-	</div> -->
 
 </h:body>
 </html>
