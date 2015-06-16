@@ -5,18 +5,23 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<!-- <h:outputStylesheet library="css" name="style.css" />
-	<title>SisEx</title> -->
+	<!-- Bootstrap core CSS -->
+	<!-- <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" /> -->
+	<!-- <link href="../resources/bootstrap/css/starter-template.css"
+		rel="stylesheet" /> 
+		 com cor de fundo style="background-color: #eeee;" -->
 
 </h:head>
 
 <h:body>
 
-	
-		<h:graphicImage value="/img/cabeçalho.png"   />
-		<h:form>
-		#{loginBean.usuario.nome} |<p:commandLink value="Sair" action="#{loginBean.deslogar()}" ajax="false" style="font-size: 16px;" />
-     	</h:form>
+
+	<h:graphicImage value="/img/cabeçalho.png" />
+	<h:form>
+		#{loginBean.usuario.nome} |<p:commandLink value="Sair"
+			action="#{loginBean.deslogar()}" ajax="false"
+			style="font-size: 16px;" />
+	</h:form>
 	<p:menubar>
 		<p:submenu label="Cadastros" icon="">
 			<p:menuitem value="Colaborador" url="/Funcionario/funcionario.jsf" />
@@ -31,27 +36,26 @@
 		</p:submenu>
 
 		<p:submenu label="Anexar" icon="">
-			
+
 			<p:menuitem value="Atestados" url="/Atestado/atestados.jsf" />
 			<p:menuitem value="Exames" url="/Exames/exameincluir.jsf" />
 		</p:submenu>
 		<p:submenu label="Registrar Entrada/Saída" icon="">
 			<p:menuitem value="Registra Entrada"
 				url="/Registro/registraentrada.jsf" />
-				<p:menuitem value="Registra Saída"
-				url="/Registro/registrasaida.jsf"/>
+			<p:menuitem value="Registra Saída" url="/Registro/registrasaida.jsf" />
 		</p:submenu>
 		<p:submenu label="Pedidos de Exames" icon="">
 			<p:menuitem value="Pedido de Exame" url="/Pedido/pedidodeexame.jsf" />
 		</p:submenu>
-		
-		<c:if test="#{loginBean.usuario.nivel_Usuario == 'true'}"> 
+
+		<c:if test="#{loginBean.usuario.nivel_Usuario == 'true'}">
 			<p:submenu label="Relatórios" icon="">
 				<p:menuitem value="Relatório Gerencial"
 					url="/Relatorio/relatoriogerencial.jsf" />
 				<p:menuitem value="Relatório Tempo de Permanência"
 					url="/Relatorio/relatoriopermanencia.jsf" />
-				<p:menuitem value="Relatório Ocorrência"
+				<p:menuitem value="Relatório Ocorrências"
 					url="/Relatorio/relatorioocorrencia.jsf" />
 				<p:menuitem value="Relatório Sintomas"
 					url="/Relatorio/relatoriosintomas.jsf" />
@@ -61,7 +65,7 @@
 					url="/Relatorio/relatorioatestados.jsf" />
 			</p:submenu>
 		</c:if>
-		
+
 	</p:menubar>
 </h:body>
 </html>

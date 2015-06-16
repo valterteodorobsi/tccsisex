@@ -64,7 +64,11 @@ public class RelatorioOcorrenciaController {
 				relatorioOcorrencias.add(relRelatorioOcorrencia);
 
 			}
-
+			if(relatorioOcorrencias.isEmpty()){
+				semRegistro();
+			}else{
+				
+			
 			JasperReport report = JasperCompileManager.compileReport(this.getPathToReportPackage()
 					+ "Relatorio_Ocorrencias.jrxml");
 
@@ -72,12 +76,12 @@ public class RelatorioOcorrenciaController {
 					new JRBeanCollectionDataSource(relatorioOcorrencias));
 			// abre visualizador
 			JasperViewer jv = new JasperViewer(print, false);
-			jv.setTitle("Relatorio Ocorrencias");
+			jv.setTitle("Relatorio Ocorrencias"); 
 			jv.setVisible(true);
 
 			JasperExportManager.exportReportToPdfFile(print,
 					"c:/relatorio/Relatorio_Ocorrencias.pdf");
-		
+			}
         }
         else{
               
@@ -90,7 +94,10 @@ public class RelatorioOcorrenciaController {
 				relatorioOcorrencias.add(relAtesRelatorioOcorrencia);
 
 			}
-
+			
+			if(relatorioOcorrencias.isEmpty()){
+				semRegistro();
+			}else{
 			JasperReport report = JasperCompileManager.compileReport(this
 					.getPathToReportPackage()
 					+ "Relatorio_Ocorrencias_unitario.jrxml");
@@ -104,6 +111,7 @@ public class RelatorioOcorrenciaController {
 
 			JasperExportManager.exportReportToPdfFile(print,
 					"c:/relatorio/Relatorio_Ocorrencias.pdf");
+			}
 		}
         
 	}
@@ -117,6 +125,12 @@ public class RelatorioOcorrenciaController {
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!",
 						"Não é possivel gerar o grafico com o Valor 'TODOS'. "));
+	}
+	public void semRegistro() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!",
+						"Não existe registros"));
 	}
 
 

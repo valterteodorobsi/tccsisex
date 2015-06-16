@@ -38,7 +38,7 @@
 					<p:inputText id="setorEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOMESET}" />
 					<p:inputText id="nomeEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOME}" />
 					
-						<p:commandButton value="PesquisarNomePorMatricula" actionListener="#{funcionarioBen.listaColaborador}"
+						<p:commandButton value="PesquisarNomePorMatricula" actionListener="#{funcionarioBen.listaColaboradorAnexo}"
 						update="grid" ajax="false" style="display: none;" id="PesquisarNomePorMatricula" />
 				</h:form>
 				<h:form enctype="multipart/form-data" id="form">
@@ -60,17 +60,21 @@
 						
 						<p:outputLabel value="Nome do Colaborador: " for="nomeAtestado" />
 						<p:inputText id="nomeAtestado" size="50" maxlength="50"
-							required="true"
+							required="true" disabled="true"
 							requiredMessage="Favor preencher o campo  Nome do Colaborador obrigatório"
 							value="#{atestadoBen.atestado.nomeColaborador}" />
 
 
 
 						<p:outputLabel value="Setor: " for="setAtes" />
-						<p:inputText id="setAtes" size="" maxlength="5" required="true"
-							requiredMessage="Favor preencher o campo  CID obrigatório"
-							value="#{atestadoBen.atestado.ID_SETOR}" 
-							 />
+							 <p:selectOneMenu id="setAtes" required="true" filter="true"
+							requiredMessage="Favor preencher o campo  Setor obrigatório"
+							value="#{atestadoBen.atestado.ID_SETOR}" >
+							<f:selectItem itemLabel="Selecione..." itemValue="" />
+							<f:selectItems value="#{setorBen.listaSetor}" var="setor"
+								itemLabel="#{setor.NOME}" itemValue="#{setor.ID_CENTRO_CUSTO}" />
+
+						</p:selectOneMenu>
 						
 						<p:outputLabel value="CID: " for="cidAtes" />
 						<p:inputText id="cidAtes" size="5" maxlength="5" required="true"

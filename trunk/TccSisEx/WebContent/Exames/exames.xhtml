@@ -97,7 +97,7 @@
 							<p:column style="width:32px">
 								<p:rowEditor title="Alterar" />
 								<p:spacer width="1" />
-								<p:commandLink title="Deletar"  ajaxSingle="true" update="table" onclick="if(!confirm('Deseja Excluir?'))return false;"
+								<p:commandLink title="Deletar"  ajaxSingle="true" update="table" onclick="if(!confirm('Deseja Excluir o registro ?'))return false;"
 									action="#{exameBen.excluirExame(tableexame)}">
 
 									<p:graphicImage url="/img/excluir.png"
@@ -114,7 +114,7 @@
 						<p:outputLabel value="Código do Exame: " for="codExame" />
 						<p:inputText id="codExame"
 							value="#{exameBen.exame.ID_EXAME}" />
-							<p:outputLabel value="OU" />
+							<p:outputLabel value="ou" />
 						<p:outputLabel value="Nome do Exame: " for="nomeExame" />
 						<p:inputText id="nomeExame"
 							value="#{exameBen.exame.NOME_EXAME}" />

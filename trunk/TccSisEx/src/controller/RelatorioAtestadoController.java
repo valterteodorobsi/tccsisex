@@ -18,9 +18,6 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
-
-import org.primefaces.model.chart.PieChartModel;
-
 import dao.RelatorioAtestadosDao;
 
 @ManagedBean(name = "RelAtestadosBean")
@@ -37,13 +34,10 @@ public class RelatorioAtestadoController implements Serializable {
 	private Date dataFinal;
 	private String path; // Caminho base
 	private String pathToReportPackage; // Caminho para o package onde estão armazenados os relatorios Jarper
-	private PieChartModel piechart;
-	private Date Time;
 	
 	
 	public RelatorioAtestadoController(){
 		relAtestados = new RelatorioAtestado();
-		piechart = new PieChartModel();
 		this.path = this.getClass().getClassLoader().getResource("").getPath();
 		this.pathToReportPackage = this.path + "jasper/";
 		System.out.println(path);
@@ -53,11 +47,11 @@ public class RelatorioAtestadoController implements Serializable {
 	
 	public void imprimir() throws Exception {
 		RelatorioAtestadosDao dao = new RelatorioAtestadosDao();
-        String nomeColaborador = relAtestados.getNomeColaborador();
-        String nomeSetor = relAtestados.getNomeSetor();
+        Integer nomeColaborador = relAtestados.getIdColaborador();
+        Integer nomeSetor = relAtestados.getIdSetor();
         
         
-        if(relAtestados.getNomeSetor().equals("todos")){
+        if(nomeColaborador.equals(0)){
         	
         	listaRelAtestados =  dao.relatorioAtestadoTodos(nomeColaborador, nomeSetor);
 			
@@ -68,7 +62,9 @@ public class RelatorioAtestadoController implements Serializable {
 				relatorioAtestados.add(relAtesRelatorioAtestado);
 
 			}
-
+			if (relatorioAtestados.isEmpty()){
+				warn();
+			}else{
 			JasperReport report = JasperCompileManager.compileReport(this
 					.getPathToReportPackage()
 					+ "Relatorio_Atestados.jrxml");
@@ -76,16 +72,13 @@ public class RelatorioAtestadoController implements Serializable {
 			JasperPrint print = JasperFillManager.fillReport(report, null,
 					new JRBeanCollectionDataSource(relatorioAtestados));
 			// abre visualizador
-			Date Tim = new Date();
-			long tim = Tim.getTime();
-			Time.setTime(tim);
 			JasperViewer jv = new JasperViewer(print, false);
 			jv.setTitle("Relatorio Atestados");
 			jv.setVisible(true);
 
 			JasperExportManager.exportReportToPdfFile(print,
 					"c:/relatorio/Relatorio_Atestados.pdf");
-		
+			}
         }
         else{
               
@@ -98,8 +91,11 @@ public class RelatorioAtestadoController implements Serializable {
 				relatorioAtestados.add(relAtesRelatorioAtestado);
 
 			}
-
-			JasperReport report = JasperCompileManager.compileReport(this
+			if(relatorioAtestados.isEmpty()){
+				warn();
+			}else{
+			
+				JasperReport report = JasperCompileManager.compileReport(this
 					.getPathToReportPackage()
 					+ "Relatorio_Atestados_unitario.jrxml");
 
@@ -112,8 +108,9 @@ public class RelatorioAtestadoController implements Serializable {
 
 			JasperExportManager.exportReportToPdfFile(print,
 					"c:/relatorio/Relatorio_Atestados.pdf");
-		}
-        
+		
+			}
+        }
 	}
 	
 	
@@ -122,7 +119,7 @@ public class RelatorioAtestadoController implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!",
-						"Não é possivel gerar o grafico com o Valor 'TODOS'. "));
+						"Nenhum registro foi encontrado.  "));
 	}
 	
 	
@@ -162,22 +159,8 @@ public class RelatorioAtestadoController implements Serializable {
 	public void setPathToReportPackage(String pathToReportPackage) {
 		this.pathToReportPackage = pathToReportPackage;
 	}
-	public PieChartModel getPiechart() {
-		return piechart;
-	}
-	public void setPiechart(PieChartModel piechart) {
-		this.piechart = piechart;
-	}
 
 
-	public Date getTime() {
-		return Time;
-	}
-
-
-	public void setTime(Date time) {
-		Time = time;
-	}
 	
 	
 

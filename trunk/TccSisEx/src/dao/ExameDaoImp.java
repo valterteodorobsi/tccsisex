@@ -3,11 +3,13 @@ package dao;
 import java.util.List;
 
 import model.Exame;
+import model.Prontuario;
 
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.transform.Transformers;
 
 import util.HibernateUtil;
 import controller.ExameController;
@@ -87,5 +89,6 @@ public class ExameDaoImp implements ExameDao {
 		t.commit();
 		return query.list();
 	}
+
 
 }

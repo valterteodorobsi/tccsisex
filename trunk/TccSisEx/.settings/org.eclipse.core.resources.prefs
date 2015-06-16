@@ -1,5 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/Jasper/Pedido_Exame.jrxml=UTF-8
+encoding//src/Jasper/Relatorio_Atestados.jrxml=UTF-8
+encoding//src/Jasper/Relatorio_Atestados_unitario.jrxml=UTF-8
 encoding//src/Jasper/Relatorio_Gerencial.jrxml=UTF-8
+encoding//src/Jasper/Relatorio_Ocorrencias.jrxml=UTF-8
 encoding//src/Jasper/Relatorio_Permanencia.jrxml=UTF-8
 encoding//src/Jasper/Relatorio_Responsabilidades.jrxml=UTF-8

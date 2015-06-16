@@ -89,7 +89,22 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 		query.executeUpdate(); 
 		t.commit();
 	}
-
+	public List<FuncionarioPes> listaColaboradorPedido(Integer matricula){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		SQLQuery query = session
+				.createSQLQuery("select f.DATA_NASC, f.NOME, s.NOME as NOMESET, funcao.NOME as NOMEFUN, f.ID_MATRICULA FROM Funcionario as f inner join setor as s on f.ID_CENTRO_CUSTO = s.ID_CENTRO_CUSTO inner join FUNCAO as funcao on f.ID_FUNCAO = funcao.ID_FUNCAO where f.ID_MATRICULA = :matricula and f.ATIVO = 1 group by  f.NOME , f.DATA_NASC, f.ID_MATRICULA, s.NOME, funcao.NOME ");
+		query.setParameter("matricula", matricula );
+		query.addScalar("NOME");
+		query.addScalar("NOMESET");
+		query.addScalar("NOMEFUN");
+		query.addScalar("DATA_NASC");
+		query.setResultTransformer( Transformers.aliasToBean( FuncionarioPes.class ) );
+		List<FuncionarioPes> users = query.list();
+		return users;
+		
+		
+	}
 	public void update(Funcionario funcionario) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
@@ -107,19 +122,6 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 				query.setParameter("RAMAL", funcionario.getRAMAL());
 				
 				query.executeUpdate(); 
-
-		/*System.out.println(funcionario.getNOME());
-		SQLQuery query = session.createSQLQuery("update funcionario set  NOME = funcionario.getNOME() , ramal = :funcionario.getRAMAL() , sexo = :funcionario.getSEXO() , rg = :funcionario.getRG() , email =:funcionario.getEMAIL(), data_nasc = :funcionario.getDATA_NAS() , id_funcao = :funcionario.getID_FUNCAO() , id_centro_custo = :funcionario.getID_CENTRO_CUSTO() where id_matricula = :funcionario.getID_MATRICULA()");
-		query.setParameter("NOME",funcionario.getNOME());
-		query.setParameter(	"ramal" , funcionario.getRAMAL());
-		query.setParameter("sexo" , funcionario.getSEXO());
-		query.setParameter("rg", funcionario.getRAMAL());
-		query.setParameter("email" , funcionario.getEMAIL());
-		query.setParameter("data_nasc" ,funcionario.getDATA_NASC());
-		query.setParameter("id_funcao" ,funcionario.getID_FUNCAO());
-		query.setParameter("id_centro_custo",funcionario.getID_CENTRO_CUSTO());
-		
-		session.update(funcionario);*/
 		
 
 		t.commit();
@@ -148,7 +150,6 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 	public List<FuncionarioPes> pesquisarNome(String nome) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		//Query query = session.createQuery("FROM Funcionario u where u.NOME LIKE :nome"); 
 		
 		
 		SQLQuery query = session.createSQLQuery("select DATA_NASC, EMAIL , ID_MATRICULA, fu.NOME as NOME, RAMAL, RG, SEXO, f.NOME as NOMEFUN, s.NOME as NOMESET FROM funcionario as fu inner join setor as s on s.ID_CENTRO_CUSTO = fu.ID_CENTRO_CUSTO inner join funcao as f on f.ID_FUNCAO = fu.ID_FUNCAO where fu.NOME LIKE :nome and ATIVO = 1 group by s.NOME , f.NOME, ID_MATRICULA, fu.NOME, DATA_NASC, EMAIL, RAMAL , RG, SEXO"); 
@@ -202,4 +203,6 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 	    List<FuncionarioPes> users = query.list();
 		return users;
 	}
+	
+	
 }

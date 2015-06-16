@@ -67,12 +67,17 @@
 									<h:outputText value="#{tableArquivo.DESCRICAO}" />
 								</p:column>
 								 <p:column headerText="Imagem">
-									<h:commandLink value="ABRIR IMAGEM" /><!-- value="#{tableArquivo.IMAGEM}" --> 
-								</p:column> 
+											
+												<p:commandButton value="Imagem"
+													action="#{arquivoBen.criarImagem(tableArquivo)}"  onclick="carDialog.show();" />
+ 			               			  			 
+			           			 			
+											</p:column> 
+			
 
 
 								<p:column headerText=" ">
-									<p:commandLink title="Deletar"  update=":form" onclick="confirm_entry();"
+									<p:commandLink title="Deletar"  update=":form" onclick="if(!confirm('Deseja Excluir o registro ?'))return false;"
 									action="#{arquivoBen.excluirArquivo(tableArquivo)}">
 
 									<p:graphicImage url="/img/excluir.png"
@@ -86,7 +91,12 @@
 								</p:column>
 
 							</p:dataTable>
-							
+							<p:dialog header="Imagem" widgetVar="carDialog" >
+		       		  		
+						               	<p:graphicImage id="boximage" url="../resources/imgUp/atestado.png" cache="false" />
+										
+		 
+						    </p:dialog>
 							<h:panelGrid columns="2" cellpadding="2">
 						<p:outputLabel value="Matrícula: " for="matriculaFun" />
 						<p:inputText id="matriculaFun"

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -77,17 +78,31 @@ public class ReceberOArquivoController {
 	}
 
 	// Recebe o arquivo e coloca na variavel imagem para inserir no banco;
-	public void recebeArquivos(FileUploadEvent event) {
+	public void recebeArquivos(FileUploadEvent event) throws IOException{
 
 		imagem = event.getFile();
 
 		byte[] arquivoBinario = event.getFile().getContents();
+		String caminho = "C:\\imgUP\\exames.png";
+		FileOutputStream fos = new FileOutputStream(caminho);
+		fos.write(arquivoBinario);
+		fos.close();
 		arquivo.setIMAGEM(arquivoBinario);
 		FacesMessage msg = new FacesMessage("Sucesso !", event.getFile()
 				.getFileName() + "Incluso.");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 
 	}
+	
+	 public void criarImagem(Arquivo arquivo) throws IOException {
+		 	//String caminho = "C:\\Users\\Hunter\\workspace\\TccSisExames\\WebContent\\resources\\imgUp\\atestado.png";
+		String caminho =FacesContext.getCurrentInstance().getExternalContext().getRealPath("")+"/resources/imgUp/exame.png";
+		System.out.println(caminho);
+		 FileOutputStream fos = new FileOutputStream(caminho);
+			fos.write(arquivo.getIMAGEM());
+			fos.close();
+		 
+	 }
 
 	public void pesquisarExamePorMatricula() {
 		Integer matricula = arquivo.getID_MATRICULA();

@@ -74,6 +74,22 @@
 	
 <title>Pedido De Exames</title>
 	<script>
+	    function desabilitarCampos(){
+	    	
+	    	document.getElementById("form:nomePed").disabled = true; 
+			document.getElementById("form:datPed").disabled = true;  
+			document.getElementById("form:setPed").disabled = true;  
+			document.getElementById("form:unPed").disabled = true; 
+	    }
+	    
+  		 function habilitarCampos(){
+	    	
+	    	document.getElementById("form:nomePed").disabled = false; 
+			document.getElementById("form:datPed").disabled = false;  
+			document.getElementById("form:setPed").disabled = false;  
+			document.getElementById("form:unPed").disabled = false; 
+	    }
+	
 		function listaColaborador(valor) {
 			document.getElementById("formEscondido:matriculaEscondida").value = valor;
 			document.getElementById("formEscondido:PesquisarNomePorMatricula").click();
@@ -81,9 +97,16 @@
 		}
 		
 		function carregaNome() {
+			
+			habilitarCampos();
+			
 			document.getElementById("form:nomePed").value = document.getElementById("formEscondido:nomeEscondida").value;
+			document.getElementById("form:datPed").value = document.getElementById("formEscondido:dataEscondida").value;
+			document.getElementById("form:setPed").value = document.getElementById("formEscondido:setorEscondida").value;
+			document.getElementById("form:unPed").value = document.getElementById("formEscondido:funcaoEscondida").value;
 			document.getElementById("form:matriculaPed").value = document.getElementById("formEscondido:matriculaEscondida").value;
 			
+			desabilitarCampos();
 		}		
 	</script>
 </h:head>
@@ -102,8 +125,13 @@
         	<h:form enctype="multipart/form-data" id="formEscondido">
 					<p:inputText id="matriculaEscondida" type="hidden" value="#{funcionarioBen.funcionario.ID_MATRICULA}" />
 					<p:inputText id="nomeEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOME}" />
+					<p:inputText id="funcaoEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOMEFUN}" />
+					<p:inputText id="setorEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOMESET}" />
+						<p:inputText id="dataEscondida" type="hidden" value="#{funcionarioBen.funcionario.DATA_NASC}" >
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+						</p:inputText>
 					
-						<p:commandButton value="PesquisarNomePorMatricula" actionListener="#{funcionarioBen.listaColaborador}"
+						<p:commandButton value="PesquisarNomePorMatricula" actionListener="#{funcionarioBen.listaColaboradorPedido}"
 						update="grid" ajax="false" style="display: none;" id="PesquisarNomePorMatricula" />
 				</h:form>
 		<h:form id="form">
@@ -112,37 +140,31 @@
 			<h:panelGrid columns="2" cellpadding="2">
 				<p:outputLabel value="Matrícula: " for="matriculaPed" />
 					<p:inputText id="matriculaPed" size="20" maxlength="20" 
-					required="true" onblur="listaColaborador(this.value);" update="nomePed" 
+					required="true" onblur="listaColaborador(this.value);" update="nomePed,setPed,unPed,datPed" 
 						requiredMessage="Favor preencher o campo Matrícula obrigatório"
 						value="#{pedidoExameBen.pedidoDeExame.MATRICULA}">
 						<f:validateLength minimum="1" maximum="20" />
 					</p:inputText>
 					<p:outputLabel value="Nome: " for="nomePed" />
-					<p:inputText id="nomePed" size="50" maxlength="50" required="true"
+					<p:inputText id="nomePed" size="50" maxlength="50" 
 						requiredMessage="Favor preencher o campo  Nome obrigatório"
+						value="#{pedidoExameBen.pedidoDeExame.NOME_COLABORADOR}"
 						 />
 					<p:outputLabel value="Setor: " for="setPed" />
-					<p:selectOneMenu id="setPed" required="true" filter="true"
+					<p:inputText id="setPed" required="true" 
 						requiredMessage="Favor preencher o campo  Setor obrigatório"
-							value="#{pedidoExameBen.pedidoDeExame.ID_SETOR}">
-							<f:selectItem itemLabel="Selecione..." itemValue=""  />
-							<f:selectItems value="#{setorBen.listaSetor()}" var="setor"
-								itemLabel="#{setor.NOME}" itemValue="#{setor.ID_CENTRO_CUSTO}" />
-						</p:selectOneMenu>
+							value="#{pedidoExameBen.pedidoDeExame.SETOR}"
+							/>
 					
 					<p:outputLabel value="Função: " for="unPed" />
-						<p:selectOneMenu id="unPed" required="true" filter="true"
+						<p:inputText id="unPed" required="true"
 						requiredMessage="Favor preencher o campo  Função obrigatório"
-							value="#{pedidoExameBen.pedidoDeExame.ID_FUNCAO}">
-							<f:selectItem itemLabel="Selecione..." itemValue=""  />
-							<f:selectItems value="#{funcaoBen.listaFuncao()}" var="funcao"
-								itemLabel="#{funcao.NOME}" itemValue="#{funcao.ID_FUNCAO}" />
-						</p:selectOneMenu>
+							value="#{pedidoExameBen.pedidoDeExame.FUNCAO}" />
 
 						<p:outputLabel value="Data de Nascimento" for="datPed" />
-					<p:inputMask id="datPed" required="true"
+					<p:inputMask id="datPed" required="true" 
 						requiredMessage="Favor preencher o campo  Data de Nascimento obrigatório"
-						onblur="comparaData(this.value);"
+						 
 						value="#{pedidoExameBen.pedidoDeExame.DATA_NASC}" mask="99/99/9999">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</p:inputMask>
@@ -151,10 +173,10 @@
 				
 						<p:selectOneMenu id="exaPed" required="true" filter="true"
 						requiredMessage="Favor preencher o campo  Exame obrigatório"
-							value="#{pedidoExameBen.pedidoDeExame.ID_EXAME}">
+							value="#{pedidoExameBen.pedidoDeExame.NOME_EXAME}" rependId="true" var="e" >
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
-							<f:selectItems value="#{exameBen.listaExame()}" var="exame"
-								itemLabel="#{exame.NOME_EXAME}" itemValue="#{exame.ID_EXAME}" />
+							<f:selectItems value="#{exameBen.listaExame}" var="exame"
+								itemLabel="#{exame.NOME_EXAME}" itemValue="#{exame.NOME_EXAME}" />
 				</p:selectOneMenu>
 						
 				<p:outputLabel value="CID: " for="cidPed" />
@@ -162,10 +184,10 @@
 				<p:outputLabel value="Médico: " for="medPed" />
 				<p:selectOneMenu id="medPed" required="true" filter="true"
 						requiredMessage="Favor preencher o campo  Médico obrigatório"
-							value="#{pedidoExameBen.pedidoDeExame.ID_MEDICO}">
+							value="#{pedidoExameBen.pedidoDeExame.NOME_MEDICO}">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
 							<f:selectItems value="#{medicoBen.listaMedico()}" var="medico"
-								itemLabel="#{medico.NOME}" itemValue="#{medico.ID_MATRICULA}" />
+								itemLabel="#{medico.NOME}" itemValue="#{medico.NOME}" />
 								 
 						</p:selectOneMenu>
 				
@@ -181,7 +203,7 @@
 
 			</h:panelGrid>
 			<p:commandButton value="voltar" action="/home" />
-				<p:commandButton value="Salvar" validateClient="true" 
+				<p:commandButton value="Salvar" validateClient="true" onclick="javascript:habilitarCampos();"
 					actionListener="#{pedidoExameBen.adicionarPedidoExame}" />
 					
 					

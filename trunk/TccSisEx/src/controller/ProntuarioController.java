@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -63,7 +62,7 @@ public class ProntuarioController {
 
 		new ProntuarioDaoImp().remove(prontuario);
 
-
+		listaProntuario = null;
 		FacesMessage msg = new FacesMessage("Prontuário foi excluído com sucesso");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
@@ -121,6 +120,12 @@ public class ProntuarioController {
 
 
 
+	public static void matriculaErro() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!",
+						"Matricula já existente. "));
+	}
 	
 	
 }

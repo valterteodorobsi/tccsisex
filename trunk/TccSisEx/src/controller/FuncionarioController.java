@@ -1,6 +1,8 @@
 package controller;
 
+import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -59,6 +61,10 @@ public class FuncionarioController {
 
 	public String adicionarFuncionario() throws HibernateException, Exception {
 		FuncionarioDao dao = new FuncionarioDaoImp();
+		if(!validarEmail(funcionario.getEMAIL())){
+			return "";
+			
+		}
 		dao.save(funcionario);
 		info();
 		listaFuncionariosPes = null;
@@ -129,7 +135,23 @@ public class FuncionarioController {
 		}
 		return nomeFuncionario;
 	}
-	
+	public List listaColaboradorAnexo() {
+
+		List<FuncionarioPes> nomeFuncionario =  new FuncionarioDaoImp()
+				.listaColaboradorProntuario(funcionario.getID_MATRICULA());
+
+		if (!nomeFuncionario.isEmpty()) {
+			
+			for (int i = 0; i < nomeFuncionario.size(); i++) {
+				funcionario.setNOME(nomeFuncionario.get(0).getNOME().toString());
+				funcionario.setNOMESET(nomeFuncionario.get(0).getNOMESET().toString());
+				
+			}
+		} else {
+			warn();
+		}
+		return nomeFuncionario;
+	}
 	
 	public void info() {
 		FacesContext.getCurrentInstance().addMessage(
@@ -194,11 +216,47 @@ public class FuncionarioController {
 			listaFuncionariosPes = new FuncionarioDaoImp().pesquisarNome(nome);
 				
 			
-		//listaFuncionariosPes= new FuncionarioDaoImp().pesquisarVazio();
-		//return listaFuncionariosPes;
 		
 		return listaFuncionariosPes;
 	}
+	
+	public List listaColaboradorPedido() {
+
+		List<FuncionarioPes> nomeFuncionario =  new FuncionarioDaoImp()
+		.listaColaboradorPedido(funcionario.getID_MATRICULA());
+		
+		if (!nomeFuncionario.isEmpty()) {
+			for (int i = 0; i < nomeFuncionario.size(); i++) {
+				funcionario.setNOME(nomeFuncionario.get(0).getNOME().toString());
+				funcionario.setNOMEFUN(nomeFuncionario.get(0).getNOMEFUN().toString());
+				funcionario.setNOMESET(nomeFuncionario.get(0).getNOMESET().toString());
+				funcionario.setDATA_NASC(new Date(nomeFuncionario.get(0).getDATA_NASC().getTime()));
+				
+			}
+		} else {
+			warn();
+		}
+		return nomeFuncionario;
+	}
+	
+	 public boolean validarEmail(String email) {
+	        Pattern pattern = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$");
+
+	        if (email != null && !email.equals("")) {
+	            if (!pattern.matcher(email.toString()).matches()) {
+
+	            	FacesContext.getCurrentInstance().addMessage(
+	        				null,
+	        				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!",
+	        						"E-mail invalido"));
+	                return false;
+	            }
+
+	           
+	        }
+	        return true;
+
+	    }
 	
 } 
 

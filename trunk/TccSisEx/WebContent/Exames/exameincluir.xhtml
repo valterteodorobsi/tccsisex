@@ -16,6 +16,7 @@
 		
 		function carregaNome() {
 			document.getElementById("form:nomeAnexo").value = document.getElementById("formEscondido:nomeEscondida").value;
+			document.getElementById("form:setAnexo").value = document.getElementById("formEscondido:setorEscondida").value;
 			document.getElementById("form:matriculaAnexo").value = document.getElementById("formEscondido:matriculaEscondida").value;
 			
 		}
@@ -33,11 +34,12 @@
 			<p:layoutUnit position="center">
 				<H1>Incluir Exames</H1>
 				<p:tooltip />
-				<h:form enctype="multipart/form-data" id="formEscondido">
+				<h:form enctype="multipart/form-data" id="formEscondido"> 
 					<p:inputText id="matriculaEscondida" type="hidden" value="#{funcionarioBen.funcionario.ID_MATRICULA}" />
+					<p:inputText id="setorEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOMESET}" />
 					<p:inputText id="nomeEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOME}" />
 					
-						<p:commandButton value="PesquisarNomePorMatricula" actionListener="#{funcionarioBen.listaColaborador}"
+						<p:commandButton value="PesquisarNomePorMatricula" actionListener="#{funcionarioBen.listaColaboradorAnexo}"
 						update="grid" ajax="false" style="display: none;" id="PesquisarNomePorMatricula" />
 				</h:form>
 				<h:form enctype="multipart/form-data" id="form">
@@ -55,7 +57,7 @@
 						</p:inputText>
 						<p:outputLabel value="Nome: " for="nomeAnexo" />
 						<p:inputText id="nomeAnexo" size="50" maxlength="50"
-							required="true"
+							required="true" disabled="true"
 							requiredMessage="Favor preencher o campo  Nome obrigatório"
 							value="#{arquivoBen.arquivo.NOME_COLABORADOR}" />
 
@@ -66,7 +68,7 @@
 							requiredMessage="Favor preencher o campo  Setor obrigatório"
 							value="#{arquivoBen.arquivo.ID_SETOR}">
 							<f:selectItem itemLabel="Selecione..." itemValue="" />
-							<f:selectItems value="#{setorBen.listaSetor()}" var="setor"
+							<f:selectItems value="#{setorBen.listaSetor}" var="setor"
 								itemLabel="#{setor.NOME}" itemValue="#{setor.ID_CENTRO_CUSTO}" />
 
 						</p:selectOneMenu>
@@ -122,7 +124,7 @@
 					<br> </br>
 					<div>
 						<p:commandButton value="Voltar" action="/home"  />
-						<p:commandButton value="Pesquisar" action="pesquisarexames.xhtml"
+						<p:commandButton value="Pesquisar" action="pesquisarexames"
 							validateClient="false"  />
 						<p:commandButton value="Salvar" validateClient="true"
 							actionListener="#{arquivoBen.adicionarArquivo}" />
