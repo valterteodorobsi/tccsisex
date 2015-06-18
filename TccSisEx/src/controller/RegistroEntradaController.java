@@ -99,6 +99,7 @@ public class RegistroEntradaController {
 		new RegistroEntradaDaoImp().update(id_matricula);
 
 		infoAlterar();
+		listaRegistro = null;
 	}
 	
 	public void infoAlterar() {

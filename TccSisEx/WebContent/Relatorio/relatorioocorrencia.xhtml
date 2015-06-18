@@ -63,9 +63,9 @@
 					<p:outputLabel value="Modo: " for="modRel" />
 					<p:selectOneMenu id="modRel" required="true" filter="true"
 						requiredMessage="Favor preencher o campo  Modo obrigatório"
-							value="#{RelOcorrenciaBean.relOcorrencias.nomeColaborador}" prependId="true">
+							value="#{RelOcorrenciaBean.relOcorrencias.idMatricula}" prependId="true">
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
-							<f:selectItem itemLabel="Todos" itemValue="todos"  />
+							<f:selectItem itemLabel="Todos" itemValue="0"  />
 							<f:selectItems value="#{funcionarioBen.listaColaboradorComboBox()}" var="f"
 								itemLabel="#{f.NOME}" itemValue="#{f.ID_MATRICULA}" />
 								 
@@ -74,11 +74,11 @@
 						<p:outputLabel value="Tipo: " for="tipRel" />
 					<p:selectOneMenu id="tipRel" required="true" filter="true"
 						requiredMessage="Favor preencher o campo Tipo obrigatório"
-							value="#{RelOcorrenciaBean.relOcorrencias.nomeSetor}" prependId="true" >
+							value="#{RelOcorrenciaBean.relOcorrencias.idCentroCusto}" prependId="true" >
 							<f:selectItem itemLabel="Selecione..." itemValue=""  />
-							<f:selectItem itemLabel="Todos" itemValue="todos"  />
+							<f:selectItem itemLabel="Todos" itemValue="0"  />
 							<f:selectItems value="#{setorBen.listaSetor()}" var="setor"
-								itemLabel="#{setor.NOME}" itemValue="#{setor.NOME}" />
+								itemLabel="#{setor.NOME}" itemValue="#{setor.ID_CENTRO_CUSTO}" />
 								 
 						</p:selectOneMenu>
 					

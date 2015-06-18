@@ -49,11 +49,11 @@ public class RelatorioOcorrenciaController {
 	
 	public void imprimir() throws Exception {
 		RelatorioOcorrenciaDao dao = new RelatorioOcorrenciaDao();
-        String nomeColaborador = relOcorrencias.getNomeColaborador();
-        String nomeSetor = relOcorrencias.getNomeSetor();
+        Integer nomeColaborador = relOcorrencias.getIdMatricula();
+        Integer nomeSetor = relOcorrencias.getIdCentroCusto();
         
         
-        if(relOcorrencias.getNomeSetor().equals("todos")){
+        if(relOcorrencias.getIdCentroCusto().equals(0)){
         	
         	listaRelOcorrencias =  dao.relatorioOcorrenciaTodos(nomeColaborador, nomeSetor);
 			
