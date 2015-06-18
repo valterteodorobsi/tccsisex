@@ -135,7 +135,7 @@
 							value="#{funcionarioBen.funcionario.NOME}" />
 						<p:outputLabel value="Setor: " for="setFun" />
 
-						<p:selectOneMenu id="setFun" required="true"
+						<p:selectOneMenu id="setFun" required="true" filter="true"
 							requiredMessage="Favor preencher o campo  Setor obrigatório"
 							value="#{funcionarioBen.funcionario.ID_CENTRO_CUSTO}">
 							<f:selectItem itemLabel="Selecione..." itemValue="" />
@@ -148,7 +148,7 @@
 
 						<p:outputLabel value="Função: " for="unFun" />
 
-						<p:selectOneMenu id="unFun" required="true"
+						<p:selectOneMenu id="unFun" required="true" filter="true"
 							requiredMessage="Favor preencher o campo  Função obrigatório"
 							value="#{funcionarioBen.funcionario.ID_FUNCAO}">
 							<f:selectItem itemLabel="Selecione..." itemValue="" />
