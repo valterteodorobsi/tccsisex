@@ -22,7 +22,7 @@ public class SintomasDaoImp implements SintomasDao {
 		Transaction t = session.beginTransaction();
 		
 		SQLQuery query = session.createSQLQuery("insert into Sintomas (NOME_SINTOMAS, DESCRICAO, ID_REMEDIO)" +
-				" values( :NOME_SINTOMAS, :DESCRICAO, :ID_REMEDIO, )");
+				" values( :NOME_SINTOMAS, :DESCRICAO, :ID_REMEDIO )");
 				query.setParameter("NOME_SINTOMAS", sintomas.getNOME_SINTOMAS());
 				query.setParameter("DESCRICAO", sintomas.getDESCRICAO());
 				query.setParameter("ID_REMEDIO", sintomas.getID_REMEDIO());

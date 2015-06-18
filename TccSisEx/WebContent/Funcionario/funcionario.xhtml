@@ -109,8 +109,9 @@
 										<h:outputText value="#{tablefuncionario.NOMEFUN}" />
 									</f:facet>
 									<f:facet name="input">
-											<p:selectOneMenu id="unFun"
-												value="#{tablefuncionario.ID_FUNCAO}">
+											<p:selectOneMenu id="unFun" filter="true"
+												value="#{tablefuncionario.ID_FUNCAO}"
+												style="width:100%">
 												<f:selectItem itemLabel="Selecione..." itemValue="" />
 												<f:selectItems value="#{funcaoBen.listaFuncao()}"
 													var="funcao" itemLabel="#{funcao.NOME}"
@@ -128,7 +129,8 @@
 									</f:facet>
 									<f:facet name="input">
 										
-											<p:selectOneMenu id="setFun" value="#{tablefuncionario.ID_CENTRO_CUSTO}" >
+											<p:selectOneMenu id="setFun" filter="true" value="#{tablefuncionario.ID_CENTRO_CUSTO}"
+											style="width:100%" >
 								<f:selectItem itemLabel="Selecione..." itemValue=""  />
 								<f:selectItems value="#{setorBen.listaSetor()}" var="setor"
 								itemLabel="#{setor.NOME}" itemValue="#{setor.ID_CENTRO_CUSTO}" />
