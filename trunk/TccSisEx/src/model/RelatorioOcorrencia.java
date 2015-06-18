@@ -12,7 +12,8 @@ public class RelatorioOcorrencia implements Serializable{
 	private String nomeSetor;
 	private float qtdEncaminhamento;
 	private String encaminhamento;
-	
+	private Integer idMatricula;
+	private Integer idCentroCusto;
 	
 	
 	public RelatorioOcorrencia (){
@@ -67,6 +68,30 @@ public class RelatorioOcorrencia implements Serializable{
 
 	public void setEncaminhamento(String encaminhamento) {
 		this.encaminhamento = encaminhamento;
+	}
+
+
+
+	public Integer getIdMatricula() {
+		return idMatricula;
+	}
+
+
+
+	public void setIdMatricula(Integer idMatricula) {
+		this.idMatricula = idMatricula;
+	}
+
+
+
+	public Integer getIdCentroCusto() {
+		return idCentroCusto;
+	}
+
+
+
+	public void setIdCentroCusto(Integer idCentroCusto) {
+		this.idCentroCusto = idCentroCusto;
 	}
 	
 	

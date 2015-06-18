@@ -52,8 +52,8 @@
 									</h:outputText>
 								</p:column>
 								<p:column style="width:32px">
-									<p:commandLink title="Registrar saida" update=":form" onclick="if(!confirm('Deseja registrar a saida ?'))return false;"
-										action="#{registroBen.registrarSaida(tableRegistro)}">
+									<p:commandLink title="Registrar saida" onclick="if(!confirm('Deseja registrar a saida ?'))return false;"
+										action="#{registroBen.registrarSaida(tableRegistro)}" update=":form">
 
 										<p:graphicImage url="/img/excluir.png"
 											style="background-color: transparent; vertical-align: middle; border: none"
