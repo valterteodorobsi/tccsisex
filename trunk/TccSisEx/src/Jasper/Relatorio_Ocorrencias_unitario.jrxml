@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
-<!-- 2015-06-18T11:52:15 -->
+<!-- 2015-06-19T15:25:21 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatorio_Gerencial1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e55c3655-45c2-4247-a078-a3fa4df9df69">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString language="SQL">
@@ -17,6 +17,12 @@
 	</field>
 	<field name="qtdEncaminhamento" class="java.lang.Float">
 		<fieldDescription><![CDATA[qtdEncaminhamento]]></fieldDescription>
+	</field>
+	<field name="dataFinal" class="java.util.Date">
+		<fieldDescription><![CDATA[dataFinal]]></fieldDescription>
+	</field>
+	<field name="dataInicial" class="java.util.Date">
+		<fieldDescription><![CDATA[dataInicial]]></fieldDescription>
 	</field>
 	<group name="Group1">
 		<groupHeader>
@@ -84,13 +90,26 @@
 					<textElement textAlignment="Right">
 						<font size="14" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Relatorio Ocorrências]]></text>
+					<text><![CDATA[Relatório Ocorrências]]></text>
 				</staticText>
 			</frame>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="13"/>
+		<band height="60">
+			<staticText>
+				<reportElement x="10" y="10" width="535" height="20" uuid="fd723a1b-823d-44c6-88d9-eefb03cfeb46"/>
+				<text><![CDATA[Esse relatorio traz como objetivo trazer os registros de entradas emergencias e eletivos no hambulatorio. no periodo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="30" width="110" height="20" uuid="11e29b4d-6409-4364-a601-5fa97eaf21e3"/>
+				<textFieldExpression><![CDATA[DateFormat . getDateInstance () .format ($F{dataInicial})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="30" width="110" height="20" uuid="aa01138a-b5de-4a3a-9c67-2d7978855aa3"/>
+				<textFieldExpression><![CDATA[DateFormat . getDateInstance () .format ($F{dataFinal})]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="24">
@@ -114,6 +133,10 @@
 				<reportElement x="40" y="0" width="100" height="13" uuid="c187154c-4452-48b3-b52a-9f116699cff4"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="136" y="0" width="40" height="13" uuid="cc81f898-ffa5-4319-af3d-2735fce288a4"/>
+				<text><![CDATA[2015]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -124,7 +147,7 @@
 			</textField>
 			<textField>
 				<reportElement x="283" y="5" width="97" height="30" uuid="796375a3-b30a-4967-9e85-d05ee394e075"/>
-				<textFieldExpression><![CDATA[$F{qtdEncaminhamento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdEncaminhamento}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="390" y="10" width="165" height="30" uuid="5a021e7f-af69-480b-931d-38118390e286"/>
@@ -140,7 +163,7 @@
 		<band/>
 	</columnFooter>
 	<pageFooter>
-		<band height="18">
+		<band height="19">
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="17" width="555" height="1" uuid="05def6ce-5ff0-4676-aa4e-5ae62db57034"/>
 			</line>

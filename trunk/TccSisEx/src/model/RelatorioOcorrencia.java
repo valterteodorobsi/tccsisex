@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class RelatorioOcorrencia implements Serializable{
 
@@ -14,7 +15,8 @@ public class RelatorioOcorrencia implements Serializable{
 	private String encaminhamento;
 	private Integer idMatricula;
 	private Integer idCentroCusto;
-	
+	private Date dataInicial;
+	private Date dataFinal;
 	
 	public RelatorioOcorrencia (){
 		
@@ -94,6 +96,23 @@ public class RelatorioOcorrencia implements Serializable{
 		this.idCentroCusto = idCentroCusto;
 	}
 	
+	public Date getDataFinal() {
+		return dataFinal;
+	}
+
+
+	public void setDataFinal(Date dataFinal) {
+		this.dataFinal = dataFinal;
+	}
 	
+	public Date getDataInicial() {
+		return dataInicial;
+	}
+
+
+	public void setDataInicial(Date dataInicial) {
+		this.dataInicial = dataInicial;
+	}
+
 	
 }

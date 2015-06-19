@@ -20,6 +20,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 import org.primefaces.model.chart.PieChartModel;
 
+
 import dao.RelatorioOcorrenciaDao;
 
 
@@ -30,8 +31,6 @@ public class RelatorioOcorrenciaController {
 
 	private RelatorioOcorrencia relOcorrencias;
 	private List<RelatorioOcorrencia> listaRelOcorrencias= new ArrayList<RelatorioOcorrencia>();
-	private Date dataInicial;
-	private Date dataFinal;
 	private String path; // Caminho base
 	private String pathToReportPackage; // Caminho para o package onde estão armazenados os relatorios Jarper
 	private PieChartModel piechart;
@@ -51,16 +50,18 @@ public class RelatorioOcorrenciaController {
 		RelatorioOcorrenciaDao dao = new RelatorioOcorrenciaDao();
         Integer nomeColaborador = relOcorrencias.getIdMatricula();
         Integer nomeSetor = relOcorrencias.getIdCentroCusto();
-        
+        Date dataInicial = relOcorrencias.getDataInicial();
+        Date dataFinal = relOcorrencias.getDataFinal();
         
         if(relOcorrencias.getIdCentroCusto().equals(0)){
         	
-        	listaRelOcorrencias =  dao.relatorioOcorrenciaTodos(nomeColaborador, nomeSetor);
+        	listaRelOcorrencias =  dao.relatorioOcorrenciaTodos(nomeColaborador, nomeSetor, dataInicial, dataFinal);
 			
         	List<RelatorioOcorrencia> relatorioOcorrencias = new ArrayList<RelatorioOcorrencia>();
 
 			for (RelatorioOcorrencia relRelatorioOcorrencia : listaRelOcorrencias) {
-
+				relRelatorioOcorrencia.setDataFinal(dataFinal);
+				relRelatorioOcorrencia.setDataInicial(dataInicial);
 				relatorioOcorrencias.add(relRelatorioOcorrencia);
 
 			}
@@ -85,16 +86,16 @@ public class RelatorioOcorrenciaController {
         }
         else{
               
-        listaRelOcorrencias =  dao.relatorioOcorrencia(nomeColaborador, nomeSetor);
+        listaRelOcorrencias =  dao.relatorioOcorrencia(nomeColaborador, nomeSetor , dataInicial, dataFinal);
 			
 			List<RelatorioOcorrencia> relatorioOcorrencias = new ArrayList<RelatorioOcorrencia>();
-
-			for (RelatorioOcorrencia relAtesRelatorioOcorrencia: listaRelOcorrencias) {
-
-				relatorioOcorrencias.add(relAtesRelatorioOcorrencia);
-
-			}
 			
+			for (RelatorioOcorrencia relAtesRelatorioOcorrencia: listaRelOcorrencias) {
+				relAtesRelatorioOcorrencia.setDataFinal(dataFinal);
+				relAtesRelatorioOcorrencia.setDataInicial(dataInicial);
+				relatorioOcorrencias.add(relAtesRelatorioOcorrencia);
+				
+			}
 			if(relatorioOcorrencias.isEmpty()){
 				semRegistro();
 			}else{
@@ -134,14 +135,7 @@ public class RelatorioOcorrenciaController {
 	}
 
 
-	public Date getDataFinal() {
-		return dataFinal;
-	}
-
-
-	public void setDataFinal(Date dataFinal) {
-		this.dataFinal = dataFinal;
-	}
+	
 	public RelatorioOcorrencia getRelOcorrencias() {
 		return relOcorrencias;
 	}
@@ -162,15 +156,7 @@ public class RelatorioOcorrenciaController {
 	}
 
 
-	public Date getDataInicial() {
-		return dataInicial;
-	}
-
-
-	public void setDataInicial(Date dataInicial) {
-		this.dataInicial = dataInicial;
-	}
-
+	
 
 	public String getPath() {
 		return path;
