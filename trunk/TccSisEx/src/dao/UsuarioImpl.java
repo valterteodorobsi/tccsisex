@@ -44,5 +44,19 @@ public class UsuarioImpl implements UsuarioDao {
 		}
 		return null;
 	}
-
+	
+	public void salvar(Usuario usuario) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		
+		SQLQuery query = session.createSQLQuery("insert into Sintomas (USUARIO, SENHA, NIVEL_USUARIO, NOME)" +
+				" values( :USUARIO, :SENHA, :NIVEL_USUARIO,:NOME)");
+				query.setParameter("USUARIO", usuario.getLogin());
+				query.setParameter("SENHA", usuario.getSenha());
+				query.setParameter("NIVEL_USUARIO", usuario.getnivel_Usuario());
+				query.setParameter("NOME", usuario.getNome()); 
+				  
+			query.executeUpdate();
+				t.commit();
+	}
 }

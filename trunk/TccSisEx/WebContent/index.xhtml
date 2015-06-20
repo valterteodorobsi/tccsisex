@@ -35,21 +35,23 @@
 						alt="" /> -->
 						<p:tooltip />
 						
-						<form class="form-signin" id="TESTE"  >
+						<form id="form" class="form-signin" >
+						
 						<p:outputLabel value="Login " />
-						<p:inputText value="#{loginBean.usuario.login}"
+						<p:inputText value="#{loginBean.usuario.login}" maxlength="10"
 							styleClass="form-control" placeholder="Login" >
 							<f:validateLength minimum="6" />
 							</p:inputText>
 							<BR />
 							<p:outputLabel value="Senha" />
-						<p:password value="#{loginBean.usuario.senha}"
+						<p:password value="#{loginBean.usuario.senha}" maxlength="10"
 							styleClass="form-control" placeholder="Senha" >
 							<f:validateLength minimum="6" maximum="10" />
 							</p:password>
 							<BR />
-						<p:commandButton value="Entrar" actionListener="#{loginBean.logar}"/>
-						
+						<p:commandButton value="Entrar" actionListener="#{loginBean.logar}"  />
+						<BR />
+						<p:commandLink value="Esqueci minha senha" style="color:blue"></p:commandLink>
 						
 					</form>
 					

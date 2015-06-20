@@ -33,8 +33,6 @@ public class RelatorioSintomasController  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private RelatorioSintomas relSintomas;
 	private List<RelatorioSintomas> listaRelSintomas= new ArrayList<RelatorioSintomas>();
-	private Date dataInicial;
-	private Date dataFinal;
 	private String path; // Caminho base
 	private String pathToReportPackage; // Caminho para o package onde estão armazenados os relatorios Jarper
 	private PieChartModel piechart;
@@ -52,16 +50,18 @@ public class RelatorioSintomasController  implements Serializable{
 		RelatorioSintomasDao dao = new RelatorioSintomasDao();
         Integer nomeSintomas = relSintomas.getIdSintomas();
         Integer nomeSetor = relSintomas.getIdSetor();
-        
+        Date dataInicial = relSintomas.getDataInicial();
+        Date dataFinal = relSintomas.getDataFinal();
         
         if(relSintomas.getIdSetor().equals(0)){
         	
-        	listaRelSintomas =  dao.relatorioSintomasTodos(nomeSintomas , nomeSetor);
+        	listaRelSintomas =  dao.relatorioSintomasTodos(nomeSintomas , nomeSetor, dataInicial, dataFinal);
 			
         	List<RelatorioSintomas> relatorioSintomas = new ArrayList<RelatorioSintomas>();
 
 			for (RelatorioSintomas relSintomas : listaRelSintomas) {
-
+				relSintomas.setDataInicial(dataInicial);
+				relSintomas.setDataFinal(dataFinal);
 				relatorioSintomas.add(relSintomas);
 
 			}
@@ -85,12 +85,13 @@ public class RelatorioSintomasController  implements Serializable{
         }
         else{
               
-        listaRelSintomas =  dao.relatorioSintomas(nomeSintomas, nomeSetor);
+        listaRelSintomas =  dao.relatorioSintomas(nomeSintomas, nomeSetor, dataInicial, dataFinal);
 			
 			List<RelatorioSintomas> relatorioSintomas = new ArrayList<RelatorioSintomas>();
 
 			for (RelatorioSintomas relSintomas : listaRelSintomas) {
-
+				relSintomas.setDataInicial(dataInicial);
+				relSintomas.setDataFinal(dataFinal);
 				relatorioSintomas.add(relSintomas);
 
 			}
@@ -141,18 +142,7 @@ public class RelatorioSintomasController  implements Serializable{
 	public void setListaRelSintomas(List<RelatorioSintomas> listaRelSintomas) {
 		this.listaRelSintomas = listaRelSintomas;
 	}
-	public Date getDataInicial() {
-		return dataInicial;
-	}
-	public void setDataInicial(Date dataInicial) {
-		this.dataInicial = dataInicial;
-	}
-	public Date getDataFinal() {
-		return dataFinal;
-	}
-	public void setDataFinal(Date dataFinal) {
-		this.dataFinal = dataFinal;
-	}
+	
 	public String getPath() {
 		return path;
 	}

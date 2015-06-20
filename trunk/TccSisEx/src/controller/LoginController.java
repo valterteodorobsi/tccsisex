@@ -10,7 +10,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import model.Usuario;
-import dao.UsuarioDao;
 import dao.UsuarioImpl;
 
 
@@ -25,7 +24,6 @@ public class LoginController extends BaseBean {
 	private Usuario usuario;
 	private String mensagem;
 	private UsuarioImpl us = new UsuarioImpl();
-	private UsuarioDao dao; 
 			
 	@PostConstruct
 	public void reset() {
@@ -35,12 +33,18 @@ public class LoginController extends BaseBean {
 	public String logar() {
 
 		if (!super.campoPreenchido(this.usuario.getLogin()) && !super.campoPreenchido(this.usuario.getSenha())) {
-			this.mensagem = super.MENSAGEM_PRENCHER_CAMPOS;
+			//this.mensagem = super.MENSAGEM_PRENCHER_CAMPOS;
+			info();
 			return null;
 		}
 
+		/*
+		if(usuario.getSenha()== null || usuario.getLogin() == null){
+			info();
+			
+			return null;
+		} */
 		try {
-//			List<Usuario> usuarioLogado = dao.carregarUsuarioLoginSenha(this.usuario);
 			List<Usuario> usuarioLogado = us.carregarUsuarioLoginSenha(this.usuario);
 			
 
@@ -49,20 +53,10 @@ public class LoginController extends BaseBean {
 				this.usuario = usuarioLogado.get(0);
 				super.usuarioLogado = this.usuario;
 				
-//				HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-//				response.sendRedirect(DESTINO_SUCESSO);
-//				
-//				HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-//				request.getRequestDispatcher(request.getContextPath() + "home.jsf");
-				//FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-				
-				//info();
 				FacesContext.getCurrentInstance().getExternalContext().redirect("home.jsf");
 				return "";
-				//return this.DESTINO_SUCESSO;
-				//return "/page2?faces-redirect=true";
 			} else {
-				this.mensagem = super.DADOS_INCORRETOS;
+				info2();
 			}
 
 		} catch (Exception e) {
@@ -76,9 +70,18 @@ public class LoginController extends BaseBean {
 		super.usuarioLogado = this.usuario;
 		FacesContext.getCurrentInstance().getExternalContext().redirect("../index.jsf");
 		return "";
-		//return this.DESTINO_LOGOUT;
 	}
-
+	
+	public String cadastrar() throws IOException {
+		
+		UsuarioImpl dao = new UsuarioImpl();
+		dao.salvar(usuario);
+		FacesContext.getCurrentInstance().getExternalContext().redirect("../usuario.jsf");
+		return "";
+	}
+		
+		
+	
 	public Boolean mostrarMensagem() {
 		return (this.mensagem != null && !this.mensagem.isEmpty());
 	}
@@ -124,8 +127,14 @@ public class LoginController extends BaseBean {
 	public void info() {
 		FacesContext.getCurrentInstance().addMessage(
 				null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso !",
-						"Colaborador Cadastrado com Sucesso. "));
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!",
+						"Favor preencher os campos obrigatorios. "));
 	}
 	
+	public void info2() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!",
+						"Usuario ou senha invalidos. "));
+	}
 }

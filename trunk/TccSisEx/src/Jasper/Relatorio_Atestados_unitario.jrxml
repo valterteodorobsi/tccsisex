@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
-<!-- 2015-06-18T13:17:40 -->
+<!-- 2015-06-19T22:28:13 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatorio_Gerencial1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e55c3655-45c2-4247-a078-a3fa4df9df69">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString language="SQL">
@@ -14,6 +14,12 @@
 	</field>
 	<field name="qtdAtestados" class="java.lang.Float">
 		<fieldDescription><![CDATA[qtdAtestados]]></fieldDescription>
+	</field>
+	<field name="dataFinal" class="java.util.Date">
+		<fieldDescription><![CDATA[dataFinal]]></fieldDescription>
+	</field>
+	<field name="dataInicial" class="java.util.Date">
+		<fieldDescription><![CDATA[dataInicial]]></fieldDescription>
 	</field>
 	<group name="Group1">
 		<groupHeader>
@@ -94,7 +100,24 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="13"/>
+		<band height="65">
+			<textField>
+				<reportElement x="0" y="30" width="100" height="30" uuid="8abca066-0953-4019-84dc-0bdb761e7d6b"/>
+				<textFieldExpression><![CDATA[DateFormat . getDateInstance () .format ($F{dataInicial})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="117" y="30" width="36" height="30" uuid="7483cec5-ed54-4151-8ff1-c8dfd195d42a"/>
+				<text><![CDATA[à]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="30" width="100" height="30" uuid="5f1fef88-f6ca-46b7-9397-255272015130"/>
+				<textFieldExpression><![CDATA[DateFormat . getDateInstance () .format ($F{dataFinal})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="10" width="545" height="20" uuid="5357e536-ac04-42ec-ba61-4dc25730794a"/>
+				<text><![CDATA[Este relatório as quantidade de atestados entregue pelo colaborados no periodo entre:]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="24">
@@ -118,6 +141,10 @@
 				<reportElement x="40" y="1" width="100" height="13" uuid="983e5278-67b1-44ca-9dd0-aa44c03d5346"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="136" y="1" width="40" height="13" uuid="6b92da52-4208-47b7-a6ee-4c63e662565d"/>
+				<text><![CDATA[2015]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -128,7 +155,7 @@
 			</textField>
 			<textField>
 				<reportElement x="183" y="10" width="189" height="30" uuid="796375a3-b30a-4967-9e85-d05ee394e075"/>
-				<textFieldExpression><![CDATA[$F{qtdAtestados}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdAtestados}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="390" y="10" width="165" height="30" uuid="5a021e7f-af69-480b-931d-38118390e286"/>

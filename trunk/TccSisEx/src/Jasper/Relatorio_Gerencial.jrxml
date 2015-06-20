@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
-<!-- 2015-06-18T11:52:31 -->
+<!-- 2015-06-19T21:12:12 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatorio_Gerencial1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e55c3655-45c2-4247-a078-a3fa4df9df69">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString language="SQL">
@@ -17,6 +17,12 @@
 	</field>
 	<field name="nomeMedicos" class="java.lang.String">
 		<fieldDescription><![CDATA[nomeMedicos]]></fieldDescription>
+	</field>
+	<field name="dataFinal" class="java.util.Date">
+		<fieldDescription><![CDATA[dataFinal]]></fieldDescription>
+	</field>
+	<field name="dataInicial" class="java.util.Date">
+		<fieldDescription><![CDATA[dataInicial]]></fieldDescription>
 	</field>
 	<group name="Group1">
 		<groupHeader>
@@ -91,13 +97,30 @@
 					<textElement textAlignment="Right">
 						<font size="14" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Relatorio Gerencial]]></text>
+					<text><![CDATA[Relatório Gerencial]]></text>
 				</staticText>
 			</frame>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="13"/>
+		<band height="79">
+			<staticText>
+				<reportElement x="0" y="10" width="555" height="30" uuid="fdeccf94-e862-487c-a764-0ec60a9d166a"/>
+				<text><![CDATA[Este relatório tem como o objeito de trazer os registro de atendimentos realizados por medicos do periodo :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="40" width="100" height="30" uuid="6434f575-91fb-40d8-9d4d-ab2600853d7b"/>
+				<textFieldExpression><![CDATA[DateFormat . getDateInstance () .format ($F{dataInicial})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="40" width="100" height="30" uuid="0fa1b22e-9b89-498f-a913-c937c614f99c"/>
+				<textFieldExpression><![CDATA[DateFormat . getDateInstance () .format ($F{dataFinal})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="110" y="40" width="36" height="30" uuid="062cabbd-e1aa-48e4-bb9e-f18d04fac33f"/>
+				<text><![CDATA[à]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="24">
@@ -121,6 +144,10 @@
 				<reportElement x="40" y="1" width="100" height="13" uuid="05a1e5f1-8624-40bc-a4c9-9e5bead7bccf"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="136" y="1" width="40" height="13" uuid="cc1688d5-3c6e-4c3a-94af-0c7f51cc5248"/>
+				<text><![CDATA[2015]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -134,7 +161,7 @@
 			</textField>
 			<textField>
 				<reportElement x="183" y="10" width="189" height="30" uuid="796375a3-b30a-4967-9e85-d05ee394e075"/>
-				<textFieldExpression><![CDATA[$F{qtdeEntrada}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdeEntrada}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="390" y="10" width="165" height="30" uuid="5a021e7f-af69-480b-931d-38118390e286"/>

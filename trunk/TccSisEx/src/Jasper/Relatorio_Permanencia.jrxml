@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
-<!-- 2015-06-18T11:52:28 -->
+<!-- 2015-06-19T21:33:56 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatorio_Gerencial1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e55c3655-45c2-4247-a078-a3fa4df9df69">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString language="SQL">
@@ -17,6 +17,12 @@
 	</field>
 	<field name="tempoMedioPermanenciaHoras" class="java.lang.Float">
 		<fieldDescription><![CDATA[tempoMedioPermanenciaHoras]]></fieldDescription>
+	</field>
+	<field name="dataFinal" class="java.util.Date">
+		<fieldDescription><![CDATA[dataFinal]]></fieldDescription>
+	</field>
+	<field name="dataInicial" class="java.util.Date">
+		<fieldDescription><![CDATA[dataInicial]]></fieldDescription>
 	</field>
 	<group name="Group1">
 		<groupHeader>
@@ -97,7 +103,24 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="13"/>
+		<band height="62">
+			<staticText>
+				<reportElement x="-1" y="10" width="545" height="20" uuid="7c0e24fb-6818-4ca1-8cf2-08262d10f3e9"/>
+				<text><![CDATA[Este relatório traz o tempo medio de atedimento por colaborador e/ou por setor no periodo entre:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="30" width="100" height="30" uuid="5b63441d-ee23-4a3b-8de8-c615a1b32495"/>
+				<textFieldExpression><![CDATA[DateFormat . getDateInstance () .format ($F{dataInicial})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="30" width="100" height="30" uuid="da117b77-00cf-44b4-bf1a-1596b3865aab"/>
+				<textFieldExpression><![CDATA[DateFormat . getDateInstance () .format ($F{dataFinal})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="117" y="30" width="36" height="30" uuid="4b937fb1-191b-4f90-a0d1-da1eff5a14b7"/>
+				<text><![CDATA[à]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="24">
@@ -121,6 +144,10 @@
 				<reportElement x="40" y="1" width="100" height="13" uuid="a134e9fa-47bc-485f-8558-85d50f0ad685"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="136" y="1" width="40" height="13" uuid="83a3c7f2-bbc6-420b-86c3-ac6b4d06c0cb"/>
+				<text><![CDATA[2015]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -134,15 +161,15 @@
 			</textField>
 			<textField>
 				<reportElement x="183" y="10" width="177" height="30" uuid="796375a3-b30a-4967-9e85-d05ee394e075"/>
-				<textFieldExpression><![CDATA[$F{qtdEntrada}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtdEntrada}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="360" y="10" width="100" height="30" uuid="5a021e7f-af69-480b-931d-38118390e286"/>
-				<textFieldExpression><![CDATA[$F{tempoMedioPermanenciaHoras}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{tempoMedioPermanenciaHoras}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="460" y="7" width="95" height="30" uuid="befc5dc8-afb9-459a-bf20-b9801f69443b"/>
-				<textFieldExpression><![CDATA[$F{tempoMedidoPermanenciaMinutos}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{tempoMedidoPermanenciaMinutos}.intValue()]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

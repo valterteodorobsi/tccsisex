@@ -60,7 +60,7 @@
 				<p:tooltip />
 				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<h:panelGrid columns="9" cellpadding="1">
-					<p:outputLabel value="Modo: " for="modRel" />
+					<p:outputLabel value="Sintomas: " for="modRel" />
 					<p:selectOneMenu id="modRel" required="true" 
 						requiredMessage="Favor preencher o campo  Modo obrigatório"
 							value="#{RelSintomasBean.relSintomas.idSintomas}" prependId="true" >
@@ -71,7 +71,7 @@
 								 
 						</p:selectOneMenu>
 						
-						<p:outputLabel value="Tipo: " for="tipRel" />
+						<p:outputLabel value="Setor: " for="tipRel" />
 					<p:selectOneMenu id="tipRel" required="true" filter="true" 
 						requiredMessage="Favor preencher o campo Tipo obrigatório"
 							value="#{RelSintomasBean.relSintomas.idSetor}" prependId="true" >
@@ -86,14 +86,14 @@
 					<p:outputLabel for="datInicial" value="Data Inicial:" />
 					<p:calendar id="datInicial" size="15" locale="pt" required="true"
 						requiredMessage="Favor preencher o campo  Data  Inicial obrigatória"
-						value="#{RelSintomasBean.dataInicial}" >
+						value="#{RelSintomasBean.relSintomas.dataInicial}" >
 					</p:calendar>
 					
 					
 					<p:outputLabel for="datFinal" value="Data Final:" />
 					<p:calendar id="datFinal" size="15" locale="pt" required="true"
 						requiredMessage="Favor preencher o campo  Data Final obrigatória"
-						value="#{RelSintomasBean.dataFinal}"  />
+						value="#{RelSintomasBean.relSintomas.dataFinal}"  />
 						
 						
 						

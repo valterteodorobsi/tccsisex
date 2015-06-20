@@ -35,13 +35,11 @@ public class RelatorioGerencialController implements Serializable {
 
 	private RelatorioGerencial gerencial;
 	private List<RelatorioGerencial> listaGerencial = new ArrayList<RelatorioGerencial>();
-	private Date dataInicial;
-	private Date dataFinal;
+	
 	private String path; // Caminho base
 	private String pathToReportPackage; // Caminho para o package onde estão
 										// armazenados os relatorios Jarper
 	private PieChartModel piechart;
-	private Date Time;
 
 	public RelatorioGerencialController() {
 		gerencial = new RelatorioGerencial();
@@ -54,13 +52,14 @@ public class RelatorioGerencialController implements Serializable {
 	public void imprimir() throws Exception {
 		RelatorioGerencialDao dao = new RelatorioGerencialDao();
 		int nomeMedico = gerencial.getNomeMedico();
-
+		Date dataInicial = gerencial.getDataInicial();
+		Date dataFinal = gerencial.getDataFinal();
 		if (gerencial.getNomeMedico() == 0) {
 
-			listaGerencial = dao.relatorioGerencialTodos(nomeMedico);
+			listaGerencial = dao.relatorioGerencialTodos(nomeMedico, dataInicial, dataFinal);
 		} else {
 
-			listaGerencial = dao.relatorioGerencial(nomeMedico);
+			listaGerencial = dao.relatorioGerencial(nomeMedico, dataInicial, dataFinal);
 		}
 
 		List<RelatorioGerencial> relatorioGerencial = new ArrayList<RelatorioGerencial>();
@@ -73,6 +72,8 @@ public class RelatorioGerencialController implements Serializable {
 				gerencial.setTipoEntrada("Eletivo");
 				relatorioGerencial.add(gerencial);
 			}
+			gerencial.setDataInicial(dataInicial);
+			gerencial.setDataFinal(dataFinal);
 		}
 
 		if (listaGerencial.isEmpty()) {
@@ -101,8 +102,10 @@ public class RelatorioGerencialController implements Serializable {
 			piechart = new PieChartModel();
 			RelatorioGerencialDao dao = new RelatorioGerencialDao();
 			Integer nomeMedico = gerencial.getNomeMedico();
-
-			listaGerencial = dao.relatorioGerencial(nomeMedico);
+			Date dataInicial = gerencial.getDataInicial();
+			Date dataFinal  = gerencial.getDataFinal();
+			
+			listaGerencial = dao.relatorioGerencial(nomeMedico, dataInicial, dataFinal);
 
 			piechart = new PieChartModel();
 
@@ -163,30 +166,6 @@ public class RelatorioGerencialController implements Serializable {
 
 	public void setListaGerencial(List<RelatorioGerencial> listaGerencial) {
 		this.listaGerencial = listaGerencial;
-	}
-
-	public Date getDataInicial() {
-		return dataInicial;
-	}
-
-	public void setDataInicial(Date dataInicial) {
-		this.dataInicial = dataInicial;
-	}
-
-	public Date getDataFinal() {
-		return dataFinal;
-	}
-
-	public void setDataFinal(Date dataFinal) {
-		this.dataFinal = dataFinal;
-	}
-
-	public Date getTime() {
-		return Time;
-	}
-
-	public void setTime(Date time) {
-		Time = time;
 	}
 
 	public void semRegistro() {

@@ -3,6 +3,7 @@ package model;
 import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 
 import javax.faces.context.FacesContext;
 import javax.persistence.Column;
@@ -47,6 +48,8 @@ public class Atestado implements Serializable {
 	private Integer ID_SETOR;
 	@Column(name = "DIAS")
 	private String DIAS;
+	@Column(name = "DATA_INCLUSAO")
+	private Date DATA_INCLUSAO;
 	
 	
     public Atestado() {
@@ -69,7 +72,6 @@ public class Atestado implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         
 		return new DefaultStreamedContent(new ByteArrayInputStream(this.getImagem()), "image/png");
-//		return "data:image/png;base64," + new String(getImagem(), "iso-8859-1");
 	}
 	public void setImagem(byte[] imagem) {
 		this.imagem = imagem;
@@ -147,4 +149,17 @@ public class Atestado implements Serializable {
 		DIAS = dIAS;
 	}
 
+
+
+	public Date getDATA_INCLUSAO() {
+		return DATA_INCLUSAO;
+	}
+
+
+
+	public void setDATA_INCLUSAO(Date dATA_INCLUSAO) {
+		DATA_INCLUSAO = dATA_INCLUSAO;
+	}
+	
+	
 }

@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class RelatorioPermanencia implements Serializable {
 
@@ -13,7 +14,8 @@ public class RelatorioPermanencia implements Serializable {
 	private float tempoMedidoPermanenciaMinutos;
 	private float tempoMedioPermanenciaHoras;
 	private Integer QtdEntrada;
-	
+	private Date dataInicial;
+	private Date dataFinal;
 	
 	
 
@@ -78,7 +80,21 @@ public class RelatorioPermanencia implements Serializable {
 	}
 	
 	
-	
+	public Date getDataInicial() {
+		return dataInicial;
+	}
+
+	public void setDataInicial(Date dataInicial) {
+		this.dataInicial = dataInicial;
+	}
+
+	public Date getDataFinal() {
+		return dataFinal;
+	}
+
+	public void setDataFinal(Date dataFinal) {
+		this.dataFinal = dataFinal;
+	}
 	
 	
 	

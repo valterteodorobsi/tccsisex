@@ -36,8 +36,7 @@ public class RelatorioPermanenciaController implements Serializable {
 
 	private RelatorioPermanencia permanencia;
 	private List<RelatorioPermanencia> listaPermanencia = new ArrayList<RelatorioPermanencia>();
-	private Date dataInicial;
-	private Date dataFinal;
+	
 	private String path; // Caminho base
 	private String pathToReportPackage; // Caminho para o package onde estão
 										// armazenados os relatorios Jarper
@@ -52,21 +51,26 @@ public class RelatorioPermanenciaController implements Serializable {
 	public void imprimir() throws Exception {
 		RelatorioPermanenciaDao dao = new RelatorioPermanenciaDao();
 		String nomeFuncionario = permanencia.getNomeFuncionario();
+		Date dataInicial = permanencia.getDataInicial();
+		Date dataFinal = permanencia.getDataFinal();
 
 		if (permanencia.getNomeFuncionario().equals("todos")) {
 
-			listaPermanencia = dao.RelatorioPermanenciaTodos(nomeFuncionario);
+			listaPermanencia = dao.RelatorioPermanenciaTodos(nomeFuncionario, dataInicial, dataFinal);
 		} else {
 
-			listaPermanencia = dao.RelatorioPermanencia(nomeFuncionario);
+			listaPermanencia = dao.RelatorioPermanencia(nomeFuncionario, dataInicial, dataFinal);
 		}
 
 		List<RelatorioPermanencia> relatorioPermanencia = new ArrayList<RelatorioPermanencia>();
 
 		for (RelatorioPermanencia permanencia : listaPermanencia) {
+			permanencia.setDataInicial(dataInicial);
+			permanencia.setDataFinal(dataFinal);
 			relatorioPermanencia.add(permanencia);
-
 		}
+		
+		
 		if (listaPermanencia.isEmpty()) {
 			semRegistro();
 		} else {
@@ -103,21 +107,6 @@ public class RelatorioPermanenciaController implements Serializable {
 		this.listaPermanencia = listaPermanencia;
 	}
 
-	public Date getDataInicial() {
-		return dataInicial;
-	}
-
-	public void setDataInicial(Date dataInicial) {
-		this.dataInicial = dataInicial;
-	}
-
-	public Date getDataFinal() {
-		return dataFinal;
-	}
-
-	public void setDataFinal(Date dataFinal) {
-		this.dataFinal = dataFinal;
-	}
 
 	public String getPath() {
 		return path;

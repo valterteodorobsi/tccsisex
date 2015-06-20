@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class RelatorioGerencial implements Serializable{
 
@@ -13,7 +14,8 @@ public class RelatorioGerencial implements Serializable{
 	private String tipoEntrada;
 	private float qtdeEntrada;
 	private String nomeMedicos;
-	
+	private Date dataInicial;
+	private Date dataFinal;
 	
 	
 	public RelatorioGerencial() {
@@ -52,7 +54,21 @@ public class RelatorioGerencial implements Serializable{
 		this.nomeMedicos = nomeMedicos;
 	}
 	
-	
+	public Date getDataInicial() {
+		return dataInicial;
+	}
+
+	public void setDataInicial(Date dataInicial) {
+		this.dataInicial = dataInicial;
+	}
+
+	public Date getDataFinal() {
+		return dataFinal;
+	}
+
+	public void setDataFinal(Date dataFinal) {
+		this.dataFinal = dataFinal;
+	}
 
 	
 }

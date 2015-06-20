@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class RelatorioResponsabilidades implements Serializable{
 
@@ -12,7 +13,8 @@ public class RelatorioResponsabilidades implements Serializable{
 	private String nomeSetor;
 	private int pendencias;
 	private String nomeFuncionario;
-	
+	private Date dataInicial;
+	private Date dataFinal;
 	
 	
 	public  RelatorioResponsabilidades(){
@@ -38,7 +40,21 @@ public class RelatorioResponsabilidades implements Serializable{
 		this.nomeFuncionario = nomeFuncionario;
 	}
 	
-	
+	public Date getDataInicial() {
+		return dataInicial;
+	}
+
+	public void setDataInicial(Date dataInicial) {
+		this.dataInicial = dataInicial;
+	}
+
+	public Date getDataFinal() {
+		return dataFinal;
+	}
+
+	public void setDataFinal(Date dataFinal) {
+		this.dataFinal = dataFinal;
+	}
 	
 	
 	
