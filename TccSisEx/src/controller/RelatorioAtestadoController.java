@@ -30,8 +30,7 @@ public class RelatorioAtestadoController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private RelatorioAtestado relAtestados;
 	private List<RelatorioAtestado> listaRelAtestados= new ArrayList<RelatorioAtestado>();
-	private Date dataInicial;
-	private Date dataFinal;
+	
 	private String path; // Caminho base
 	private String pathToReportPackage; // Caminho para o package onde estão armazenados os relatorios Jarper
 	
@@ -49,16 +48,18 @@ public class RelatorioAtestadoController implements Serializable {
 		RelatorioAtestadosDao dao = new RelatorioAtestadosDao();
         Integer nomeColaborador = relAtestados.getIdColaborador();
         Integer nomeSetor = relAtestados.getIdSetor();
-        
+        Date dataInicial = relAtestados.getDataInicial();
+        Date dataFinal = relAtestados.getDataFinal();
         
         if(nomeColaborador.equals(0)){
         	
-        	listaRelAtestados =  dao.relatorioAtestadoTodos(nomeColaborador, nomeSetor);
+        	listaRelAtestados =  dao.relatorioAtestadoTodos(nomeColaborador, nomeSetor, dataInicial, dataFinal );
 			
         	List<RelatorioAtestado> relatorioAtestados = new ArrayList<RelatorioAtestado>();
 
 			for (RelatorioAtestado relAtesRelatorioAtestado : listaRelAtestados) {
-
+				relAtesRelatorioAtestado.setDataInicial(dataInicial);
+				relAtesRelatorioAtestado.setDataFinal(dataFinal);
 				relatorioAtestados.add(relAtesRelatorioAtestado);
 
 			}
@@ -82,12 +83,13 @@ public class RelatorioAtestadoController implements Serializable {
         }
         else{
               
-        listaRelAtestados =  dao.RelatorioAtestado(nomeColaborador, nomeSetor);
+        listaRelAtestados =  dao.RelatorioAtestado(nomeColaborador, nomeSetor, dataInicial, dataFinal);
 			
 			List<RelatorioAtestado> relatorioAtestados = new ArrayList<RelatorioAtestado>();
 
 			for (RelatorioAtestado relAtesRelatorioAtestado: listaRelAtestados) {
-
+				relAtesRelatorioAtestado.setDataInicial(dataInicial);
+				relAtesRelatorioAtestado.setDataFinal(dataFinal);
 				relatorioAtestados.add(relAtesRelatorioAtestado);
 
 			}
@@ -135,18 +137,7 @@ public class RelatorioAtestadoController implements Serializable {
 	public void setListaRelAtestados(List<RelatorioAtestado> listaRelAtestados) {
 		this.listaRelAtestados = listaRelAtestados;
 	}
-	public Date getDataInicial() {
-		return dataInicial;
-	}
-	public void setDataInicial(Date dataInicial) {
-		this.dataInicial = dataInicial;
-	}
-	public Date getDataFinal() {
-		return dataFinal;
-	}
-	public void setDataFinal(Date dataFinal) {
-		this.dataFinal = dataFinal;
-	}
+	
 	public String getPath() {
 		return path;
 	}

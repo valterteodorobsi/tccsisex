@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
-<!-- 2015-06-18T11:52:11 -->
+<!-- 2015-06-19T21:55:47 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatorio_Gerencial1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e55c3655-45c2-4247-a078-a3fa4df9df69">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString language="SQL">
@@ -14,6 +14,12 @@
 	</field>
 	<field name="nomeSintomas" class="java.lang.String">
 		<fieldDescription><![CDATA[nomeSintomas]]></fieldDescription>
+	</field>
+	<field name="dataFinal" class="java.util.Date">
+		<fieldDescription><![CDATA[dataFinal]]></fieldDescription>
+	</field>
+	<field name="dataInicial" class="java.util.Date">
+		<fieldDescription><![CDATA[dataInicial]]></fieldDescription>
 	</field>
 	<group name="Group1">
 		<groupHeader>
@@ -88,13 +94,30 @@
 					<textElement textAlignment="Right">
 						<font size="14" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Relatorio de Sintomas]]></text>
+					<text><![CDATA[Relatório de Sintomas]]></text>
 				</staticText>
 			</frame>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="13"/>
+		<band height="61">
+			<textField>
+				<reportElement x="0" y="30" width="100" height="30" uuid="26f12fdf-d179-4c1e-a49a-6ce805934b02"/>
+				<textFieldExpression><![CDATA[DateFormat . getDateInstance () .format ($F{dataInicial})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="30" width="100" height="30" uuid="589f742f-ca43-4c5c-a710-d5dec0cc3c04"/>
+				<textFieldExpression><![CDATA[DateFormat . getDateInstance () .format ($F{dataFinal})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="117" y="30" width="36" height="30" uuid="0e2c1945-426d-4d24-9a43-c5058281269a"/>
+				<text><![CDATA[à]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="10" width="545" height="20" uuid="677567b5-fa69-4321-851b-a6ec9c9aa6a9"/>
+				<text><![CDATA[Este relatório traz os sintomas mais ocorridos nos setores referente ao periodo entre:]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="24">
@@ -118,6 +141,10 @@
 				<reportElement x="40" y="1" width="100" height="13" uuid="432d2612-6f3f-4e58-b569-ef8e8d0dacf2"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="136" y="1" width="40" height="13" uuid="1d8c136a-d980-48eb-a3dc-ad099bbcd149"/>
+				<text><![CDATA[2015]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -131,7 +158,7 @@
 			</textField>
 			<textField>
 				<reportElement x="183" y="10" width="189" height="30" uuid="796375a3-b30a-4967-9e85-d05ee394e075"/>
-				<textFieldExpression><![CDATA[$F{qtd_sintomas}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{qtd_sintomas}.intValue()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="390" y="10" width="165" height="30" uuid="5a021e7f-af69-480b-931d-38118390e286"/>

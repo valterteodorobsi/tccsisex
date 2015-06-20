@@ -41,7 +41,30 @@
 			allDayText : 'Todo o Dia'
 		};
 	</script>
-	
+	<script type="text/javascript">
+		function validaData(datInicial,datFinal) {
+			
+			 var diaInicio = (datInicial.split('/')[0]);
+			    var mesInicio = (datInicial.split('/')[1]);
+			    var anoInicio = (datInicial.split('/')[2]);
+			 
+			    var diaFim = (datFinal.split('/')[0]);
+			    var mesFim = (datFinal.split('/')[1]);
+			    var anoFim = (datFinal.split('/')[2]);
+			 
+			    var datInicial = anoInicio+'-'+mesInicio+'-'+diaInicio;
+			    var datFinal = anoFim+'-'+mesFim+'-'+diaFim;
+			 
+			    if(Date.parse(datInicial) > Date.parse(datFinal))
+			        return false;
+			    	else if(Date.parse(datFinal) < Date.parse(datInicial))
+			 		alert("s")
+			    else
+			        return true;
+			       
+
+		}
+	</script>
 	<title>Relatório Atestados</title>
 
 </h:head>
@@ -86,18 +109,18 @@
 					<p:outputLabel for="datInicial" value="Data Inicial:" />
 					<p:calendar id="datInicial" size="15" locale="pt" required="true"
 						requiredMessage="Favor preencher o campo  Data  Inicial obrigatória"
-						value="#{RelAtestadosBean.dataInicial}" >
+						value="#{RelAtestadosBean.relAtestados.dataInicial}" >
 					</p:calendar>
 					
 					
 					<p:outputLabel for="datFinal" value="Data Final:" />
 					<p:calendar id="datFinal" size="15" locale="pt" required="true"
 						requiredMessage="Favor preencher o campo  Data Final obrigatória"
-						value="#{RelAtestadosBean.dataFinal}"  />
+						value="#{RelAtestadosBean.relAtestados.dataFinal}"  onblur="validaData(this.datInicial, this.datFinal));"/>
 						
 						
 						
-				<p:commandButton value="Gerar Relatório"  actionListener="#{RelAtestadosBean.imprimir}" ajax="false"  />
+				<p:commandButton value="Gerar Relatório" actionListener="#{RelAtestadosBean.imprimir}"   />
 				</h:panelGrid>
 					
 				

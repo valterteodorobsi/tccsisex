@@ -31,8 +31,6 @@ public class RelatorioResponsabilidadesController implements Serializable {
 
 	private RelatorioResponsabilidades resposabilidades;
 	private List<RelatorioResponsabilidades> listaReposnsabilidades = new ArrayList<RelatorioResponsabilidades>();
-	private Date dataInicial;
-	private Date dataFinal;
 	private String path; // Caminho base
 	private String pathToReportPackage; // Caminho para o package onde estão
 										// armazenados os relatorios Jarper
@@ -46,7 +44,8 @@ public class RelatorioResponsabilidadesController implements Serializable {
 	public void imprimir() throws Exception {
 		RelatorioResponsabilidadesDao dao = new RelatorioResponsabilidadesDao();
 		String nomeSetor = resposabilidades.getNomeSetor();
-
+		Date dataInicial = resposabilidades.getDataInicial();
+		Date dataFinal = resposabilidades.getDataFinal();
 		if (resposabilidades.getNomeSetor().equals("todos")) {
 
 			listaReposnsabilidades = dao
@@ -59,6 +58,8 @@ public class RelatorioResponsabilidadesController implements Serializable {
 		List<RelatorioResponsabilidades> relatorioResponsabilidade = new ArrayList<RelatorioResponsabilidades>();
 
 		for (RelatorioResponsabilidades responsabilidades : listaReposnsabilidades) {
+			responsabilidades.setDataInicial(dataInicial);
+			responsabilidades.setDataFinal(dataFinal);
 			relatorioResponsabilidade.add(responsabilidades);
 
 		}
@@ -101,21 +102,6 @@ public class RelatorioResponsabilidadesController implements Serializable {
 		this.listaReposnsabilidades = listaReposnsabilidades;
 	}
 
-	public Date getDataInicial() {
-		return dataInicial;
-	}
-
-	public void setDataInicial(Date dataInicial) {
-		this.dataInicial = dataInicial;
-	}
-
-	public Date getDataFinal() {
-		return dataFinal;
-	}
-
-	public void setDataFinal(Date dataFinal) {
-		this.dataFinal = dataFinal;
-	}
 
 	public String getPath() {
 		return path;

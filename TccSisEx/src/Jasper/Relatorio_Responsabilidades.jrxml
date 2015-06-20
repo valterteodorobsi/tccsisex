@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
-<!-- 2015-06-18T11:52:45 -->
+<!-- 2015-06-19T21:52:45 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatorio_Gerencial1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e55c3655-45c2-4247-a078-a3fa4df9df69">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString language="SQL">
@@ -14,6 +14,12 @@
 	</field>
 	<field name="nomeSetor" class="java.lang.String">
 		<fieldDescription><![CDATA[nomeSetor]]></fieldDescription>
+	</field>
+	<field name="dataFinal" class="java.util.Date">
+		<fieldDescription><![CDATA[dataFinal]]></fieldDescription>
+	</field>
+	<field name="dataInicial" class="java.util.Date">
+		<fieldDescription><![CDATA[dataInicial]]></fieldDescription>
 	</field>
 	<group name="Group1">
 		<groupHeader>
@@ -80,7 +86,24 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="13"/>
+		<band height="60">
+			<staticText>
+				<reportElement x="-1" y="10" width="545" height="20" uuid="be2dc7a9-96dc-4c34-9828-cee4d1000227"/>
+				<text><![CDATA[Este relatório traz as pendencias de um ou mais colaboradores no periodo entre:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="30" width="100" height="30" uuid="8f66c5e2-09b1-4cc0-b173-f1cccc7837a0"/>
+				<textFieldExpression><![CDATA[DateFormat . getDateInstance () .format ($F{dataInicial})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="117" y="30" width="36" height="30" uuid="12da801c-49e8-4707-99e1-cd05954465d4"/>
+				<text><![CDATA[à]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="30" width="100" height="30" uuid="f098dee7-77ad-44c1-90c2-296676aa14e9"/>
+				<textFieldExpression><![CDATA[DateFormat . getDateInstance () .format ($F{dataFinal})]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="24">
@@ -104,6 +127,10 @@
 				<reportElement x="40" y="2" width="100" height="13" uuid="c0baf30b-de66-48c3-ae30-a5430dbbb454"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="136" y="2" width="40" height="13" uuid="2f8ff8d7-95ae-412a-b2d3-9043cfc3d6f3"/>
+				<text><![CDATA[2015]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>

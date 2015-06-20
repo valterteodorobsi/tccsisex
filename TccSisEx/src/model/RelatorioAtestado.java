@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class RelatorioAtestado implements Serializable {
 
@@ -13,6 +14,8 @@ public class RelatorioAtestado implements Serializable {
 	private float qtdAtestados;
 	private Integer idColaborador;
 	private Integer idSetor;
+	private Date dataInicial;
+	private Date dataFinal;
 	
 	public RelatorioAtestado(){
 		
@@ -78,7 +81,18 @@ public class RelatorioAtestado implements Serializable {
 		this.idSetor = idSetor;
 	}
 	
-	
+	public Date getDataInicial() {
+		return dataInicial;
+	}
+	public void setDataInicial(Date dataInicial) {
+		this.dataInicial = dataInicial;
+	}
+	public Date getDataFinal() {
+		return dataFinal;
+	}
+	public void setDataFinal(Date dataFinal) {
+		this.dataFinal = dataFinal;
+	}
 	
 	
 }
