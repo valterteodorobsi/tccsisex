@@ -46,42 +46,49 @@ public class RelatorioResponsabilidadesController implements Serializable {
 		String nomeSetor = resposabilidades.getNomeSetor();
 		Date dataInicial = resposabilidades.getDataInicial();
 		Date dataFinal = resposabilidades.getDataFinal();
-		if (resposabilidades.getNomeSetor().equals("todos")) {
 
-			listaReposnsabilidades = dao
-					.RelatorioResponsabilidadesTodos(nomeSetor);
+		if (!dataFinal.after(dataInicial)) {
+			informacao();
 		} else {
+			if (resposabilidades.getNomeSetor().equals("todos")) {
 
-			listaReposnsabilidades = dao.RelatorioResponsabilidades(nomeSetor);
-		}
+				listaReposnsabilidades = dao
+						.RelatorioResponsabilidadesTodos(nomeSetor);
+			} else {
 
-		List<RelatorioResponsabilidades> relatorioResponsabilidade = new ArrayList<RelatorioResponsabilidades>();
+				listaReposnsabilidades = dao
+						.RelatorioResponsabilidades(nomeSetor);
+			}
 
-		for (RelatorioResponsabilidades responsabilidades : listaReposnsabilidades) {
-			responsabilidades.setDataInicial(dataInicial);
-			responsabilidades.setDataFinal(dataFinal);
-			relatorioResponsabilidade.add(responsabilidades);
+			List<RelatorioResponsabilidades> relatorioResponsabilidade = new ArrayList<RelatorioResponsabilidades>();
 
-		}
-		if (listaReposnsabilidades.isEmpty()) {
+			for (RelatorioResponsabilidades responsabilidades : listaReposnsabilidades) {
+				responsabilidades.setDataInicial(dataInicial);
+				responsabilidades.setDataFinal(dataFinal);
+				relatorioResponsabilidade.add(responsabilidades);
 
-			semRegistro();
-		} else {
+			}
+			if (listaReposnsabilidades.isEmpty()) {
 
-			JasperReport report = JasperCompileManager.compileReport(this
-					.getPathToReportPackage()
-					+ "Relatorio_Responsabilidades.jrxml");
+				semRegistro();
+			} else {
 
-			JasperPrint print = JasperFillManager.fillReport(report, null,
-					new JRBeanCollectionDataSource(relatorioResponsabilidade));
-			// abre visualizador
-			JasperViewer jv = new JasperViewer(print, false);
-			jv.setTitle("Relatorio De Responsabilidades");
-			jv.setVisible(true);
+				JasperReport report = JasperCompileManager.compileReport(this
+						.getPathToReportPackage()
+						+ "Relatorio_Responsabilidades.jrxml");
 
-			JasperExportManager.exportReportToPdfFile(print,
-					"c:/relatorio/Relatorio_Responsabilidades.pdf");
+				JasperPrint print = JasperFillManager.fillReport(report, null,
+						new JRBeanCollectionDataSource(
+								relatorioResponsabilidade));
+				// abre visualizador
+				JasperViewer jv = new JasperViewer(print, false);
+				jv.setTitle("Relatorio De Responsabilidades");
+				jv.setVisible(true);
 
+				JasperExportManager.exportReportToPdfFile(print,
+						"c:/relatorio/Relatorio_Responsabilidades.pdf");
+
+			}
 		}
 	}
 
@@ -101,7 +108,6 @@ public class RelatorioResponsabilidadesController implements Serializable {
 			List<RelatorioResponsabilidades> listaReposnsabilidades) {
 		this.listaReposnsabilidades = listaReposnsabilidades;
 	}
-
 
 	public String getPath() {
 		return path;
@@ -126,4 +132,11 @@ public class RelatorioResponsabilidadesController implements Serializable {
 						"Não existe registros"));
 	}
 
+	public void informacao() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!",
+						"A data final não pode ser menor que a data inicial. "));
+
+	}
 }

@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+
+
+
+	<title>usuario</title>
+</h:head>
+
+<h:body>
+	<div id="cabecalho">
+		<ui:insert name="cabecalho">
+			<ui:include src="/cabecalho.xhtml" />
+		</ui:insert>
+	</div>
+	<div id="conteudo">
+		<p:layout id="lay" style="min-width:400px;height:600px;">
+			<p:layoutUnit position="center">
+				<H1>Cadastro de Usuarios</H1>
+				<p:tooltip />
+				<h:form id="form">
+					<p:messages id="messages" showDetail="true" autoUpdate="true"
+						closable="true" />
+					<p:growl id="nomes" showDetail="true" />
+					<h:panelGrid columns="2" cellpadding="2">
+
+
+						<p:outputLabel value="Nome: " for="nomeUsuario" />
+						<p:inputText id="nomeUsuario" size="40" maxlength="40"
+							required="true"
+							requiredMessage="Favor preencher o campo  Nome obrigatório"
+							value="#{loginBean.usuario.nome}">
+
+						</p:inputText>
+						<p:outputLabel value="Usuario: " for="usuario" />
+						<p:inputText id="usuario" size="20" maxlength="20" required="true"
+							requiredMessage="Favor preencher o campo Usuario obrigatório"
+							value="#{loginBean.usuario.login}">
+						</p:inputText>
+
+						<p:outputLabel value="Senha: " for="senha" />
+						<p:password id="senha" size="12" maxlength="10" required="true"
+							requiredMessage="Favor preencher o campo  senha obrigatório"
+							value="#{loginBean.usuario.senha}" />
+ 						<p:outputLabel value="Nivel Usuario: " for="nivel" />
+						<p:selectOneMenu id="nivel" required="true" filter="true"
+							requiredMessage="Favor preencher o campo  Nivel Usuario obrigatório"
+							value="#{loginBean.usuario.nivel_Usuario}" prependId="true">
+							<f:selectItem itemLabel="Selecione..." itemValue="" />
+							<f:selectItem itemLabel="Normal" itemValue="false" />
+							<f:selectItem itemLabel="Administrador" itemValue="true" />
+
+
+						</p:selectOneMenu>
+
+
+						<br> </br>
+					</h:panelGrid>
+					<p:commandButton value="voltar" action="home" />
+					<p:commandButton value="Salvar" validateClient="true"
+						actionListener="#{loginBean.cadastrar}" />
+
+				</h:form>
+			</p:layoutUnit>
+		</p:layout>
+	</div>
+	<!-- VER O PORQUE NÃO ESTA CHAMDO O CORPO INSERINDO O RODAPÉ <div id="rodape">
+		<ui:insert name="rodape">
+			<ui:include src="/rodape.xhtml" />
+		</ui:insert>
+	</div> -->
+
+</h:body>
+</html>

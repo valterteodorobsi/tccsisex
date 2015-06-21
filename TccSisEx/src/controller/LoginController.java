@@ -76,7 +76,7 @@ public class LoginController extends BaseBean {
 		
 		UsuarioImpl dao = new UsuarioImpl();
 		dao.salvar(usuario);
-		FacesContext.getCurrentInstance().getExternalContext().redirect("../usuario.jsf");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("usuario.jsf");
 		return "";
 	}
 		

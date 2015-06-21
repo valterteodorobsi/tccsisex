@@ -10,7 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import model.RelatorioGerencial;
 import model.RelatorioPermanencia;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -19,10 +18,6 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
-
-import org.primefaces.model.chart.PieChartModel;
-
-import dao.RelatorioGerencialDao;
 import dao.RelatorioPermanenciaDao;
 
 @ManagedBean(name = "permanenciaBean")
@@ -53,7 +48,10 @@ public class RelatorioPermanenciaController implements Serializable {
 		String nomeFuncionario = permanencia.getNomeFuncionario();
 		Date dataInicial = permanencia.getDataInicial();
 		Date dataFinal = permanencia.getDataFinal();
-
+		
+		if(!dataFinal.after(dataInicial)){
+			informacao();
+		}else{
 		if (permanencia.getNomeFuncionario().equals("todos")) {
 
 			listaPermanencia = dao.RelatorioPermanenciaTodos(nomeFuncionario, dataInicial, dataFinal);
@@ -87,6 +85,7 @@ public class RelatorioPermanenciaController implements Serializable {
 			JasperExportManager.exportReportToPdfFile(print,
 					"c:/relatorio/Relatorio_Permanencia.pdf");
 
+			}
 		}
 	}
 
@@ -130,5 +129,12 @@ public class RelatorioPermanenciaController implements Serializable {
 				new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!",
 						"Não existe registros"));
 	}
-
+	
+	public void informacao() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!",
+						"A data final não pode ser menor que a data inicial. "));
+	}
+	
 }

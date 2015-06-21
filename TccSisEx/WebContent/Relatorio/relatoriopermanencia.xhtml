@@ -8,7 +8,7 @@
 
 <h:head>
 	<h:outputStylesheet library="css" name="style.css" />
-	
+
 	<script>
 		PrimeFaces.locales['pt'] = {
 			closeText : 'Fechar',
@@ -41,7 +41,7 @@
 			allDayText : 'Todo o Dia'
 		};
 	</script>
-	
+
 	<title>Relatório Tempo Médio de Permanencia</title>
 
 </h:head>
@@ -49,49 +49,54 @@
 <h:body>
 	<div id="cabecalho">
 		<ui:insert name="cabecalho">
-		<ui:include src="/cabecalho.xhtml" />
-	</ui:insert>
+			<ui:include src="/cabecalho.xhtml" />
+		</ui:insert>
 	</div>
 	<div id="conteudo">
 		<h:form>
-		<p:layout style="min-width:400px;height:600px;">
-			<p:layoutUnit position="center">
-				<H1>Relatório Tempo Médio de Permanencia</H1>
-				<p:tooltip />
-				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-				<h:panelGrid columns="9" cellpadding="1">
-					<p:outputLabel value="Funcionario: " for="funcionarioRel" />
-					<p:selectOneMenu id="funcionarioRel" required="true" filter="true"
-						requiredMessage="Favor preencher o campo  Funcionario obrigatório"
-							value="#{permanenciaBean.permanencia.nomeFuncionario}" prependId="true" var="m">
-							<f:selectItem itemLabel="Selecione..." itemValue=""  />
-							<f:selectItem itemLabel="Todos" itemValue="todos"  />
-							<f:selectItems value="#{funcionarioBen.listaColaboradorComboBox()}" var="colaborador"
-								itemLabel="#{colaborador.NOME}" itemValue="#{colaborador.NOME}" />
-								 
+			<p:layout style="min-width:400px;height:600px;">
+				<p:layoutUnit position="center">
+					<H1>Relatório Tempo Médio de Permanencia</H1>
+					<p:tooltip />
+					<p:messages id="messages" showDetail="true" autoUpdate="true"
+						closable="true" />
+					<h:panelGrid columns="9" cellpadding="1">
+						<p:outputLabel value="Colaborador: " for="funcionarioRel" />
+						<p:selectOneMenu id="funcionarioRel" required="true" filter="true"
+							requiredMessage="Favor preencher o campo  Funcionario obrigatório"
+							value="#{permanenciaBean.permanencia.nomeFuncionario}"
+							prependId="true" var="m">
+							<f:selectItem itemLabel="Selecione..." itemValue="" />
+							<f:selectItem itemLabel="Todos" itemValue="todos" />
+							<f:selectItems
+								value="#{funcionarioBen.listaColaboradorComboBox()}"
+								var="colaborador" itemLabel="#{colaborador.NOME}"
+								itemValue="#{colaborador.NOME}" />
+
 						</p:selectOneMenu>
-					
-				
-					<p:outputLabel for="datInicial" value="Data Inicial:" />
-					<p:calendar id="datInicial" size="15" locale="pt" required="true"
-						requiredMessage="Favor preencher o campo  Data  Inicial obrigatória"
-						value="#{permanenciaBean.permanencia.dataInicial}" >
-					</p:calendar>
-					
-					
-					<p:outputLabel for="datFinal" value="Data Final:" />
-					<p:calendar id="datFinal" size="15" locale="pt" required="true"
-						requiredMessage="Favor preencher o campo  Data Final obrigatória"
-						value="#{permanenciaBean.permanencia.dataFinal}"  />
-						
-						
-						
-				<p:commandButton value="Gerar Relatório"  actionListener="#{permanenciaBean.imprimir}" ajax="false"  />
-				</h:panelGrid>
-					
-				
-			</p:layoutUnit>
-		</p:layout>
+
+
+						<p:outputLabel for="datInicial" value="Data Inicial:" />
+						<p:calendar id="datInicial" size="15" locale="pt" required="true"
+							requiredMessage="Favor preencher o campo  Data  Inicial obrigatória"
+							value="#{permanenciaBean.permanencia.dataInicial}">
+						</p:calendar>
+
+
+						<p:outputLabel for="datFinal" value="Data Final:" />
+						<p:calendar id="datFinal" size="15" locale="pt" required="true"
+							requiredMessage="Favor preencher o campo  Data Final obrigatória"
+							value="#{permanenciaBean.permanencia.dataFinal}" />
+
+
+
+						<p:commandButton value="Gerar Relatório"
+							actionListener="#{permanenciaBean.imprimir}" ajax="false" />
+					</h:panelGrid>
+
+
+				</p:layoutUnit>
+			</p:layout>
 		</h:form>
 	</div>
 	<div id="rodape"></div>
