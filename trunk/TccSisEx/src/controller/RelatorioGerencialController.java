@@ -35,7 +35,7 @@ public class RelatorioGerencialController implements Serializable {
 
 	private RelatorioGerencial gerencial;
 	private List<RelatorioGerencial> listaGerencial = new ArrayList<RelatorioGerencial>();
-	
+
 	private String path; // Caminho base
 	private String pathToReportPackage; // Caminho para o package onde estão
 										// armazenados os relatorios Jarper
@@ -54,47 +54,57 @@ public class RelatorioGerencialController implements Serializable {
 		int nomeMedico = gerencial.getNomeMedico();
 		Date dataInicial = gerencial.getDataInicial();
 		Date dataFinal = gerencial.getDataFinal();
-		if (gerencial.getNomeMedico() == 0) {
 
-			listaGerencial = dao.relatorioGerencialTodos(nomeMedico, dataInicial, dataFinal);
+		if (!dataFinal.after(dataInicial)) {
+			infomracao();
+
 		} else {
+			if (gerencial.getNomeMedico() == 0) {
 
-			listaGerencial = dao.relatorioGerencial(nomeMedico, dataInicial, dataFinal);
-		}
-
-		List<RelatorioGerencial> relatorioGerencial = new ArrayList<RelatorioGerencial>();
-
-		for (RelatorioGerencial gerencial : listaGerencial) {
-			if (gerencial.getTipoEntrada().equals("0")) {
-				gerencial.setTipoEntrada("Emergencial");
-				relatorioGerencial.add(gerencial);
+				listaGerencial = dao.relatorioGerencialTodos(nomeMedico,
+						dataInicial, dataFinal);
 			} else {
-				gerencial.setTipoEntrada("Eletivo");
-				relatorioGerencial.add(gerencial);
+
+				listaGerencial = dao.relatorioGerencial(nomeMedico,
+						dataInicial, dataFinal);
 			}
-			gerencial.setDataInicial(dataInicial);
-			gerencial.setDataFinal(dataFinal);
-		}
 
-		if (listaGerencial.isEmpty()) {
-			semRegistro();
-		} else {
-			JasperReport report = JasperCompileManager.compileReport(this
-					.getPathToReportPackage() + "Relatorio_Gerencial.jrxml");
+			List<RelatorioGerencial> relatorioGerencial = new ArrayList<RelatorioGerencial>();
 
-			JasperPrint print = JasperFillManager.fillReport(report, null,
-					new JRBeanCollectionDataSource(relatorioGerencial));
-			// abre visualizador
-			JasperViewer jv = new JasperViewer(print, false);
-			jv.setTitle("Relatorio Gerencial");
-			jv.setVisible(true);
+			for (RelatorioGerencial gerencial : listaGerencial) {
+				if (gerencial.getTipoEntrada().equals("0")) {
+					gerencial.setTipoEntrada("Emergencial");
+					relatorioGerencial.add(gerencial);
+				} else {
+					gerencial.setTipoEntrada("Eletivo");
+					relatorioGerencial.add(gerencial);
+				}
+				gerencial.setDataInicial(dataInicial);
+				gerencial.setDataFinal(dataFinal);
+			}
 
-			JasperExportManager.exportReportToPdfFile(print,
-					"c:/relatorio/Relatorio_Gerencial.pdf");
+			if (listaGerencial.isEmpty()) {
+				semRegistro();
+			} else {
+				JasperReport report = JasperCompileManager
+						.compileReport(this.getPathToReportPackage()
+								+ "Relatorio_Gerencial.jrxml");
+
+				JasperPrint print = JasperFillManager.fillReport(report, null,
+						new JRBeanCollectionDataSource(relatorioGerencial));
+				// abre visualizador
+				JasperViewer jv = new JasperViewer(print, false);
+				jv.setTitle("Relatorio Gerencial");
+				jv.setVisible(true);
+
+				JasperExportManager.exportReportToPdfFile(print,
+						"c:/relatorio/Relatorio_Gerencial.pdf");
+			}
 		}
 	}
 
 	public void abreGrafico() {
+
 		if (gerencial.getNomeMedico() == 0) {
 			warn();
 		} else if (gerencial != null) {
@@ -103,20 +113,25 @@ public class RelatorioGerencialController implements Serializable {
 			RelatorioGerencialDao dao = new RelatorioGerencialDao();
 			Integer nomeMedico = gerencial.getNomeMedico();
 			Date dataInicial = gerencial.getDataInicial();
-			Date dataFinal  = gerencial.getDataFinal();
-			
-			listaGerencial = dao.relatorioGerencial(nomeMedico, dataInicial, dataFinal);
+			Date dataFinal = gerencial.getDataFinal();
+			if (!dataFinal.after(dataInicial)) {
+				infomracao();
+			} else {
+				listaGerencial = dao.relatorioGerencial(nomeMedico,
+						dataInicial, dataFinal);
 
-			piechart = new PieChartModel();
+				piechart = new PieChartModel();
 
-			for (RelatorioGerencial gerencial : listaGerencial) {
-				piechart.set(
-						TipoEntrada.getByOrdinal(
-								Integer.valueOf(gerencial.getTipoEntrada()))
-								.getDescricao(), gerencial.getQtdeEntrada());
+				for (RelatorioGerencial gerencial : listaGerencial) {
+					piechart.set(
+							TipoEntrada
+									.getByOrdinal(
+											Integer.valueOf(gerencial
+													.getTipoEntrada()))
+									.getDescricao(), gerencial.getQtdeEntrada());
+				}
 			}
 		}
-
 	}
 
 	public void warn() {
@@ -126,6 +141,14 @@ public class RelatorioGerencialController implements Serializable {
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!",
 								"Não é possivel gerar o grafico com o Valor 'TODOS'. "));
+	}
+
+	public void infomracao() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!",
+						"A data final não pode ser menor que a data inicial. "));
+
 	}
 
 	public PieChartModel getPiechart() {

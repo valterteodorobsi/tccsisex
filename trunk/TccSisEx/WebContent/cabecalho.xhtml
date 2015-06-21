@@ -65,6 +65,13 @@
 					url="/Relatorio/relatorioatestados.jsf" />
 			</p:submenu>
 		</c:if>
+		<c:if test="#{loginBean.usuario.nivel_Usuario == 'true'}">
+			<p:submenu label="Usuario" icon="">
+				<p:menuitem value="Cadastrar Usuario"
+					url="/usuario/usuario.jsf" />
+			</p:submenu>
+		</c:if>
+		
 
 	</p:menubar>
 </h:body>

@@ -41,30 +41,6 @@
 			allDayText : 'Todo o Dia'
 		};
 	</script>
-	<script type="text/javascript">
-		function validaData(datInicial,datFinal) {
-			
-			 var diaInicio = (datInicial.split('/')[0]);
-			    var mesInicio = (datInicial.split('/')[1]);
-			    var anoInicio = (datInicial.split('/')[2]);
-			 
-			    var diaFim = (datFinal.split('/')[0]);
-			    var mesFim = (datFinal.split('/')[1]);
-			    var anoFim = (datFinal.split('/')[2]);
-			 
-			    var datInicial = anoInicio+'-'+mesInicio+'-'+diaInicio;
-			    var datFinal = anoFim+'-'+mesFim+'-'+diaFim;
-			 
-			    if(Date.parse(datInicial) > Date.parse(datFinal))
-			        return false;
-			    	else if(Date.parse(datFinal) < Date.parse(datInicial))
-			 		alert("s")
-			    else
-			        return true;
-			       
-
-		}
-	</script>
 	<title>Relatório Atestados</title>
 
 </h:head>
@@ -83,7 +59,7 @@
 				<p:tooltip />
 				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<h:panelGrid columns="9" cellpadding="1">
-					<p:outputLabel value="Modo: " for="modRel" />
+					<p:outputLabel value="Colaborador: " for="modRel" />
 					<p:selectOneMenu id="modRel" required="true"  filter="true"
 						requiredMessage="Favor preencher o campo  Modo obrigatório"
 							value="#{RelAtestadosBean.relAtestados.idColaborador}" prependId="true" >
@@ -94,7 +70,7 @@
 								 
 						</p:selectOneMenu>
 						
-						<p:outputLabel value="Tipo: " for="tipRel" />
+						<p:outputLabel value="Setor: " for="tipRel" />
 					<p:selectOneMenu id="tipRel" required="true" filter="true"
 						requiredMessage="Favor preencher o campo Tipo obrigatório"
 							value="#{RelAtestadosBean.relAtestados.idSetor}" prependId="true" >
@@ -116,7 +92,7 @@
 					<p:outputLabel for="datFinal" value="Data Final:" />
 					<p:calendar id="datFinal" size="15" locale="pt" required="true"
 						requiredMessage="Favor preencher o campo  Data Final obrigatória"
-						value="#{RelAtestadosBean.relAtestados.dataFinal}"  onblur="validaData(this.datInicial, this.datFinal));"/>
+						value="#{RelAtestadosBean.relAtestados.dataFinal}" />
 						
 						
 						
