@@ -145,6 +145,7 @@ public class FuncionarioController {
 			for (int i = 0; i < nomeFuncionario.size(); i++) {
 				funcionario.setNOME(nomeFuncionario.get(0).getNOME().toString());
 				funcionario.setNOMESET(nomeFuncionario.get(0).getNOMESET().toString());
+				funcionario.setID_CENTRO_CUSTO(nomeFuncionario.get(0).getID_CENTRO_CUSTO());
 				
 			}
 		} else {

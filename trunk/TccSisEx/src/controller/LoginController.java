@@ -22,12 +22,14 @@ public class LoginController extends BaseBean {
 	private final String DESTINO_CADASTRO = "cadastro.jsf?faces-redirect=true";
 
 	private Usuario usuario;
+	private Usuario usuario2;
 	private String mensagem;
 	private UsuarioImpl us = new UsuarioImpl();
 			
 	@PostConstruct
 	public void reset() {
 		this.usuario = new Usuario();
+		this.usuario2 = new Usuario();
 	}
 
 	public String logar() {
@@ -38,12 +40,6 @@ public class LoginController extends BaseBean {
 			return null;
 		}
 
-		/*
-		if(usuario.getSenha()== null || usuario.getLogin() == null){
-			info();
-			
-			return null;
-		} */
 		try {
 			List<Usuario> usuarioLogado = us.carregarUsuarioLoginSenha(this.usuario);
 			
@@ -75,8 +71,8 @@ public class LoginController extends BaseBean {
 	public String cadastrar() throws IOException {
 		
 		UsuarioImpl dao = new UsuarioImpl();
-		dao.salvar(usuario);
-		FacesContext.getCurrentInstance().getExternalContext().redirect("usuario.jsf");
+		dao.salvar(usuario2);
+		FacesContext.getCurrentInstance().getExternalContext().redirect("../home.jsf");
 		return "";
 	}
 		
@@ -136,5 +132,33 @@ public class LoginController extends BaseBean {
 				null,
 				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!",
 						"Usuario ou senha invalidos. "));
+	}
+
+	public Usuario getUsuario2() {
+		return usuario2;
+	}
+
+	public void setUsuario2(Usuario usuario2) {
+		this.usuario2 = usuario2;
+	}
+	
+	public String alterar() throws IOException {
+		
+		UsuarioImpl dao = new UsuarioImpl();
+		dao.alterar(usuario2);
+		FacesContext.getCurrentInstance().getExternalContext().redirect("../index.jsf");
+		return "";
+	}
+	
+	public String redirecionar() throws IOException {
+		
+		FacesContext.getCurrentInstance().getExternalContext().redirect("usuario/usuarioalterar.jsf");
+		return "";
+	}
+	
+public String voltar() throws IOException {
+		
+		FacesContext.getCurrentInstance().getExternalContext().redirect("../index.jsf");
+		return "";
 	}
 }

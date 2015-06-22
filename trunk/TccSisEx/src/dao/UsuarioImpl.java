@@ -59,4 +59,16 @@ public class UsuarioImpl implements UsuarioDao {
 			query.executeUpdate();
 				t.commit();
 	}
+	public void alterar(Usuario usuario) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		
+		SQLQuery query = session.createSQLQuery("update USUARIO set SENHA=:senha where usuario=:login");
+				query.setParameter("login", usuario.getLogin());
+				query.setParameter("senha", usuario.getSenha());
+				
+				  
+			query.executeUpdate();
+				t.commit();
+	}
 }

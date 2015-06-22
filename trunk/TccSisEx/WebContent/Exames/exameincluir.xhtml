@@ -37,6 +37,7 @@
 				<h:form enctype="multipart/form-data" id="formEscondido"> 
 					<p:inputText id="matriculaEscondida" type="hidden" value="#{funcionarioBen.funcionario.ID_MATRICULA}" />
 					<p:inputText id="setorEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOMESET}" />
+					<p:inputText id="idSetorEscondida" type="hidden" value="#{funcionarioBen.funcionario.ID_CENTRO_CUSTO}" />
 					<p:inputText id="nomeEscondida" type="hidden" value="#{funcionarioBen.funcionario.NOME}" />
 					
 						<p:commandButton value="PesquisarNomePorMatricula" actionListener="#{funcionarioBen.listaColaboradorAnexo}"
@@ -64,12 +65,11 @@
 
 						<p:outputLabel value="Setor: " for="setAnexo" />
 
-						<p:selectOneMenu id="setAnexo" required="true" filter="true"
+						<p:selectOneMenu id="setAnexo" required="true" filter="true" style="width:30%"
 							requiredMessage="Favor preencher o campo  Setor obrigatório"
 							value="#{arquivoBen.arquivo.ID_SETOR}">
-							<f:selectItem itemLabel="Selecione..." itemValue="" />
-							<f:selectItems value="#{setorBen.listaSetor}" var="setor"
-								itemLabel="#{setor.NOME}" itemValue="#{setor.ID_CENTRO_CUSTO}" />
+							<f:selectItem itemLabel="#{funcionarioBen.funcionario.NOMESET}" 
+							itemValue="#{funcionarioBen.funcionario.ID_CENTRO_CUSTO}" />
 
 						</p:selectOneMenu>
 

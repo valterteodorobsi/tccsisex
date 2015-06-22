@@ -69,9 +69,10 @@ public class FuncionarioDaoImp implements FuncionarioDao {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
 		SQLQuery query = session
-				.createSQLQuery("select f.NOME, s.NOME as NOMESET, funcao.NOME as NOMEFUN, f.ID_MATRICULA FROM Funcionario as f inner join setor as s on f.ID_CENTRO_CUSTO = s.ID_CENTRO_CUSTO inner join FUNCAO as funcao on f.ID_FUNCAO = funcao.ID_FUNCAO where f.ID_MATRICULA = :matricula and f.ATIVO = 1 group by  f.NOME , f.ID_MATRICULA, s.NOME, funcao.NOME ");
+				.createSQLQuery("select s.ID_CENTRO_CUSTO, f.NOME, s.NOME as NOMESET, funcao.NOME as NOMEFUN, f.ID_MATRICULA FROM Funcionario as f inner join setor as s on f.ID_CENTRO_CUSTO = s.ID_CENTRO_CUSTO inner join FUNCAO as funcao on f.ID_FUNCAO = funcao.ID_FUNCAO where f.ID_MATRICULA = :matricula and f.ATIVO = 1 group by  f.NOME , f.ID_MATRICULA, s.NOME, funcao.NOME ,s.ID_CENTRO_CUSTO");
 		query.setParameter("matricula", matricula );
 		query.addScalar("NOME");
+		query.addScalar("ID_CENTRO_CUSTO");
 		query.addScalar("NOMESET");
 		query.addScalar("NOMEFUN");
 		query.setResultTransformer( Transformers.aliasToBean( FuncionarioPes.class ) );
