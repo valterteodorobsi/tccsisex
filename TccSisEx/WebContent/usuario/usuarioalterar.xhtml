@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>SisEx - Curitiba 2015</title>
+
+	<!-- Bootstrap core CSS -->
+	 <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" />
+	<!-- <link href="resources/css/style.css" rel="stylesheet" /> -->
+	<!-- Custom styles for this template -->
+	<link href="../resources/bootstrap/css/starter-template.css" rel="stylesheet" />
+
+</h:head>
+
+<h:body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-md-4 col-md-offset-4">
+				<h1 class="text-center">SisEx</h1>
+				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />  
+				<div class="account-wall">
+					<p:panel >
+						<p:tooltip />
+						
+						<form id="form" class="form-signin" >
+						
+						<p:outputLabel value="Login " />
+						<p:inputText value="#{loginBean.usuario2.login}" maxlength="10"
+							styleClass="form-control" placeholder="Login" >
+							<f:validateLength minimum="6" />
+							</p:inputText>
+							<BR />
+							<p:outputLabel value="Senha" />
+							<p:password value="#{loginBean.usuario2.senha}" maxlength="10"
+							styleClass="form-control" placeholder="Senha" >
+							<f:validateLength minimum="6" maximum="10" />
+							</p:password>
+							<BR />
+						<p:commandButton value="Alterar" 
+						actionListener="#{loginBean.alterar}" />
+						<p:commandButton value="cancelar" 
+						actionListener="#{loginBean.voltar}"/>
+						<BR />
+					</form>
+					
+						</p:panel>
+					
+				</div>
+	
+			</div>
+		</div>
+	</div>
+
+
+
+</h:body>
+</html>

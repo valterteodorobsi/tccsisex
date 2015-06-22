@@ -53,7 +53,8 @@
 	</ui:insert>
 	</div>
 	<div id="conteudo">
-		<h:form>
+		<h:form id="form">
+		 <p:growl id="growl" showDetail="true" />
 		<p:layout style="min-width:400px;height:600px;">
 			<p:layoutUnit position="center">
 				<H1>Relatório Gerencial</H1>
@@ -93,9 +94,15 @@
 				<p:panel id="grafico" style="width: 550px" >
 
                                                 <p:pieChart id="linear" type="pie" title="Gráfico Gerencial Tipo de Entrada"
-                                                        value="#{gerencialBean.piechart}" legendPosition="ne" fill="true" showDataLabels="true" minY="0" maxY="10"
-                                                        style="height:400px" >
+                                                        value="#{gerencialBean.piechart}"   showDetail="true" legendPosition="ne" fill="true" stacked="true"  showDataLabels="true" minY="0" maxY="10"
+                                                        style="height:400px"    >
+                                                         <p:ajax event="itemSelect" listener="#{gerencialBean.itemSelect}" update="growl"  />
+                                                         
                                                 </p:pieChart>
+                                                 <p:outputLabel style="font: -webkit-control;alignment-baseline: initial;font-style: italic;" 
+                                                 id="quantidade"  value="#{gerencialBean.piechart.data}"></p:outputLabel>
+                                                 
+                                
                                  </p:panel>
 				
 			</p:layoutUnit>

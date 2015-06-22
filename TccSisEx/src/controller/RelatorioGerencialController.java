@@ -19,6 +19,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
+import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.PieChartModel;
 
 import util.TipoEntrada;
@@ -109,8 +110,8 @@ public class RelatorioGerencialController implements Serializable {
 			warn();
 		} else if (gerencial != null) {
 
-			piechart = new PieChartModel();
-			RelatorioGerencialDao dao = new RelatorioGerencialDao();
+ 			piechart = new PieChartModel();
+ 			RelatorioGerencialDao dao = new RelatorioGerencialDao();
 			Integer nomeMedico = gerencial.getNomeMedico();
 			Date dataInicial = gerencial.getDataInicial();
 			Date dataFinal = gerencial.getDataFinal();
@@ -129,6 +130,7 @@ public class RelatorioGerencialController implements Serializable {
 											Integer.valueOf(gerencial
 													.getTipoEntrada()))
 									.getDescricao(), gerencial.getQtdeEntrada());
+					
 				}
 			}
 		}
@@ -150,6 +152,13 @@ public class RelatorioGerencialController implements Serializable {
 						"A data final não pode ser menor que a data inicial. "));
 
 	}
+	public void itemSelect(ItemSelectEvent event) {
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Item selected",
+                        "Item Index: " + event.getItemIndex() + ", Series Index:" + event.getSeriesIndex() +
+        gerencial.getTipoEntrada());
+         
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 
 	public PieChartModel getPiechart() {
 		return piechart;

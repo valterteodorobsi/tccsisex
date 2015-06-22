@@ -51,7 +51,7 @@ public class RelatorioGerencialDao {
 						+ " inner join medico as me on registro.ID_MEDICO = me.ID_MATRICULA"
 						+ " where registro.DATA_ENTRADA >= :dataInicial and registro.DATA_SAIDA <= :dataFinal "
 						+ " group by tipo_entrada , me.NOME");
-		query.setParameter("nomeMedico", nomeMedico);
+		//query.setParameter("nomeMedico", nomeMedico);
 		query.setParameter("dataInicial", dataInicial);
 		query.setParameter("dataFinal", dataFinal);
 		query.addScalar("nomeMedicos");

@@ -34,23 +34,23 @@
 						<p:inputText id="nomeUsuario" size="40" maxlength="40"
 							required="true"
 							requiredMessage="Favor preencher o campo  Nome obrigatório"
-							value="#{loginBean.usuario.nome}">
+							value="#{loginBean.usuario2.nome}">
 
 						</p:inputText>
 						<p:outputLabel value="Usuario: " for="usuario" />
 						<p:inputText id="usuario" size="20" maxlength="20" required="true"
 							requiredMessage="Favor preencher o campo Usuario obrigatório"
-							value="#{loginBean.usuario.login}">
+							value="#{loginBean.usuario2.login}">
 						</p:inputText>
 
 						<p:outputLabel value="Senha: " for="senha" />
 						<p:password id="senha" size="12" maxlength="10" required="true"
 							requiredMessage="Favor preencher o campo  senha obrigatório"
-							value="#{loginBean.usuario.senha}" />
+							value="#{loginBean.usuario2.senha}" />
  						<p:outputLabel value="Nivel Usuario: " for="nivel" />
 						<p:selectOneMenu id="nivel" required="true" filter="true"
 							requiredMessage="Favor preencher o campo  Nivel Usuario obrigatório"
-							value="#{loginBean.usuario.nivel_Usuario}" prependId="true">
+							value="#{loginBean.usuario2.nivel_Usuario}" prependId="true">
 							<f:selectItem itemLabel="Selecione..." itemValue="" />
 							<f:selectItem itemLabel="Normal" itemValue="false" />
 							<f:selectItem itemLabel="Administrador" itemValue="true" />

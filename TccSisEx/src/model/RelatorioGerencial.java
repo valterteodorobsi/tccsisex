@@ -12,7 +12,7 @@ public class RelatorioGerencial implements Serializable{
 	
 	private Integer nomeMedico;
 	private String tipoEntrada;
-	private float qtdeEntrada;
+	private Integer qtdeEntrada;
 	private String nomeMedicos;
 	private Date dataInicial;
 	private Date dataFinal;
@@ -22,7 +22,7 @@ public class RelatorioGerencial implements Serializable{
 		
 	}
 	
-	public RelatorioGerencial(int nomeMedico, String tipoEntrada,float qtdeEntrada) {
+	public RelatorioGerencial(int nomeMedico, String tipoEntrada,Integer qtdeEntrada) {
 		this.nomeMedico = nomeMedico;
 		this.tipoEntrada = tipoEntrada;
 		this.qtdeEntrada = qtdeEntrada;
@@ -39,10 +39,10 @@ public class RelatorioGerencial implements Serializable{
 	public void setTipoEntrada(String tipoEntrada) {
 		this.tipoEntrada = tipoEntrada;
 	}
-	public float getQtdeEntrada() {
+	public Integer getQtdeEntrada() {
 		return qtdeEntrada;
 	}
-	public void setQtdeEntrada(float qtdeEntrada) {
+	public void setQtdeEntrada(Integer qtdeEntrada) {
 		this.qtdeEntrada = qtdeEntrada;
 	}
 
